@@ -1,3 +1,3 @@
-# Individual Reports
+# Connor Lee
 
-Create a folder for each team member.  Each member will document and summarize their activities on a weekly (ongoing) basis.
+Each member will document and summarize their activities on a weekly (ongoing) basis.
