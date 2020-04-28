@@ -2,7 +2,7 @@
 
 Summary of our activities on a weekly basis:
 
-| First Header  | Second Header |
+| Week | Date | Activity  | Activity Type | Time (hrs)  | Second Header |
 | ------------- | ------------- |
 | Content Cell  | Content Cell  |
 | Content Cell  | Content Cell  |
