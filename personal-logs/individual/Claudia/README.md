@@ -1,3 +1,8 @@
 # Claudia Nikel
 
-Each member will document and summarize their activities on a weekly (ongoing) basis.
+Summary of our activities on a weekly basis:
+
+| First Header  | Second Header |
+| ------------- | ------------- |
+| Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  |
