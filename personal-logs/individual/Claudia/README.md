@@ -16,3 +16,4 @@ Summary of our activities on a weekly basis:
 |1|2020-04-29|Daily standup meeting|Daily Meetings|0.25|
 |1|2020-04-30|Daily standup meeting|Daily Meetings|0.5|
 |1|2020-04-30|Updating time log|Logistics|0.5|
+|1|2020-04-30|Researched & created weekly sprint meeting outline|Research|2|
