@@ -1,7 +1,9 @@
 # Connor Lee
 
-Each member will document and summarize their activities on a weekly (ongoing) basis.
+Summary of our activities on a weekly basis:
 
+| Week | Date | Activity  | Activity Type | Time (hrs)   |
+| ------------- | ------------- | ------------- | ------------- |------------- | 
 |0|2020-04-27|Brainstoriming and researching|Research|3.5|
 |0|2020-04-27|Group meeting|Other Meeting|1|
 |0|2020-04-27|Work on meeting action items|Research|0.666666666666667|
