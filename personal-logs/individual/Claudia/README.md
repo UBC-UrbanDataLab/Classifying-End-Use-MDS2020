@@ -4,5 +4,5 @@ Summary of our activities on a weekly basis:
 
 | Week | Date | Activity  | Activity Type | Time (hrs)   |
 | ------------- | ------------- | ------------- | ------------- |------------- | 
-| Content Cell  | Content Cell  | Content Cell  | Content Cell  | Content Cell  |
+|0|2020-04-27|Brainstorming meeting|Logistics|1|
 | Content Cell  | Content Cell  | Content Cell  | Content Cell  | Content Cell  |
