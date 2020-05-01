@@ -2,7 +2,10 @@
 
 Each member will document and summarize their activities on a weekly (ongoing) basis.
 
+Summary of our activities on a weekly basis:
 
+| Week | Date | Activity  | Activity Type | Time (hrs)   |
+| ------------- | ------------- | ------------- | ------------- |------------- | 
 |0|2020-04-27|Logistics Meeting|Other Meeting|1|
 |0|2020-04-27|||4|
 |1|2020-04-28|D599 Lecture|Weekly Meetings|1.5|
