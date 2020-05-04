@@ -10,3 +10,4 @@ Summary of our activities on a weekly basis:
 |Model|1|15 - 21 May|Develop a classification model to apply group tags to end uses for the Pharmacy building.|
 |Model|1|22 - 28 May|Validate and evaluate models.|
 |Scale + Analysis|2|29 May - 11 June|Expand the model to other UBC buildings + complete user-acceptance testing of model + UBC mid-term presentation + Identify conclusions + create visualizations of results + complete user-acceptance testing of dashboards|
+|Wrap-Up|2|12 - 26 June|Final report + package final code + UDL final presentation + UBCO final presentation|
