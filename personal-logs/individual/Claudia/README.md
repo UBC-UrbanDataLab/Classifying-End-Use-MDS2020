@@ -23,3 +23,6 @@ Summary of our activities on a weekly basis:
 |1|2020-05-01|Daily standup meeting|Daily Meetings|0.15|
 |1|2020-05-01|Meeting with UDL|Weekly Meetings|1|
 |1|2020-05-01|Team meeting post UDL meeting|Weekly Meetings|1|
+|1|2020-05-01|Worked on Proposal|Report|1|
+|1|2020-05-04|Daily standup meeting|Daily Meetings|0.25|
+|1|2020-05-04|Added tables to github repository|Logistics|1|
