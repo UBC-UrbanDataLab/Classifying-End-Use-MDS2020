@@ -4,5 +4,5 @@ The team will document (summarize) their overall project progress on a weekly ba
 
 Summary of our activities on a weekly basis:
 
-| Week | Date | Activity  | Activity Type | Time (hrs)   |
-| ------------- | ------------- | ------------- | ------------- |------------- | 
+| Themes | Weeks | Dates  | Goals  |
+| ------------- | ------------- | ------------- | -----------| 
