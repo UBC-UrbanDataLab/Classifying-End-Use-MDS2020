@@ -18,3 +18,10 @@ Summary of our activities on a weekly basis:
 |1|2020-04-30|Read Previous Works|Research|2|
 |1|2020-04-30|Organized meeting agenda & reached out to UDL |Logistics|1.5|
 |1|2020-05-01|Reviewed what needs to be done + prepped for daily stand-up|Logistics|0.5|
+|1|2020-05-01|Daily Stand Up|Daily Stand Up|0.25|
+|1|2020-05-01|Sprint Planning|Weekly Meetings|1|
+|1|2020-05-01|Client Meeting|Weekly Meetings|1|
+|1|2020-05-01|Team Sync Up Meeting|Other Meeting|1|
+|1|2020-05-01|Finish Meeting Minutes|Logistics|0.5|
+|1|2020-05-01|Workflow Document|Research|0.5|
+|1|2020-05-01|Workflow Chart|Research|0.5|
