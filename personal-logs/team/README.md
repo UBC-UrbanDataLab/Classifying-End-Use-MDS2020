@@ -13,4 +13,4 @@ Summary of our activities on a weekly basis:
 |**Wrap-Up**|2|12 - 26 June|Final report + package final code + UDL final presentation + UBCO final presentation|
 |**Total Weeks**|9|||
 
-**THEMES WILL COORDINATE WITH SPRINTS = FRIDAY - THURSDAY
+**Themes will coordinate with sprints=Friday-Thursday
