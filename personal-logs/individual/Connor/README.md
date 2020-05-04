@@ -26,3 +26,14 @@ Summary of our activities on a weekly basis:
 |1|2020-04-30|Daily Standup prep|Logistics|0.17|
 |1|2020-04-30|Daily Standup|Daily Meetings|0.33|
 |1|2020-04-30|Add comments to papers I found|Research|0.33|
+|1|2020-04-30|Aims and objectives seciton of proposal|Reports|0.5|
+|1|2020-04-30|Personal Log|Reports|0.25|
+|1|2020-04-30|Clustering and Feature Mapping Pros and Cons|Research|4.5|
+|1|2020-04-30|Download larger chunks of data from the databases and store as CSV|Data Exploration|1.5|
+|1|2020-05-01|Prep for today's meetings|Logistics|1.17|
+|1|2020-05-01|Daily standup|Daily Meetings|0.17|
+|1|2020-05-01|Sprint Planning and prep for first meeting with UDL|Weekly Meetings|1.83|
+|1|2020-05-01|Reformat model and feature mapping pros and cons to be in an easier to compare format|Research|1.5|
+|1|2020-05-01|Client Meeting|Weekly Meetings|1|
+|1|2020-05-01|Team Meeting|Weekly Meetings|0.5|
+|1|2020-05-01|Work on proposal|Reports|3|
