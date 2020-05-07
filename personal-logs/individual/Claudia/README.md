@@ -26,3 +26,18 @@ Summary of our activities on a weekly basis:
 |1|2020-05-01|Worked on Proposal|Report|1|
 |1|2020-05-04|Daily standup meeting|Daily Meetings|0.25|
 |1|2020-05-04|Added tables to github repository|Logistics|1|
+|1|2020-05-04|Editting Report/presentation|Report|3|
+|1|2020-05-04|Researched clustering for SPARK (MLlib)|Research|1|
+|1|2020-05-04|Prepared presentation notes for myself|Presentation|0.5|
+|2|2020-05-05|Daily standup meeting|Daily Meetings|0.25|
+|2|2020-05-05|Practice Weekly presentation|Weekly Meetings|1|
+|2|2020-05-05|Trying clustering in databricks|Research|2|
+|2|2020-05-05|Weekly meeting with Scott|Weekly Meetings|0.5|
+|2|2020-05-05|Testing out Feature Selection|Research|1.5|
+|2|2020-05-06|Daily standup meeting|Daily Meetings|0.25|
+|2|2020-05-06|Meeting to prepare for EDA with Jiachen|Weekly Meetings|1|
+|2|2020-05-06|Code review|Coding|2|
+|2|2020-05-06|Feature Selection Research|Research|1|
+|2|2020-05-07|Daily standup meeting|Daily Meetings|0.25|
+|2|2020-05-07|EDA meeting with Jiachen|Other Meeting|1|
+|2|2020-05-07|Trying sklearn on databricks|Coding|1|
