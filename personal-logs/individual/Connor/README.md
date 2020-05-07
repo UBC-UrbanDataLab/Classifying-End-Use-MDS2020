@@ -37,3 +37,24 @@ Summary of our activities on a weekly basis:
 |1|2020-05-01|Client Meeting|Weekly Meetings|1|
 |1|2020-05-01|Team Meeting|Weekly Meetings|0.5|
 |1|2020-05-01|Work on proposal|Reports|3|
+|1|2020-05-04|Work on proposal|Reports|1.25|
+|1|2020-05-04|Daily stand up|Daily Meetings|0.25|
+|1|2020-05-04|Work on proposal|Reports|2.75|
+|1|2020-05-04|Review Presentation|Meeting Prep|2.17|
+|1|2020-05-04|Final Proposal Draft Review|Reports|0.5|
+|1|2020-05-04|Prepare for presentation|Meeting Prep|1.08|
+|1|2020-05-04|Researching how/if we can run Python scripts through Databricks|Research|0.25|
+|2|2020-05-05|Presentation prep|Meeting Prep|0.5|
+|2|2020-05-05|Daily Standup Prep|Meeting Prep|0.25|
+|2|2020-05-05|Daily Standup|Daily Meetings|0.25|
+|2|2020-05-05|Practice Presentation and Test Colab Ultra|Meeting Prep|0.58|
+|2|2020-05-05|Researching MLlib tools and updating Pros and Cons file|Research|1.17|
+|2|2020-05-05|Meeting with Scott|Weekly Meetings|0.42|
+|2|2020-05-05|Researching and Trying MLlib tools in Databricks community|Research|4.25|
+|2|2020-05-06|Try running sklearn on databricks|Research|1|
+|2|2020-05-06|Daily Standup|Daily Meetings|0.25|
+|2|2020-05-06|Jira Board Update Discussion|Other Meeting|0.25|
+|2|2020-05-06|Data Exploration to prep for meeting on Questions for Jiachen|Research|1.5|
+|2|2020-05-06|Meeting to discuss questions for Jiachen|Other Meeting|0.67|
+|2|2020-05-06|Try running sklearn on databricks|Research|2|
+|2|2020-05-06|Cleanup pros and cons sheet|Research|2.33|
