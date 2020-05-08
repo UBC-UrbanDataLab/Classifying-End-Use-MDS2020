@@ -2,8 +2,8 @@
 
 The team will document (summarize) their overall project progress on a weekly basis, linking it to key project deliverables. 
 
-Summary of our activities on a weekly basis:
 
+# Weekly Schedule
 | Themes | Weeks | Dates  | Goals  |
 | ------------- | ------------- | ------------- | -----------| 
 |**Investigation and Data Prep**|3|27 April - 14 May| Identify project objectives and key data features + understand data dictionaries + transform data for machine learning tasks.|
@@ -15,5 +15,5 @@ Summary of our activities on a weekly basis:
 
 **Themes will coordinate with sprints=Friday-Thursday
 
-# Week 1 Team Project Process
+# Week 1: Team Project Process
 ![](week1_team.png)
