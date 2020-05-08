@@ -58,3 +58,10 @@ Summary of our activities on a weekly basis:
 |2|2020-05-06|Meeting to discuss questions for Jiachen|Other Meeting|0.67|
 |2|2020-05-06|Try running sklearn on databricks|Research|2|
 |2|2020-05-06|Cleanup pros and cons sheet|Research|2.33|
+|2|2020-05-07|Figure out if/how we can run our Spark code locally in the event we can't get AWS access|Research|1|
+|2|2020-05-07|Daily Standup|Daily Meetings|0.33|
+|2|2020-05-07|Figure out if/how we can run our Spark code locally in the event we can't get AWS access|Research|2.33|
+|2|2020-05-07|EDA meeting with Jiachen|Other Meeting|1|
+|2|2020-05-07|EDA Debrief and Weekly Retrospective|Weekly Meetings|0.75|
+|2|2020-05-07|Update Proposal Based on Jiachen's comments|Reports|2.08|
+|2|2020-05-07|Research distance measures|Research|0.5|
