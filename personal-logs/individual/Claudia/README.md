@@ -41,3 +41,13 @@ Summary of our activities on a weekly basis:
 |2|2020-05-07|Daily standup meeting|Daily Meetings|0.25|
 |2|2020-05-07|EDA meeting with Jiachen|Other Meeting|1|
 |2|2020-05-07|Trying sklearn on databricks|Coding|1|
+|2|2020-05-07|Retrospective Meeting|Weekly Meetings|0.75|
+|2|2020-05-07|Edit Final Proposal Draft|Report|0.5|
+|2|2020-05-07|Researched Feature Engineering|Research|1|
+|2|2020-05-08|daily standup meeting|Daily Meetings|0.25|
+|2|2020-05-08|Sprint pre-planning meeting|Weekly Meetings|1|
+|2|2020-05-08|Meeting to prepare for meeting with UDL|Weekly Meetings|0.75|
+|2|2020-05-08|Meeting with UDL|Weekly Meetings|0.5|
+|2|2020-05-08|Team meeting post UDL meeting|Weekly Meetings|0.75|
+|2|2020-05-08|Update github |Logistics|0.5|
+|2|2020-05-08|Looking to metadata in Skyspark|Research|1|
