@@ -14,3 +14,5 @@ Summary of our activities on a weekly basis:
 |**Total Weeks**|9|||
 
 **Themes will coordinate with sprints=Friday-Thursday
+
+![](week1_team.png)
