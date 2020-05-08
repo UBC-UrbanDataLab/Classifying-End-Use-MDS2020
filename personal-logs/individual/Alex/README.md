@@ -43,7 +43,20 @@ Summary of our activities on a weekly basis:
 |2|2020-05-06|Write git workflow+comment on kanban cards|Logistics|1|
 |2|2020-05-06|Daily Standup+kanban update|Daily Meetings|0.5|
 |2|2020-05-06|Refresh on time series/influxdb concepts|Research|1.25|
-|2|2020-05-06|Start exploring skyspark DB using chronograf|Research|0.25|
+|2|2020-05-06|Start exploring skyspark DB using chronograf|Data Analysis|0.25|
 |2|2020-05-06|Meeting to discuss EDA questions|Other Meeting|0.5|
 |2|2020-05-06|Continue working with chronograf&influxDB - started to focus on trying to find effecient way to answer if typeRef is universally reliable data|Research|5|
 |2|2020-05-07|Catch up on logs|Logistics|0.5|
+|2|2020-05-07|Daily Standup|Daily Meetings|0.5|
+|2|2020-05-07|Read enough about Kapacitor to see if it might be of use + consider alternative to AWS+Spark|Research|1.25|
+|2|2020-05-07|Read Connor's ML notes + start trying out his code on databricks|Research|1.5|
+|2|2020-05-07|EDA Meeting with Jiachen|Client Meetings|1|
+|2|2020-05-07|Retrospective and post client meeting|Weekly Meetings|0.75|
+|2|2020-05-07|Got chronograf displaying data Jiachen had wanted to show us. Investigated how missing data looks.|Data Analysis|1.25|
+|2|2020-05-07|Updated pipeline flowchart/discussed with team|Logistics|1|
+|2|2020-05-08|Read what Eva wrote as possible project notes, try to mentally organize work order for pipeline||1|
+|2|2020-05-08|Daily Standup||0.25|
+|2|2020-05-08|Sprint Planning||1|
+|2|2020-05-08|Make Agenda for Client Meeting||0.5|
+|2|2020-05-08|Review final proposal|Logistics|0.25|
+|2|2020-05-08|Finish going through Connor's list of clustering information|Research|0.5|
