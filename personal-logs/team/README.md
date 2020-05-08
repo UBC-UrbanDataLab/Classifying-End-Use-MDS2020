@@ -15,4 +15,5 @@ Summary of our activities on a weekly basis:
 
 **Themes will coordinate with sprints=Friday-Thursday
 
+# Week 1 Team Project Process
 ![](week1_team.png)
