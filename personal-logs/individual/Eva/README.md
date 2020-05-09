@@ -30,14 +30,14 @@ Summary of our activities on a weekly basis:
 |1|2020-05-01|Workflow Chart|Research|0.5|
 |1|2020-05-04|Gantt chart and reached out to Kevin|Development|1|
 |1|2020-05-04|Prepared for daily stand-up|Logistics|0.25|
-|1|2020-05-04|Daily Stand Up|Daily Stand Up|0.333333333333333|
-|1|2020-05-04|Worked on presentation slides|Development|1.66666666666667|
+|1|2020-05-04|Daily Stand Up|Daily Stand Up|0.33|
+|1|2020-05-04|Worked on presentation slides|Development|1.67|
 |1|2020-05-04|Worked on presentation slides|Development|0.5|
 |1|2020-05-04|Reviewed project proposal|Development|1|
 |1|2020-05-04|Work on presentation slides|Development|0.5|
-|1|2020-05-04|Worked on presentation slides + proposal + gantt |Development|0.666666666666667|
+|1|2020-05-04|Worked on presentation slides + proposal + gantt |Development|0.67|
 |1|2020-05-04|Submitted proposal draft to UDL|Development|0.5|
-|1|2020-05-04|Prepped for presentation|Development|0.333333333333333|
+|1|2020-05-04|Prepped for presentation|Development|0.33|
 |1|2020-05-04|Prepped for presentation and updated log|Development|1|
 |2|2020-05-05|Practiced presentation + daily stand up prep|Development|1.5|
 |2|2020-05-05|Daily stand up + ran through presentation with team|Daily Stand Up|1.25|
@@ -45,10 +45,19 @@ Summary of our activities on a weekly basis:
 |2|2020-05-05|Meeting with Scott|Weekly Meetings|0.75|
 |2|2020-05-05|Worked on giving Scott access + spoke with Jiachen about meetings|Logistics|0.75|
 |2|2020-05-05|Played around with Jira + researched if others set up similar pipelines + sent Scott access|Research|1|
-|2|2020-05-06|Worked on EDA|Data Analysis|1.33333333333333|
-|2|2020-05-06|Daily Stand Up + Jira Update Assignment|Daily Stand Up|0.666666666666667|
+|2|2020-05-06|Worked on EDA|Data Analysis|1.33|
+|2|2020-05-06|Daily Stand Up + Jira Update Assignment|Daily Stand Up|0.67|
 |2|2020-05-06|Data research + reviewed Connor's databricks|Data Analysis|2|
-|2|2020-05-06|Sent meeting details + reviewed NRCan's website|Research|0.666666666666667|
+|2|2020-05-06|Sent meeting details + reviewed NRCan's website|Research|0.67|
 |2|2020-05-06|Reviewed ML pros + cons + Connor's databricks|Data Analysis|1.1|
 |2|2020-05-06|Looked at GLM in MLlib + fuzzy c-means + how to compare clustering models|Data Analysis|1|
-|2|2020-05-06|Fuzzy-c-means investigations|Data Analysis|0.666666666666667|
+|2|2020-05-06|Fuzzy-c-means investigations|Data Analysis|0.67|
+|2|2020-05-07|Prepped for daily stand up, reviewed Alex's git workflow|Logistics|0.5|
+|2|2020-05-07|Daily stand up + reviewed Jiachen's comments on the proposal and EDA questiosn|Research|1|
+|2|2020-05-07|Looked at Alex's flowchart + fuzzy-c-means research + retrospective review|Research|1|
+|2|2020-05-07|Fuzzy-c-means research|Research|0.33|
+|2|2020-05-07|Prepped for Jiachen's meeting|Logistics|0.67|
+|2|2020-05-07|EDA meeting with Jichen|Client Meetings|1|
+|2|2020-05-07|Retrospective meeting|Other Meeting|1|
+|2|2020-05-07|Prepared for sprint|Research|0.83|
+|2|2020-05-07|Edited sprint planning documents|Research|1|
