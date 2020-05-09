@@ -65,3 +65,11 @@ Summary of our activities on a weekly basis:
 |2|2020-05-07|EDA Debrief and Weekly Retrospective|Weekly Meetings|0.75|
 |2|2020-05-07|Update Proposal Based on Jiachen's comments|Reports|2.08|
 |2|2020-05-07|Research distance measures|Research|0.5|
+|2|2020-05-08|Prep for Daily standup, sprint planning, and UDL meetings|Meeting Prep|1|
+|2|2020-05-08|Daily Standup|Daily Meetings|0.2|
+|2|2020-05-08|Sprint Planning|Weekly Meetings|1|
+|2|2020-05-08|Preping for UDL meeting|Weekly Meetings|0.5|
+|2|2020-05-08|Research implementing Gower's distance|Research|1.25|
+|2|2020-05-08|Meeting with UDL|Weekly Meetings|0.5|
+|2|2020-05-08|UDL meeting debrief and finish sprint planning|Weekly Meetings|0.75|
+|2|2020-05-08|Research implementing Gower's distance|Research|1.75|
