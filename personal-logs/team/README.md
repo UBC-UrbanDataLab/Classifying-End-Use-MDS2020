@@ -15,5 +15,8 @@ The team will document (summarize) their overall project progress on a weekly ba
 
 **Themes will coordinate with sprints=Friday-Thursday
 
+# Week 2: Team Project Process
+![](week2_team.png)
+
 # Week 1: Team Project Process
 ![](week1_team.png)
