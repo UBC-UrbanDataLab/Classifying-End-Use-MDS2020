@@ -54,9 +54,15 @@ Summary of our activities on a weekly basis:
 |2|2020-05-07|Retrospective and post client meeting|Weekly Meetings|0.75|
 |2|2020-05-07|Got chronograf displaying data Jiachen had wanted to show us. Investigated how missing data looks.|Data Analysis|1.25|
 |2|2020-05-07|Updated pipeline flowchart/discussed with team|Logistics|1|
-|2|2020-05-08|Read what Eva wrote as possible project notes, try to mentally organize work order for pipeline||1|
-|2|2020-05-08|Daily Standup||0.25|
-|2|2020-05-08|Sprint Planning||1|
-|2|2020-05-08|Make Agenda for Client Meeting||0.5|
+|2|2020-05-08|Read what Eva wrote as possible project notes, try to mentally organize work order for pipeline|Research|1|
+|2|2020-05-08|Daily Standup|Daily Meetings|0.25|
+|2|2020-05-08|Sprint Planning|Weekly Meetings|1|
+|2|2020-05-08|Make Agenda for Client Meeting|Weekly Meetings|0.5|
 |2|2020-05-08|Review final proposal|Logistics|0.25|
 |2|2020-05-08|Finish going through Connor's list of clustering information|Research|0.5|
+|2|2020-05-08|Client Meeting|Client Meetings|0.5|
+|2|2020-05-08|Wrap up sprint planning|Weekly Meetings|0.75|
+|2|2020-05-08|Brainstorm/research missing data detection|Research|1|
+|2|2020-05-08|Play with missing data detection|Coding|0.75|
+|2|2020-05-11|Daily Standup|Daily Meetings|0|
+|2|2020-05-11|Worked with Connor on the "Our Approach" slide in the Tuesday presentation|Logistics|1|
