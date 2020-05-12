@@ -61,3 +61,19 @@ Summary of our activities on a weekly basis:
 |2|2020-05-07|Retrospective meeting|Other Meeting|1|
 |2|2020-05-07|Prepared for sprint|Research|0.83|
 |2|2020-05-07|Edited sprint planning documents|Research|1|
+|2|2020-05-08|Daily stand up + sprint planning meeting|Other Meeting|2|
+|2|2020-05-08|Reviewed Scott's email + organized jira + sprint planning tasks|Logistics|1|
+|2|2020-05-08|Meeting with Jiachen|Client Meetings|0.5|
+|2|2020-05-08|Sprint Planning|Other Meeting|0.75|
+|2|2020-05-08|Finish meeting minutes|Logistics|0.25|
+|2|2020-05-08|Assigned jira tickets to people|Logistics|0.5|
+|2|2020-05-08|NRCan request draft + researched how to approach populating missing data|Research|1|
+|2|2020-05-11|Reviewed Jira to-do + updated daily stand up + sent Mike NRCan classifications|Logistics|0.42|
+|2|2020-05-11|Daily Stand Up|Daily Stand Up|0.17|
+|2|2020-05-11|Presentation review as a team|Other Meeting|0.5|
+|2|2020-05-11|Worked on presentation client over + reviewed deliverables part|Development|1.53|
+|2|2020-05-11|Chronograf installation + played around with query builder|Data Analysis|1.9|
+|2|2020-05-11|Played with chronograf query syntax|Data Analysis|0.57|
+|2|2020-05-11|Tried to play with data in influxdb + python jupyter|Data Analysis|0.38|
+|2|2020-05-11|Investigated which fields in the database have "Omit" has an observation|Data Analysis|1.05|
+|2|2020-05-11|Wrote down what I'll say for the presentation|Development|0.5|
