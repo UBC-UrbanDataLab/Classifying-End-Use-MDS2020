@@ -50,4 +50,9 @@ Summary of our activities on a weekly basis:
 |2|2020-05-08|Meeting with UDL|Weekly Meetings|0.5|
 |2|2020-05-08|Team meeting post UDL meeting|Weekly Meetings|0.75|
 |2|2020-05-08|Update github |Logistics|0.5|
-|2|2020-05-08|Looking to metadata in Skyspark|Research|1|
+|2|2020-05-08|Looking into metadata in Skyspark|Research|1|
+|2|2020-05-11|Prepared presentation for Tuesdays meeting|Logistics|1|
+|2|2020-05-11|Updated team & personal logs on github|Logistics|1|
+|2|2020-05-11|daily standup meeting|Weekly Meetings|0.5|
+|2|2020-05-11|Work on weekly presentation |Logistics|1.5|
+|2|2020-05-11|Coding for missing values|Coding|2|
