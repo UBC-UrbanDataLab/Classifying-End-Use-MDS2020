@@ -73,3 +73,12 @@ Summary of our activities on a weekly basis:
 |2|2020-05-08|Meeting with UDL|Weekly Meetings|0.5|
 |2|2020-05-08|UDL meeting debrief and finish sprint planning|Weekly Meetings|0.75|
 |2|2020-05-08|Research implementing Gower's distance|Research|1.75|
+|2|2020-05-11|Prep for daily standup|Meeting Prep|0.5|
+|2|2020-05-11|Explore data for missing data|Data Exploration|0.5|
+|2|2020-05-11|Daily Standup|Daily Meetings|0.25|
+|2|2020-05-11|Presentation Prep|Meeting Prep|1.25|
+|2|2020-05-11|Explore data for missing data|Data Exploration|4|
+|2|2020-05-11|Go Over what to present|Meeting Prep|0.5|
+|2|2020-05-11|Explore data for missing data|Data Exploration|1.33|
+|2|2020-05-11|Practice Presentation|Meeting Prep|0.17|
+|2|2020-05-11|Research how to check if an InfluxDB is live|Research|0.33|
