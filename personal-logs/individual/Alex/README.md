@@ -64,5 +64,13 @@ Summary of our activities on a weekly basis:
 |2|2020-05-08|Wrap up sprint planning|Weekly Meetings|0.75|
 |2|2020-05-08|Brainstorm/research missing data detection|Research|1|
 |2|2020-05-08|Play with missing data detection|Coding|0.75|
-|2|2020-05-11|Daily Standup|Daily Meetings|0|
+|2|2020-05-11|Daily Standup|Daily Meetings|0.5|
 |2|2020-05-11|Worked with Connor on the "Our Approach" slide in the Tuesday presentation|Logistics|1|
+|2|2020-05-11|Looked into missing/invalid data|Research|1.5|
+|2|2020-05-11|Examined skyspark metadata for missing data|Research|1.5|
+|2|2020-05-11|Mess with influxdb->grafana|Research|0.5|
+|2|2020-05-11|Practice presentation |Logistics|0.75|
+|3|2020-05-12|Daily Standup|Daily Meetings|0.5|
+|3|2020-05-12|Prepare for presentation|Logistics|0.5|
+|3|2020-05-12|Work with skyspark metadata (download+compile with script)|Data Cleaning|5.25|
+|3|2020-05-12|Weekly presentation|Weekly Meetings|0.5|
