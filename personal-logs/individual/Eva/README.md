@@ -75,5 +75,36 @@ Summary of our activities on a weekly basis:
 |2|2020-05-11|Chronograf installation + played around with query builder|Data Analysis|1.9|
 |2|2020-05-11|Played with chronograf query syntax|Data Analysis|0.57|
 |2|2020-05-11|Tried to play with data in influxdb + python jupyter|Data Analysis|0.38|
-|2|2020-05-11|Investigated which fields in the database have "Omit" has an observation|Data Analysis|1.05|
+|2|2020-05-11|Investigated which fields in the database have "Omit" has an observation|Coding|1.05|
 |2|2020-05-11|Wrote down what I'll say for the presentation|Development|0.5|
+|3|2020-05-12|Reviewed what needs to be done in Jira + prepped for daily stand up|Logistics|0.5|
+|3|2020-05-12|Daily stand up + discussed missing data + practiced presentation for Scott|Daily Stand Up|1|
+|3|2020-05-12|Practiced presentation + revised what I want to say during presentation|Logistics|0.5|
+|3|2020-05-12|Tried to look up meta data on SkySpark|Research|0.17|
+|3|2020-05-12|Presentation with Scott |Other Meeting|0.45|
+|3|2020-05-12|Reviewed meta data|Data Analysis|0.5|
+|3|2020-05-12|Report draft |Development|0.67|
+|3|2020-05-12|Tried merging metadata with pharmacy sky spark data using ‘uniqueId’. Found duplicates in the metadata using this approach |Coding|1.5|
+|3|2020-05-12|Feature selection techniques research|Research|0.75|
+|3|2020-05-13|Updated progress on Jira tickets|Logistics|0.5|
+|3|2020-05-13|Researched relevant features + updated daily stand up|Research|0.5|
+|3|2020-05-13|Daily stand up|Daily Stand Up|0.33|
+|3|2020-05-13|Read up more about feature selection|Research|0.5|
+|3|2020-05-13|Looked more into joining meta data|Coding|0.75|
+|3|2020-05-13|Cleaned up meta data join to share on Jira ticket|Logistics|0.5|
+|3|2020-05-13|Tried locating NRCan classifications|Research|0.25|
+|3|2020-05-13|Researched training and testing breakdown|Research|0.25|
+|3|2020-05-13|Looking at population size and sample size|Research|0.5|
+|3|2020-05-13|Gantt chart|Logistics|0.5|
+|3|2020-05-13|Reviewed Connor's comments on csv |Data Analysis|1.23|
+|3|2020-05-14|Jira ticket updates + daily stand up + retrospective prep|Updating Jira|0.5|
+|3|2020-05-14|Made retrospective templates|Logistics|0.17|
+|3|2020-05-14|Daily stand up |Daily Stand Up|0.17|
+|3|2020-05-14|Restrospective meeting|Other Meeting|0.92|
+|3|2020-05-14|Training data discussion|Other Meeting|0.67|
+|3|2020-05-14|Discussed splitting training data with Claudia|Development|0.25|
+|3|2020-05-14|Read Connor's problematic data on the drive + Alex's help with chronograf queries|Data Analysis|0.72|
+|3|2020-05-14|Reviewed Connor's missing csv|Data Analysis|0.45|
+|3|2020-05-14|Looked at Connor's script + started thinking about sprint planning|Data Analysis|1|
+|3|2020-05-14|Sprint planning|Logistics|0.5|
+|3|2020-05-14|Worked on script for fixing unit of measurement inconsistencies|Data Cleaning|1.67|
