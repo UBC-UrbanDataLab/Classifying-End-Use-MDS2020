@@ -4,8 +4,6 @@ Summary of our activities on a weekly basis:
 
 | Week | Date | Activity  | Activity Type | Time (hrs)   |
 | ------------- | ------------- | ------------- | ------------- |------------- | 
-|0|2020-04-27|Brainstorming meeting|Logistics|1|
-|0|2020-04-27|Played around with data|Logistics|1|
 |1|2020-04-28|Capstone meeting|Logistics|2|
 |1|2020-04-28|Created slack channel|Logistics|0.25|
 |1|2020-04-28|Created proposal template|Report|0.5|
@@ -56,3 +54,18 @@ Summary of our activities on a weekly basis:
 |2|2020-05-11|daily standup meeting|Weekly Meetings|0.5|
 |2|2020-05-11|Work on weekly presentation |Logistics|1.5|
 |2|2020-05-11|Coding for missing values|Coding|2|
+|3|2020-05-12|Practice Weekly presentation|Presentation|0.5|
+|3|2020-05-12|Coding for missing values|Logistics|1|
+|3|2020-05-12|daily standup meeting|Daily Meetings|0.5|
+|3|2020-05-12|Practice Weekly presentation|Presentation|0.5|
+|3|2020-05-12|presentation with Scott|Presentation|0.5|
+|3|2020-05-12|looking for irregularities in the data|Coding|2|
+|3|2020-05-13|daily standup meeting|Daily Meetings|0.25|
+|3|2020-05-13|create units threshold list|Logistics|2|
+|3|2020-05-13|continued looking at inconsistencies with the data|Data Cleaning|3|
+|3|2020-05-13|Looked into semi-supervised methods|Logistics|1|
+|3|2020-05-14|daily standup meeting|Daily Meetings|0.5|
+|3|2020-05-14|Retrospective Meeting|Weekly Meetings|0.5|
+|3|2020-05-14|Data labelling meeting|Logistics|1|
+|3|2020-05-14|Data labelling organization|Logistics|2|
+|3|2020-05-15|daily standup meeting|Daily Meetings|0.25|
