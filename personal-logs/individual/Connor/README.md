@@ -82,3 +82,16 @@ Summary of our activities on a weekly basis:
 |2|2020-05-11|Explore data for missing data|Data Exploration|1.33|
 |2|2020-05-11|Practice Presentation|Meeting Prep|0.17|
 |2|2020-05-11|Research how to check if an InfluxDB is live|Research|0.33|
+|3|2020-05-12|Prep for daily standup|Meeting Prep|0.42|
+|3|2020-05-12|Practice Presentation solo|Meeting Prep|0.25|
+|3|2020-05-12|Explore data for missing/inconsistent information|Data Exploration|0.33|
+|3|2020-05-12|Daily Standup|Daily Meetings|0.25|
+|3|2020-05-12|Practice Presentation with team|Weekly Meetings|0.58|
+|3|2020-05-12|Explore data for missing/inconsistent information|Data Exploration|1.5|
+|3|2020-05-12|Meeting with Scott|Weekly Meetings|0.42|
+|3|2020-05-12|Explore data for missing/inconsistent information|Data Exploration|4.25|
+|3|2020-05-13|Prep for daily standup|Meeting Prep|0.67|
+|3|2020-05-13|Cleanup my GitHub branches|Logistics|0.17|
+|3|2020-05-13|Daily Standup|Daily Meetings|0.25|
+|3|2020-05-13|Explore data for missing/inconsistent information|Data Exploration|3.75|
+|3|2020-05-13|Write functions for encoding categorical variables, connecting, checking connection, and querying databases|Coding|3|
