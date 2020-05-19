@@ -4,6 +4,8 @@ Summary of our activities on a weekly basis:
 
 | Week | Date | Activity  | Activity Type | Time (hrs)   |
 | ------------- | ------------- | ------------- | ------------- |------------- | 
+|0|2020-04-27|Brainstorming meeting|Logistics|1|
+|0|2020-04-27|Played around with data|Logistics|1|
 |1|2020-04-28|Capstone meeting|Logistics|2|
 |1|2020-04-28|Created slack channel|Logistics|0.25|
 |1|2020-04-28|Created proposal template|Report|0.5|
@@ -69,3 +71,13 @@ Summary of our activities on a weekly basis:
 |3|2020-05-14|Data labelling meeting|Logistics|1|
 |3|2020-05-14|Data labelling organization|Logistics|2|
 |3|2020-05-15|daily standup meeting|Daily Meetings|0.25|
+|3|2020-05-15|Sprint pre-planning meeting|Weekly Meetings|1.5|
+|3|2020-05-15|Meeting to prepare for meeting with UDL|Weekly Meetings|0.5|
+|3|2020-05-15|meeting with UDL|Weekly Meetings|1|
+|3|2020-05-15|preparing for data labelling|Logistics|1.5|
+|3|2020-05-15|debrief meeting|Weekly Meetings|0.5|
+|3|2020-05-15|Data Labelling|Data Prep|0.5|
+|3|2020-05-15|Research semi-supervised methods|Research|1|
+|3|2020-05-18|Data Labelling|Data Prep|2|
+|4|2020-05-19|daily standup meeting|Daily Meetings|1.5|
+|4|2020-05-19|presentation with Scott|Weekly Meetings|0.75|
