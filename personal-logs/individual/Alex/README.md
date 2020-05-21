@@ -74,3 +74,32 @@ Summary of our activities on a weekly basis:
 |3|2020-05-12|Prepare for presentation|Logistics|0.5|
 |3|2020-05-12|Work with skyspark metadata (download+compile with script)|Data Cleaning|5.25|
 |3|2020-05-12|Weekly presentation|Weekly Meetings|0.5|
+|3|2020-05-12|Misc Jira/Log updates|Logistics|0.25|
+|3|2020-05-13|Daily Standup|Weekly Meetings|0.25|
+|3|2020-05-13|Finished getting combined metadata from program|Coding|3|
+|3|2020-05-14|Caught up on reading some of the cards and the "interesting findings" doc|Research|1|
+|3|2020-05-15|Confirm data aggregation in influxDB limited by string datatype|Research|1|
+|3|2020-05-15|Look for patterns in sensor update rates|Data Analysis|2.25|
+|3|2020-05-15|Prep for standup+sprint planning|Logistics|0.75|
+|3|2020-05-15|Daily Standup|Daily Meetings|0.25|
+|3|2020-05-15|Sprint Planning|Weekly Meetings|1|
+|3|2020-05-15|Make agenda for client meeting|Logistics|0.5|
+|3|2020-05-15|Clean up "meta-data exploration" code|Coding|0.75|
+|3|2020-05-15|Updates in Jira|Logistics|0.5|
+|3|2020-05-15|Client Meeting|Weekly Meetings|1|
+|3|2020-05-15|Post meeting team followup|Other Meeting|0.5|
+|3|2020-05-15|Clean up "meta-data exploration" code|Coding|0.75|
+|3|2020-05-15|Investigated+wrote to Jiachan about possible improvement to the influxDB schema|Research|1|
+|3|2020-05-15|Fiddled with pulling values for the labelling project|Data Cleaning|0.25|
+|3|2020-05-15|Looked at tuesday's presentation|Logistics|0.25|
+|3|2020-05-15|Updated Personal Log|Logistics|0.75|
+|3|2020-05-16|Setup local influxdb and query with grafana|Logistics|2.25|
+|3|2020-05-18|Created "abstract" flowcharts to wrap head around labeling|Data Analysis|3|
+|3|2020-05-18|Reviewed weekly presentation+communicated w/teammates re: labeling concept|Logistics|1|
+|4|2020-05-19|Prepare for presentation|Logistics|1|
+|4|2020-05-19|Daily Standup|Daily Meetings|0.25|
+|4|2020-05-19|Practice presentation + roll into discussing project strategy/labeling|Other Meeting|1|
+|4|2020-05-19|Query new data for labeling|Data Cleaning|0.75|
+|4|2020-05-19|Weekly presentation|Weekly Meetings|0.75|
+|4|2020-05-19|Explore data to see if we caught everything that needs NRCan labels / fix query|Data Cleaning|1.5|
+|4|2020-05-19|Fill out missing days in personal log|Logistics|1|

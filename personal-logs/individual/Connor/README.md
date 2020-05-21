@@ -95,3 +95,16 @@ Summary of our activities on a weekly basis:
 |3|2020-05-13|Daily Standup|Daily Meetings|0.25|
 |3|2020-05-13|Explore data for missing/inconsistent information|Data Exploration|3.75|
 |3|2020-05-13|Write functions for encoding categorical variables, connecting, checking connection, and querying databases|Coding|3|
+|3|2020-05-14|Prep for daily standup|Meeting Prep|0.5|
+|3|2020-05-14|Prep for retrospective|Meeting Prep|0.5|
+|3|2020-05-14|Daily Standup|Daily Meetings|0.25|
+|3|2020-05-14|Retrospective|Weekly Meetings|0.83|
+|3|2020-05-14|Discuss plan for labeling data|Other Meeting|0.67|
+|3|2020-05-14|Write code for encoding and scaling data, found out how to vectorize data|Coding|5.92|
+|3|2020-05-15|Sprint Planning Prep|Meeting Prep|0.33|
+|3|2020-05-15|Daily Standup Prep|Meeting Prep|0.33|
+|3|2020-05-15|Daily Standup|Daily Meetings|0.25|
+|3|2020-05-15|Sprint Planning Meeting|Weekly Meetings|1.75|
+|3|2020-05-15|Meeting with UDL|Weekly Meetings|1|
+|3|2020-05-15|UDL meeting debrief|Weekly Meetings|0.5|
+|3|2020-05-15|Clean up data prep and database conneciton code and comments and push to GitHub|Coding|1.5|
