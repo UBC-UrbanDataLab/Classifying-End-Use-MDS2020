@@ -108,3 +108,10 @@ Summary of our activities on a weekly basis:
 |3|2020-05-14|Looked at Connor's script + started thinking about sprint planning|Data Analysis|1|
 |3|2020-05-14|Sprint planning|Logistics|0.5|
 |3|2020-05-14|Worked on script for fixing unit of measurement inconsistencies|Data Cleaning|1.67|
+|3|2020-05-15|Updated sprint planning documents + updated Jira tickets + updated personal logs |Logistics|0.5|
+|3|2020-05-15|Daily Stand Up|Daily Stand Up|0.17|
+|3|2020-05-15|Sprint planning + prepared for UDL meeting|Other Meeting|1.72|
+|3|2020-05-15|Prepared for UDL meeting|Logistics|0.8|
+|3|2020-05-15|UDL meeting + post-UDL meeting|Client Meetings|1.4|
+|3|2020-05-15|Made weekly meeting template|Logistics|0.57|
+|3|2020-05-15|Updated slides for Tuesday's presentation|Development|0.92|
