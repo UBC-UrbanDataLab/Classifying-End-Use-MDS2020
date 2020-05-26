@@ -11,19 +11,20 @@ import pandas as pd
 # Function imports from other files
 import data_preparation as dp
 
-# Function to create and populate columns for the date and the hour of the day of each observation
-def get_date_and_hour(df):
+# Function to create and populate columns for the date, month, and the hour of the day of each observation
+def split_datetime(df):
     # Takes a raw dataframe (no pre-processing after querying data)
     df = df.copy()
-    # Extracting the date and hour of the day from the timestamp column
+    # Extracting the date, month, and hour of the day from the timestamp column
     df['datetime'] = pd.to_datetime(df['datetime'])
     df['date'] = df['datetime'].dt.date
+    df['month'] = df['datetime'].dt.month.astype(str)
     df['hour'] = df['datetime'].dt.hour.astype(str) # Want as str so that it doesn't get aggregated when not aggregating on it
     return df
 
 # A function to aggregate the numeric data by the specified columns in a user defined manner
 def agg_numeric_by_col(df, col_idx, how='mean'):
-    # Takes a dataframe to aggregate numeric data for, the columns to aggregate on, and how to aggregate
+    # Takes a dataframe to aggregate numeric data for and the columns to aggregate on
     df = df.copy()
     # Filtering down just to the numeric values
     df['dtype'] = df['value'].apply(dp.get_data_type)
@@ -39,9 +40,9 @@ def agg_numeric_by_col(df, col_idx, how='mean'):
     elif how=='std':
         df_agg = df.groupby(groupNames).std()
     elif how=='max':
-        df_agg = df.groupby(groupNames).max()[['value']] # Just get the value column aggregation
+        df_agg = df.groupby(groupNames).max()[['value']] # Just get from the value column
     elif how=='min':
-        df_agg = df.groupby(groupNames).min()[['value']] # Just get the value column aggregation
+        df_agg = df.groupby(groupNames).min()[['value']] # Just get from the value column
     else:
         print('Invalid how argument, only capable of mean, std, max, or min.')
         return None
@@ -51,7 +52,7 @@ def agg_numeric_by_col(df, col_idx, how='mean'):
 # Function to provide a count of the number boolean value changes grouped by the specified columns
 def agg_bool_by_col(df, col_idx):
     # Takes a dataframe to aggregate boolean data for and the columns to aggregate on
-    df = df.copy()
+    df = data.copy()
     # Filtering down just to the boolean values
     df['dtype'] = df['value'].apply(dp.get_data_type)
     df = df.loc[df['dtype']=='bool']
@@ -70,10 +71,10 @@ def agg_bool_by_col(df, col_idx):
     # For loop to identify the number of changes for each group individually
     for group in groupList:
         temp_df = df[df.loc[:,'groups']==group]
-        temp_df.loc[:,'isChanged'] = temp_df.loc[:,'value'].diff().abs() # If value changes then will be 1, else will be 0
+        temp_df.loc[:,'value'] = temp_df.loc[:,'value'].diff().abs() # If value changes then will be 1, else will be 0
         temp_df = temp_df.drop(labels='groups', axis=1)
-        temp_df['isChanged'] = temp_df.loc[:,'isChanged'].fillna(0)
-        temp_df = temp_df.groupby(groupNames).sum()['isChanged']
+        temp_df['value'] = temp_df.loc[:,'value'].fillna(0)
+        temp_df = temp_df.groupby(groupNames).sum()['value'].to_frame()
         if isFirst==True:
                 return_df = temp_df
                 isFirst = False
@@ -83,8 +84,8 @@ def agg_bool_by_col(df, col_idx):
 
 # Function to provide a count of the number categorical value changes grouped by the specified columns
 def agg_cat_by_col(df, col_idx):
-    # Takes a dataframe to aggregate categorical data for and the columns to aggregate on
-    df = df.copy()
+    # Takes a dataframe to aggregate boolean data for and the columns to aggregate on
+    df = data.copy()
     # Filtering down just to the categorical values
     df['dtype'] = df['value'].apply(dp.get_data_type)
     df = df.loc[df['dtype']=='str']
@@ -104,14 +105,29 @@ def agg_cat_by_col(df, col_idx):
     # For loop to identify the number of changes for each group individually
     for group in groupList:
         temp_df = df[df.loc[:,'groups']==group]
-        temp_df.loc[:,'isChanged'] = temp_df.loc[:,'value'].diff().abs()
+        temp_df.loc[:,'value'] = temp_df.loc[:,'value'].diff().abs()
         temp_df = temp_df.drop(labels='groups', axis=1)
-        temp_df['isChanged'] = temp_df.loc[:,'isChanged'].fillna(0)
-        temp_df['isChanged'] = temp_df['isChanged'].apply(lambda x: 1 if x>0 else 0)
-        temp_df = temp_df.groupby(groupNames).sum()['isChanged']
+        temp_df['value'] = temp_df.loc[:,'value'].fillna(0)
+        temp_df['value'] = temp_df['value'].apply(lambda x: 1 if x>0 else 0)
+        temp_df = temp_df.groupby(groupNames).sum()['value'].to_frame()
         if isFirst==True:
                 return_df = temp_df
                 isFirst = False
         else:
             return_df = return_df.append(temp_df)
     return return_df
+
+
+# Function to fun all three aggregation types covered by the above functions and output data columnwise for input into other functions (ex. feature selection, and scaling)
+def agg_all(df, col_idx, num_how='mean'):
+    # Takes a dataframe to aggregate, columns to aggregate on, and how to aggregate the numeric values (bool and cat only have one type of aggregation)
+    # Aggregating each datatype
+    num_agg = agg_numeric_by_col(df, col_idx, how=num_how)
+    bool_agg = agg_bool_by_col(df, col_idx)
+    cat_agg = agg_cat_by_col(df, col_idx)
+    # Combining all aggregations into one dataframe
+    all_agg = num_agg.append(bool_agg)
+    all_agg = all_agg.append(cat_agg)
+    # Creating columns for each level in the last item of the index
+    all_agg = all_agg.unstack(level=-1).fillna(0).droplevel(level=0, axis=1).reset_index()
+    return all_agg
