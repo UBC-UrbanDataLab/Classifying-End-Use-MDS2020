@@ -81,3 +81,28 @@ Summary of our activities on a weekly basis:
 |3|2020-05-18|Data Labelling|Data Prep|2|
 |4|2020-05-19|daily standup meeting|Daily Meetings|1.5|
 |4|2020-05-19|presentation with Scott|Weekly Meetings|0.75|
+|4|2020-05-19|labelling data|Data Prep|1|
+|4|2020-05-19|Updated team & personal logs on github|Logistics|1|
+|4|2020-05-20|Daily standup meeting|Daily Meetings|0.25|
+|4|2020-05-20|Team meeting: labelling, feature selection|Other Meeting|0.75|
+|4|2020-05-20|Research and create code review checklist|Coding|1|
+|4|2020-05-20|Reviewed Connors code|Coding|2|
+|4|2020-05-20|Research & coding feature selection|Research|1|
+|4|2020-05-21|Research encoding for categorical data|Research|1|
+|4|2020-05-21|Daily standup meeting|Daily Meetings|0.25|
+|4|2020-05-21|Team meeting|Logistics|0.5|
+|4|2020-05-21|Retrospective Meeting|Weekly Meetings|0.75|
+|4|2020-05-21|coded data prep for feature selection|Data Prep|2|
+|4|2020-05-21|research feature selection|Research|2|
+|4|2020-05-22|Daily standup meeting|Daily Meetings|0.25|
+|4|2020-05-22|Sprint pre-planning meeting|Weekly Meetings|1|
+|4|2020-05-22|Meeting to prepare for meeting with UDL|Weekly Meetings|1|
+|4|2020-05-22|Meeting with UDL|Weekly Meetings|1|
+|4|2020-05-22|categorizing equipRef column for feature selection|Data Prep|1|
+|4|2020-05-22|worked on weekly presentation|Presentation|1|
+|4|2020-05-25|Daily standup meeting|Daily Meetings|0.25|
+|4|2020-05-25|Research feature selection for categorical data|Research|3|
+|4|2020-05-25|coded for numerical feature selection|Coding|2|
+|5|2020-05-26|Daily standup meeting|Daily Meetings|0.25|
+|5|2020-05-26|practice Weekly presentation|Presentation|0.5|
+|5|2020-05-26|Weekly meeting with Scott|Presentation|0.5|
