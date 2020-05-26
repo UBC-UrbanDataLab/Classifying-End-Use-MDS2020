@@ -11,6 +11,10 @@ import pandas as pd
 # Function imports from other files
 import data_preparation as dp
 
+# Code to Aggregate numeric data
+data = pd.read_csv('test_data/2020-05-01.csv')
+data = data.append(pd.read_csv('test_data/2020-03-16.csv'))
+
 # Function to create and populate columns for the date and the hour of the day of each observation
 def get_date_and_hour(df):
     # Takes a raw dataframe (no pre-processing after querying data)
@@ -21,9 +25,12 @@ def get_date_and_hour(df):
     df['hour'] = df['datetime'].dt.hour.astype(str) # Want as str so that it doesn't get aggregated when not aggregating on it
     return df
 
+# Testing get_date_and_hour() function
+data = get_date_and_hour(data)
+
 # A function to aggregate the numeric data by the specified columns in a user defined manner
 def agg_numeric_by_col(df, col_idx, how='mean'):
-    # Takes a dataframe to aggregate numeric data for, the columns to aggregate on, and how to aggregate
+    # Takes a dataframe to aggregate numeric data for and the columns to aggregate on
     df = df.copy()
     # Filtering down just to the numeric values
     df['dtype'] = df['value'].apply(dp.get_data_type)
@@ -39,19 +46,34 @@ def agg_numeric_by_col(df, col_idx, how='mean'):
     elif how=='std':
         df_agg = df.groupby(groupNames).std()
     elif how=='max':
-        df_agg = df.groupby(groupNames).max()[['value']] # Just get the value column aggregation
+        df_agg = df.groupby(groupNames).max()[['value']] # Just get from the value column
     elif how=='min':
-        df_agg = df.groupby(groupNames).min()[['value']] # Just get the value column aggregation
+        df_agg = df.groupby(groupNames).min()[['value']] # Just get from the value column
     else:
         print('Invalid how argument, only capable of mean, std, max, or min.')
         return None
     # Aggregate and return values
     return df_agg
 
+# Testing aggregating on numeric function using unique ID columns and hour of the day, and how=mean
+print(agg_numeric_by_col(data, [1,2,3,4,5,9], 'mean'))
+# Testing aggregating on numeric function using unique ID columns and date, and how=median
+print(agg_numeric_by_col(data, [1,2,3,4,5,8], 'median'))
+# Testing aggregating on numeric function using unit column and hour of the day, and how=std
+print(agg_numeric_by_col(data, [6,9], 'std'))
+# Testing aggregating on numeric function using unit columns and date, and how=max
+print(agg_numeric_by_col(data, [6,8], 'max'))
+# Testing aggregating on numeric function using unit columns and date, and how=min
+print(agg_numeric_by_col(data, [6,8], 'min'))
+
+# For easily viewing the data (Delete when done)
+test = data.sample(20)
+
+
 # Function to provide a count of the number boolean value changes grouped by the specified columns
 def agg_bool_by_col(df, col_idx):
     # Takes a dataframe to aggregate boolean data for and the columns to aggregate on
-    df = df.copy()
+    df = data.copy()
     # Filtering down just to the boolean values
     df['dtype'] = df['value'].apply(dp.get_data_type)
     df = df.loc[df['dtype']=='bool']
@@ -81,10 +103,13 @@ def agg_bool_by_col(df, col_idx):
             return_df = return_df.append(temp_df)
     return return_df
 
+# Testing agg_bool_by_col() function
+test_bool_agg = agg_bool_by_col(data, [1,2,3,4,5,9])
+
 # Function to provide a count of the number categorical value changes grouped by the specified columns
 def agg_cat_by_col(df, col_idx):
-    # Takes a dataframe to aggregate categorical data for and the columns to aggregate on
-    df = df.copy()
+    # Takes a dataframe to aggregate boolean data for and the columns to aggregate on
+    df = data.copy()
     # Filtering down just to the categorical values
     df['dtype'] = df['value'].apply(dp.get_data_type)
     df = df.loc[df['dtype']=='str']
@@ -115,3 +140,6 @@ def agg_cat_by_col(df, col_idx):
         else:
             return_df = return_df.append(temp_df)
     return return_df
+
+# Testing agg_bool_by_col() function
+test_cat_agg = agg_cat_by_col(data, [1,2,3,4,5,8])
