@@ -7,7 +7,7 @@
 import pandas as pd
 import glob
 
-###################### Connor's CSVs ##########################
+###################### Connor's CSVs January 2020 Data ##########################
 ##################### pulling csv files ##################### 
 files1=glob.glob('/users/evanguyen/SkySpark_data/data_files/**.csv', recursive=True)
 
