@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[92]:
 
 
 import pandas as pd
@@ -80,5 +79,4 @@ print("Percentage of unmerged sensors:", number_of_unmerged/number_of_sensors_to
 print(len(merged_left[merged_left.connRef.isnull()==True]))
 print(len(merged_left))
 2086381/11083961
-
 
