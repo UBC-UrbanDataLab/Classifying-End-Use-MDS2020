@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
+# In[13]:
 
 
 ############ CONNOR'S CODE TO IDENTIFY INCONSISTENT DATA ############
@@ -23,12 +23,12 @@ print("# of observations when omitting units from the drop keys:" +str(len(no_du
 units_incons = no_dupes_w_unit[no_dupes_w_unit.duplicated(subset=['unique'], keep=False)]
 print("# of items in the duplicates list: "+str(len(units_incons)))
 # Storing the list of instruments with inconsistent units in a csv
-units_incons.to_csv("units_incons.csv")
+# units_incons.to_csv("units_incons.csv")
 
 
 ################### CODE TO FIX INCONSISTENT DATA ####################
 # creating a function to fix units 
-def fix_units_incons(nav, equip, val, u):
+def fix_units_incons(nav, equip, val, u, typeref):
     # rows 2-4 on Connor's csv
     if nav.find('ALRM')!=-1 and (float(val)==1 or float(val)==0):
         return "omit"
@@ -87,10 +87,16 @@ def fix_units_incons(nav, equip, val, u):
     # rows 34-50 on Connor's csv
     elif nav.find('ISOD')!=-1 and equip.find('LEF-4 EF-4')!=-1 and (u=='_' or u=='°C'):
         return "omit"
+    # changing all '_' of kWh typeRefs  to kWh from Alex's training data
+    elif u.find('_')!=-1 and typeref.find('kWh')!=-1:
+        return "kWh"
+    # changing all '_' units to 'omit' to standardize unknowns from Alex's training data
+    elif u.find('_')!=-1:
+        return "omit"
     else:
         return u
 
-mod_units=units_incons.apply(lambda x: fix_units_incons(x.navName, x.equipRef, x.value, x.unit), axis=1)
+mod_units=units_incons.apply(lambda x: fix_units_incons(x.navName, x.equipRef, x.value, x.unit, x.typeRef), axis=1)
 
 # inserting new units as a new column
 units_incons.insert(6,"mod_units", mod_units)
