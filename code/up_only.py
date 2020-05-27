@@ -1,5 +1,5 @@
 # Only the sensor update rate aggregation
-# Will add this into the aggregation.py file once tested
+# Will add this into the aggregation.py file when it makes sense to do so
 
 import pandas as pd
 import numpy as np
@@ -14,7 +14,7 @@ def agg_up_rate(dataframe):
     Args:
         dataframe (pandas.dataFrame): dataframe containing sensor id tags, date, and number of updates for the day
         
-    Returns
+    Returns:
         Pandas.dataFrame: dataframe with sensor id tags and columns for mean number of updates per day, variance in number of updates per day, and max number of updates per day
 
     """
