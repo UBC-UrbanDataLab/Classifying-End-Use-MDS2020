@@ -71,7 +71,7 @@ print(agg_numeric_by_col(data, [6,8], 'min'))
 # Function to provide a count of the number boolean value changes grouped by the specified columns
 def agg_bool_by_col(df, col_idx):
     # Takes a dataframe to aggregate boolean data for and the columns to aggregate on
-    df = data.copy()
+    df = df.copy()
     # Filtering down just to the boolean values
     df['dtype'] = df['value'].apply(dp.get_data_type)
     df = df.loc[df['dtype']=='bool']
@@ -107,7 +107,7 @@ test_bool_agg = agg_bool_by_col(data, [1,2,3,4,5,8])
 # Function to provide a count of the number categorical value changes grouped by the specified columns
 def agg_cat_by_col(df, col_idx):
     # Takes a dataframe to aggregate boolean data for and the columns to aggregate on
-    df = data.copy()
+    df = df.copy()
     # Filtering down just to the categorical values
     df['dtype'] = df['value'].apply(dp.get_data_type)
     df = df.loc[df['dtype']=='str']
@@ -143,8 +143,8 @@ def agg_cat_by_col(df, col_idx):
 test_cat_agg = agg_cat_by_col(data, [1,2,3,4,5,8])
 
 # Function to fun all three aggregation types covered by the above functions and output data columnwise for input into other functions (ex. feature selection, and scaling)
-def agg_all(df, col_idx, num_how='mean'):
-    # Takes a dataframe to aggregate, columns to aggregate on, and how to aggregate the numeric values (bool and cat only have one type of aggregation)
+def agg_all(df, col_idx, num_how='mean', last_idx_to_col=True):
+    # Takes a dataframe to aggregate, columns to aggregate on, and how to aggregate the numeric values (bool and cat only have one type of aggregation), and if the last index should become columns (default=True)
     # Aggregating each datatype
     num_agg = agg_numeric_by_col(df, col_idx, how=num_how)
     bool_agg = agg_bool_by_col(df, col_idx)
@@ -152,9 +152,24 @@ def agg_all(df, col_idx, num_how='mean'):
     # Combining all aggregations into one dataframe
     all_agg = num_agg.append(bool_agg)
     all_agg = all_agg.append(cat_agg)
-    # Creating columns for each level in the last item of the index
-    all_agg = all_agg.unstack(level=-1).fillna(0).droplevel(level=0, axis=1).reset_index()
+    if last_idx_to_col == True:
+        groups = all_agg.reset_index().iloc[:,-2].unique()
+        new_df = all_agg.reset_index().drop(all_agg.reset_index().columns[-2:].tolist(), axis=1).drop_duplicates()
+        onList = new_df.columns.tolist()
+        for group in groups:
+            cur_df = all_agg.reset_index()[all_agg.reset_index().iloc[:,-2]==group].drop(all_agg.reset_index().columns[-2], axis=1)
+            new_df = pd.merge(new_df, cur_df, on=onList, how='left')
+            new_df = new_df.rename(columns={'value':group})
+        all_agg = new_df.fillna(0)
+    else:
+        all_agg = all_agg.reset_index().fillna(0)
     return all_agg
 
-# Testing the agg_all() function
+# Testing the agg_all() function when the last index is split to columns (days)
 test_all_agg = agg_all(data, [1,2,3,4,5,8], num_how='mean')
+# Testing the agg_all() function when the last index isn't split to columns
+test_all_agg2 = agg_all(data, [1,2,3,4,5], num_how='std', last_idx_to_col=False)
+# Testing the agg_all() function when the last index is split to columns (hours)
+test_all_agg3 = agg_all(data, [1,2,3,4,5,10], num_how='median')
+# Testing the agg_all() function when the last index is split to columns (groupRef)
+test_all_agg4 = agg_all(data, [1,3,4,5,2], num_how='mean') # NOTE: This test was just to show that it can be done, it won't actually be of any use
