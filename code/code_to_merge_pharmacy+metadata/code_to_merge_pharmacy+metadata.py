@@ -70,10 +70,17 @@ merged_left.head()
 
 
 ###### Reviewing number of unmerged uniqueIDs
+##### This will show 34% of unique sensor IDs did not merge
 number_of_unmerged=merged_left[merged_left.connRef.isnull()==True].uniqueId.nunique()
 number_of_sensors_total=merged_left.uniqueId.nunique()
 
 print("Number of unmerged sensors:", number_of_unmerged)
 print("Number of total sensors:", number_of_sensors_total)
 print("Percentage of unmerged sensors:", number_of_unmerged/number_of_sensors_total)
+
+###### This will show 18% of rows did not merge
+print(len(merged_left[merged_left.connRef.isnull()==True]))
+print(len(merged_left))
+2086381/11083961
+
 
