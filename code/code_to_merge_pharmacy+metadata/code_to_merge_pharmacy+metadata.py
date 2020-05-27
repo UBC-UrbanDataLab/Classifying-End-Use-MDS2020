@@ -36,8 +36,6 @@ metadata['siteRef']=metadata['siteRef'].str.extract('[^ ]* (.*)', expand=True)
 metadata['connRef']=metadata['connRef'].str.extract('[^ ]* (.*)', expand=True)
 
 #### Making uniqueID 
-#### 'Pharmacy' in metadata equipRef, but not in Influx SkySpark
-metadata.equipRef=metadata.equipRef.replace(regex=['Pharmacy'], value='').str.strip()
 metadata['uniqueId']=metadata['equipRef'].fillna('')+' '+metadata['groupRef'].fillna('')+' '+metadata['navName'].fillna('')+' '+metadata['siteRef'].fillna('')+' '+metadata['bmsName'].fillna('')
 #### Dropping duplicate uniqueIDs based on most recent lastSynced
 metadata=metadata.sort_values('lastSynced').drop_duplicates('uniqueId',keep='last')
