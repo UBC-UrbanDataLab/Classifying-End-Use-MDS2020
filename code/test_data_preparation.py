@@ -5,7 +5,7 @@ import numpy as np
 
 import data_preparation
 
-class DataPrepFunctionsTestCase(unittest.TestCase):
+class DataPrepTestCase(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.test_df = pd.read_csv("test_data/2020-05-01.csv")
@@ -21,6 +21,13 @@ class DataPrepFunctionsTestCase(unittest.TestCase):
         self.assertEqual(data_preparation.get_data_type("123.456a"), "str")
         self.assertEqual(data_preparation.get_data_type("foobar"), "str")
         self.assertEqual(data_preparation.get_data_type(None), "str")
+    
+    def test_seperate_cat_and_cont(self):
+        #Just the basic tests right now. Need some more indepth tests, maybe checking something like shape of returns?
+        self.assertIsInstance(data_preparation.seperate_cat_and_cont(self.test_df), tuple)
+        for entry in data_preparation.seperate_cat_and_cont(self.test_df):
+            self.assertIsInstance(entry,pd.DataFrame)
+
     def test_encode_categorical(self):
         #This is a place holder. Need to think of some good tests
         with self.assertRaises(AttributeError):
@@ -28,6 +35,26 @@ class DataPrepFunctionsTestCase(unittest.TestCase):
         with self.assertRaises(AttributeError):
             data_preparation.encode_categorical(22)
         self.assertIsInstance(data_preparation.encode_categorical(self.test_df,[1]), np.ndarray)
-        
+    
+    def test_scale_continuous(self):
+        #This is a place holder. Need to think of some good tests
+        self.assertIsInstance(data_preparation.scale_continuous(self.test_df, indexes=[7]), np.ndarray)
+
+    def test_encode_and_scale_values(self):
+        #This is just one basic test as a place holder. Pretty large function, probably needs a lot of tests
+        self.assertIsInstance(data_preparation.encode_and_scale_values(self.test_df), pd.DataFrame)
+
+    def test_encode_units(self):
+        #This is a place holder test, need to add some more indepth tests.
+        self.assertIsInstance(data_preparation.encode_units(self.test_df), pd.DataFrame)
+
+#class DataConnectionTestCase(unittest.TestCase):
+    #@classmethod
+    #def setUpClass(cls):
+    #    cls.test_df = pd.read_csv("test_data/2020-05-01.csv")
+    #def test_connect_to_db(self):
+    #    This is probably a stupid test to include. 
+    #    self.assertIsInstance(data_preparation.connect_to_db(database = 'SKYSPARK'), influxdb.)
+
 if __name__ == "__main__":
     unittest.main()
