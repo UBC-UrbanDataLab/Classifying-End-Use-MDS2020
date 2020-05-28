@@ -7,34 +7,35 @@ import pandas as pd
 import glob
 
 ###################### Connor's CSVs January 2020 Data ##########################
-##################### pulling csv files ##################### 
+###### download data here https://u.pcloud.link/publink/show?code=kZRQCKkZgc9dnKRyOOH0NVV4Dk9jRm2izqnk#folder=6009049826&tpl=publicfoldergrid
+##################### pulling csv files #####################
 files1=glob.glob('/users/evanguyen/SkySpark_data/data_files/**.csv', recursive=True)
 
 list1 = []
 
-################  reading each csv filename into a dataframe into a list ############# 
+################  reading each csv filename into a dataframe into a list #############
 for file_ in files1:
     df1 = pd.read_csv(file_,index_col=None, header=0)
     list1.append(df1)
-      
-        
-##################### merging all the reviews files into one df ##################### 
+
+
+##################### merging all the reviews files into one df #####################
 for file_ in files1:
     df = pd.concat(list1)
-    
-###### Creating uniqueID 
+
+###### Creating uniqueID
 df['uniqueId']=df['equipRef'].fillna('')+' '+df['groupRef'].fillna('')+' '+df['navName'].fillna('')+' '+df['siteRef'].fillna('')+' '+df['typeRef'].fillna('')
 
 
 ############### METADATA CLEANING ##############
 metadata=pd.read_csv('PharmacyQuery.csv')
-##### Removing @UUID for now 
+##### Removing @UUID for now
 metadata['equipRef']=metadata['equipRef'].str.extract('[^ ]* (.*)', expand=True)
 metadata['groupRef']=metadata['groupRef'].str.extract('[^ ]* (.*)', expand=True)
 metadata['siteRef']=metadata['siteRef'].str.extract('[^ ]* (.*)', expand=True)
 metadata['connRef']=metadata['connRef'].str.extract('[^ ]* (.*)', expand=True)
 
-#### Making uniqueID 
+#### Making uniqueID
 metadata['uniqueId']=metadata['equipRef'].fillna('')+' '+metadata['groupRef'].fillna('')+' '+metadata['navName'].fillna('')+' '+metadata['siteRef'].fillna('')+' '+metadata['bmsName'].fillna('')
 #### Dropping duplicate uniqueIDs based on most recent lastSynced
 metadata=metadata.sort_values('lastSynced').drop_duplicates('uniqueId',keep='last')
@@ -58,7 +59,7 @@ df['uniqueId']=df['uniqueId'].map(lambda x: x.replace('Pharmacy ', ''))
 # In[100]:
 
 
-####### Left inner join 
+####### Left inner join
 merged_left=pd.merge(left=df, right=metadata, how='left', left_on='uniqueId', right_on='uniqueId')
 merged_left.head()
 
@@ -79,4 +80,3 @@ print("Percentage of unmerged sensors:", number_of_unmerged/number_of_sensors_to
 print(len(merged_left[merged_left.connRef.isnull()==True]))
 print(len(merged_left))
 2086381/11083961
-

@@ -5,6 +5,7 @@
 
 
 ############ CONNOR'S CODE TO IDENTIFY INCONSISTENT DATA ############
+######### please download code here https://u.pcloud.link/publink/show?code=kZRQCKkZgc9dnKRyOOH0NVV4Dk9jRm2izqnk#folder=6009056909&tpl=publicfoldergrid
 # Data Import
 import pandas as pd
 df = pd.read_csv('all_sites_2020-04-01.csv')
@@ -27,7 +28,7 @@ print("# of items in the duplicates list: "+str(len(units_incons)))
 
 
 ################### CODE TO FIX INCONSISTENT DATA ####################
-# creating a function to fix units 
+# creating a function to fix units
 def fix_units_incons(nav, equip, val, u, typeref):
     # rows 2-4 on Connor's csv
     if nav.find('ALRM')!=-1 and (float(val)==1 or float(val)==0):
@@ -38,10 +39,10 @@ def fix_units_incons(nav, equip, val, u, typeref):
     # rows 8-13 on Connor's csv
     elif nav.find('Outside Air Damper')!=-1 and (float(val)==1 or float(val)==0):
         return "omit"
-    # rows 14-15 on Connor's csv 
+    # rows 14-15 on Connor's csv
     elif (nav=='Hot Water Flow') and (u=='°C'):
         return "gal/min"
-    # rows 16-19 on Connor's csv 
+    # rows 16-19 on Connor's csv
     elif (nav=='ESB_CHIL1_PCE01_CHWFLW' or nav=='ESB_CHIL2_PCE02_CHWFLW') and (u=='°C'):
         return "gal/min"
     # rows 22-23, 64-65, 74-97, 104-115 on Connor's csv
@@ -71,7 +72,7 @@ def fix_units_incons(nav, equip, val, u, typeref):
     # rows 116-123 on Connor's csv
     elif nav=='Exhaust Air Flow' and (u=='°C'):
         return "L/s"
-    # rows 136-171, 184-291 on Connor's csv 
+    # rows 136-171, 184-291 on Connor's csv
     elif nav.find('Water Temp') and (u=='%'):
         return "°C"
     # rows 172-183 on Connor's csv
@@ -103,4 +104,3 @@ units_incons.insert(6,"mod_units", mod_units)
 
 # checking work
 units_incons[units_incons.typeRef.str.find('JCL-NAE43/FCB-01.FEC-50.BLDG')!=-1]
-
