@@ -103,3 +103,28 @@ Summary of our activities on a weekly basis:
 |4|2020-05-19|Weekly presentation|Weekly Meetings|0.75|
 |4|2020-05-19|Explore data to see if we caught everything that needs NRCan labels / fix query|Data Cleaning|1.5|
 |4|2020-05-19|Fill out missing days in personal log|Logistics|1|
+|4|2020-05-19|Worked on labeling data|Data Cleaning|1|
+|4|2020-05-20|Comments on Jira cards, wrote questions for Jiachen|Logistics|1|
+|4|2020-05-20|Daily Standup|Daily Meetings|0.25|
+|4|2020-05-20|Team meeting to discuss details of today's tasks|Other Meeting|0.75|
+|4|2020-05-20|Dig more into labels and refine questions to Jiachen|Data Cleaning|1.5|
+|4|2020-05-20|Finish commenting/restructuring metadata joining code|Coding|1.5|
+|4|2020-05-20|Respond to Jiachen|Logistics|1|
+|4|2020-05-21|Daily Standup|Daily Meetings|0.25|
+|4|2020-05-21|Retrospective meeting|Weekly Meetings|1|
+|4|2020-05-21|Got update rate subquery working|Coding|3|
+|4|2020-05-21|Created database update slides|Logistics|1|
+|4|2020-05-21|Queried 30 days of data and started to try to aggregate for sensor update rates|Data Analysis|1.5|
+|4|2020-05-22|Merged my metadata common field code to git, pulled down connor's code and started reviewing it|Debugging|0.75|
+|4|2020-05-22|Update meeting agenda+update some jira cards|Logistics|1|
+|4|2020-05-22|Daily Standup|Daily Meetings|0.25|
+|4|2020-05-22|Sprint Planning|Weekly Meetings|0.75|
+|4|2020-05-22|Plan for Client Meeting|Weekly Meetings|0.75|
+|4|2020-05-22|Discuss Model concept chart|Other Meeting|0.5|
+|4|2020-05-22|Brain storm/discuss model concept w/Connor|Research|1.5|
+|4|2020-05-22|Client Meeting|Weekly Meetings|1.25|
+|4|2020-05-22|Rewrote questions|Data Cleaning|1|
+|4|2020-05-25|Daily Standup+prep|Daily Meetings|0.5|
+|4|2020-05-25|Prep for weekly meeting slideshow|Logistics|0.75|
+|4|2020-05-25|Review Connor's whiteboard slide|Research|1|
+|4|2020-05-25|Started writing python code for sensor update rate aggregation|Coding|0.75|

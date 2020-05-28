@@ -1,0 +1,2 @@
+id,navName,disMacro,point,his,siteRef,equipRef,kind,unit,tz,temp,deltaTempPoint,utilityPoint,delta,groupRef,hisMode,water,hisFunc,mod
+@p:ubcv:r:250ac1cd-7028ec99 Vanier - Okanagan HW Main Meter Water Delta Temp Copy,Water Delta Temp Copy,$equipRef $navName,✓,✓,@p:ubcv:r:250ac1cd-ae239745 Vanier - Okanagan,@p:ubcv:r:250ac1cd-d86e4ca5 Vanier - Okanagan HW Main Meter,Number,°C,Los_Angeles,✓,✓,✓,✓,@p:ubcv:r:250ac1cd-d6c0da5e Vanier - Okanagan Utilities,consumption,✓,deltaTemp,2020-04-28T00:03:35.87Z UTC

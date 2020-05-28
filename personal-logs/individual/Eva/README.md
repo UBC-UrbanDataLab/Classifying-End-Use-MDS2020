@@ -115,3 +115,42 @@ Summary of our activities on a weekly basis:
 |3|2020-05-15|UDL meeting + post-UDL meeting|Client Meetings|1.4|
 |3|2020-05-15|Made weekly meeting template|Logistics|0.57|
 |3|2020-05-15|Updated slides for Tuesday's presentation|Development|0.92|
+|3|2020-05-18|Made modifications to Tuesday's presentation per Scott's email|Development|1.58|
+|3|2020-05-18|Peer evaluations|Logistics|0.35|
+|4|2020-05-19|Wrote down what to say for the presentation|Logistics|0.5|
+|4|2020-05-19|Daily stand up prep + coding to fix inconsistent data + daily stand up + presentation practice+ meeting for how should we label the data|Other Meeting|0.5|
+|4|2020-05-19|Coding to fix inconsistent data|Coding|2.25|
+|4|2020-05-19|Meeting with Scott|Weekly Meetings|0.58|
+|4|2020-05-19|Coding to fix inconsistent data|Coding|0.62|
+|4|2020-05-19|Coding to fix inconsistent data|Coding|0.42|
+|4|2020-05-19|Coding to fix inconsistent data + double checking work + updating jira about progress|Coding|1.25|
+|4|2020-05-20|Updated jira with progress + prepped for daily stand up|Updating Jira|0.25|
+|4|2020-05-20|Updated gantt chart|Logistics|0.15|
+|4|2020-05-20|Daily stand up meeting + questions meeting|Daily Stand Up|0.72|
+|4|2020-05-20|Inviestgated metadata duplicates + reached out to Jiachen about current questions|Research|0.92|
+|4|2020-05-20|Updated jira with progress + asked for updates on jira|Updating Jira|0.5|
+|4|2020-05-20|Reviewed metadata to select fields|Data Analysis|1.25|
+|4|2020-05-20|Updated jira with progress|Updating Jira|0.32|
+|4|2020-05-20|Joined selected metadata fields with skyspark data|Data Analysis|0.78|
+|4|2020-05-20|Sent jiachent request to review metadata field selections + duplicates in metadata|Logistics|0.35|
+|4|2020-05-20|Updated jira with progress|Updating Jira|0.17|
+|4|2020-05-20|Updating personal log|Logistics|0.17|
+|4|2020-05-21|Read Jiachen's response + think about what to do today + prepped for daily stand up|Logistics|0.18|
+|4|2020-05-21|Tried joining metadata with skyspark data again + investigated duplicates and unjoined unique ids with new metadata fields|Coding|0.65|
+|4|2020-05-21|Made feature selection flow chart|Development|0.83|
+|4|2020-05-21|Daily stand up + questions meetings|Daily Stand Up|1.28|
+|4|2020-05-21|Trying to figure out how to join metadata with training data|Coding|1.83|
+|4|2020-05-21|Discussed encodding with Claudia|Research|0.67|
+|4|2020-05-21|Manually labeled navName for smaller groups|Data Cleaning|0.88|
+|4|2020-05-21|Manually labeled navName for smaller groups and checked against hvac acroynms|Data Cleaning|1.07|
+|4|2020-05-22|Brainstormed tasks for sprint planning|Logistics|0.25|
+|4|2020-05-22|Daily stand up|Daily Stand Up|0.25|
+|4|2020-05-22|Sprint planning|Other Meeting|0.83|
+|4|2020-05-22|UDL meeting prep|Other Meeting|1|
+|4|2020-05-22|Reviewed script flow chart + send meeting agenda to Jiachen + finished bio|Other Meeting|0.45|
+|4|2020-05-22|Manually labeled navname data for smaller groups|Data Cleaning|0.38|
+|4|2020-05-22|Cilent meeting|Client Meetings|1.25|
+|4|2020-05-22|Manually labeled navname data for smaller groups|Data Cleaning|0.82|
+|4|2020-05-22|Manually labeled navname data for smaller groups|Data Cleaning|0.67|
+|4|2020-05-22|Updated log|Logistics|0.23|
+|4|2020-05-22|Manually labeled navname data for smaller groups|Data Cleaning|0.3|

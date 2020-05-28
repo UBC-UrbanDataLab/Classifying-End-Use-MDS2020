@@ -91,7 +91,7 @@ def encode_and_scale_values(df):
     # Add scaled data columns to the combined encoded data and original data dataframe
     encoded_and_scaled_df = pd.concat([encoded_df, scaled_df], axis=1)
     encoded_and_scaled_df = encoded_and_scaled_df.drop(columns=drop_cols)
-    encoded_and_scaled_df = encoded_and_scaled_df.fillna(-1)
+    encoded_and_scaled_df = encoded_and_scaled_df.fillna(0)
     return encoded_and_scaled_df
 
 # Function to encode units
@@ -99,8 +99,7 @@ def encode_units(df):
     df = df.copy()
     encoded_units = encode_categorical(df,[6])
     # Creating dataframe for storing encoded units
-    encoded_units_df = pd.concat([df, pd.DataFrame(encoded_units, index=df.index, columns=[str(i) for i in range(len(encoded_units[0]))])], axis=1)
-    encoded_units_df = encoded_units_df.add_prefix('unit_')
+    encoded_units_df = pd.concat([df, pd.DataFrame(encoded_units, index=df.index, columns=[str(i) for i in range(len(encoded_units[0]))]).add_prefix('unit_')], axis=1)
     return encoded_units_df
 
 # ***

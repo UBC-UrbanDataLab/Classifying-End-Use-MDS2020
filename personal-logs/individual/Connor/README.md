@@ -108,3 +108,45 @@ Summary of our activities on a weekly basis:
 |3|2020-05-15|Meeting with UDL|Weekly Meetings|1|
 |3|2020-05-15|UDL meeting debrief|Weekly Meetings|0.5|
 |3|2020-05-15|Clean up data prep and database conneciton code and comments and push to GitHub|Coding|1.5|
+|3|2020-05-18|Review presentation|Meeting Prep|0.5|
+|3|2020-05-18|Research semi-supervised learning methods|Research|1|
+|3|2020-05-18|Go over Alex's flow chart and brainstorm ideas for addressing the possibility of dynamic labeling|Research|0.75|
+|3|2020-05-18|Research pomegranet and semi-supervised learnign with HMMs|Research|0.75|
+|4|2020-05-19|Prepair what I am going to say during the presentation|Meeting Prep|0.75|
+|4|2020-05-19|Prep for daily standup|Meeting Prep|0.25|
+|4|2020-05-19|Daily Standup|Daily Meetings|0.25|
+|4|2020-05-19|Discuss the hand labeling and modelling plan|Other Meeting|1.08|
+|4|2020-05-19|Start on clustering functions and review clustering code from when I was testing clustering and gowers distance|Coding|1|
+|4|2020-05-19|Meeting with Scott|Weekly Meetings|0.58|
+|4|2020-05-19|Developed functions for implementing Gower's distance and started developing functions for implementing clustering|Coding|4.33|
+|4|2020-05-20|Prepare for Daily Standup|Meeting Prep|0.42|
+|4|2020-05-20|Brainstorm what we need in order to start modeling|Logistics|0.25|
+|4|2020-05-20|Daily Standup|Daily Meetings|0.25|
+|4|2020-05-20|Discuss questions (like feature selection plan of attack) as a group|Other Meeting|0.5|
+|4|2020-05-20|Write MDS function and incorporate into k-means clustering|Coding|1.42|
+|4|2020-05-20|Add more clustering methods to the cluster function and researched feature selection techniques|Coding|4.5|
+|4|2020-05-21|Prepare for Daily Standup|Meeting Prep|0.33|
+|4|2020-05-21|Prep for retrospective|Meeting Prep|0.67|
+|4|2020-05-21|Daily Standup|Daily Meetings|0.25|
+|4|2020-05-21|Retrospective|Weekly Meetings|1.42|
+|4|2020-05-21|Flowchart for details of scripting|Meeting Prep|0.33|
+|4|2020-05-21|Flowchart for details of scripting|Meeting Prep|2.33|
+|4|2020-05-21|Fix hierarchical clustering code, tested code for the other clustering methods, and cleaned up the clustering code file|Coding|1.17|
+|4|2020-05-21|Research semi-supervised learning methods|Research|1.42|
+|4|2020-05-21|Review and update Jira board|Logistics|0.25|
+|4|2020-05-22|Bio for UDL|Logistics|0.33|
+|4|2020-05-22|Daily Standup and Sprint Planning Prep|Meeting Prep|0.67|
+|4|2020-05-22|Daily standup|Daily Meetings|0.25|
+|4|2020-05-22|Sprint planning meeting|Weekly Meetings|1|
+|4|2020-05-22|Plan for UDL meeting|Meeting Prep|0.92|
+|4|2020-05-22|Brainstorm ideas on how to use NC sensors to help predict EC sensor tags|Research|1.33|
+|4|2020-05-22|Meeting with UDL|Client Meetings|1.08|
+|4|2020-05-22|Brainstorm ideas on how to use NC sensors to help predict EC sensor tags|Research|1.92|
+|4|2020-05-22|Write function to aggregate numeric values|Coding|1|
+|4|2020-05-25|Prep for Daily standup|Meeting Prep|0.5|
+|4|2020-05-25|Review weekly presentation slides|Meeting Prep|0.5|
+|4|2020-05-25|Daily standup|Daily Meetings|0.25|
+|4|2020-05-25|Discuss weekly presentation slides|Meeting Prep|0.42|
+|4|2020-05-25|Update detailed flow chart for non-NRCan modeling being part of the feature engineering phase|Research|1|
+|4|2020-05-25|Go over what I plan to present|Meeting Prep|2.33|
+|4|2020-05-25|Data aggregation functions|Coding|4|
