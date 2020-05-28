@@ -17,6 +17,15 @@ data = data.append(pd.read_csv('test_data/2020-03-16.csv'))
 
 # Function to create and populate columns for the date and the hour of the day of each observation
 def split_datetime(df):
+    """Function to create and populate columns for the date and hour value from the timestamp of each observation
+
+    Args:
+        dataframe (pandas.dataFrame): dataframe containing a 'datetime' column
+        
+    Returns:
+        Pandas.dataFrame: input dataframe with 'date', 'month', 'hour' columns appended
+
+    """
     # Takes a raw dataframe (no pre-processing after querying data)
     df = df.copy()
     # Extracting the date and hour of the day from the timestamp column
