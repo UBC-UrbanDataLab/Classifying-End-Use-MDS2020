@@ -17,7 +17,7 @@ from sklearn.preprocessing import OneHotEncoder, MinMaxScaler
 # Function to get Datatype of a value
 def get_data_type(x):
     try:
-        if x=='True' or x=='False':
+        if x=='True' or x=='False' or x==True or x==False:
             return 'bool'
         else:
             float(x)
