@@ -109,7 +109,7 @@ import influxdb
 from datetime import timezone, datetime
 import pytz
 import matplotlib.pyplot as plt
-get_ipython().run_line_magic('matplotlib', 'inline')
+#get_ipython().run_line_magic('matplotlib', 'inline') #This should be removed
 import certifi
 import time
 
