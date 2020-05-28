@@ -17,6 +17,15 @@ data = data.append(pd.read_csv('test_data/2020-03-16.csv'))
 
 # Function to create and populate columns for the date and the hour of the day of each observation
 def split_datetime(df):
+    """Function to create and populate columns for the date and hour value from the timestamp of each observation
+
+    Args:
+        df (pandas.DataFrame): dataframe containing a 'datetime' column
+        
+    Returns:
+        pandas.DataFrame: input dataframe with 'date', 'month', 'hour' columns appended
+
+    """
     # Takes a raw dataframe (no pre-processing after querying data)
     df = df.copy()
     # Extracting the date and hour of the day from the timestamp column
@@ -31,6 +40,17 @@ data = split_datetime(data)
 
 # A function to aggregate the numeric data by the specified columns in a user defined manner
 def agg_numeric_by_col(df, col_idx, how='mean'):
+    """Function to aggregate numeric data in user specified column using specified aggregation function
+
+    Args:
+        df (pandas.DataFrame): dataframe containing at least a numeric 'value' column
+        col_idx (list): one or more column indicies to group by when aggregating
+        how (str): 'mean', 'median', 'std', 'max', 'min'
+        
+    Returns:
+        ???pandas.DataFrame: is this a dataframe or a special groupby subclass of a dataframe??????
+
+    """
     # Takes a dataframe to aggregate numeric data for and the columns to aggregate on
     df = df.copy()
     # Filtering down just to the numeric values
