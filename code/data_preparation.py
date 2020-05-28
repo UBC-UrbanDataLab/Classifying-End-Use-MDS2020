@@ -25,8 +25,8 @@ def get_data_type(x):
     except:
         return 'str'
 
-# Creating seperate dataframes for categorical values and continuous values
-def seperate_cat_and_cont(df, idx=0):
+# Creating separate dataframes for categorical values and continuous values
+def separate_cat_and_cont(df, idx=0):
     df = df.copy()
     df['dtype'] = df.iloc[:,idx].apply(lambda x: get_data_type(x))
     cat_df = df[df['dtype']!='num']
@@ -62,11 +62,11 @@ def scale_continuous(df, indexes=[0]):
             np_arr = np.append(np_arr, scaled_data ,axis=1)
     return np_arr
 
-# Function to Encode and Scale values, outputs a dataframe with a scaled values column, and seperate dummy variable columns for each category option
+# Function to Encode and Scale values, outputs a dataframe with a scaled values column, and separate dummy variable columns for each category option
 def encode_and_scale_values(df):
     df = df.copy()
-    # Generate seperate dataframes for categorical and continous data
-    cat_data, cont_data = seperate_cat_and_cont(df,7)
+    # Generate separate dataframes for categorical and continous data
+    cat_data, cont_data = separate_cat_and_cont(df,7)
     
     # Encode Data
     encode_catVals = encode_categorical(cat_data,[7])
