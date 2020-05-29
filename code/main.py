@@ -5,19 +5,54 @@ Created on Wed May 27 16:27:50 2020
 
 @author: connor
 """
+import pandas as pd
+import numpy as np
+
+
+import data_preparation
+import aggregation
+
 
 def main():
-    """
-    Highlevel overview of steps:
+    #0) Set Constants (remember, constants are named in all caps with underscores between words)
+    #################
+    
+    # TODO: write code to create a proper list of each day in the decided upon date-range store as DATELIST
+    
+    
+    DATELIST = ["2020-04-01","2020-04-02"]
 
-    1) Cluster NC data
-        a) load+aggregate NC data (including weather), grouping by sensor ID fields [and 'unit'?]
-        b) Encode and scale NC data
-        c) cluster NC data to get df of sensor id fields + cluster group number
-        d) Reload NC data + join cluster group num + aggregate, this time grouping by date, time, and clust_group_num
-        OUTPUT OF STEP = dataframe with clust_group_num, 5nums per agg period. 
-        
+    SENSOR_ID_TAGS = [1,2,3,4,5] #I think this is ["groupRef","equipRef","navName","typeRef","unit"]
+    # The planned update to the InfluxDB may change SENSOR_ID_TAGS to only [1] as in ["uniqueID"]
+    
+    #1) Cluster NC data
+    ###################
+    
+    # 1a) load+aggregate NC data (including weather), grouping by sensor ID fields [and 'unit'?]
+    # TODO: Write data_preparation.query_csv()
+    # TODO: Update all function calls with correct arguments
+
+    is_first_iter = True
+    cnt=1
+    for day in DATELIST:
+        temp_df = data_preparation.query_csv(day) #Yeah I know, have to make this func. Working on it...
+        temp_df = aggregation.agg_all(temp_df, how="all", col_idx=SENSOR_ID_TAGS)
+        if is_first_iter: 
+            nc_data=temp_df
+            is_first_iter = False
+        nc_data = aggregation.append_agg(newdf=temp_df, masterdf=nc_data)
+        cnt += 1
+    temp_df = None
+    nc_data["update_rate"] = nc_data["obsv_count"] / cnt
+    nc_data.drop("obsv_count", inplace=True)
+
+    # b) Encode and scale NC data
+    # c) cluster NC data to get df of sensor id fields + cluster group number
+    # d) Reload NC data + join cluster group num + aggregate, this time grouping by date, time, and clust_group_num
+   
+"""        
     2) Model EC/NC relationship
+    ###########################
         a) Load+aggregate EC data, grouping by date, time, and sensor ID fields (no feature selection needed yet!)
         b) Also create second DF by aggregating further just using sensor ID fields (end result=1row per sensor)
         c) For each unique EC sensorID (i.e. row in 2b_EC_data_df), create LASSO model using 2a_EC_data_df and 
@@ -27,6 +62,7 @@ def main():
             that unique EC sensor's LASSO model
 
     3) Mid-Process cleanup
+    ######################
         a) set all NC data dataframes = None (clear up memory)
         b) set 2a_EC_data_df = None (clear up memory)
         [c) we could also save any EC dataframes to temporary csvs if we want to split the program up and allow a user 
@@ -35,6 +71,7 @@ def main():
         OUTPUT OF STEP = nothing! Just more available memory.
     
     4) Prep EC data for classification model 
+    ########################################
         a) Load metadata and join with 2b_EC_data_df
         b) Apply feature selection function(s) to the joined EC+metadata
         c) Encode and scale the EC+metadata
@@ -42,6 +79,7 @@ def main():
         OUTPUT OF STEP = dataframe with EC sensor ID fields, selected EC features, model coeffecients
     
     5) Classification model 
+    #######################
         a) Run classification model on output from step 4
         b) ?
         c) PROFIT!
