@@ -13,16 +13,16 @@ def main():
     1) Cluster NC data
         a) load+aggregate NC data (including weather), grouping by sensor ID fields [and 'unit'?]
         b) Encode and scale NC data
-        b) cluster NC data to get df of sensor id fields + cluster group number
-        c) Reload NC data + join cluster group num + aggregate, this time grouping by date, time, and clust_group_num
+        c) cluster NC data to get df of sensor id fields + cluster group number
+        d) Reload NC data + join cluster group num + aggregate, this time grouping by date, time, and clust_group_num
         OUTPUT OF STEP = dataframe with clust_group_num, 5nums per agg period. 
         
     2) Model EC/NC relationship
         a) Load+aggregate EC data, grouping by date, time, and sensor ID fields (no feature selection needed yet!)
         b) Also create second DF by aggregating further just using sensor ID fields (end result=1row per sensor)
-        b) For each unique EC sensorID (i.e. row in 2b_EC_data_df), create LASSO model using 2a_EC_data_df and 
+        c) For each unique EC sensorID (i.e. row in 2b_EC_data_df), create LASSO model using 2a_EC_data_df and 
             step1_output_NC_data_df. Model is basically: Y=EC response and Xn=NC data
-        c) Join the coeffecients from LASSO model to 2b_EC_data_df (so each EC sensor has a list of n coeffecients)
+        d) Join the coeffecients from LASSO model to 2b_EC_data_df (so each EC sensor has a list of n coeffecients)
         OUTPUT OF STEP = dataframe with EC sensor ID fields, mean response, and all n coeffecients from 
             that unique EC sensor's LASSO model
 
