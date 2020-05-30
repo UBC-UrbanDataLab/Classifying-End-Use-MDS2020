@@ -29,14 +29,18 @@ def main():
     ###################
     
     # 1a) load+aggregate NC data (including weather), grouping by sensor ID fields [and 'unit'?]
-    # TODO: Write data_preparation.query_csv()
-    # TODO: Update all function calls with correct arguments
+    # TODONE: Write data_preparation.query_csv()
+    # TODO: Check that last_idx_to_col is supposed to be True for aggregation.agg_all()
+    # TODO: Update call to aggregation.append_agg() once that function is finalized
+    # TODO: Make sure col names are correct when working with nc_data df in last two lines
 
     is_first_iter = True
     cnt=1
     for day in DATELIST:
-        temp_df = data_preparation.query_csv(day) #Yeah I know, have to make this func. Working on it...
-        temp_df = aggregation.agg_all(temp_df, how="all", col_idx=SENSOR_ID_TAGS)
+        temp_df = data_preparation.query_csv(client=None, date=day, site=None)
+        if temp_df == None:
+            continue
+        temp_df = aggregation.agg_all(temp_df, num_how="all", col_idx=SENSOR_ID_TAGS, last_idx_to_col=True)
         if is_first_iter: 
             nc_data=temp_df
             is_first_iter = False
@@ -47,6 +51,8 @@ def main():
     nc_data.drop("obsv_count", inplace=True)
 
     # b) Encode and scale NC data
+
+    
     # c) cluster NC data to get df of sensor id fields + cluster group number
     # d) Reload NC data + join cluster group num + aggregate, this time grouping by date, time, and clust_group_num
    
