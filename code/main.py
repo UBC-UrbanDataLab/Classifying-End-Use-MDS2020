@@ -56,7 +56,7 @@ def main():
     #clean and correct units of measurement
     nc_data=some_call_to_fix_units_function(nc_data)
     
-    nc_data=data_preparation.encode_units
+    nc_data=data_preparation.encode_units()
     # c) cluster NC data to get df of sensor id fields + cluster group number
     # d) Reload NC data + join cluster group num + aggregate, this time grouping by date, time, and clust_group_num
    
@@ -69,7 +69,8 @@ def main():
     #    a) Load+aggregate EC data, grouping by date, time, and sensor ID fields (no feature selection needed yet!)
     #    b) Also create second DF by aggregating further just using sensor ID fields (end result=1row per sensor)
     #    c) For each unique EC sensorID (i.e. row in 2b_EC_data_df), create LASSO model using 2a_EC_data_df and 
-            step1_output_NC_data_df. Model is basically: Y=EC response and Xn=NC data
+    #       step1_output_NC_data_df. Model is basically: Y=EC response and Xn=NC data
+    
     #    d) Join the coeffecients from LASSO model to 2b_EC_data_df (so each EC sensor has a list of n coeffecients)
     
     #    OUTPUT OF STEP2 = dataframe with EC sensor ID fields, mean response, and all n coeffecients from 
