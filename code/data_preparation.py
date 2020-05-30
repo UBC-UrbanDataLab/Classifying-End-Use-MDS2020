@@ -7,6 +7,9 @@
 ## Data Preparation
 
 # Library Imports
+
+import re
+
 # Data storing Imports
 import numpy as np
 import pandas as pd
@@ -159,3 +162,40 @@ def query_db(client, date, num_days=1, site='Pharmacy'):
         return df
     except:
         print("No data found for specified query")
+
+def query_csv(client, date, site):
+    """Function to read the csv of saved data from the influxDB for the specified date. Requires csv files
+    to already be saved in a test_data subfolder. This is a temporary function to make testing faster while
+    developing code. It is meant to be replaced with query_db() so that the project will actually pull data
+    directly from the database.
+
+    Args:
+        date (string): date of interest in format 'YYYY-MM-DD' such as '2020-05-05'
+        
+    Dummy Args:
+        site (string): name of builing of interest. Not actually used but will make it easier to replace
+                        this function with the proper query_db() function in main
+        client (influxdb-python client object): database connection object. Not actually used, kept as a placeholder
+                        to make it easier to replace query_csv with query_db() function when it comes time to do so
+                        in the main() function.
+    Returns:
+        pandas.DataFrame: contents of the specific csv
+        OR
+        None: couldn't find/access the specified csv
+
+    """
+    regexp = re.compile(r'^[0-9]{4}-[0-9]{2}-[0-9]{2}')
+    if not regexp.search(date):
+        raise ValueError("Date was not entered in usable format: YYYY-MM-DD")
+    try:
+        filename = date+".csv"
+        temp_df = pd.read_csv("test_date/"+filename)
+        return temp_df
+    except ValueError as e:
+        print("ERROR: ", e)
+        return None
+    except OSError as e:
+        print("ERROR: Unable to find or access file:", e)
+        return None
+    except:
+        return None
