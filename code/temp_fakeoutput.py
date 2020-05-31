@@ -15,8 +15,12 @@ min_value=np.random.uniform(1, 5, fake_step1_output.shape[0]),
 max_value=np.random.uniform(1, 5, fake_step1_output.shape[0]),
 mean_update_rate=np.random.uniform(1, 5, fake_step1_output.shape[0]))
 fake_step1_output.rename(columns={"value":"mean_value"}, inplace=True)
+#fake_step1_output.pivot(index=["date","hour"],columns=["clust_group_num"])
+fake_step1_output=fake_step1_output.groupby(['date', 'hour', 'clust_group_num'])['mean_value','stddev_value'].mean().unstack('clust_group_num')
 #Need to pivot table this to get in the format needed!
-#
-#
+#fake_step1_output=fake_step1_output.stack()
+#fake_step1_output.pivot_table()
+#print(fake_step1_output.unstack(1).head(25))
 print(fake_step1_output.head(25))
+
 #
