@@ -15,9 +15,8 @@ import data_preparation as dp
 data = pd.read_csv('test_data/2020-05-01.csv')
 data = data.append(pd.read_csv('test_data/2020-03-16.csv'))
 
-# Function to create and populate columns for the date and the hour of the day of each observation
 def split_datetime(df):
-    """Function to create and populate columns for the date and hour value from the timestamp of each observation
+    """Function to create and populate columns for the date, month, and hour value from the timestamp of each observation
 
     Args:
         df (pandas.DataFrame): dataframe containing a 'datetime' column
@@ -40,15 +39,21 @@ data = split_datetime(data)
 
 # A function to aggregate the numeric data by the specified columns in a user defined manner
 def agg_numeric_by_col(df, col_idx, how='all'):
-    """Function to aggregate numeric data in user specified column using specified aggregation function
+    """Function to aggregate numeric data in user specified column using specified aggregation function(s).
+       
+       The user can specify how='all' to get 'mean', 'std', 'max', 'min', and 'count', or they can specify any function
+       that is accepted by the .agg function, this will return the provided string and the count. Finally the user 
+       can pass in a list of functions that are accepted by the .agg function to get the specified aggregations and the
+       count of observations. The function filters out any non-numeric values in the "value" column.
 
     Args:
-        df (pandas.DataFrame): dataframe containing at least a numeric 'value' column
+        df (pandas.DataFrame): dataframe containing at least a 'value' column
         col_idx (list): one or more column indicies to group by when aggregating
-        how (str): 'mean', 'median', 'std', 'max', 'min'
+        how (str or list): 'mean', 'std', 'max', 'min', 'all', (or any function that can be passed into the .agg function)
         
     Returns:
-        pandas.DataFrame: Dataframe with col_idx columns as the indexes and the appropriate aggregation(s) as columns
+        pandas.DataFrame: Dataframe with col_idx columns as the indexesthe appropriate aggregation(s) as columns,
+                          and the count of observations as a column
     """
     # Takes a dataframe to aggregate numeric data for and the columns to aggregate on
     df = df.copy()
@@ -87,9 +92,23 @@ print(test_num4)
 test_num5 = agg_numeric_by_col(data, [6,8], 'min')
 print(test_num5)
 
-# Function to provide a count of the number boolean value changes grouped by the specified columns
 def agg_bool_by_col(df, col_idx, how='all'):
-    # Takes a dataframe to aggregate boolean data for and the columns to aggregate on
+    """Function to aggregate the count of boolean value changes the in user specified column(s) using specified aggregation function(s).
+       
+       The user can specify how='all' to get 'mean', 'std', 'max', 'min', and 'count', or they can specify any function
+       that is accepted by the .agg function, this will return the provided string and the count. Finally the user 
+       can pass in a list of functions that are accepted by the .agg function to get the specified aggregations and the
+       count of observations. The function filters out any non-boolean values in the "value" column.
+
+    Args:
+        df (pandas.DataFrame): dataframe containing at least a 'value' column
+        col_idx (list): one or more column indicies to group by when aggregating
+        how (str or list): 'mean', 'std', 'max', 'min', 'all', (or any function that can be passed into the .agg function)
+        
+    Returns:
+        pandas.DataFrame: Dataframe with col_idx columns as the indexesthe appropriate aggregation(s) as columns,
+                          and the count of observations as a column
+    """
     df = df.copy()
     # Filtering down just to the boolean values
     df['dtype'] = df['value'].apply(dp.get_data_type)
@@ -141,6 +160,22 @@ test_bool_agg = agg_bool_by_col(data, [1,2,3,4,5,8], ['mean','std'])
 # Function to provide a count of the number categorical value changes grouped by the specified columns
 def agg_cat_by_col(df, col_idx, how='all'):
     # Takes a dataframe to aggregate boolean data for and the columns to aggregate on
+    """Function to aggregate the count of categorical value changes the in user specified column(s) using specified aggregation function(s).
+       
+       The user can specify how='all' to get 'mean', 'std', 'max', 'min', and 'count', or they can specify any function
+       that is accepted by the .agg function, this will return the provided string and the count. Finally the user 
+       can pass in a list of functions that are accepted by the .agg function to get the specified aggregations and the
+       count of observations. The function filters out any non-boolean values in the "value" column.
+
+    Args:
+        df (pandas.DataFrame): dataframe containing at least a 'value' column
+        col_idx (list): one or more column indicies to group by when aggregating
+        how (str or list): 'mean', 'std', 'max', 'min', 'all', (or any function that can be passed into the .agg function)
+        
+    Returns:
+        pandas.DataFrame: Dataframe with col_idx columns as the indexes, the appropriate aggregation(s) as columns,
+                          and the count of observations as a column
+    """
     df = df.copy()
     # Filtering down just to the categorical values
     df['dtype'] = df['value'].apply(dp.get_data_type)
@@ -192,6 +227,26 @@ test_cat_agg = agg_cat_by_col(data, [1,2,3,4,5,8], ['mean','std'])
 
 # Function to fun all three aggregation types covered by the above functions and output data columnwise for input into other functions (ex. feature selection, and scaling)
 def agg_all(df, col_idx, how='all', last_idx_to_col=True):
+    """Function to run all three aggregation types covered by the above functions and output data columnwise for input into other functions (ex. feature selection, and scaling)
+       
+       The user can specify how='all' to get 'mean', 'std', 'max', 'min', and 'count', or they can specify any function
+       that is accepted by the .agg function, this will return the provided string and the count. Finally the user 
+       can pass in a list of functions that are accepted by the .agg function to get the specified aggregations and the
+       count of observations. The function filters out any non-numeric values in the "value" column. The user can also specify
+       if the last index of the col_idx input should be made into columns or not.
+
+    Args:
+        df (pandas.DataFrame): dataframe containing at least a 'value' column
+        col_idx (list): one or more column indicies to group by when aggregating
+        how (str or list): 'mean', 'std', 'max', 'min', 'all', (or any function that can be passed into the .agg function)
+        last_idx_to_col (bool): A boolean value indicating if the last index in the col_idx list should be made into columns in the output (True means yes and is the default)
+        
+    Returns:
+        pandas.DataFrame: Dataframe with col_idx columns (minus the last index in the list if last_idx_to_col=True)
+                          as the indexes, the appropriate aggregation(s) (grouped by the unique values of the column 
+                          of the last value in col_idx if last_idx_to_col=True) as columns, and the count of observations
+                          as a column
+    """
     # Takes a dataframe to aggregate, columns to aggregate on, and how to aggregate the numeric values (bool and cat only have one type of aggregation), and if the last index should become columns (default=True)
     # Aggregating each datatype
     num_agg = agg_numeric_by_col(df, col_idx, how=how)
@@ -240,24 +295,27 @@ test_all_agg4 = agg_all(data, [1,3,4,5,2], how='mean') # NOTE: This test was jus
 # for_eva.to_csv("sample_agg_data.csv")
 ##### ~~~ Setting up a test aggregation data for Eva ~~~ #####
 
-df = data.copy()
-col_idx = [1,2,3,4,5,10] # Columns from the original input dataframe (before aggregations)
-append_data1 = split_datetime(pd.read_csv('test_data/2020-05-01.csv'))
-append_data2 = split_datetime(pd.read_csv('test_data/2020-03-16.csv'))
-
-test_app1 = agg_all(append_data1, col_idx, how='all')
-test_app2 = agg_all(append_data2, col_idx, how='all')
-
-test_app_check = test_app1.copy()
-#test_set1 = set(test_all_agg.columns.tolist())
-#print(test_set1)
-#test_set2 = set(test_all_agg2.columns.tolist())
-#print(test_set2)
-#common_cols = list(test_set1 & test_set2)
-#print(common_cols)
-
-
 def append_agg(df1, df2, col_idx, last_idx_to_col=True):
+    """ Function to combine two previously aggregated dataframes with weighted averages for aggregations and total count for counts
+       
+       The user can pass in two aggregation dataframes (prefereably outputs from the agg_all function) in order
+       to combine them. This function is intended for sequentially aggregating data in small portions since aggregating
+       large datasets is infeasible due to limitations on RAM and computation power. NOTE: Both dataframes must be in the
+       same format.
+
+    Args:
+        df1 (pandas.DataFrame): dataframe containing the first of two dataframes to aggregate
+        df2 (pandas.DataFrame): dataframe containing the second of two dataframes to aggregate
+        col_idx (list): the column indicies to group by when aggregating
+        how (str or list): 'mean', 'std', 'max', 'min', 'all', (or any function that can be passed into the .agg function)
+        last_idx_to_col (bool): A boolean value indicating if the last index in the col_idx list should be made into columns in the output (True means yes and is the default)
+        
+    Returns:
+        pandas.DataFrame: Dataframe with col_idx columns (minus the last index in the list if last_idx_to_col=True)
+                          as the indexes, the appropriate aggregation(s) (grouped by the unique values of the column 
+                          of the last value in col_idx if last_idx_to_col=True) as columns, and the count of observations
+                          as a column
+    """
     if last_idx_to_col==True:
         col_idx = col_idx[:-1]
     group_names = df.columns[col_idx].values.tolist()
@@ -273,6 +331,18 @@ def append_agg(df1, df2, col_idx, last_idx_to_col=True):
     temp_df = temp_df.drop(dropList, axis=1)
     temp_df = temp_df.fillna(0)
     return temp_df
+
+
+# Testing append_agg() function
+df = data.copy()
+col_idx = [1,2,3,4,5,10] # Columns from the original input dataframe (before aggregations)
+append_data1 = split_datetime(pd.read_csv('test_data/2020-05-01.csv'))
+append_data2 = split_datetime(pd.read_csv('test_data/2020-03-16.csv'))
+
+test_app1 = agg_all(append_data1, col_idx, how='all')
+test_app2 = agg_all(append_data2, col_idx, how='all')
+
+test_app_check = test_app1.copy()
 
 test_append_agg = append_agg(test_app1, test_app2, [1,2,3,4,5,10])
 

@@ -7,17 +7,31 @@
 ## Data Preparation
 
 # Library Imports
+import re
+
 # Data storing Imports
 import numpy as np
 import pandas as pd
 
+# Influx Imports
+import influxdb
+import pytz
+import time
+
 # Feature Engieering Imports
 from sklearn.preprocessing import OneHotEncoder, MinMaxScaler
 
-# Function to get Datatype of a value
+# Data Preparation Functions
 def get_data_type(x):
+    """Function to identify the value type of the string passed in
+    Args:
+        x (str): string format of data that is either a boolean, numeric value, or string
+        
+    Returns:
+        (str): a string representing the value type of the string passed into the function 'bool', 'num', or 'str'
+    """
     try:
-        if x=='True' or x=='False':
+        if x=='True' or x=='False' or x==True or x==False:
             return 'bool'
         else:
             float(x)
@@ -25,16 +39,31 @@ def get_data_type(x):
     except:
         return 'str'
 
-# Creating seperate dataframes for categorical values and continuous values
-def seperate_cat_and_cont(df, idx=0):
+def separate_cat_and_cont(df, idx=0):
+    """Function to separate continuous and categorical data into separate dataframes
+    Args:
+        df (pandas.DataFrame): dataframe to containing a column of mixed categorical and continuous data
+        idx (int): index of the column containing mixed categorical and continuous data
+        
+    Returns:
+        cat_df (pandas.DataFrame): original dataframe filterd down to only include observations with categorical values
+        cont_df (pandas.DataFrame): original dataframe filterd down to only include observations with continuous values
+    """
     df = df.copy()
     df['dtype'] = df.iloc[:,idx].apply(lambda x: get_data_type(x))
     cat_df = df[df['dtype']!='num']
     cont_df = df[df['dtype']=='num']
     return cat_df, cont_df
 
-# Encoding Categorical Data
 def encode_categorical(df, indexes = [0]):
+    """Function to encode categorical data, the user must define which columns have categorical data
+    Args:
+        df (pandas.DataFrame): dataframe to containing at least one column of categorical data
+        indexes (list): list of indexes with categorical data to encode
+        
+    Returns:
+        np_arr (numpy.array): numpy array of encode categorical values
+    """
     df = df.copy()
     isFirst = True
     for idx in indexes:
@@ -49,8 +78,15 @@ def encode_categorical(df, indexes = [0]):
             np_arr = np.append(np_arr, encodedUnits,axis=1)
     return np_arr
 
-# Scaling Continuous Data
 def scale_continuous(df, indexes=[0]):
+    """Function to scale continuous data, the user must define which columns have continuous data
+    Args:
+        df (pandas.DataFrame): dataframe to containing at least one column of continuous data
+        indexes (list): list of indexes with continuous data to scale
+        
+    Returns:
+        np_arr (numpy.array): numpy array of scaled continuous values
+    """
     isFirst = True
     for idx in indexes:
         scaler = MinMaxScaler()
@@ -62,11 +98,18 @@ def scale_continuous(df, indexes=[0]):
             np_arr = np.append(np_arr, scaled_data ,axis=1)
     return np_arr
 
-# Function to Encode and Scale values, outputs a dataframe with a scaled values column, and seperate dummy variable columns for each category option
 def encode_and_scale_values(df):
+    """Function to encode and scale values, outputs a dataframe with a scaled values column, and separate dummy variable columns for each category option
+    Args:
+        df (pandas.DataFrame): dataframe to containing a "value" column
+        
+    Returns:
+        encoded_units_df (pandas.DataFrame): dataframe containing scaled numeric values, and encoded categorical values 
+                                             (with appropriate dummy variables)
+    """
     df = df.copy()
-    # Generate seperate dataframes for categorical and continous data
-    cat_data, cont_data = seperate_cat_and_cont(df,7)
+    # Generate separate dataframes for categorical and continous data
+    cat_data, cont_data = separate_cat_and_cont(df,7)
     
     # Encode Data
     encode_catVals = encode_categorical(cat_data,[7])
@@ -94,28 +137,33 @@ def encode_and_scale_values(df):
     encoded_and_scaled_df = encoded_and_scaled_df.fillna(0)
     return encoded_and_scaled_df
 
-# Function to encode units
 def encode_units(df):
+    """Function to encode units
+    Args:
+        df (pandas.DataFrame): dataframe to containing a "unit" column
+        
+    Returns:
+        encoded_units_df (pandas.DataFrame): dataframe containing encoded units
+    """
     df = df.copy()
-    encoded_units = encode_categorical(df,[6])
+    encoded_units = encode_categorical(df, df.columns.tolist().index('unit'))
     # Creating dataframe for storing encoded units
     encoded_units_df = pd.concat([df, pd.DataFrame(encoded_units, index=df.index, columns=[str(i) for i in range(len(encoded_units[0]))]).add_prefix('unit_')], axis=1)
     return encoded_units_df
 
 # ***
 # # Database Connection and Querying
-# Library Imports for Influx Queries
-import influxdb
-from datetime import timezone, datetime
-import pytz
-import matplotlib.pyplot as plt
-get_ipython().run_line_magic('matplotlib', 'inline')
-import certifi
-import time
 
-# Function to connect to the database
 def connect_to_db(database = 'SKYSPARK'):
-    # Options for database are SKYSPARK and ION, default is SKYSPARK
+    """Function to connect to the database
+    Args:
+        database (string): name of the database to connect to options are 'SKYSPARK' (default) and 'ION'
+        
+    Returns:
+        client (influxdb-python client object): database connection object
+        OR
+        None: If the database connection failed
+    """
     client = influxdb.DataFrameClient(host='206.12.92.81',port=8086, 
                                       username='public', password='public',database=database)
     try:
@@ -124,9 +172,19 @@ def connect_to_db(database = 'SKYSPARK'):
         return client
     except:
         print("Failure to Connect")
+        return None
 
-# Funciton to check connection to the database
 def check_connection(client):
+    """Funciton to check connection to the database
+
+    Args:
+        client (influxdb-python client object): database connection object
+        
+    Returns:
+        True: If the database connection is live
+        OR
+        False: If the database connection is not live
+    """
     try:
         client.ping()
         print("Connected")
@@ -135,9 +193,20 @@ def check_connection(client):
         print("Disconnected")
         return False
 
-# Function to query a date range fromt he database
 def query_db(client, date, num_days=1, site='Pharmacy'):
-    start_date = date
+    """Function to query the UBC_EWS database for the user defined start date, number of days (default=1), and site (default=Pharmacy)
+
+    Args:
+        client (influxdb-python client object): database connection object
+        date (string): date of interest in format 'YYYY-MM-DD' such as '2020-05-05'
+        num_days (int): number of days to query data
+        site (string): name of builing of interest
+        
+    Returns:
+        pandas.DataFrame: data from the queried date(s)
+        OR
+        None: return value if the query found no data
+    """
     for i in range(0,num_days):
         print(date)
         time1 = '00:00:00'
@@ -159,3 +228,41 @@ def query_db(client, date, num_days=1, site='Pharmacy'):
         return df
     except:
         print("No data found for specified query")
+        return None
+
+def query_csv(client, date, site):
+    """Function to read the csv of saved data from the influxDB for the specified date. Requires csv files
+    to already be saved in a test_data subfolder. This is a temporary function to make testing faster while
+    developing code. It is meant to be replaced with query_db() so that the project will actually pull data
+    directly from the database.
+
+    Args:
+        date (string): date of interest in format 'YYYY-MM-DD' such as '2020-05-05'
+        
+    Dummy Args:
+        site (string): name of builing of interest. Not actually used but will make it easier to replace
+                        this function with the proper query_db() function in main
+        client (influxdb-python client object): database connection object. Not actually used, kept as a placeholder
+                        to make it easier to replace query_csv with query_db() function when it comes time to do so
+                        in the main() function.
+    Returns:
+        pandas.DataFrame: contents of the specific csv
+        OR
+        None: couldn't find/access the specified csv
+
+    """
+    regexp = re.compile(r'^[0-9]{4}-[0-9]{2}-[0-9]{2}')
+    if not regexp.search(date):
+        raise ValueError("Date was not entered in usable format: YYYY-MM-DD")
+    try:
+        filename = date+".csv"
+        temp_df = pd.read_csv("test_date/"+filename)
+        return temp_df
+    except ValueError as e:
+        print("ERROR: ", e)
+        return None
+    except OSError as e:
+        print("ERROR: Unable to find or access file:", e)
+        return None
+    except:
+        return None
