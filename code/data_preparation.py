@@ -39,6 +39,7 @@ def get_data_type(x):
     except:
         return 'str'
 
+
 def separate_cat_and_cont(df, idx=0):
     """Function to separate continuous and categorical data into separate dataframes
     Args:
@@ -97,6 +98,7 @@ def scale_continuous(df, indexes=[0]):
         else:
             np_arr = np.append(np_arr, scaled_data ,axis=1)
     return np_arr
+
 
 def encode_and_scale_values(df):
     """Function to encode and scale values, outputs a dataframe with a scaled values column, and separate dummy variable columns for each category option
