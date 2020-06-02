@@ -154,3 +154,57 @@ Summary of our activities on a weekly basis:
 |4|2020-05-22|Manually labeled navname data for smaller groups|Data Cleaning|0.67|
 |4|2020-05-22|Updated log|Logistics|0.23|
 |4|2020-05-22|Manually labeled navname data for smaller groups|Data Cleaning|0.3|
+|4|2020-05-25|Daily stand up|Daily Stand Up|0.92|
+|4|2020-05-25|Created merged data set for feature selection testing|Coding|0.75|
+|4|2020-05-25|Played around with chi-squared feature selection|Coding|0.82|
+|4|2020-05-25|Played around with mutual information feature selection|Coding|0.13|
+|4|2020-05-25|Tried to find info about mixed data types for feature selection + looked more into chi-squared score interpretation|Research|0.8|
+|4|2020-05-25|Figured out chi-squared feature names outputs after encoding|Coding|0.42|
+|4|2020-05-25|Updated jira tickets with progress|Updating Jira|0.17|
+|4|2020-05-25|Wrote out what still needs to be done|Logistics|0.2|
+|4|2020-05-25|Wrote down what to say for the presentation|Development|0.17|
+|5|2020-05-26|Practiced presentation|Development|0.25|
+|5|2020-05-26|Daily stand up prep + reviewed Claudia's feature selection for numerical data|Data Analysis|0.5|
+|5|2020-05-26|Daily stand up|Daily Stand Up|0.25|
+|5|2020-05-26|Presentation practice|Other Meeting|0.45|
+|5|2020-05-26|Made my own branch + uploaded codes to Github|Logistics|0.5|
+|5|2020-05-26|Worked on finalized code to merge data sets and clean UOM |Coding|1.05|
+|5|2020-05-26|Weekly meeting with Scott|Weekly Meetings|0.5|
+|5|2020-05-26|Investigated what could be the cause for the duplicates for metadata + spent much too long using regex to convert string into a date for metadata|Data Cleaning|1.38|
+|5|2020-05-26|Working on full code for meta data merged with training data|Data Cleaning|0.65|
+|5|2020-05-26|Figured out how to remove duplicates in meta data and why missing values are not merging|Data Cleaning|1|
+|5|2020-05-26|Updated Jira|Updating Jira|0.6|
+|5|2020-05-27|Prepped for daily stand up|Logistics|0.17|
+|5|2020-05-27|Daily stand up|Daily Stand Up|0.17|
+|5|2020-05-27|Meeting to review Connor's flow charts|Other Meeting|1.17|
+|5|2020-05-27|Fixed training data duplicates|Data Cleaning|1.25|
+|5|2020-05-27|Reviewed code with categorical feature outputs |Research|0.3|
+|5|2020-05-27|Organized all my random codes and python jupyter notebooks|Logistics|0.4|
+|5|2020-05-27|Reviewed numerical aggregate concept with Claudia|Other Meeting|0.3|
+|5|2020-05-27|Worked on git pull with Alex + trying to understand Connor's code to aggergate numerical values|Research|0.53|
+|5|2020-05-27|Tried to understand Connor's code to format it for numerical feature selection|Research|0.73|
+|5|2020-05-27|Reviewed potential formats of numerical aggregate outputs with Connor |Other Meeting|0.28|
+|5|2020-05-27|Updating personal log|Logistics|0.3|
+|5|2020-05-27|Organized code + updated jira and moved tickets|Updating Jira|1.05|
+|5|2020-05-28|Daily stand up meeting |Daily Stand Up|0.33|
+|5|2020-05-28|Retrospective meeting|Other Meeting|1|
+|5|2020-05-28|Updated jira with progress|Updating Jira|0.8|
+|5|2020-05-28|Wrote cross validation code to choose k|Coding|0.63|
+|5|2020-05-28|Updated feature selection flowchart|Logistics|0.6|
+|5|2020-05-28|Feature selection meeting with Claudia|Other Meeting|1.12|
+|5|2020-05-28|Finalized smaller categorical levels code and moved over to code review|Coding|0.22|
+|5|2020-05-28|Git repo branch confusion|Logistics|0.28|
+|5|2020-05-28|Comparing chi-squared and mutual information outputs for feature selection|Research|0.57|
+|5|2020-05-28|Made sprint planning tasks and subtasks|Logistics|0.4|
+|5|2020-05-28|Finalized categorical feature selection code and pushed to Github repo|Coding|0.5|
+|5|2020-05-29|Daily stand up + sprint planning meeting + prepped for client meeting |Other Meeting|2.17|
+|5|2020-05-29|Reviewed Scott's email and presentation rubric|Logistics|0.17|
+|5|2020-05-29|UDL Meeting|Client Meetings|1|
+|5|2020-05-29|Team Sync Up Meeting|Other Meeting|0.68|
+|5|2020-05-29|Finished meeting minutes|Logistics|0.2|
+|5|2020-05-29|Changed project schedule|Development|0.62|
+|5|2020-05-29|Merged aggregated sample data + tried running feature selection on numerical data|Coding|0.82|
+|5|2020-05-29|Worked on code to run feature selection on numerical data|Coding|0.15|
+|5|2020-05-29|Ran cross validation to choose k for numerical feature selection|Coding|0.28|
+|5|2020-05-29|Updated Log|Logistics|0.13|
+|5|2020-05-29|Prepped encoding data to feed into models|Coding|0.45|
