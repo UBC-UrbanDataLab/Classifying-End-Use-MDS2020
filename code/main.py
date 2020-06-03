@@ -63,8 +63,6 @@ def main():
         
     #2) Model EC/NC relationship
     ############################
-    #    temp) Make a fake version of the output dataframe from step 1 so that step 2 can be (mostly) developed 
-    #        without waiting for step 1 to be finished!
         
     #    a) Load+aggregate EC data, grouping by date, time, and sensor ID fields (no feature selection needed yet!)
     #    b) Also create second DF by aggregating further just using sensor ID fields (end result=1row per sensor)
