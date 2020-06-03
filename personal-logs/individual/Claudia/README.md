@@ -27,7 +27,7 @@ Summary of our activities on a weekly basis:
 |1|2020-05-04|Daily standup meeting|Daily Meetings|0.25|
 |1|2020-05-04|Added tables to github repository|Logistics|1|
 |1|2020-05-04|Editting Report/presentation|Report|3|
-|1|2020-05-04|Researched clustering for SPARK (MLlib)|Research|1|
+|1|2020-05-04|Researched clustering for SPARK (MLlib)|Research|2|
 |1|2020-05-04|Prepared presentation notes for myself|Presentation|0.5|
 |2|2020-05-05|Daily standup meeting|Daily Meetings|0.25|
 |2|2020-05-05|Practice Weekly presentation|Weekly Meetings|1|
@@ -42,7 +42,7 @@ Summary of our activities on a weekly basis:
 |2|2020-05-07|EDA meeting with Jiachen|Other Meeting|1|
 |2|2020-05-07|Trying sklearn on databricks|Coding|1|
 |2|2020-05-07|Retrospective Meeting|Weekly Meetings|0.75|
-|2|2020-05-07|Edit Final Proposal Draft|Report|0.5|
+|2|2020-05-07|Edit Final Proposal Draft|Report|1|
 |2|2020-05-07|Researched Feature Engineering|Research|1|
 |2|2020-05-08|daily standup meeting|Daily Meetings|0.25|
 |2|2020-05-08|Sprint pre-planning meeting|Weekly Meetings|1|
@@ -57,27 +57,27 @@ Summary of our activities on a weekly basis:
 |2|2020-05-11|Work on weekly presentation |Logistics|1.5|
 |2|2020-05-11|Coding for missing values|Coding|2|
 |3|2020-05-12|Practice Weekly presentation|Presentation|0.5|
-|3|2020-05-12|Coding for missing values|Logistics|1|
+|3|2020-05-12|Coding for missing values|Logistics|2|
 |3|2020-05-12|daily standup meeting|Daily Meetings|0.5|
 |3|2020-05-12|Practice Weekly presentation|Presentation|0.5|
 |3|2020-05-12|presentation with Scott|Presentation|0.5|
-|3|2020-05-12|looking for irregularities in the data|Coding|2|
+|3|2020-05-12|looking for irregularities in the data|Coding|3|
 |3|2020-05-13|daily standup meeting|Daily Meetings|0.25|
 |3|2020-05-13|create units threshold list|Logistics|2|
-|3|2020-05-13|continued looking at inconsistencies with the data|Data Cleaning|3|
+|3|2020-05-13|continued looking at inconsistencies with the data|Data Cleaning|3.5|
 |3|2020-05-13|Looked into semi-supervised methods|Logistics|1|
 |3|2020-05-14|daily standup meeting|Daily Meetings|0.5|
 |3|2020-05-14|Retrospective Meeting|Weekly Meetings|0.5|
 |3|2020-05-14|Data labelling meeting|Logistics|1|
-|3|2020-05-14|Data labelling organization|Logistics|2|
+|3|2020-05-14|Data labelling organization|Logistics|2.5|
 |3|2020-05-15|daily standup meeting|Daily Meetings|0.25|
 |3|2020-05-15|Sprint pre-planning meeting|Weekly Meetings|1.5|
 |3|2020-05-15|Meeting to prepare for meeting with UDL|Weekly Meetings|0.5|
 |3|2020-05-15|meeting with UDL|Weekly Meetings|1|
 |3|2020-05-15|preparing for data labelling|Logistics|1.5|
 |3|2020-05-15|debrief meeting|Weekly Meetings|0.5|
-|3|2020-05-15|Data Labelling|Data Prep|0.5|
-|3|2020-05-15|Research semi-supervised methods|Research|1|
+|3|2020-05-15|Data Labelling|Data Prep|1.5|
+|3|2020-05-15|Research semi-supervised methods|Research|2|
 |3|2020-05-18|Data Labelling|Data Prep|2|
 |4|2020-05-19|daily standup meeting|Daily Meetings|1.5|
 |4|2020-05-19|presentation with Scott|Weekly Meetings|0.75|
@@ -85,15 +85,15 @@ Summary of our activities on a weekly basis:
 |4|2020-05-19|Updated team & personal logs on github|Logistics|1|
 |4|2020-05-20|Daily standup meeting|Daily Meetings|0.25|
 |4|2020-05-20|Team meeting: labelling, feature selection|Other Meeting|0.75|
-|4|2020-05-20|Research and create code review checklist|Coding|1|
+|4|2020-05-20|Research and create code review checklist|Coding|1.5|
 |4|2020-05-20|Reviewed Connors code|Coding|2|
-|4|2020-05-20|Research & coding feature selection|Research|1|
-|4|2020-05-21|Research encoding for categorical data|Research|1|
+|4|2020-05-20|Research & coding feature selection|Research|2|
+|4|2020-05-21|Research encoding for categorical data|Research|2|
 |4|2020-05-21|Daily standup meeting|Daily Meetings|0.25|
 |4|2020-05-21|Team meeting|Logistics|0.5|
 |4|2020-05-21|Retrospective Meeting|Weekly Meetings|0.75|
-|4|2020-05-21|coded data prep for feature selection|Data Prep|2|
-|4|2020-05-21|research feature selection|Research|2|
+|4|2020-05-21|coded data prep for feature selection|Data Prep|2.5|
+|4|2020-05-21|research feature selection|Research|3|
 |4|2020-05-22|Daily standup meeting|Daily Meetings|0.25|
 |4|2020-05-22|Sprint pre-planning meeting|Weekly Meetings|1|
 |4|2020-05-22|Meeting to prepare for meeting with UDL|Weekly Meetings|1|
@@ -102,7 +102,29 @@ Summary of our activities on a weekly basis:
 |4|2020-05-22|worked on weekly presentation|Presentation|1|
 |4|2020-05-25|Daily standup meeting|Daily Meetings|0.25|
 |4|2020-05-25|Research feature selection for categorical data|Research|3|
-|4|2020-05-25|coded for numerical feature selection|Coding|2|
+|4|2020-05-25|coded for numerical feature selection|Coding|2.5|
 |5|2020-05-26|Daily standup meeting|Daily Meetings|0.25|
 |5|2020-05-26|practice Weekly presentation|Presentation|0.5|
 |5|2020-05-26|Weekly meeting with Scott|Presentation|0.5|
+|5|2020-05-26|update github repository with team/individual logs|Logistics|1|
+|5|2020-05-26|code review for aggregating data|Coding|2|
+|5|2020-05-27|Daily standup meeting|Daily Meetings|0.25|
+|5|2020-05-27|Team meeting|Logistics|1.5|
+|5|2020-05-27|Coded for cv for numerical feature selection|Coding|2|
+|5|2020-05-27|research more about continous feature selection and ANOVA|Research|2|
+|5|2020-05-28|Daily standup meeting|Daily Meetings|0.25|
+|5|2020-05-28|Retrospective Meeting|Weekly Meetings|0.75|
+|5|2020-05-28|Meeting with Eva to discuss feature selection|Logistics|1.5|
+|5|2020-05-28|coding for numerical selection|Coding|3|
+|5|2020-05-29|Daily standup meeting|Daily Meetings|0.25|
+|5|2020-05-29|Sprint pre-planning meeting|Weekly Meetings|0.5|
+|5|2020-05-29|Meeting to prepare for meeting with UDL|Weekly Meetings|1|
+|5|2020-05-29|Meeting with UDL|Weekly Meetings|1|
+|5|2020-05-29|Work on mid-term presentation|Presentation|2.5|
+|5|2020-05-29|Team meeting (change schedule)|Other Meeting|1|
+|5|2020-06-01|Research models for EC/NC relationship|Research|1|
+|5|2020-06-01|Code for Lasso|Coding|1|
+|5|2020-06-01|Midterm presentation meeting|Other Meeting|1.5|
+|5|2020-06-01|Midterm presentation prep|Logistics|1|
+|5|2020-06-01|Midterm presentation practice|Other Meeting|1|
+|6|2020-06-02|Midterm presentations|Other Meeting|4|

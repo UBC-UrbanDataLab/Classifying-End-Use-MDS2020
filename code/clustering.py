@@ -4,7 +4,6 @@
 ### ~ Library Imports ~ ###
 # Data storing Imports
 import numpy as np
-import pandas as pd
 
 # Clustering imports
 from sklearn.cluster import KMeans, AgglomerativeClustering, DBSCAN, MeanShift
@@ -15,51 +14,82 @@ import skfuzzy as fuzz
 # Cluster performance comparison metric imports
 from sklearn.metrics import silhouette_score
 
-
 # Distance Calculation Imports
 import gower
 
 # MDS Import
 from sklearn.manifold import MDS
 
-# Function imports from other files
-import data_preparation as dp
-
-# Plotting Imports
-from mpl_toolkits.mplot3d import Axes3D
-import matplotlib.pyplot as plt
-
 ### ~ Calculating the Gower's distances ~ ###
-# Generating list of Booleans for identifying which columns are categorical and which aren't (pass in a list of columns that are continuous and the number predictor variables)
 def make_categorical_list(cont_idxs, num_predictors):
+    """Function to generate a list of booleans to identify which columns are categorical and which aren't
+    Args:
+        cont_idxs (list): list of indexes that are continuous
+        num_predictors (int): number of predictor variables
+        
+    Returns:
+        is_cat (list): a list of boolean values indicating which columns are categorical (True) and which are continuous (False)
+    """
     if type(cont_idxs)==int: cont_idxs = [cont_idxs]
-    is_Cat = []
+    is_cat = []
     for i in range(num_predictors):
         if i in cont_idxs:
-            is_Cat.append(False)
+            is_cat.append(False)
         else:
-            is_Cat.append(True)
-    return is_Cat
+            is_cat.append(True)
+    return is_cat
 
-# Function to simplify calculating Gower's distance (pass in the dataframe and the indexes of the columns that are categorical)
 def calc_gowers(df, continuous_columns):
+    """Function to simplify calculating Gower's distance
+    Args:
+        df (pandas.DataFrame): dataframe of observations to calculate Gower's dstance for
+        continuous_columns (list): list of integers identifying the indexes of columns that are continuous
+        
+    Returns:
+        gow_dists (numpy.array): a numpy array of Gower's distances between observations
+    """
     catList = make_categorical_list(continuous_columns, len(df.columns)-8)
     data_np = df.iloc[:,8:].to_numpy()
     gow_dists = gower.gower_matrix(data_np, cat_features=catList)
     return gow_dists
 
 ### ~ Multidimensional Scaling ~ ###
-# Function to perform Multidimensional Scaling (MDS)
 def multidim_scale(dist_mat, num_dim=2):
+    """Function to perform Multidimensional Scaling (MDS)
+    Args:
+        dist_mat (numpy.array): a numpy array of relative distances betwen observations
+        num_dim (int): the number of dimensions to scale down to (default=2)
+        
+    Returns:
+        scaled_data (numpy.array): a numpy array of values that satisfy the distance measures passed in
+    """
     scaler = MDS(n_components=num_dim, dissimilarity='precomputed')
     scaled_data = scaler.fit_transform(dist_mat)
     return scaled_data
 
 ### ~ Clustering Function ~ ###
-# Function to quickly run various different clustering methods, look at the portion of the if statement to see what values each model type needs in order to run
-## Available model types are: kmeans, agglom (agglomerative or hierarchical), dbscan, hdbscan, gmm (gausian mixture model), 
-##                            vbgm (variational bayesian gaussian mixture model), meanshift, and fuzzy (fuzzy c-means)
 def cluster(df, clust_type, num_clusts = None, continuous_columns = None, input_type='original'):
+    """Function to simplify various different clustering methods
+    
+       Available model types are: kmeans, agglom (agglomerative or hierarchical), dbscan, hdbscan, 
+       gmm (gausian mixture model), vbgm (variational bayesian gaussian mixture model), meanshift, 
+       and fuzzy (fuzzy c-means)
+    Args:
+        df (pandas.DataFrame): dataframe of original values (if input_type='original')
+        OR                     numpy array of Gower's distances between observations (if input_type='gowers')
+        OR                     dataframe of multidimensionaly scaled values (if input_type='mds')
+        clust_type (str): the type of clustering to be done options are kmeans, agglom, dbscan, hdbscan, gmm, 
+                          vbgm, meanshift, and fuzzy
+        num_clusts (int): the number of clusters to generate (default=None) only required for kmeans, agglom, 
+                          gmm, vbgm, fuzzy
+        continuous_columns (list): list of integers identifying the indexes of columns that are continuous
+        input_type (str): user defined input type options are 'original', 'gowers', and 'mds'
+        
+    Returns:
+        preds (numpy.array): a numpy array of the cluster groups
+        OR
+        None: if clustering doesn't work and/or the sihlouette score can't be calculated
+    """
     needs_mds = ['kmeans', 'gmm', 'vbgm', 'meanshift', 'fuzzy'] # List of models that don't accept distance measures as input
     # Determines how to address the input (calculate gower's distance, store, or use as is) based on the user defined input type
     ## Allows the user to pass in either data on the original scale, as gowers distance or after performing MDS 
@@ -119,9 +149,11 @@ def cluster(df, clust_type, num_clusts = None, continuous_columns = None, input_
         preds = np.argmax(u, axis=0)
     else:
         print("Specified model type not available yet")
+        return None
     try:
         # Silhouette Score appears to be the prefered cluster comparison metric used with sklearn from what I have read (1 is good, -1 is bad)
         print("Silhouette Score for {} clustering: {}".format(clust_type, silhouette_score(fit_data, preds)))
         return preds
     except:
         print('Unable to calculate silhouette score for the given model under the current conditions')
+        return None
