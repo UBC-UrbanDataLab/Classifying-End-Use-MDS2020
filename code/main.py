@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 """
 Created on Wed May 27 16:27:50 2020
+
 @author: connor
 """
 import pandas as pd
 import numpy as np
-
 
 import data_preparation
 import aggregation
@@ -19,26 +19,24 @@ def main():
     
     # TODO: write code to create a proper list of each day in the decided upon date-range store as DATELIST
     
-    
-    DATELIST = ["2020-04-01","2020-04-02"]
-    
-    ##################### Connor Update ##################### TEMP
     DATELIST = ["2020-03-16","2020-05-01"] # These dates are in the test_data folder so this is just here for testing purposes
-    ##################### Connor Update ##################### TEMP
 
     SENSOR_ID_TAGS = [1,2,3,4,5,6] # order is ["groupRef","equipRef","navName","siteRef","typeRef","unit"] #NOTE: Including "unit" here means that we WILL have inconsistent units after aggregations unless we address them in the for loop BEFORE running agg_all, it's fine for now but this will need to be addressed
                                  # Contiued from above: including "unit" causes issues when there are duplicate items with mixed units (need to run the code to fix the units during this for loop or ignore units in the clustering phase)
+
     # The planned update to the InfluxDB may change SENSOR_ID_TAGS to only [1] as in ["uniqueID"]
     
     #1) Cluster NC data
     ###################
     
     # 1a) load+aggregate NC data (including weather), grouping by sensor ID fields [and 'unit'?]
+
     # DONE: Write data_preparation.query_csv()
     # TODO: Check that last_idx_to_col is supposed to be True for aggregation.agg_all()
     # TODO: Update call to aggregation.append_agg() once that function is finalized
     # TODO: Make sure col names are correct when working with nc_data df in last two lines
     last_idx_as_cols = False
+
     is_first_iter = True
     cnt=1
     for day in DATELIST:
@@ -207,3 +205,4 @@ plt.scatter(data_2d_df['x']*1000,data_2d_df['y']*1000, c=data_2d_df['cluster'])
 hdb_2d = data_2d_df.copy()
 meanshift_2d = data_2d_df.copy()
 data_2d_df_w_units = data_2d_df.copy()
+
