@@ -150,3 +150,34 @@ Summary of our activities on a weekly basis:
 |4|2020-05-25|Update detailed flow chart for non-NRCan modeling being part of the feature engineering phase|Research|1|
 |4|2020-05-25|Go over what I plan to present|Meeting Prep|2.33|
 |4|2020-05-25|Data aggregation functions|Coding|4|
+|5|2020-05-26|Daily standup prep|Meeting Prep|0.5|
+|5|2020-05-26|Practice presentation|Meeting Prep|0.5|
+|5|2020-05-26|Daily standup|Daily Meetings|0.25|
+|5|2020-05-26|Practice presentation|Weekly Meetings|1|
+|5|2020-05-26|Write function to run and combine outputs for the data aggregation functions|Coding|0.92|
+|5|2020-05-26|Meeting with Scott|Weekly Meetings|0.5|
+|5|2020-05-26|Write function to run and combine outputs for the data aggregation functions|Coding|2.17|
+|5|2020-05-26|Created detailed flowchart of all the functions we need|Research|3.17|
+|5|2020-05-27|Prep for Daily standup|Meeting Prep|0.2|
+|5|2020-05-27|Fixing issue with agg_all function|Coding|0.5|
+|5|2020-05-27|Daily Standup|Daily Meetings|0.25|
+|5|2020-05-27|Discuss detailed project flow and concept relating EC and NC sensors|Other Meeting|1|
+|5|2020-05-27|Update detailed flow chart and make EC to NC sensors flow chart a Google Sheet|Research|1.75|
+|5|2020-05-27|Fixing issue with agg_all function|Coding|3|
+|5|2020-05-27|Started working on the main function|Coding|1|
+|5|2020-05-28|Prep for Daily standup|Meeting Prep|0.25|
+|5|2020-05-28|Discuss magintude of data issue for agg_all with Alex|Other Meeting|0.5|
+|5|2020-05-28|Daily Standup|Daily Meetings|0.25|
+|5|2020-05-28|Weekly retrospective|Weekly Meetings|0.92|
+|5|2020-05-28|Discuss magintude of data issue for agg_all with Alex|Other Meeting|1.83|
+|5|2020-05-28|Work on aggregation function fixes as discussed|Coding|4.5|
+|5|2020-05-29|Prep for Daily standup|Meeting Prep|0.5|
+|5|2020-05-29|Daily standup|Daily Meetings|0.25|
+|5|2020-05-29|Sprint planning|Weekly Meetings|0.75|
+|5|2020-05-29|UDL meeting prep|Meeting Prep|0.83|
+|5|2020-05-29|Work on aggregation function fixes as discussed|Coding|1.83|
+|5|2020-05-29|UDL Meeting|Weekly Meetings|1|
+|5|2020-05-29|Finish Sprint planning, discuss schedule, and discuss presentations|Weekly Meetings|0.5|
+|5|2020-05-29|Work on aggregation function fixes as discussed|Coding|2.5|
+|5|2020-05-31|Add docstrings to functions|Coding|3|
+|5|2020-05-31|Update Jira|Logistics|0.17|

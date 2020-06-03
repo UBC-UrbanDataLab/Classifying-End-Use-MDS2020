@@ -128,3 +128,23 @@ Summary of our activities on a weekly basis:
 |4|2020-05-25|Prep for weekly meeting slideshow|Logistics|0.75|
 |4|2020-05-25|Review Connor's whiteboard slide|Research|1|
 |4|2020-05-25|Started writing python code for sensor update rate aggregation|Coding|0.75|
+|4|2020-05-25|Investiage EC sensors with unknown NRCan tags (look at metadata+google abbreviations)|Data Cleaning|1.5|
+|5|2020-05-26|Quick review of slideshow|Logistics|0.25|
+|5|2020-05-27|Explore update rates in R|Data Analysis|1.5|
+|5|2020-05-28|Continue to work through the aggregation py file and add some doc strings.|Coding|0.75|
+|5|2020-05-28|Daily Standup|Daily Meetings|0.25|
+|5|2020-05-28|Discuss other questions|Other Meeting|0.25|
+|5|2020-05-28|Retrospective Meeting|Weekly Meetings|0.75|
+|5|2020-05-28|Brainstorm+hammer out aggregation function details with Connor|Other Meeting|1.75|
+|5|2020-05-28|Clean up unittests+docstrings|Coding|1|
+|5|2020-05-28|Approve Connor's pull request+prep and make pull requests for agg_up_rate and first_unittests|Git management|1.25|
+|5|2020-05-28|Started trying to make psuedocode in main.py|Coding|2|
+|5|2020-05-29|Hammered out draft program flow psuedo code (main.py)|Coding|1|
+|5|2020-05-29|Fill out personal log|Logistics|1.25|
+|5|2020-05-29|Daily Standup|Daily Meetings|0.25|
+|5|2020-05-29|Sprint Planning|Weekly Meetings|1.25|
+|5|2020-05-29|Meeting to discuss agenda for client meeting|Weekly Meetings|0.75|
+|5|2020-05-29|Add code to main.py|Coding|1.5|
+|5|2020-05-29|Client Meeting|Client Meetings|1|
+|5|2020-05-29|Finish Sprint Planning, Discuss updated project schedule, Discuss presentation|Other Meeting|0.85|
+|5|2020-05-29|misc updates on main.py|Coding|0.25|
