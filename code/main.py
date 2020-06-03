@@ -54,9 +54,9 @@ def main():
     # TODO: Look up the correct function name for fixing units of measurement
     # TODO: 
     #clean and correct units of measurement
-    nc_data=some_call_to_fix_units_function(nc_data)
+    #nc_data=some_call_to_fix_units_function(nc_data)
     
-    nc_data=data_preparation.encode_units()
+    #nc_data=data_preparation.encode_units()
     # c) cluster NC data to get df of sensor id fields + cluster group number
     # d) Reload NC data + join cluster group num + aggregate, this time grouping by date, time, and clust_group_num
    
