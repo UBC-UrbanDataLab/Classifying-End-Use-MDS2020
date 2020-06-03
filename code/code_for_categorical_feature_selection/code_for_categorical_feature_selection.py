@@ -1,9 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# ## IMPORT TRAINING DATA AND FIX UOM
 
-# In[113]:
+# In[17]:
 
 
 import pandas as pd
@@ -16,7 +15,7 @@ training['uniqueId']=training['equipRef'].fillna('')+' '+training['groupRef'].fi
 training.rename(columns={'UBC_EWS.firstValue':'firstValue'}, inplace=True)
 
 
-# In[114]:
+# In[18]:
 
 
 ################### CODE TO FIX INCONSISTENT DATA ####################
@@ -95,28 +94,29 @@ mod_units=training.apply(lambda x: fix_units_incons(x.navName, x.equipRef, x.fir
 training.insert(6,"mod_units", mod_units)
 
 
-# In[115]:
+# In[19]:
 
 
 # overwrite unit column with fixed_uoms
 training['unit']=training['mod_units']
 
 
-# In[116]:
+# In[20]:
 
 
 # drop unncessary columns in order to drop duplicate rows
 training=training.drop(['Alex-Comments', 'UBC_EWS.numReadings', 'time','firstValue','UBC_EWS.lastValue'], axis=1)
 # can change ? to 0 since uom fixed
 training['isGas']=training.isGas.apply(lambda x: '0' if x=='?' else x)
-# changing boolean for more descriptive encoding
+# changing boolean for more descriptive encoding 
+
 training['isGas']=training.isGas.apply(lambda x: 'no_gas' if x=='0' else 'yes_gas')
 training=training.drop_duplicates()
 
 
 # ## IMPORT METADATA
 
-# In[117]:
+# In[21]:
 
 
 ############### METADATA CLEANING ##############
@@ -141,7 +141,7 @@ metadata['water']=metadata['water'].apply(lambda x: 'yes_water' if x=='✓' else
 metadata['unit']=metadata['unit'].apply(lambda x: 'omit' if x=='_' else x)
 
 
-# In[118]:
+# In[22]:
 
 
 ######## Removing the word Pharmacy from uniqueID
@@ -153,7 +153,7 @@ training['groupRef']=training['groupRef'].map(lambda x: x.replace('Pharmacy ', '
 
 # ## MERGE METADATA AND TRAINING DATA
 
-# In[119]:
+# In[23]:
 
 
 merged_left=pd.merge(left=training, right=metadata, how='left', left_on='uniqueId', right_on='uniqueId')
@@ -161,7 +161,7 @@ merged_left=pd.merge(left=training, right=metadata, how='left', left_on='uniqueI
 
 # ## MAKE CATEGORIES INTO SMALLER GROUPS
 
-# In[120]:
+# In[24]:
 
 
 ########## GROUPING EQUIPREF AND NAVNAME INTO SMALLER CATEGORICAL LEVELS #############
@@ -213,7 +213,7 @@ def equip_label(equip):
 merged_left['equipNew']=merged_left.equipRef.apply(lambda x: equip_label(x))
 
 
-# In[121]:
+# In[25]:
 
 
 def nav_label(nav):
@@ -302,53 +302,62 @@ merged_left['navNew']=merged_left.navName.apply(lambda x: nav_label(x))
 
 # ## CHOOSE RELEVANT FIELDS IN MERGED DATA SET
 
-# In[122]:
+# In[26]:
 
 
 ###### renaming unit columns to reflect data source
 merged_left.rename(columns={'mod_units':'influxDB_units'}, inplace=True)
 merged_left.rename(columns={'unit_y':'metadata_units'}, inplace=True)
-##### selecting relevant fields
+
+##### selecting relevant fields 
 #### decided to remove metadata_units because it matches with influxDB_units OR it is showing nan due to unmerged obs
 merged_left=merged_left[['groupRef', 'influxDB_units', 'isGas', 'kind', 'energy','power', 'sensor', 'water', 'equipNew', 'navNew', 'ALEX-NRCanLabelGuess']]
 
+# prepare target
+def prepare_targets(y_train, y_test):
+    le = LabelEncoder()
+    le.fit(y_train)
+    y_train_enc = le.transform(y_train)
+    y_test_enc = le.transform(y_test)
+    return y_train_enc, y_test_enc
 
 # ## FILTER OUT NC LABELS
 
-# In[123]:
+# In[27]:
 
 
 merged_left=merged_left[merged_left["ALEX-NRCanLabelGuess"]!='0_NOT_ENERGY_CONSUMPTION']
 
 
-# In[94]:
+# In[28]:
 
 
 # merged_left.to_csv("mergeddata.csv")
 
 
-# ## FEATURE SELECTION TESTING WITH CROSS VALIDATION AND CHI-SQUARED
+# ## FEATURE SELECTION TESTING WITH CHI-SQUARED
 
-# In[125]:
+# In[29]:
 
 
-# Load libraries
+#### Load libraries 
 import pandas as pd
 import numpy as np
-from sklearn.feature_selection import SelectKBest
-from sklearn.feature_selection import chi2
+from sklearn.feature_selection import SelectKBest 
+from sklearn.feature_selection import chi2 
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import OneHotEncoder
 from matplotlib import pyplot
 
+#### Split data into training and test data
 dataset = merged_left.values
 X = dataset[:, :-1]
 y = dataset[:,-1]
 X=X.astype(str)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=1)
 
-
+#### Encode categorical data
 oe = OneHotEncoder(handle_unknown='ignore')
 oe.fit(X_train)
 X_train_enc = oe.transform(X_train)
@@ -359,31 +368,29 @@ le.fit(y_train)
 y_train_enc = le.transform(y_train)
 y_test_enc = le.transform(y_test)
 
-
-oe.get_feature_names()
-
-# Two features with highest chi-squared statistics are selected
-chi2_features = SelectKBest(chi2, k = 15)
-X_kbest_features = chi2_features.fit_transform(X_train_enc, y_train_enc)
-
-# Reduced features
-print('Original feature number:', X.shape[1])
-print('Reduced feature number:', X_kbest_features.shape[1])
-
+  
+#### Chi-Squared feature selection using SelectKBest 
+#### Chose k=15 from cross-validation spike, do not feel comfortable choosing k=3
+chi2_features = SelectKBest(chi2, k = 15) 
+X_kbest_features = chi2_features.fit_transform(X_train_enc, y_train_enc)   
+    
 feature_names=oe.get_feature_names()
 
 chi2_features.get_support(indices=True)
 
 
 feature_names = [feature_names[i] for i in chi2_features.get_support(indices=True)]
-
+ 
 if feature_names:
     feature_names = np.asarray(feature_names)
 
+print("BEST FEATURES WITH CHI-SQUARED:")
 feature_names
 
 
-# In[126]:
+# ## CROSS VALIDATION TO CHOOSE K
+
+# In[30]:
 
 
 import matplotlib.pyplot as plt
@@ -391,7 +398,6 @@ from sklearn.svm import SVC
 from sklearn.model_selection import StratifiedKFold
 from sklearn.feature_selection import RFECV
 from sklearn.datasets import make_classification
-
 
 # Create the RFE object and compute a cross-validated score.
 svc = SVC(kernel="linear")
@@ -411,9 +417,9 @@ plt.plot(range(1, len(rfecv.grid_scores_) + 1), rfecv.grid_scores_)
 plt.show()
 
 
-# ## FEATURE SELECTION WITH MUTUAL INFORMATION
+# ## FEATURE SELECTION WITH MUTUAL INFORMATION 
 
-# In[127]:
+# In[35]:
 
 
 # evaluation of a model fit using mutual information input features
@@ -426,29 +432,49 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 
-# prepare input data
-def prepare_inputs(X_train, X_test):
-    oe = OneHotEncoder(handle_unknown='ignore')
-    oe.fit(X_train)
-    X_train_enc = oe.transform(X_train)
-    X_test_enc = oe.transform(X_test)
-    return X_train_enc, X_test_enc
+#### Split data into training and test data
+dataset = merged_left.values
+X = dataset[:, :-1]
+y = dataset[:,-1]
+X=X.astype(str)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=1)
 
-# prepare target
-def prepare_targets(y_train, y_test):
-    le = LabelEncoder()
-    le.fit(y_train)
-    y_train_enc = le.transform(y_train)
-    y_test_enc = le.transform(y_test)
-    return y_train_enc, y_test_enc
+#### Encode categorical data
+oe = OneHotEncoder(handle_unknown='ignore')
+oe.fit(X_train)
+X_train_enc = oe.transform(X_train)
+X_test_enc = oe.transform(X_test)
 
-# feature selection
-def select_features(X_train, y_train, X_test):
-    fs = SelectKBest(score_func=mutual_info_classif, k=14)
-    fs.fit(X_train, y_train)
-    X_train_fs = fs.transform(X_train)
-    X_test_fs = fs.transform(X_test)
-    return X_train_fs, X_test_fs
+le = LabelEncoder()
+le.fit(y_train)
+y_train_enc = le.transform(y_train)
+y_test_enc = le.transform(y_test)
+ 
+#### Mutual Information feature selection using SelectKBest
+#### Chose k=15 from cross-validation spike, do not feel comfortable choosing k=3
+fs = SelectKBest(score_func=mutual_info_classif, k=15)
+fs.fit(X_train_enc, y_train_enc)
+X_train_fs = fs.transform(X_train_enc)
+X_test_fs = fs.transform(X_test_enc)
+
+feature_names=oe.get_feature_names()
+
+fs.get_support(indices=True)
+
+
+feature_names = [feature_names[i] for i in fs.get_support(indices=True)]
+ 
+if feature_names:
+    feature_names = np.asarray(feature_names)
+    
+#### CHOOSING MUTUAL INFORMATION BECAUSE IT DOESN'T CHANGE FEATURES 
+# WITH EACH RUN LIKE CHI-SQUARED DOES
+print("BEST FEATURES WITH MUTUAL INFORMATION:")
+feature_names
+
+
+# In[34]:
+
 
 # prepare input data
 X_train_enc, X_test_enc = prepare_inputs(X_train, X_test)
@@ -464,6 +490,10 @@ yhat = model.predict(X_test_fs)
 # evaluate predictions
 accuracy = accuracy_score(y_test_enc, yhat)
 print('Accuracy: %.2f' % (accuracy*100))
+
+merged_left.head(4)
+# x0 = groupRef, x1 = influxDB_units, x2 = isGas
+# x4 = energy, x6 = sensor, x8 = equipNew, x9 = navNew
 
 
 # In[ ]:
