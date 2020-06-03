@@ -103,3 +103,48 @@ Summary of our activities on a weekly basis:
 |4|2020-05-19|Weekly presentation|Weekly Meetings|0.75|
 |4|2020-05-19|Explore data to see if we caught everything that needs NRCan labels / fix query|Data Cleaning|1.5|
 |4|2020-05-19|Fill out missing days in personal log|Logistics|1|
+|4|2020-05-19|Worked on labeling data|Data Cleaning|1|
+|4|2020-05-20|Comments on Jira cards, wrote questions for Jiachen|Logistics|1|
+|4|2020-05-20|Daily Standup|Daily Meetings|0.25|
+|4|2020-05-20|Team meeting to discuss details of today's tasks|Other Meeting|0.75|
+|4|2020-05-20|Dig more into labels and refine questions to Jiachen|Data Cleaning|1.5|
+|4|2020-05-20|Finish commenting/restructuring metadata joining code|Coding|1.5|
+|4|2020-05-20|Respond to Jiachen|Logistics|1|
+|4|2020-05-21|Daily Standup|Daily Meetings|0.25|
+|4|2020-05-21|Retrospective meeting|Weekly Meetings|1|
+|4|2020-05-21|Got update rate subquery working|Coding|3|
+|4|2020-05-21|Created database update slides|Logistics|1|
+|4|2020-05-21|Queried 30 days of data and started to try to aggregate for sensor update rates|Data Analysis|1.5|
+|4|2020-05-22|Merged my metadata common field code to git, pulled down connor's code and started reviewing it|Debugging|0.75|
+|4|2020-05-22|Update meeting agenda+update some jira cards|Logistics|1|
+|4|2020-05-22|Daily Standup|Daily Meetings|0.25|
+|4|2020-05-22|Sprint Planning|Weekly Meetings|0.75|
+|4|2020-05-22|Plan for Client Meeting|Weekly Meetings|0.75|
+|4|2020-05-22|Discuss Model concept chart|Other Meeting|0.5|
+|4|2020-05-22|Brain storm/discuss model concept w/Connor|Research|1.5|
+|4|2020-05-22|Client Meeting|Weekly Meetings|1.25|
+|4|2020-05-22|Rewrote questions|Data Cleaning|1|
+|4|2020-05-25|Daily Standup+prep|Daily Meetings|0.5|
+|4|2020-05-25|Prep for weekly meeting slideshow|Logistics|0.75|
+|4|2020-05-25|Review Connor's whiteboard slide|Research|1|
+|4|2020-05-25|Started writing python code for sensor update rate aggregation|Coding|0.75|
+|4|2020-05-25|Investiage EC sensors with unknown NRCan tags (look at metadata+google abbreviations)|Data Cleaning|1.5|
+|5|2020-05-26|Quick review of slideshow|Logistics|0.25|
+|5|2020-05-27|Explore update rates in R|Data Analysis|1.5|
+|5|2020-05-28|Continue to work through the aggregation py file and add some doc strings.|Coding|0.75|
+|5|2020-05-28|Daily Standup|Daily Meetings|0.25|
+|5|2020-05-28|Discuss other questions|Other Meeting|0.25|
+|5|2020-05-28|Retrospective Meeting|Weekly Meetings|0.75|
+|5|2020-05-28|Brainstorm+hammer out aggregation function details with Connor|Other Meeting|1.75|
+|5|2020-05-28|Clean up unittests+docstrings|Coding|1|
+|5|2020-05-28|Approve Connor's pull request+prep and make pull requests for agg_up_rate and first_unittests|Git management|1.25|
+|5|2020-05-28|Started trying to make psuedocode in main.py|Coding|2|
+|5|2020-05-29|Hammered out draft program flow psuedo code (main.py)|Coding|1|
+|5|2020-05-29|Fill out personal log|Logistics|1.25|
+|5|2020-05-29|Daily Standup|Daily Meetings|0.25|
+|5|2020-05-29|Sprint Planning|Weekly Meetings|1.25|
+|5|2020-05-29|Meeting to discuss agenda for client meeting|Weekly Meetings|0.75|
+|5|2020-05-29|Add code to main.py|Coding|1.5|
+|5|2020-05-29|Client Meeting|Client Meetings|1|
+|5|2020-05-29|Finish Sprint Planning, Discuss updated project schedule, Discuss presentation|Other Meeting|0.85|
+|5|2020-05-29|misc updates on main.py|Coding|0.25|

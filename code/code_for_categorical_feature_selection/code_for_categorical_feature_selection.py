@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# ## IMPORT TRAINING DATA AND FIX UOM 
 
 # In[17]:
 
@@ -9,7 +8,7 @@
 import pandas as pd
 # loading NRCan classifications
 training=pd.read_csv('/users/evanguyen/data-599-capstone-ubc-urban-data-lab/data/PharmacyEnergyConsumption-secondtry - PharmacyEnergyConsumption-secondtry.csv')
-# making uniqueID 
+# making uniqueID
 training['siteRef']='Pharmacy'
 training['uniqueId']=training['equipRef'].fillna('')+' '+training['groupRef'].fillna('')+' '+training['navName'].fillna('')+' '+training['siteRef'].fillna('')+' '+training['typeRef'].fillna('')
 # need to rename column to use in fix_units_incons function below
@@ -20,7 +19,7 @@ training.rename(columns={'UBC_EWS.firstValue':'firstValue'}, inplace=True)
 
 
 ################### CODE TO FIX INCONSISTENT DATA ####################
-# creating a function to fix units 
+# creating a function to fix units
 def fix_units_incons(nav, equip, val, u, typeref):
     # rows 2-4 on Connor's csv
     if nav.find('ALRM')!=-1 and (float(val)==1 or float(val)==0):
@@ -31,10 +30,10 @@ def fix_units_incons(nav, equip, val, u, typeref):
     # rows 8-13 on Connor's csv
     elif nav.find('Outside Air Damper')!=-1 and (float(val)==1 or float(val)==0):
         return "omit"
-    # rows 14-15 on Connor's csv 
+    # rows 14-15 on Connor's csv
     elif (nav=='Hot Water Flow') and (u=='°C'):
         return "gal/min"
-    # rows 16-19 on Connor's csv 
+    # rows 16-19 on Connor's csv
     elif (nav=='ESB_CHIL1_PCE01_CHWFLW' or nav=='ESB_CHIL2_PCE02_CHWFLW') and (u=='°C'):
         return "gal/min"
     # rows 22-23, 64-65, 74-97, 104-115 on Connor's csv
@@ -64,7 +63,7 @@ def fix_units_incons(nav, equip, val, u, typeref):
     # rows 116-123 on Connor's csv
     elif nav=='Exhaust Air Flow' and (u=='°C'):
         return "L/s"
-    # rows 136-171, 184-291 on Connor's csv 
+    # rows 136-171, 184-291 on Connor's csv
     elif nav.find('Water Temp') and (u=='%'):
         return "°C"
     # rows 172-183 on Connor's csv
@@ -107,9 +106,10 @@ training['unit']=training['mod_units']
 
 # drop unncessary columns in order to drop duplicate rows
 training=training.drop(['Alex-Comments', 'UBC_EWS.numReadings', 'time','firstValue','UBC_EWS.lastValue'], axis=1)
-# can change ? to 0 since uom fixed 
+# can change ? to 0 since uom fixed
 training['isGas']=training.isGas.apply(lambda x: '0' if x=='?' else x)
 # changing boolean for more descriptive encoding 
+
 training['isGas']=training.isGas.apply(lambda x: 'no_gas' if x=='0' else 'yes_gas')
 training=training.drop_duplicates()
 
@@ -121,13 +121,13 @@ training=training.drop_duplicates()
 
 ############### METADATA CLEANING ##############
 metadata=pd.read_csv('/users/evanguyen/data-599-capstone-ubc-urban-data-lab/data/PharmacyQuery.csv')
-##### Removing @UUID for now 
+##### Removing @UUID for now
 metadata['equipRef']=metadata['equipRef'].str.extract('[^ ]* (.*)', expand=True)
 metadata['groupRef']=metadata['groupRef'].str.extract('[^ ]* (.*)', expand=True)
 metadata['siteRef']=metadata['siteRef'].str.extract('[^ ]* (.*)', expand=True)
 metadata['connRef']=metadata['connRef'].str.extract('[^ ]* (.*)', expand=True)
 
-#### Making uniqueID 
+#### Making uniqueID
 metadata['uniqueId']=metadata['equipRef'].fillna('')+' '+metadata['groupRef'].fillna('')+' '+metadata['navName'].fillna('')+' '+metadata['siteRef'].fillna('')+' '+metadata['bmsName'].fillna('')
 #### Dropping duplicate uniqueIDs based on most recent lastSynced
 metadata=metadata.sort_values('lastSynced').drop_duplicates('uniqueId',keep='last')
@@ -173,7 +173,7 @@ def equip_label(equip):
     elif equip.find('Windows')!=-1:
         return 'Window'
     elif equip.find('VAV')!=-1:
-        return 'VAV'   
+        return 'VAV'
     elif equip.find('Heating')!=-1:
         return 'Heating'
     elif equip.find('RAD')!=-1:
@@ -201,14 +201,14 @@ def equip_label(equip):
     elif equip.find('Zone')!=-1:
         return 'Humidity'
     elif equip.find('WM')!=-1:
-        return 'Water' 
+        return 'Water'
     elif equip.find('Gas')!=-1:
-        return 'Gas' 
+        return 'Gas'
     elif equip.find('DCB')!=-1:
-        return 'Power' 
+        return 'Power'
     elif equip.find('DCA')!=-1:
         return 'Power'
-    else: 
+    else:
         return "NEED TO LABEL"
 merged_left['equipNew']=merged_left.equipRef.apply(lambda x: equip_label(x))
 
@@ -218,17 +218,17 @@ merged_left['equipNew']=merged_left.equipRef.apply(lambda x: equip_label(x))
 
 def nav_label(nav):
     if nav.lower().find('alarm')!=-1:
-        return 'Alarm' 
+        return 'Alarm'
     elif nav.lower().find('temp')!=-1 or nav.lower().find('lwt')!=-1 or nav.lower().find('ewt')!=-1 or nav.lower().find('humidity')!=-1:
         #leaving and entering water temperature # humidity sensors measures moisture&air temps
         return 'Temp'
-    elif nav.lower().find('water')!=-1 or nav.lower().find('_cw')!=-1 or nav.lower().find('chw')!=-1 or nav.find('SB1_2_FWT_T')!=-1 or nav.lower().find('lwco')!=-1: 
+    elif nav.lower().find('water')!=-1 or nav.lower().find('_cw')!=-1 or nav.lower().find('chw')!=-1 or nav.find('SB1_2_FWT_T')!=-1 or nav.lower().find('lwco')!=-1:
         # I think FW = Feed Water # CW = Condenser Water # CHW = Chilled Water metrics # LWCO = low water cut off
         return 'Water'
     elif nav.lower().find('air')!=-1 or nav.lower().find('ach')!=-1 or nav.lower().find('ahu')!=-1 or nav.lower().find('inlet')!=-1:
         # AHU = Air Handling Unit # ACH = Air Changes per Hour # Inlet Air Temperature sensor
         return 'Air'
-    elif nav.lower().find('press')!=-1 or nav.lower().find('_dp')!=-1: # DP = differential pressure 
+    elif nav.lower().find('press')!=-1 or nav.lower().find('_dp')!=-1: # DP = differential pressure
         return 'Pressure'
     elif nav.lower().find('heat')!=-1 or nav.lower().find('hrv')!=-1 or nav.lower().find('_rh')!=-1: # HRV = heat recovery ventilator # RH = Reheat
         return 'Heat'
@@ -247,54 +247,54 @@ def nav_label(nav):
     elif nav.lower().find('feedback')!=-1 or nav.lower().find('demand')!=-1: # demand controlled ventilation
         return 'Feedback'
     elif nav.find('CO2')!=-1:
-        return 'CO2'    
+        return 'CO2'
     elif nav.lower().find('power')!=-1:
-        return 'Power'   
+        return 'Power'
     elif nav.lower().find('cool')!=-1 or nav.lower().find('_ct_')!=-1: # CT = cooling tower
-        return 'Cooling'   
+        return 'Cooling'
     elif nav.lower().find('speed')!=-1:
-        return 'Speed'  
+        return 'Speed'
     elif nav.lower().find('pump')!=-1:
-        return 'Pump'  
+        return 'Pump'
     elif nav.lower().find('_tl')!=-1:
-        return '_TL'  
+        return '_TL'
     elif nav.lower().find('_aflw')!=-1:
-        return '_AFLW'  
+        return '_AFLW'
     elif nav.lower().find('_sp')!=-1:
-        return '_SP/_SPT'  
+        return '_SP/_SPT'
     elif nav.lower().find('cmd')!=-1:
-        return 'Cmd'  
+        return 'Cmd'
     elif nav.lower().find('_day')!=-1:
-        return '_DAY'  
+        return '_DAY'
     elif nav.lower().find('_av')!=-1:
-        return '_AV'  
+        return '_AV'
     elif nav.lower().find('_bms')!=-1:
-        return '_BMS'  
+        return '_BMS'
     elif nav.lower().find('status')!=-1:
-        return '_Status'  
+        return '_Status'
     elif nav.lower().find('rwt')!=-1:
-        return '_RWT'  
+        return '_RWT'
     elif nav.lower().find('_open')!=-1:
-        return '_OPEN'  
+        return '_OPEN'
     elif nav.lower().find('wifi')!=-1:
-        return 'Wifi'  
+        return 'Wifi'
     elif nav.lower().find('operation')!=-1:
-        return 'Operation'  
+        return 'Operation'
     elif nav.lower().find('pres')!=-1:
-        return '_PRES'  
+        return '_PRES'
     elif nav.lower().find('_efficiency')!=-1:
-        return '_EFFICIENCY'  
+        return '_EFFICIENCY'
     elif nav.lower().find('_flow')!=-1:
-        return '_FLOW'  
+        return '_FLOW'
     elif nav.lower().find('_delay')!=-1:
-        return '_DELAY'  
+        return '_DELAY'
     elif nav.lower().find('_clg')!=-1:
-        return '_CLG'  
+        return '_CLG'
     elif nav.lower().find('bs050')!=-1:
-        return 'BS050'  
+        return 'BS050'
     elif nav.lower().find('fdbk')!=-1:
-        return '_FDBK'  
-    else: 
+        return '_FDBK'
+    else:
         return "LOWER FREQUENCY UNKNOWNS"
 
 merged_left['navNew']=merged_left.navName.apply(lambda x: nav_label(x))
@@ -305,13 +305,21 @@ merged_left['navNew']=merged_left.navName.apply(lambda x: nav_label(x))
 # In[26]:
 
 
-###### renaming unit columns to reflect data source 
+###### renaming unit columns to reflect data source
 merged_left.rename(columns={'mod_units':'influxDB_units'}, inplace=True)
 merged_left.rename(columns={'unit_y':'metadata_units'}, inplace=True)
+
 ##### selecting relevant fields 
 #### decided to remove metadata_units because it matches with influxDB_units OR it is showing nan due to unmerged obs
 merged_left=merged_left[['groupRef', 'influxDB_units', 'isGas', 'kind', 'energy','power', 'sensor', 'water', 'equipNew', 'navNew', 'ALEX-NRCanLabelGuess']]
 
+# prepare target
+def prepare_targets(y_train, y_test):
+    le = LabelEncoder()
+    le.fit(y_train)
+    y_train_enc = le.transform(y_train)
+    y_test_enc = le.transform(y_test)
+    return y_train_enc, y_test_enc
 
 # ## FILTER OUT NC LABELS
 
@@ -468,7 +476,24 @@ feature_names
 # In[34]:
 
 
+# prepare input data
+X_train_enc, X_test_enc = prepare_inputs(X_train, X_test)
+# prepare output data
+y_train_enc, y_test_enc = prepare_targets(y_train, y_test)
+# feature selection
+X_train_fs, X_test_fs = select_features(X_train_enc, y_train_enc, X_test_enc)
+# fit the model
+model = LogisticRegression(solver='lbfgs')
+model.fit(X_train_fs, y_train_enc)
+# evaluate the model
+yhat = model.predict(X_test_fs)
+# evaluate predictions
+accuracy = accuracy_score(y_test_enc, yhat)
+print('Accuracy: %.2f' % (accuracy*100))
+
 merged_left.head(4)
 # x0 = groupRef, x1 = influxDB_units, x2 = isGas
 # x4 = energy, x6 = sensor, x8 = equipNew, x9 = navNew
 
+
+# In[ ]:
