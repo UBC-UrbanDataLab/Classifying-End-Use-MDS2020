@@ -295,7 +295,7 @@ test_all_agg4 = agg_all(data, [1,3,4,5,2], how='mean') # NOTE: This test was jus
 # for_eva.to_csv("sample_agg_data.csv")
 ##### ~~~ Setting up a test aggregation data for Eva ~~~ #####
 
-def append_agg(df1, df2, col_idx, last_idx_to_col=True):
+def append_agg(df1, df2, df, col_idx, last_idx_to_col=True):
     """ Function to combine two previously aggregated dataframes with weighted averages for aggregations and total count for counts
        
        The user can pass in two aggregation dataframes (prefereably outputs from the agg_all function) in order
@@ -306,6 +306,7 @@ def append_agg(df1, df2, col_idx, last_idx_to_col=True):
     Args:
         df1 (pandas.DataFrame): dataframe containing the first of two dataframes to aggregate
         df2 (pandas.DataFrame): dataframe containing the second of two dataframes to aggregate
+        df (pandas.DataFrame): the original dataframe used to generate df1 or df2 (just needs the structure so could just pass the head)
         col_idx (list): the column indicies to group by when aggregating
         how (str or list): 'mean', 'std', 'max', 'min', 'all', (or any function that can be passed into the .agg function)
         last_idx_to_col (bool): A boolean value indicating if the last index in the col_idx list should be made into columns in the output (True means yes and is the default)
@@ -319,13 +320,18 @@ def append_agg(df1, df2, col_idx, last_idx_to_col=True):
     if last_idx_to_col==True:
         col_idx = col_idx[:-1]
     group_names = df.columns[col_idx].values.tolist()
+    if 'hour' not in group_names:
+        group_names.append('hour')
+    print(group_names) ###################################### Test
     cols = list(set(df1.columns.tolist())-set(group_names))
     temp_df = pd.merge(df1,df2, how='outer', on=group_names, suffixes=['_1','_2'])
+    print(cols) ########################## Test
     for col in cols:
         if col=='count':
-            temp_df['count'] = temp_df[col+'_1'] + temp_df[col+'_2']
+            temp_df.loc[:,'count'] = temp_df.loc[:,col+'_1'] + temp_df.loc[:,col+'_2']
         else:
-            temp_df[col] = (temp_df[col+'_1']*temp_df['count_1']+temp_df[col+'_2']*temp_df['count_2'])/(temp_df['count_1']+temp_df['count_2'])
+            #print(temp_df.columns.tolist()) ###################################### Test
+            temp_df.loc[:,col] = (temp_df.loc[:,col+'_1']*temp_df.loc[:,'count_1']+temp_df.loc[:,col+'_2']*temp_df.loc[:,'count_2'])/(temp_df.loc[:,'count_1']+temp_df.loc[:,'count_2'])
     dropList = [col+"_1" for col in cols]
     dropList.extend([col+"_2" for col in cols])
     temp_df = temp_df.drop(dropList, axis=1)
@@ -344,8 +350,9 @@ test_app2 = agg_all(append_data2, col_idx, how='all')
 
 test_app_check = test_app1.copy()
 
-test_append_agg = append_agg(test_app1, test_app2, [1,2,3,4,5,10])
+test_append_agg = append_agg(test_app1, test_app2, data.head(1), [1,2,3,4,5,10])
 
-test_app3 = agg_all(append_data1, col_idx, how='all', last_idx_to_col=False)
-test_app4 = agg_all(append_data2, col_idx, how='all', last_idx_to_col=False)
-test_append_agg2 = append_agg(test_app3, test_app4, [1,2,3,4,5,10], last_idx_to_col=False)
+col_idx2 = [1,2,3,4,5,6]
+test_app3 = agg_all(append_data1, col_idx2, how='all', last_idx_to_col=False)
+test_app4 = agg_all(append_data2, col_idx2, how='all', last_idx_to_col=False)
+test_append_agg2 = append_agg(test_app3, test_app4, data.head(1), col_idx2, last_idx_to_col=False)
