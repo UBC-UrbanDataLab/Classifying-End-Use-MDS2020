@@ -208,3 +208,26 @@ Summary of our activities on a weekly basis:
 |5|2020-05-29|Ran cross validation to choose k for numerical feature selection|Coding|0.28|
 |5|2020-05-29|Updated Log|Logistics|0.13|
 |5|2020-05-29|Prepped encoding data to feed into models|Coding|0.45|
+|5|2020-06-01|Looked at presentation powerpoint |Development|1|
+|5|2020-06-01|Meeting to review presentation|Other Meeting|1|
+|5|2020-06-01|Wrote down what to say for the presentation|Development|1|
+|5|2020-06-01|Practice presentation with team|Other Meeting|1|
+|5|2020-06-01|Practice presentation|Development|1|
+|6|2020-06-02|Practiced presentation|Development|0.5|
+|6|2020-06-02|Mid-capstone presentations|Other Meeting|4.25|
+|6|2020-06-02|Reviewed Connor's code|Code Review|1.42|
+|6|2020-06-02|Meeting with UDL + Arthur|Client Meetings|0.43|
+|6|2020-06-02|Reviewed Connor's code|Code Review|0.25|
+|6|2020-06-03|Updated Jira + moved feature selection tasks over to Done|Updating Jira|0.5|
+|6|2020-06-03|Reviewed main_pseudocode and completed code review for Connor's code|Code Review|1|
+|6|2020-06-03|Daily stand up|Daily Stand Up|0.5|
+|6|2020-06-03|Trying to figure out how to create data set to join NC data + git merge meeting with Alex|Coding|1|
+|6|2020-06-03|Worked on lasso code|Coding|2.33|
+|6|2020-06-03|Reviewed main_pseudocode and main.py|Research|0.67|
+|6|2020-06-04|Researched scaling data for lasso + implementing it |Research|1|
+|6|2020-06-04|Daily stand up meeting + meeting with Alex|Other Meeting|1|
+|6|2020-06-04|Worked on scaling data for lasso |Coding|1|
+|6|2020-06-04|Tested ridge regression instead of lasso|Coding|1|
+|6|2020-06-04|Created uniqueId module|Coding|1.33|
+|6|2020-06-04|Updated sprint planning|Logistics|0.33|
+|6|2020-06-04|Updated Personal Log|Logistics|0.33|
