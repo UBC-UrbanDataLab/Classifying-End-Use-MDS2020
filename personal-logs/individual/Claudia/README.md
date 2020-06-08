@@ -128,3 +128,20 @@ Summary of our activities on a weekly basis:
 |5|2020-06-01|Midterm presentation prep|Logistics|1|
 |5|2020-06-01|Midterm presentation practice|Other Meeting|1|
 |6|2020-06-02|Midterm presentations|Other Meeting|4|
+|6|2020-06-02|Updated github|Logistics|0.5|
+|6|2020-06-03|Daily standup meeting|Daily Meetings|0.5|
+|6|2020-06-03|Research Lasso method|Research|2|
+|6|2020-06-03|Review Eva's code for EC & NC relationship|Coding|3|
+|6|2020-06-03|Create layout for final report|Report|1|
+|6|2020-06-04|Daily standup meeting|Daily Meetings|0.25|
+|6|2020-06-04|Retrospective Meeting|Weekly Meetings|1|
+|6|2020-06-04|Lasso/Ridge regression research|Research|2|
+|6|2020-06-04|Lasso/Ridge regression code|Coding|2|
+|6|2020-06-05|daily standup meeting|Daily Meetings|0.25|
+|6|2020-06-05|Sprint pre-planning meeting|Weekly Meetings|1|
+|6|2020-06-05|Meeting to prepare for meeting with UDL|Weekly Meetings|1|
+|6|2020-06-05|Meeting with UDL|Weekly Meetings|1|
+|6|2020-06-05|code review|Coding|2.5|
+|6|2020-06-08|daily standup meeting|Daily Meetings|0.25|
+|6|2020-06-08|make weekly presentation|Logistics|2|
+|6|2020-06-08|update github with team progress|Logistics|0.5|
