@@ -1,3 +1,6 @@
+# Week 6: Individual Project Process
+![](individual_logs_week6.png)
+
 # Week 4: Individual Project Process
 ![](individual_logs_week4.png)
 
