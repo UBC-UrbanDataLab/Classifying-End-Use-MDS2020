@@ -181,3 +181,37 @@ Summary of our activities on a weekly basis:
 |5|2020-05-29|Work on aggregation function fixes as discussed|Coding|2.5|
 |5|2020-05-31|Add docstrings to functions|Coding|3|
 |5|2020-05-31|Update Jira|Logistics|0.17|
+|5|2020-06-01|Review presentaiton|Meeting Prep|0.33|
+|5|2020-06-01|Prep for Daily standup|Meeting Prep|0.5|
+|5|2020-06-01|Daily standup|Daily Meetings|0.33|
+|5|2020-06-01|Review presentaiton and detailed flowchart|Meeting Prep|1.5|
+|5|2020-06-01|Integrate clustering into main|Coding|2.25|
+|5|2020-06-01|Review and practice presentation|Meeting Prep|2.75|
+|5|2020-06-01|Integrate clustering into main|Coding|0.58|
+|6|2020-06-02|Practice presentation|Meeting Prep|0.33|
+|6|2020-06-02|Mid capstone presentations|Other Meeting|3.67|
+|6|2020-06-02|Integrate clustering into main|Coding|2.17|
+|6|2020-06-02|Meeting with Arthur|Other Meeting|0.67|
+|6|2020-06-02|Integrate clustering into main|Coding|2.83|
+|6|2020-06-03|Daily Standup Prep|Meeting Prep|0.25|
+|6|2020-06-03|Prep Sample Cluster Output file for team|Coding|0.75|
+|6|2020-06-03|Daily standup and model discussion|Daily Meetings|0.5|
+|6|2020-06-03|Fixing duplicate hours issue in clustering output|Coding|4.17|
+|6|2020-06-03|Clean up and comment main code after clustering implementation|Coding|1.83|
+|6|2020-06-04|Fix git issues and submit pull request for main code|Coding|0.67|
+|6|2020-06-04|Daily Standup Prep|Meeting Prep|0.17|
+|6|2020-06-04|Daily Standup|Daily Meetings|0.25|
+|6|2020-06-04|Weekly retrospective|Weekly Meetings|0.5|
+|6|2020-06-04|Research packages for supervised classification|Research|1.25|
+|6|2020-06-04|Create supervised classification mode comparison template for quick model comparison|Research|2.25|
+|6|2020-06-05|Prep for Daily standup|Meeting Prep|0.33|
+|6|2020-06-05|Write up overview of our modeling process and why those steps|Research|0.5|
+|6|2020-06-05|Daily standup|Daily Meetings|0.25|
+|6|2020-06-05|Sprint planning|Weekly Meetings|0.83|
+|6|2020-06-05|Prep for UDL Meeting|Weekly Meetings|0.5|
+|6|2020-06-05|UDL Meeting|Weekly Meetings|1.17|
+|6|2020-06-05|Research comparison metrics, thought about how to prep data for next week's model comparisons|Research|1.33|
+|6|2020-06-06|Queried more skyspark data, ran dataprep steps (agg, gower's calcs, mds calcs) on 97 days of data and stored various configurations as .csv (prep for next week)|Coding|2|
+|6|2020-06-07|Setup and ran more possible dataprep configurations on 97 days of data (prep for next week)|Coding|0.5|
+|6|2020-06-07|Wrote code to create seperate EC and NC dataframes from the datapre-prep portion|Coding|2.5|
+|6|2020-06-07|Wrote code to test the different clustering methods|Coding|2.5|
