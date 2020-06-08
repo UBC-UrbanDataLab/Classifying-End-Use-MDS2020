@@ -148,3 +148,45 @@ Summary of our activities on a weekly basis:
 |5|2020-05-29|Client Meeting|Client Meetings|1|
 |5|2020-05-29|Finish Sprint Planning, Discuss updated project schedule, Discuss presentation|Other Meeting|0.85|
 |5|2020-05-29|misc updates on main.py|Coding|0.25|
+|5|2020-05-30|Worked on updating main section 1b (encoding+scaling)|Coding|1.5|
+#REF!
+|5|2020-05-30|Tried to make "fake" output for step 1 (as a dataframe)|Logistics|2|
+|5|2020-05-31|Continued to get "fake output for step 1|Logistics|2|
+|5|2020-05-31|Ran ideas by Connor|Other Meeting|0.5|
+|5|2020-05-31|Made some additional slides to explain EC/NC data|Logistics|4|
+|5|2020-06-01|Work on presentation updates|Logistics|1|
+|5|2020-06-01|Daily Standup+discuss some stuff|Daily Meetings|0.5|
+|5|2020-06-01|Confirm add_main good enough + push|Coding|0.25|
+|5|2020-06-01|Review agg_all pull request|Git management|0.75|
+|5|2020-06-01|Work on presentation updates|Logistics|6|
+|6|2020-06-02|Final updates to presentation flowchart|Logistics|0.5|
+|6|2020-06-02|Practice presentation|Logistics|0.5|
+|6|2020-06-02|Mid-Project Presentations|Other Meeting|4|
+|6|2020-06-02|Research influxDB implications of storing null tag data|Research|2|
+|6|2020-06-02|Meeting with UDL/EWS|Client Meetings|0.5|
+|6|2020-06-02|Write document/note to Jiachen re: influxDB findings|Client Meetings|1|
+|6|2020-06-02|Update personal logs|Logistics|1.25|
+|6|2020-06-03|Update influxDB change slides for Jiachen|Logistics|0.33|
+|6|2020-06-03|Look into eva branch pull request|Git management|1|
+|6|2020-06-03|Daily Standup+discuss aspects of project design|Daily Meetings|0.5|
+|6|2020-06-03|Get add_main ready for merge to master|Git management|0.75|
+|6|2020-06-03|Resolve merge conflicts in eva branch pull request|Git management|1.25|
+|6|2020-06-03|Add draft output tables to main_pseudocode doc|Coding|0.75|
+|6|2020-06-03|Work on making unit of measurement code modular+work with current program design|Coding|2.75|
+|6|2020-06-03|Start looking into date range for pharmacy dataset|Data Analysis|0.5|
+|6|2020-06-04|Misc. catchup on kanban board|Logistics|0.5|
+|6|2020-06-04|Continue working on making uom code modular|Coding|0.75|
+|6|2020-06-04|Daily Standup|Daily Meetings|0.25|
+|6|2020-06-04|Retrospective Meeting|Weekly Meetings|0.5|
+|6|2020-06-04|Finished making unit of measurement code modular|Coding|4|
+|6|2020-06-04|Started looking at date-range of "stable" data|Data Analysis|1|
+|6|2020-06-05|Continued to look at date-range of "stable" data|Data Analysis|2|
+|6|2020-06-05|Daily Standup|Daily Meetings|0.25|
+|6|2020-06-05|Sprint Planning|Weekly Meetings|0.75|
+|6|2020-06-05|Agenda for Client Meeting|Weekly Meetings|0.75|
+|6|2020-06-05|Continued to look at date-range of "stable" data|Data Analysis|2.5|
+|6|2020-06-05|Client Meeting|Client Meetings|1.25|
+|6|2020-06-05|Misc. wrapup from client meeting|Logistics|0.5|
+|6|2020-06-05|Continued to look at date-range of "stable" data|Data Analysis|1|
+|6|2020-06-06|Learn to write to local influxDB|Research|3.75|
+|6|2020-06-06|Test impact of storing data with different field sets in influxDB|Research|1.25|
