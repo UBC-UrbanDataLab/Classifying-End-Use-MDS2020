@@ -1,4 +1,4 @@
 # Logs
 
-![](week4a.png)
-![](week4b.png)
+![](week6a.png)
+![](week6b.png)
