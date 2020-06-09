@@ -128,7 +128,7 @@ def main():
     for day in DATELIST:
         # Querying and preping data for aggregations
         temp_df = data_preparation.query_csv(client=None, date=day, site=None)
-        if temp_df is None: # Changed from temp_df==None to temp_df is None (was giving an error as is)
+        if temp_df is None:
             continue
         temp_df = aggregation.split_datetime(temp_df) # Added to create month and hour columns (must have at least hour for aggs)
         temp_df = temp_df.merge(cluster_groups, how='left', on=cluster_groups.columns[:-1].tolist())
