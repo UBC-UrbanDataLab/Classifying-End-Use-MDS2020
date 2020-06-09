@@ -21,8 +21,11 @@ def main():
     
     DATELIST = ["2020-03-16","2020-05-01"] # These dates are in the test_data folder so this is just here for testing purposes
 
-    SENSOR_ID_TAGS = [1,2,3,4,5,6] # order is ["groupRef","equipRef","navName","siteRef","typeRef","unit"] #NOTE: Including "unit" here means that we WILL have inconsistent units after aggregations unless we address them in the for loop BEFORE running agg_all, it's fine for now but this will need to be addressed
-                                 # Contiued from above: including "unit" causes issues when there are duplicate items with mixed units (need to run the code to fix the units during this for loop or ignore units in the clustering phase)
+    SENSOR_ID_TAGS = [1,2,3,4,5,6] # order is ["groupRef","equipRef","navName","siteRef","typeRef","unit"] 
+    #NOTE: Including "unit" here means that we WILL have inconsistent units after aggregations unless we address
+    # them in the for loop BEFORE running agg_all, it's fine for now but this will need to be addressed
+    # Including "unit" causes issues when there are duplicate items with mixed units (need to run the code to fix the
+    # units during this for loop or ignore units in the clustering phase)
 
     # The planned update to the InfluxDB may change SENSOR_ID_TAGS to only [1] as in ["uniqueID"]
     
@@ -234,4 +237,3 @@ plt.scatter(data_2d_df['x']*1000,data_2d_df['y']*1000, c=data_2d_df['cluster'])
 hdb_2d = data_2d_df.copy()
 meanshift_2d = data_2d_df.copy()
 data_2d_df_w_units = data_2d_df.copy()
-
