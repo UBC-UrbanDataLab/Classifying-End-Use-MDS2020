@@ -76,7 +76,7 @@ def agg_bool_by_col(df, col_idx, how='all'):
 
     Args:
         df (pandas.DataFrame): dataframe containing at least a 'value' column
-        col_idx (list): one or more column indicies to group by when aggregating
+        col_idx (list): one or more column indicies to group by when aggregating (The "hour" column must always be included for aggregation to work properly)
         how (str or list): 'mean', 'std', 'max', 'min', 'all', (or any function that can be passed into the .agg function)
         
     Returns:
@@ -138,7 +138,7 @@ def agg_cat_by_col(df, col_idx, how='all'):
 
     Args:
         df (pandas.DataFrame): dataframe containing at least a 'value' column
-        col_idx (list): one or more column indicies to group by when aggregating
+        col_idx (list): one or more column indicies to group by when aggregating (The "hour" column must always be included for aggregation to work properly)
         how (str or list): 'mean', 'std', 'max', 'min', 'all', (or any function that can be passed into the .agg function)
         
     Returns:
@@ -191,6 +191,49 @@ def agg_cat_by_col(df, col_idx, how='all'):
             return_df= return_df.rename(columns={'sum':how})
     return return_df.fillna(0)
 
+def combine_mixed_agg(df, struct_df, col_idx):
+    """Function to aggregate any duplicate observations within a dataframe, this function is required in the case that there are any mixed datatypes between 
+        aggregation groups (ex. if an aggregation group has continuous and categorical data these would be stored as two aggregations and need to be aggregated further down to one observation)
+
+    Args:
+        df (pandas.DataFrame): dataframe to check for, and aggregate (if applicable) duplicate observations
+        struct_df (pandas.DataFrame): dataframe with the structure of the original data (can just be the head from the original dataframe)
+        col_idx (list): one or more column indicies corresponding to the struct_df indices of the column being grouped on
+    Returns:
+        pandas.DataFrame: Dataframe with any duplicate observations aggregated down to one observation
+    """
+    df = df.copy()
+    group_names = struct_df.columns[col_idx].values.tolist()
+    dupes = df.duplicated(subset = group_names, keep=False)
+    dupes = df[dupes]
+    if len(dupes) == 0:
+        return df
+    else:
+        df = df.drop_duplicates(subset=group_names, keep=False)
+        dupes['id'] = ''
+        for group in group_names:
+            dupes['id'] += dupes[group].astype(str)
+        dupe_list = dupes['id'].unique()
+        agg_types = list(set(df.columns.tolist())-set(group_names))
+        for dupe in dupe_list:
+            cur_dupe = dupes.loc[dupes['id']==dupe]
+            #cur_dupe = pd.DataFrame(cur_dupe).transpose()
+            dupe_agg = dupes.loc[dupes['id']==dupe].iloc[0,:]
+            dupe_agg = pd.DataFrame(dupe_agg).transpose()
+            dupe_agg['count'] = cur_dupe['count'].sum()
+            for agg in agg_types:
+                if agg == 'max':
+                    dupe_agg['max'] = cur_dupe['max'].max()
+                elif agg == 'min':
+                    dupe_agg['min'] = cur_dupe['min'].min()
+                elif agg == 'mean' or agg == 'std':
+                    dupe_agg[agg] = sum(cur_dupe[agg]*cur_dupe['count'])/sum(cur_dupe['count'])
+            dupe_agg = dupe_agg.drop('id', axis=1)
+            df = df.append(dupe_agg)
+        return df
+            
+    #drop_cols = list(set(nc_data.columns.tolist())-set(test_groups))
+
 def agg_all(df, col_idx, how='all', last_idx_to_col=True):
     """Function to run all three aggregation types covered by the above functions and output data columnwise for input into other functions (ex. feature selection, and scaling)
        
@@ -220,7 +263,7 @@ def agg_all(df, col_idx, how='all', last_idx_to_col=True):
     all_agg = num_agg.append(bool_agg)
     all_agg = all_agg.append(cat_agg)
     agg_cols = all_agg.columns.tolist()
-    if last_idx_to_col == True:
+    if last_idx_to_col:
         groups = all_agg.reset_index().iloc[:,-len(agg_cols)-1].unique()
         new_df = all_agg.reset_index().drop(all_agg.reset_index().columns[-len(agg_cols)-1:].tolist(), axis=1).drop_duplicates()
         onList = new_df.columns.tolist()
@@ -240,11 +283,13 @@ def agg_all(df, col_idx, how='all', last_idx_to_col=True):
                 new_df = new_df.drop(labels='count_'+str(group), axis=1)
         new_df = new_df.rename(columns={'count_'+str(first_group):'count'})
         all_agg = new_df.fillna(0)
+        all_agg = combine_mixed_agg(all_agg, df.head(1), col_idx[:-1])
     else:
         all_agg = all_agg.reset_index().fillna(0)
+        all_agg = combine_mixed_agg(all_agg, df.head(1), col_idx)
     return all_agg
 
-def append_agg(df1, df2, df, col_idx, last_idx_to_col=True):
+def append_agg(df1, df2, struct_df, col_idx, last_idx_to_col=True):
     """ Function to combine two previously aggregated dataframes with weighted averages for aggregations and total count for counts
        
        The user can pass in two aggregation dataframes (prefereably outputs from the agg_all function) in order
@@ -255,7 +300,7 @@ def append_agg(df1, df2, df, col_idx, last_idx_to_col=True):
     Args:
         df1 (pandas.DataFrame): dataframe containing the first of two dataframes to aggregate
         df2 (pandas.DataFrame): dataframe containing the second of two dataframes to aggregate
-        df (pandas.DataFrame): the original dataframe used to generate df1 or df2 (just needs the structure so could just pass the head)
+        struct_df (pandas.DataFrame): the original dataframe used to generate df1 or df2 (just needs the structure so could just pass the head)
         col_idx (list): the column indicies to group by when aggregating
         how (str or list): 'mean', 'std', 'max', 'min', 'all', (or any function that can be passed into the .agg function)
         last_idx_to_col (bool): A boolean value indicating if the last index in the col_idx list should be made into columns in the output (True means yes and is the default)
@@ -268,14 +313,17 @@ def append_agg(df1, df2, df, col_idx, last_idx_to_col=True):
     """
     if last_idx_to_col==True:
         col_idx = col_idx[:-1]
-    group_names = df.columns[col_idx].values.tolist()
+    group_names = struct_df.columns[col_idx].values.tolist()
+    #if 'hour' not in group_names:
+    #    group_names.append('hour')
     cols = list(set(df1.columns.tolist())-set(group_names))
     temp_df = pd.merge(df1,df2, how='outer', on=group_names, suffixes=['_1','_2'])
+    temp_df = temp_df.fillna(0)
     for col in cols:
         if col=='count':
-            temp_df['count'] = temp_df[col+'_1'] + temp_df[col+'_2']
+            temp_df.loc[:,'count'] = temp_df.loc[:,col+'_1'] + temp_df.loc[:,col+'_2']
         else:
-            temp_df[col] = (temp_df[col+'_1']*temp_df['count_1']+temp_df[col+'_2']*temp_df['count_2'])/(temp_df['count_1']+temp_df['count_2'])
+            temp_df.loc[:,col] = (temp_df.loc[:,col+'_1']*temp_df.loc[:,'count_1']+temp_df.loc[:,col+'_2']*temp_df.loc[:,'count_2'])/(temp_df.loc[:,'count_1']+temp_df.loc[:,'count_2'])
     dropList = [col+"_1" for col in cols]
     dropList.extend([col+"_2" for col in cols])
     temp_df = temp_df.drop(dropList, axis=1)

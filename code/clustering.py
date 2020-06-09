@@ -48,8 +48,8 @@ def calc_gowers(df, continuous_columns):
     Returns:
         gow_dists (numpy.array): a numpy array of Gower's distances between observations
     """
-    catList = make_categorical_list(continuous_columns, len(df.columns)-8)
-    data_np = df.iloc[:,8:].to_numpy()
+    catList = make_categorical_list(continuous_columns, len(df.columns)-5)
+    data_np = df.iloc[:,5:].to_numpy()
     gow_dists = gower.gower_matrix(data_np, cat_features=catList)
     return gow_dists
 
@@ -122,14 +122,14 @@ def cluster(df, clust_type, num_clusts = None, continuous_columns = None, input_
         if input_type == 'mds':
             print("DBSCAN doesn't accept mds input type, please provide input as original unscaled data or as a Gower's distance matrix.")
         else:
-            model = DBSCAN(eps=0.06, min_samples=2, metric='precomputed').fit(fit_data)
+            model = DBSCAN(eps=0.1, min_samples=5, metric='precomputed').fit(fit_data)
             preds = model.labels_
     elif clust_type == 'hdbscan':
         # Needs df, clust_type, continuous_columns
         if input_type == 'mds':
             print("HDBSCAN doesn't accept mds input type, please provide input as original unscaled data or as a Gower's distance matrix.")
         else:
-            model = hdbscan.HDBSCAN(metric='precomputed', cluster_selection_epsilon=0.06).fit(fit_data.astype('double'))
+            model = hdbscan.HDBSCAN(metric='precomputed', cluster_selection_epsilon=0.025).fit(fit_data.astype('double'))
             preds = model.labels_
     elif clust_type == 'gmm':
         # Needs df, clust_type, num_clusts, continuous_columns

@@ -149,7 +149,7 @@ def encode_units(df):
         encoded_units_df (pandas.DataFrame): dataframe containing encoded units
     """
     df = df.copy()
-    encoded_units = encode_categorical(df, df.columns.tolist().index('unit'))
+    encoded_units = encode_categorical(df, [df.columns.tolist().index('unit')])
     # Creating dataframe for storing encoded units
     encoded_units_df = pd.concat([df, pd.DataFrame(encoded_units, index=df.index, columns=[str(i) for i in range(len(encoded_units[0]))]).add_prefix('unit_')], axis=1)
     return encoded_units_df
@@ -259,7 +259,7 @@ def query_csv(client, date, site):
         raise ValueError("Date was not entered in usable format: YYYY-MM-DD")
     try:
         filename = date+".csv"
-        temp_df = pd.read_csv("test_date/"+filename)
+        temp_df = pd.read_csv("test_data/"+filename)
         return temp_df
     except ValueError as e:
         print("ERROR: ", e)
