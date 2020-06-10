@@ -259,7 +259,7 @@ def query_csv(client, date, site):
         raise ValueError("Date was not entered in usable format: YYYY-MM-DD")
     try:
         filename = date+".csv"
-        temp_df = pd.read_csv('../../data-599-capstone-ubc-urban-data-lab/code/test_data/'+filename)
+        temp_df = pd.read_csv('test_data/'+filename)
         return temp_df
     except ValueError as e:
         print("ERROR: ", e)
