@@ -113,23 +113,23 @@ def cluster(df, clust_type, num_clusts = None, continuous_columns = None, input_
     elif clust_type == 'agglom':
         # Needs df, clust_type, num_clusts, continuous_columns
         if input_type != 'mds':
-            model = AgglomerativeClustering(affinity='precomputed', linkage = 'complete', n_clusters=num_clusts).fit(fit_data)
+            model = AgglomerativeClustering(affinity='precomputed', linkage = 'single', n_clusters=num_clusts).fit(fit_data)
         else:
-            model = AgglomerativeClustering(linkage = 'complete', n_clusters=num_clusts).fit(fit_data)
+            model = AgglomerativeClustering(linkage = 'single', n_clusters=num_clusts).fit(fit_data)
         preds = model.labels_
     elif clust_type == 'dbscan':
         # Needs df, clust_type, continuous_columns
         if input_type == 'mds':
             print("DBSCAN doesn't accept mds input type, please provide input as original unscaled data or as a Gower's distance matrix.")
         else:
-            model = DBSCAN(eps=0.1, min_samples=5, metric='precomputed').fit(fit_data)
+            model = DBSCAN(eps=0.15, min_samples=5, metric='precomputed').fit(fit_data)
             preds = model.labels_
     elif clust_type == 'hdbscan':
         # Needs df, clust_type, continuous_columns
         if input_type == 'mds':
             print("HDBSCAN doesn't accept mds input type, please provide input as original unscaled data or as a Gower's distance matrix.")
         else:
-            model = hdbscan.HDBSCAN(metric='precomputed', cluster_selection_epsilon=0.025).fit(fit_data.astype('double'))
+            model = hdbscan.HDBSCAN(metric='precomputed', cluster_selection_epsilon=0.15).fit(fit_data.astype('double'))
             preds = model.labels_
     elif clust_type == 'gmm':
         # Needs df, clust_type, num_clusts, continuous_columns
