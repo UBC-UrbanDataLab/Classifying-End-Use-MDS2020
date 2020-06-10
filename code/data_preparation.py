@@ -20,7 +20,7 @@ import pytz
 import time
 
 # Feature Engieering Imports
-from sklearn.preprocessing import OneHotEncoder, MinMaxScaler
+from sklearn.preprocessing import OneHotEncoder, MinMaxScaler, StandardScaler
 
 # Data Preparation Functions
 def get_data_type(x):
@@ -91,7 +91,7 @@ def scale_continuous(df, indexes=[0]):
     """
     isFirst = True
     for idx in indexes:
-        scaler = MinMaxScaler()
+        scaler = MinMaxScaler() #StandardScaler(with_mean=False, with_std=False)
         scaled_data = scaler.fit_transform(np.reshape(df.iloc[:,idx].to_numpy(),(-1,1)))
         if isFirst:
             np_arr = scaled_data
@@ -259,7 +259,7 @@ def query_csv(client, date, site):
         raise ValueError("Date was not entered in usable format: YYYY-MM-DD")
     try:
         filename = date+".csv"
-        temp_df = pd.read_csv("test_data/"+filename)
+        temp_df = pd.read_csv('../../data-599-capstone-ubc-urban-data-lab/code/test_data/'+filename)
         return temp_df
     except ValueError as e:
         print("ERROR: ", e)

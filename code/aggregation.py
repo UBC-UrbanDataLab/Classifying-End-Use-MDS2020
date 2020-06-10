@@ -255,6 +255,7 @@ def agg_all(df, col_idx, how='all', last_idx_to_col=True):
                           of the last value in col_idx if last_idx_to_col=True) as columns, and the count of observations
                           as a column
     """
+    first_group=''
     # Aggregating each datatype
     num_agg = agg_numeric_by_col(df, col_idx, how=how)
     bool_agg = agg_bool_by_col(df, col_idx, how=how)
@@ -275,6 +276,7 @@ def agg_all(df, col_idx, how='all', last_idx_to_col=True):
             col_names[-len(agg_cols):]=[i+"_"+str(group) for i in col_names[-len(agg_cols):]]
             new_df.columns = col_names
             new_df = new_df.fillna(0)
+            new_df = new_df.drop_duplicates(subset = onList) ##### Added
             if is_first:
                 is_first = False
                 first_group = group
@@ -323,7 +325,19 @@ def append_agg(df1, df2, struct_df, col_idx, last_idx_to_col=True):
         if col=='count':
             temp_df.loc[:,'count'] = temp_df.loc[:,col+'_1'] + temp_df.loc[:,col+'_2']
         else:
-            temp_df.loc[:,col] = (temp_df.loc[:,col+'_1']*temp_df.loc[:,'count_1']+temp_df.loc[:,col+'_2']*temp_df.loc[:,'count_2'])/(temp_df.loc[:,'count_1']+temp_df.loc[:,'count_2'])
+            try:
+                temp_df.loc[:,col] = (temp_df.loc[:,col+'_1']*temp_df.loc[:,'count_1']+temp_df.loc[:,col+'_2']*temp_df.loc[:,'count_2'])/(temp_df.loc[:,'count_1']+temp_df.loc[:,'count_2'])
+            except:
+                if col+"_1" in temp_df.columns.tolist():
+                    temp_df.loc[:,col] = temp_df.loc[:,col+'_1']
+                    temp_df.loc[:,col+'_2'] = 0
+                elif col+"_2" in temp_df.columns.tolist():
+                    temp_df.loc[:,col] = temp_df.loc[:,col+'_2']
+                    temp_df.loc[:,col+'_1'] = 0
+                else:
+                    temp_df.loc[:,col] = 0
+                    temp_df.loc[:,col+'_1'] = 0
+                    temp_df.loc[:,col+'_2'] = 0
     dropList = [col+"_1" for col in cols]
     dropList.extend([col+"_2" for col in cols])
     temp_df = temp_df.drop(dropList, axis=1)
