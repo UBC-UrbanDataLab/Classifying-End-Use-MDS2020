@@ -23,9 +23,9 @@ import clustering
 def main():
     #0) Set Constants (remember, constants are named in all caps with underscores between words)
     #################
-    
+
     # TODO: write code to create a proper list of each day in the decided upon date-range store as DATELIST
-    
+
     ##############################################################################################################
     ############### TEMP: for testing from csvs to delete once actual querying code is implemented ###############
     ###############       (gets list of file names in the given path)
@@ -41,7 +41,7 @@ def main():
                                  # Contiued from above: including "unit" causes issues when there are duplicate items with mixed units (need to run the code to fix the units during this for loop or ignore units in the clustering phase)
 
     # The planned update to the InfluxDB may change SENSOR_ID_TAGS to only [1] as in ["uniqueID"]
-    
+
     #1) Cluster NC data
     ###################
     print("####### ~~~~~ Started - Step 1: Clustering Phase ~~~~~ #######") ############### TEMP: For Tracking test progress
@@ -75,49 +75,49 @@ def main():
         cnt += 1
         if cnt == 15: ############### TEMP: For speeding up testing of updated code for main function delete once updates confirmed to work
             break ############### TEMP: For speeding up testing of updated code for main function delete once updates confirmed to work
-    
+
     print("\t\t### ~ Started - Agg Phase 1: Calculating Update Rates ~ ###") ############### TEMP: For Tracking test progress
     # Freeing up some memory
     temp_df = None
     # Calculating the update rate
     nc_data["update_rate"] = nc_data["count"] / cnt
     nc_data.drop("count", inplace=True, axis=1)
-    
-    
+
+
     #nc_data.to_csv('aggregated_no_units_data.csv') ############### TEMP: Write aggregation output to file to provide sample data for testing step 2, remove for final model
 
-    
+
     # b) Encode and scale NC data
     # TODO: Look up the correct function name for fixing units of measurement (getting added to the query function, can remove/update to DONE once confirmed complete)
     # TODO: clean and correct units of measurement (getting added to the query function, can remove/update to DONE once confirmed complete)
     # TODO: Test performance for categorical variables included vs excluded
     # TODO: Scale continuous variables
     # TODO: Test performance for continuous variables scaled vs not scaled
-    
+
     print("\t##### ~~~ Started - Clustering Phase ~~~ #####") ############### TEMP: For Tracking test progress
-    
+
     # Getting Indexes of the continuous columns
     cont_cols = [i for i in range(len(SENSOR_ID_TAGS),len(nc_data.columns))]
-    
+
     # Scale Continuous
     scaled_data = data_preparation.scale_continuous(nc_data, cont_cols)
     nc_data = pd.concat([nc_data.iloc[:, 0:len(SENSOR_ID_TAGS)], pd.DataFrame(scaled_data, index=nc_data.index, columns=nc_data.columns[cont_cols].tolist())], axis=1)
-    
+
     # Encoding units
     nc_data = data_preparation.encode_units(nc_data)
-    
+
     # c) cluster NC data to get df of sensor id fields + cluster group number
     # TODO: Determine if the model we are using requires Gower's distance (if not including categorical variables then may not need it)
     # TODO: Determine if the model we are using requires MDS
     # TODO: Determine which clustering model to use
-    
+
     # Calculating Gower's Distance, MDS, and clustering
     gow_dist = clustering.calc_gowers(nc_data, cont_cols)
     #pd.DataFrame(gow_dist).to_csv('gowers_scaled_no_units_data.csv') ############### TEMP: Write aggregation output to file to provide sample data for testing step 2, remove for final model
     mds_data = clustering.multidim_scale(gow_dist, num_dim=2)
     #pd.DataFrame(mds_data).to_csv('mds_2d_scaled_no_units_data.csv') ############### TEMP: Write aggregation output to file to provide sample data for testing step 2, remove for final model
     clusters = clustering.cluster(mds_data, 'vbgm', num_clusts=35, input_type='mds')
-    
+
     ###############################################################################
     ############### TEMP: Included for testing the clustering model ###############
     ###############       Shows how many observations belong to each cluster
@@ -126,7 +126,7 @@ def main():
     #cluster_df['cluster'].value_counts().sort_index()
     ############### TEMP: Included for testing the clustering model ###############
     ###############################################################################
-    
+
     # Generating a list of the columns to keep when making the dataframe relating sensors to clusters(the unique identifiers for an NC sensor and cluster)
     unique_cols_idx = [i for i in range(len(SENSOR_ID_TAGS))]
     unique_cols = nc_data.columns[unique_cols_idx].values.tolist()
@@ -135,9 +135,9 @@ def main():
     drop_cols = list(set(nc_data.columns.tolist())-set(unique_cols))
     cluster_groups = pd.concat([nc_data, pd.DataFrame(clusters, columns=["cluster"])], axis=1)
     cluster_groups = cluster_groups.drop(drop_cols, axis=1)
-    
+
     print("\t##### ~~~ Started - Aggregation Phase 2 ~~~ #####") ############### TEMP: For Tracking test progress
-    
+
     # d) Reload NC data + join cluster group num + aggregate, this time grouping by date, time, and clust_group_num
     last_idx_as_cols = True
     is_first_iter = True
@@ -203,66 +203,66 @@ def main():
         cnt += 1
         if cnt == 15: ############### TEMP: For speeding up testing of updated code for main function delete once updates confirmed to work
             break ############### TEMP: For speeding up testing of updated code for main function delete once updates confirmed to work
-    
+
     print("\t\t### ~ Started - Agg Phase 2: Calculating Update Rates ~ ###") ############### TEMP: For Tracking test progress
     # Re-format update rates so that clusters are columns
     update_rates = update_rates.unstack()
     update_rates.columns = update_rates.columns.droplevel(level=0)
     update_rates = update_rates.fillna(0)
-    
+
     # Calculate the number of sensors per cluster
     sensor_count_per_cluster = cluster_groups.groupby('cluster').agg({cluster_groups.columns.tolist()[0]:'count'})
     sensor_count_per_cluster.columns = ['count']
-    
+
     # Calculate the average sensor update rate per hour per cluster
     for cluster in cluster_groups['cluster'].unique():
         update_rates.loc[:,cluster] = update_rates.loc[:,cluster]/sensor_count_per_cluster.loc[cluster][0]
-    
+
     # Rename the update rate columns and join them to the nc_data
     update_rates = update_rates.add_prefix('urate_')
     nc_data = nc_data.join(update_rates, how='left', on=['hour', 'date'])
     nc_data = nc_data.drop('count', axis=1)
-    
+
     print("####### ~~~~~ Complete - Step 1: NC Aggregation and Clustering Phase ~~~~~ #######") ############### TEMP: For Tracking test progress
-    
+
     #2) Model EC/NC relationship
     ############################
-    #    temp) Make a fake version of the output dataframe from step 1 so that step 2 can be (mostly) developed 
+    #    temp) Make a fake version of the output dataframe from step 1 so that step 2 can be (mostly) developed
     #        without waiting for step 1 to be finished!
-        
+
     #    a) Load+aggregate EC data, grouping by date, time, and sensor ID fields (no feature selection needed yet!)
     #    b) Also create second DF by aggregating further just using sensor ID fields (end result=1row per sensor)
-    #    c) For each unique EC sensorID (i.e. row in 2b_EC_data_df), create LASSO model using 2a_EC_data_df and 
+    #    c) For each unique EC sensorID (i.e. row in 2b_EC_data_df), create LASSO model using 2a_EC_data_df and
     #       step1_output_NC_data_df. Model is basically: Y=EC response and Xn=NC data
-    
+
     #    d) Join the coeffecients from LASSO model to 2b_EC_data_df (so each EC sensor has a list of n coeffecients)
-    
-    #    OUTPUT OF STEP2 = dataframe with EC sensor ID fields, mean response, and all n coeffecients from 
+
+    #    OUTPUT OF STEP2 = dataframe with EC sensor ID fields, mean response, and all n coeffecients from
     #        that unique EC sensor's LASSO model
     """
     3) Mid-Process cleanup
     ######################
         a) set all NC data dataframes = None (clear up memory)
         b) set 2a_EC_data_df = None (clear up memory)
-        [c) we could also save any EC dataframes to temporary csvs if we want to split the program up and allow a user 
+        [c) we could also save any EC dataframes to temporary csvs if we want to split the program up and allow a user
             to just run only the first two steps which maybe take a long time if all data has to be queried? That would
             make this step a checkpoint of sorts...just a thought]
         OUTPUT OF STEP = nothing! Just more available memory.
-    
-    4) Prep EC data for classification model 
+
+    4) Prep EC data for classification model
     ########################################
         a) Load metadata and join with 2b_EC_data_df
         b) Apply feature selection function(s) to the joined EC+metadata
         c) Encode and scale the EC+metadata
         d) Join the model coeffecients from step2 output to the EC+metadata
         OUTPUT OF STEP = dataframe with EC sensor ID fields, selected EC features, model coeffecients
-"""    
-    # 5) Classification model 
+"""
+    # 5) Classification model
     #######################
     #    a) Dataprep to get the step 4 data into an appropriate format for prediction
     # TODO: Ensure that the step 4 output data is in the same format as the training_data dataframe (with the NRCan labels column as null for now)
 
-    #    b) 
+    #    b)
     # TODO: Update read_csv() path to the correct location and file name for final product
     # TODO: Remove the train_test_split() code for final product
     # TODO: Ensure that the training_data dataframe is formated the same as the step 4 output (same as TODO for part a b/c it is that important)
@@ -276,12 +276,12 @@ def main():
     training_data = training_data.fillna(0)
     # Extracting just the number from the label
     training_data['NRCan'] = training_data['NRCan'].apply(lambda x: int(x[0]))
-    
+
     # Creating seperate predictor variable and response variable numpy arrays
     x = training_data.iloc[:, :-1].values
     y = training_data.iloc[:, -1].values
     x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.2, random_state = 0) ############### TEMP: For testing the model, remove for final product
-    
+
     #    b) Create and train the selected model
     # Creating and fitting the classifier
     # TODO: Test various models and select a final model
@@ -289,12 +289,12 @@ def main():
     # TODO: Change x_train and y_train to x and y once final model has been selcted
     classifier = RandomForestClassifier(n_estimators = 100, criterion = 'gini') # can include random_state=0 if we want to set the seed to be constant
     classifier.fit(x_train, y_train) # Can change x_train and y_train to just x and y for final model
-    
+
     #    c) Predict the outputs for the new data
     # Predicting the outputs
     # TODO: Change x_test to whatever the numpy data to be predicted is (NOTE: Must have same format as the training_data dataframe)
     y_pred = classifier.predict(x_test) # TODO: Change x_test to whatever the actual data to be predicted's variable for final model
-    
+
     ########################################################################################
     ############### TEMP: Used to test the effectiveness of the chosen model ###############
     ###############       To delete for the final model, just here so we can see some actual
@@ -317,14 +317,14 @@ def main():
 
     #    d) Join the predictions onto the  step 4 output dataframe
     # TODO: Join the predictions onto the step 4 output dataframe (or populate the NRCan column with these values)
-    
+
     #    OUTPUT OF STEP = dataframe with EC sensor ID fields and end-use group
-    
+
 
 ########################################################################################
 ############### TEMP: Used for calibrating dbscan and hdbscan clustering ###############
-###############       Can delete once final model selection and calibration complete 
-###############                                     OR 
+###############       Can delete once final model selection and calibration complete
+###############                                     OR
 ###############       once dbscan AND hdbscan dismissed as possible models
 from matplotlib import pyplot as plt
 sorted_vals = gow_dist[0]
@@ -338,8 +338,8 @@ testGow['values'].value_counts()#.sort_index()
 
 ##################################################################
 ############### TEMP: For visualizing the clusters ###############
-###############       Can delete after moved to a seperate file 
-###############                             OR 
+###############       Can delete after moved to a seperate file
+###############                             OR
 ###############       once desired plots have been obtained for
 ###############       the final report
 from matplotlib import pyplot as plt
@@ -351,5 +351,3 @@ data_2d_df['cluster'] = cluster_groups['cluster']
 plt.scatter(data_2d_df['x']*1000,data_2d_df['y']*1000, c=data_2d_df['cluster'])
 ############### TEMP: For visualizing the clusters ###############
 ##################################################################
-
-
