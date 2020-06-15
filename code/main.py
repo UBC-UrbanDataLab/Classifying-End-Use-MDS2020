@@ -13,6 +13,8 @@ import numpy as np
 # Supervised Learning Imports
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
+from sklearn.linear_model import Ridge, RidgeCV
+from sklearn.metrics import mean_squared_error
 
 # Project Module Imports
 import data_preparation
@@ -33,7 +35,7 @@ def main():
     from os.path import isfile, join
     mypath = 'test_data'
     DATELIST = [f.split(".")[0] for f in listdir(mypath) if isfile(join(mypath, f))]
-    #DATELIST = ["2020-03-16","2020-05-01"] # These dates are in the test_data folder so this is just here for testing purposes
+    # DATELIST = ["2020-03-16","2020-05-01"] # These dates are in the test_data folder so this is just here for testing purposes
     ############### TEMP: for testing from csvs to delete once actual querying code is implemented ###############
     ##############################################################################################################
 
@@ -225,20 +227,135 @@ def main():
 
     print("####### ~~~~~ Complete - Step 1: NC Aggregation and Clustering Phase ~~~~~ #######") ############### TEMP: For Tracking test progress
 
+    print("####### ~~~~~ Starting - Step 2: Model EC/NC Relationship ~~~~~ #######") ############### TEMP: For Tracking test progress
+
     #2) Model EC/NC relationship
     ############################
     #    temp) Make a fake version of the output dataframe from step 1 so that step 2 can be (mostly) developed
     #        without waiting for step 1 to be finished!
 
-    #    a) Load+aggregate EC data, grouping by date, time, and sensor ID fields (no feature selection needed yet!)
+    last_idx_as_cols = False
+    is_first_iter = True
+    cnt=1
+    for day in DATELIST:
+        # Querying and preping data for aggregations
+        temp_df2 = data_preparation.query_csv(client=None, date=day, site=None)
+        if temp_df2 is None:
+            continue
+        temp_df2 = aggregation.split_datetime(temp_df2)
+        # Filter for EC data, this step will be done in the query
+        temp_df2=temp_df2[temp_df2['unit']=='kWh']
+        # Creating uniqueId
+        temp_df2=data_preparation.create_unique_id(temp_df2)
+        # Filtering dataframe for only relevant fields
+        temp_df2=temp_df2[['uniqueId', 'date', 'hour', 'unit', 'value']]
+        if is_first_iter:
+            # Creating a low memory dataframe for the append_agg function before the structure is changed by agg_all
+            struct_df2 = temp_df2.head(1)
+            # Aggregating the first date's data
+            ec_data1=aggregation.agg_numeric_by_col(temp_df2, col_idx=[0,1,2,3], how='mean')
     #    b) Also create second DF by aggregating further just using sensor ID fields (end result=1row per sensor)
+            ec_data2=aggregation.agg_numeric_by_col(temp_df2, col_idx=[0,3], how='all')
+            is_first_iter = False
+        else:
+            # Aggregating the current date's data and aggregate it with the current running total
+            temp_df2a=aggregation.agg_numeric_by_col(temp_df2, col_idx=[0,1,2,3], how='mean')
+            temp_df2b=aggregation.agg_numeric_by_col(temp_df2, col_idx=[0,3], how='all')
+            ec_data1=aggregation.append_agg(df1=temp_df2a, df2=ec_data1, struct_df=struct_df2, col_idx=[0,1,2,3])
+            ec_data2=aggregation.append_agg(df1=temp_df2b, df2=ec_data2, struct_df=struct_df2, col_idx=[0,3])
+        cnt += 1
+    # Freeing up some memory
+    temp_df2 = None
+    temp_df2a = None
+    temp_df2b = None
+    # Calculating the update rate
+    ec_data2["update_rate"] = ec_data2["count"] / (cnt*24)
+    ec_data2.drop("count", inplace=True, axis=1)
+
+    # Resetting index columns
+    ec_data1=ec_data1.reset_index()
+    ec_data2=ec_data2.reset_index()
+
+    # Renaming column
+    ec_data1=ec_data1.rename(columns={"mean":"EC_mean_value"})
+
+    # Dataframe with unique sensor ids
+    uniqueSensors=ec_data2['uniqueId'].unique()
+
+    ### Scaling EC data
+    ec_data1['EC_mean_value']=data_preparation.scale_continuous(ec_data1, indexes=[4])
+
+
+    ### Scaling Cluster data
+    for i in range(6,len(nc_data.columns)):
+        nc_data.iloc[:,i]=data_preparation.scale_continuous(nc_data, indexes=[i])
+
     #    c) For each unique EC sensorID (i.e. row in 2b_EC_data_df), create LASSO model using 2a_EC_data_df and
     #       step1_output_NC_data_df. Model is basically: Y=EC response and Xn=NC data
 
-    #    d) Join the coeffecients from LASSO model to 2b_EC_data_df (so each EC sensor has a list of n coeffecients)
+    ### Will store each ridge output into a list and append all the dataframes
+    coefficients_list=[]
+
+    ### total sum of mse from each ridge regression model (accumulative)
+    score=0
+
+    ### Creating individual data frames for each sensor and implementing lasso
+    for sensor in uniqueSensors:
+
+        ## Create data frame for only that relevant sensor
+        new_df=ec_data1[ec_data1['uniqueId']==sensor]
+        ######## Changing EC data types for merging later. Might not need depending on step 1 output types
+        nc_data = nc_data.astype({"date": str})
+        new_df = new_df.astype({"date": object, "hour": object})
+        new_df.loc[:,'date']=new_df['date'].apply(lambda x: str(x)[0:10])
+
+        ## Merge specific sensor to cluster data
+        new_merged=pd.merge(nc_data, new_df, how='inner', left_on=['date','hour'], right_on=['date','hour'])
+        ## Ridge does not allow NANs, seems like some sensors are not 'on' during specific hours
+        new_merged=new_merged.dropna()
+
+        ## All NC predictor variables
+        X=new_merged.iloc[:,2:22]
+
+        ## Mean value of EC data
+        Y=new_merged['EC_mean_value']
+        Y=Y.to_numpy().reshape(len(Y),1)
+
+        #Ridge CV to find optimal alpha value
+        alphas=[0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1, 1, 10, 100, 1e3, 1e4, 1e5, 1e6, 1e7, 1e8]
+        reg=RidgeCV(alphas=alphas, store_cv_values=True)
+        reg.fit(X, Y)
+        alpha_best=reg.alpha_
+
+      ## Ridge model using optimal alpha value found in step above
+        ridge_test=Ridge(alpha=alpha_best, tol=.01, max_iter=10e7,normalize=True)
+        ridge_test.fit(X,Y)
+        coef=ridge_test.coef_
+        mse=mean_squared_error(y_true=Y, y_pred=ridge_test.predict(X))
+        score=score+mse
+
+        ## Store coefficients into a dataframe
+        new=pd.DataFrame(data=coef.reshape(1,20))
+
+        ## Add uniqueId to the dataframe
+        new['uniqueId']=sensor
+
+        ## Store each sensorID's ridge coefficients into a list
+        coefficients_list.append(new)
+
+    ### Append all ridge coefficients for all sensors into a single dataframe
+    for df in uniqueSensors:
+        final_df = pd.concat(coefficients_list)
+
+    ### calculate the avarge mse across all ridge regression models
+    avg_mse=score/len(uniqueSensors)
+    print("avg_mse:",avg_mse)
 
     #    OUTPUT OF STEP2 = dataframe with EC sensor ID fields, mean response, and all n coeffecients from
     #        that unique EC sensor's LASSO model
+    print("####### ~~~~~ Complete - Step 2: Model EC/NC Relationship ~~~~~ #######") ############### TEMP: For Tracking test progress
+
+
     """
     3) Mid-Process cleanup
     ######################
@@ -248,15 +365,75 @@ def main():
             to just run only the first two steps which maybe take a long time if all data has to be queried? That would
             make this step a checkpoint of sorts...just a thought]
         OUTPUT OF STEP = nothing! Just more available memory.
+    """
 
-    4) Prep EC data for classification model
-    ########################################
-        a) Load metadata and join with 2b_EC_data_df
-        b) Apply feature selection function(s) to the joined EC+metadata
-        c) Encode and scale the EC+metadata
-        d) Join the model coeffecients from step2 output to the EC+metadata
-        OUTPUT OF STEP = dataframe with EC sensor ID fields, selected EC features, model coeffecients
-"""
+    print("####### ~~~~~ Starting - Step 4: Prep EC Data for Classification Model ~~~~~ #######") ############### TEMP: For Tracking test progress
+    #     4) Prep EC data for classification model
+    #     ########################################
+    #         a) Load metadata and join with 2b_EC_data_df
+    metadata=pd.read_csv('~/data-599-capstone-ubc-urban-data-lab/code/test_data/PharmacyQuery.csv')
+    # Make uniqueIDs
+    metadata=data_preparation.create_unique_id(metadata, metadata=True)
+    # Drop duplicates
+    metadata=metadata.sort_values('lastSynced').drop_duplicates('uniqueId',keep='last')
+    # Choose relevant fields
+    metadata=metadata[['uniqueId','kind', 'energy','power', 'sensor', 'unit', 'water']]
+    ### Changing boolean to easily identify during encoding process
+    metadata['energy']=metadata['energy'].apply(lambda x: 'yes_energy' if x=='✓' else 'no_energy')
+    metadata['power']=metadata['power'].apply(lambda x: 'yes_power' if x=='✓' else 'no_power')
+    metadata['sensor']=metadata['sensor'].apply(lambda x: 'yes_sensor' if x=='✓' else 'no_sensor')
+    metadata['water']=metadata['water'].apply(lambda x: 'yes_water' if x=='✓' else 'no_water')
+    metadata['unit']=metadata['unit'].apply(lambda x: 'omit' if x=='_' else x)
+    # inner join metadata and 2b_EC_data_df
+    merged_inner=pd.merge(ec_data2, metadata, left_on='uniqueId', right_on='uniqueId', how='inner')
+
+    #         b) Apply feature selection function(s) to the joined EC+metadata
+    # load NRCan classifications training data
+    nrcan_labels=pd.read_csv('~/data-599-capstone-ubc-urban-data-lab/data/FinalPharmacyECSensorList-WithLabels - PharmacyECSensorsWithLabels.csv')
+    # make uniqueId
+    nrcan_labels['siteRef']='Pharmacy'
+    nrcan_labels=data_preparation.create_unique_id(nrcan_labels)
+
+    # rename columns to fix unit of measurements
+    nrcan_labels.rename(columns={'UBC_EWS.firstValue':'value'}, inplace=True)
+    # run correct_df_units function
+    nrcan_labels=data_preparation.correct_df_units(nrcan_labels)
+
+    # TRAINING DATA CLEANING (maybe its own module with metadata?)
+    # can change ? to 0 since uom fixed
+    nrcan_labels=nrcan_labels.assign(isGas=nrcan_labels.isGas.apply(lambda x: '0' if x=='?' else x))
+    # changing boolean for more descriptive encoding
+    nrcan_labels=nrcan_labels.assign(isGas=nrcan_labels.isGas.apply(lambda x: 'no_gas' if x=='0' else 'yes_gas'))
+
+    # selecting relevant training data fields
+    nrcan_labels=nrcan_labels[['uniqueId', 'isGas', 'equipRef', 'groupRef', 'navName', 'endUseLabel']]
+    nrcan_labels=nrcan_labels.drop_duplicates()
+    merged_outer=pd.merge(left=merged_inner, right=nrcan_labels, how='outer', left_on='uniqueId', right_on='uniqueId')
+    # make equipRef and navName into smaller categories for feature engineering
+    merged_outer=merged_outer.assign(equipRef=merged_outer.equipRef.apply(lambda x: data_preparation.equip_label(str(x))))
+    merged_outer=merged_outer.assign(navName=merged_outer.navName.apply(lambda x: data_preparation.nav_label(str(x))))
+
+#             c) Encode and scale the EC+metadata
+#     encoding after feature selection
+    merged_outer=merged_outer.assign(energy_no_energy=merged_outer.energy.apply(lambda x: 1 if x=='no_energy' else 0))
+    merged_outer=merged_outer.assign(energy_yes_energy=merged_outer.energy.apply(lambda x: 1 if x=='yes_energy' else 0))
+    merged_outer=merged_outer.assign(sensor_no_sensor=merged_outer.sensor.apply(lambda x: 1 if x=='no_sensor' else 0))
+    merged_outer=merged_outer.assign(sensor_yes_sensor=merged_outer.sensor.apply(lambda x: 1 if x=='yes_sensor' else 0))
+    merged_outer=merged_outer.assign(equipRef_Air_Equip=merged_outer.equipRef.apply(lambda x: 1 if x=='Air_Equip' else 0))
+    merged_outer=merged_outer.assign(equipRef_Cooling=merged_outer.equipRef.apply(lambda x: 1 if x=='Cooling' else 0))
+    merged_outer=merged_outer.assign(equipRef_Heating=merged_outer.equipRef.apply(lambda x: 1 if x=='Heating' else 0))
+    merged_outer=merged_outer.assign(equipRef_LEED=merged_outer.equipRef.apply(lambda x: 1 if x=='LEED' else 0))
+#     scaling after feature selection
+    for i in range(1,6):
+        merged_outer.iloc[:,i]=data_preparation.scale_continuous(merged_outer, indexes=[i])
+#             d) Join the model coeffecients from step2 output to the EC+metadata
+    step4_data = pd.merge(merged_outer, final_df, left_on='uniqueId', right_on='uniqueId', how='outer')
+#     dropping unnessary columns to feed into classification
+    step4_data = step4_data.drop(['kind', 'energy', 'power', 'sensor', 'water', 'isGas', 'equipRef', 'groupRef', 'navName', 'unit'], axis=1)
+#             OUTPUT OF STEP = dataframe with EC sensor ID fields, selected EC features, model coeffecients
+
+    print("####### ~~~~~ Complete - Step 4: Prep EC Data for Classification Model ~~~~~ #######")
+    ############### TEMP: For Tracking test progress
     # 5) Classification model
     #######################
     #    a) Dataprep to get the step 4 data into an appropriate format for prediction
@@ -266,16 +443,18 @@ def main():
     # TODO: Update read_csv() path to the correct location and file name for final product
     # TODO: Remove the train_test_split() code for final product
     # TODO: Ensure that the training_data dataframe is formated the same as the step 4 output (same as TODO for part a b/c it is that important)
-    training_data = pd.read_csv('../../step4_data.csv') # Reading in the training data file
+    training_data=step4_data
+    # training_data = pd.read_csv('../../step4_data.csv') # Reading in the training data file
     # Manipulating dataset to be in the appropriate format for creating seperate predictor and response datasets
     cols = training_data.columns.tolist()
-    cols.remove('NRCan')
-    cols.append('NRCan')
+    cols.remove('endUseLabel')
+    cols.append('endUseLabel')
     training_data = training_data[cols]
     training_data = training_data.iloc[:,2:]
     training_data = training_data.fillna(0)
     # Extracting just the number from the label
-    training_data['NRCan'] = training_data['NRCan'].apply(lambda x: int(x[0]))
+    training_data['endUseLabel'] = training_data['endUseLabel'].apply(lambda x: int(str(x)[0:2]))
+    training_data=training_data[(training_data['endUseLabel']!=99)]
 
     # Creating seperate predictor variable and response variable numpy arrays
     x = training_data.iloc[:, :-1].values
