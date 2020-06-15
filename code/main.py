@@ -290,7 +290,7 @@ def main():
     for i in range(6,len(nc_data.columns)):
         nc_data.iloc[:,i]=data_preparation.scale_continuous(nc_data, indexes=[i])
 
-    #    c) For each unique EC sensorID (i.e. row in 2b_EC_data_df), create LASSO model using 2a_EC_data_df and
+    #    c) For each unique EC sensorID (i.e. row in 2b_EC_data_df), create Ridge Regression model using 2a_EC_data_df and
     #       step1_output_NC_data_df. Model is basically: Y=EC response and Xn=NC data
 
     ### Will store each ridge output into a list and append all the dataframes
