@@ -108,14 +108,14 @@ def cluster(df, clust_type, num_clusts = None, continuous_columns = None, input_
     # Runs the user defined clustering method
     if clust_type == 'kmeans':
         # Needs df, clust_type, num_clusts, continuous_columns
-        model = KMeans(n_clusters=num_clusts).fit(fit_data)
+        model = KMeans(n_clusters=num_clusts, n_init=1000).fit(fit_data)
         preds = model.labels_
     elif clust_type == 'agglom':
         # Needs df, clust_type, num_clusts, continuous_columns
         if input_type != 'mds':
-            model = AgglomerativeClustering(affinity='precomputed', linkage = 'single', n_clusters=num_clusts).fit(fit_data)
+            model = AgglomerativeClustering(affinity='precomputed', linkage = 'ward', n_clusters=num_clusts).fit(fit_data)
         else:
-            model = AgglomerativeClustering(linkage = 'single', n_clusters=num_clusts).fit(fit_data)
+            model = AgglomerativeClustering(linkage = 'ward', n_clusters=num_clusts).fit(fit_data)
         preds = model.labels_
     elif clust_type == 'dbscan':
         # Needs df, clust_type, continuous_columns
@@ -131,13 +131,13 @@ def cluster(df, clust_type, num_clusts = None, continuous_columns = None, input_
         else:
             model = hdbscan.HDBSCAN(metric='precomputed', cluster_selection_epsilon=0.15).fit(fit_data.astype('double'))
             preds = model.labels_
-    elif clust_type == 'gmm':
+    elif clust_type == 'gmm': #NOTE: All tests up to 2020-06-12 had covariance_type='spherical'
         # Needs df, clust_type, num_clusts, continuous_columns
-        model = GaussianMixture(n_components=num_clusts, covariance_type='spherical',n_init=100).fit(fit_data)
+        model = GaussianMixture(n_components=num_clusts, covariance_type='full',n_init=100).fit(fit_data)
         preds = model.predict(fit_data)
-    elif clust_type == 'vbgm':
+    elif clust_type == 'vbgm': #NOTE: All tests up to 2020-06-12 had covariance_type='spherical'
         # Needs df, clust_type, num_clusts, continuous_columns
-        model = BayesianGaussianMixture(n_components=num_clusts, covariance_type='spherical',n_init=100).fit(fit_data)
+        model = BayesianGaussianMixture(n_components=num_clusts, covariance_type='full',n_init=100).fit(fit_data)
         preds = model.predict(fit_data)
     elif clust_type == 'meanshift':
         # Needs df, clust_type, continuous_columns

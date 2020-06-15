@@ -20,7 +20,7 @@ import pytz
 import time
 
 # Feature Engieering Imports
-from sklearn.preprocessing import OneHotEncoder, MinMaxScaler, StandardScaler
+from sklearn.preprocessing import OneHotEncoder, MinMaxScaler
 
 # Data Preparation Functions
 def get_data_type(x):
@@ -91,7 +91,7 @@ def scale_continuous(df, indexes=[0]):
     """
     isFirst = True
     for idx in indexes:
-        scaler = MinMaxScaler() #StandardScaler(with_mean=False, with_std=False)
+        scaler = MinMaxScaler()
         scaled_data = scaler.fit_transform(np.reshape(df.iloc[:,idx].to_numpy(),(-1,1)))
         if isFirst:
             np_arr = scaled_data
@@ -196,8 +196,9 @@ def check_connection(client):
         print("Disconnected")
         return False
 
-def query_db(client, date, num_days=1, site='Pharmacy'):
-    """Function to query the UBC_EWS database for the user defined start date, number of days (default=1), and site (default=Pharmacy)
+def query_db_ec(client, date, num_days=1, site='Pharmacy'):
+    """Function to query the UBC_EWS database for the EC sensors for the user defined start date, 
+       number of days (default=1), and site (default=Pharmacy)
 
     Args:
         client (influxdb-python client object): database connection object
@@ -214,8 +215,8 @@ def query_db(client, date, num_days=1, site='Pharmacy'):
         print(date)
         time1 = '00:00:00'
         time2 = '23:59:59'
-        query = 'select * from UBC_EWS where siteRef=$siteRef and time > $time1 and time < $time2'
-        where_params = {'siteRef': site, 'time1':date+' '+time1, 'time2':date+' '+time2}
+        query = 'select * from UBC_EWS where siteRef=$siteRef and (unit=$unit1 or unit=$unit2 or navName=~/^(.*?(\bEnergy\b)[^$]*)$/ or typeRef=~/^(.*?(\bkWh\b)[^$]*)$/) and (time > $time1 and time < $time2)'
+        where_params = {'siteRef':site,'unit1': 'kWh', 'unit2':'m³', 'time1':date+' '+time1, 'time2':date+' '+time2}
         result = client.query(query = query, bind_params = where_params, chunked=True, chunk_size=10000)
         if i==0:
             df=result['UBC_EWS']
@@ -232,6 +233,45 @@ def query_db(client, date, num_days=1, site='Pharmacy'):
     except:
         print("No data found for specified query")
         return None
+    
+def query_db_nc(client, date, num_days=1, site='Pharmacy'):
+    """Function to query the UBC_EWS database for the Non-Energy Consumption (NC) sensors 
+       for the user defined start date, number of days (default=1), and site (default=Pharmacy)
+
+    Args:
+        client (influxdb-python client object): database connection object
+        date (string): date of interest in format 'YYYY-MM-DD' such as '2020-05-05'
+        num_days (int): number of days to query data
+        site (string): name of builing of interest
+        
+    Returns:
+        pandas.DataFrame: data from the queried date(s)
+        OR
+        None: return value if the query found no data
+    """
+    for i in range(0,num_days):
+        print(date)
+        time1 = '00:00:00'
+        time2 = '23:59:59'
+        query = 'select * from UBC_EWS where siteRef=$siteRef and ((unit!=$unit1 and unit!=$unit2 and navName!~/^(.*?(\bEnergy\b)[^$]*)$/ and typeRef!~/^(.*?(\bkWh\b)[^$]*)$/) or groupRef=$groupRef )and (time > $time1 and time < $time2)'
+        where_params = {'siteRef':site,'unit1': 'kWh', 'unit2':'m³', 'groupRef':'weatherRef','time1':date+' '+time1, 'time2':date+' '+time2}
+        result = client.query(query = query, bind_params = where_params, chunked=True, chunk_size=10000)
+        if i==0:
+            df=result['UBC_EWS']
+        else:
+            df=pd.concat([df,result['UBC_EWS']],axis=0)
+            time.sleep(5)
+    try:
+        print("Time zone in InfluxDB:",df.index.tz)
+        my_timezone = pytz.timezone('Canada/Pacific')
+        df.index=df.index.tz_convert(my_timezone)
+        print("Converted to",my_timezone,"in dataframe")
+        print("Dataframe memory usage in bytes:",f"{df.memory_usage().values.sum():,d}")
+        return df
+    except:
+        print("No data found for specified query")
+        return None
+    
 
 def query_csv(client, date, site):
     """Function to read the csv of saved data from the influxDB for the specified date. Requires csv files
@@ -260,6 +300,43 @@ def query_csv(client, date, site):
     try:
         filename = date+".csv"
         temp_df = pd.read_csv('test_data/'+filename)
+        return temp_df
+    except ValueError as e:
+        print("ERROR: ", e)
+        return None
+    except OSError as e:
+        print("ERROR: Unable to find or access file:", e)
+        return None
+    except:
+        return None
+    
+def query_weather_csv(client, date, site):
+    """Function to read the csv of saved data from the influxDB for the specified date. Requires csv files
+    to already be saved in a weather_data subfolder. This is a temporary function to make testing faster while
+    developing code. It is meant to be replaced with query_db() so that the project will actually pull data
+    directly from the database.
+
+    Args:
+        date (string): date of interest in format 'YYYY-MM-DD' such as '2020-05-05'
+        
+    Dummy Args:
+        site (string): name of builing of interest. Not actually used but will make it easier to replace
+                        this function with the proper query_db() function in main
+        client (influxdb-python client object): database connection object. Not actually used, kept as a placeholder
+                        to make it easier to replace query_csv with query_db() function when it comes time to do so
+                        in the main() function.
+    Returns:
+        pandas.DataFrame: contents of the specific csv
+        OR
+        None: couldn't find/access the specified csv
+
+    """
+    regexp = re.compile(r'^[0-9]{4}-[0-9]{2}-[0-9]{2}')
+    if not regexp.search(date):
+        raise ValueError("Date was not entered in usable format: YYYY-MM-DD")
+    try:
+        filename = date+".csv"
+        temp_df = pd.read_csv('weather_data/'+filename)
         return temp_df
     except ValueError as e:
         print("ERROR: ", e)

@@ -6,6 +6,9 @@ Created on Wed May 27 16:27:50 2020
 @author: connor
 """
 ### ~ Library Imports ~ ###
+# General Imports
+from datetime import datetime, date, timedelta
+
 # Data Formatting and Manipulation Imports
 import pandas as pd
 import numpy as np
@@ -24,7 +27,8 @@ def main():
     #0) Set Constants (remember, constants are named in all caps with underscores between words)
     #################
     
-    # TODO: write code to create a proper list of each day in the decided upon date-range store as DATELIST
+    # Getting a list of the last 90 dates
+    DATELIST =  [(date.today() + timedelta(days=x)).strftime('%Y-%m-%d') for x in range(91)]
     
     ##############################################################################################################
     ############### TEMP: for testing from csvs to delete once actual querying code is implemented ###############
@@ -33,6 +37,7 @@ def main():
     from os.path import isfile, join
     mypath = 'test_data'
     DATELIST = [f.split(".")[0] for f in listdir(mypath) if isfile(join(mypath, f))]
+    DATELIST.sort(key=lambda date: datetime.strptime(date, "%Y-%m-%d"))
     #DATELIST = ["2020-03-16","2020-05-01"] # These dates are in the test_data folder so this is just here for testing purposes
     ############### TEMP: for testing from csvs to delete once actual querying code is implemented ###############
     ##############################################################################################################
@@ -55,7 +60,13 @@ def main():
     for day in DATELIST:
         print("\t\t"+str(cnt)+": "+str(day)) ############### TEMP: For Tracking test progress
         # Querying and preping data for aggregations
-        temp_df = data_preparation.query_csv(client=None, date=day, site=None)
+        temp_df = data_preparation.query_csv(client=None, date=day, site=None) ############### TEMP: To be replaced by actual query functions in final product
+        weather_df = data_preparation.query_weather_csv(client=None, date=day, site=None) ############### TEMP: To be replaced by actual query functions in final product
+        if weather_df is None: ############### TEMP: To be replaced by actual query functions in final product
+            pass
+        else:
+            temp_df = pd.concat([temp_df, weather_df]) ############### TEMP: To be replaced by actual query functions in final product
+            temp_df = temp_df.fillna('empty') ############### TEMP: To be replaced by actual query functions in final product # Aggregation doesn't work with nan's, used empty as an obvious flag for value being nan
         col_names = ['datetime']
         col_names.extend(temp_df.columns[1:])
         temp_df.columns = col_names
@@ -73,18 +84,19 @@ def main():
             temp_df = aggregation.agg_all(temp_df, how="all", col_idx=SENSOR_ID_TAGS, last_idx_to_col=last_idx_as_cols)
             nc_data = aggregation.append_agg(df1=temp_df, df2=nc_data, struct_df=struct_df, col_idx=SENSOR_ID_TAGS, last_idx_to_col=last_idx_as_cols)
         cnt += 1
-        if cnt == 15: ############### TEMP: For speeding up testing of updated code for main function delete once updates confirmed to work
-            break ############### TEMP: For speeding up testing of updated code for main function delete once updates confirmed to work
+        #if cnt == 5: ############### TEMP: For speeding up testing of updated code for main function delete once updates confirmed to work
+        #    break ############### TEMP: For speeding up testing of updated code for main function delete once updates confirmed to work
     
     print("\t\t### ~ Started - Agg Phase 1: Calculating Update Rates ~ ###") ############### TEMP: For Tracking test progress
     # Freeing up some memory
     temp_df = None
+    weather_df = None
     # Calculating the update rate
     nc_data["update_rate"] = nc_data["count"] / cnt
     nc_data.drop("count", inplace=True, axis=1)
     
     
-    #nc_data.to_csv('aggregated_no_units_data.csv') ############### TEMP: Write aggregation output to file to provide sample data for testing step 2, remove for final model
+    nc_data.to_csv('aggregated_with_units_data.csv') ############### TEMP: Write aggregation output to file to provide sample data for testing step 2, remove for final model
 
     
     # b) Encode and scale NC data
@@ -102,6 +114,7 @@ def main():
     # Scale Continuous
     scaled_data = data_preparation.scale_continuous(nc_data, cont_cols)
     nc_data = pd.concat([nc_data.iloc[:, 0:len(SENSOR_ID_TAGS)], pd.DataFrame(scaled_data, index=nc_data.index, columns=nc_data.columns[cont_cols].tolist())], axis=1)
+    scaled_data = None
     
     # Encoding units
     nc_data = data_preparation.encode_units(nc_data)
@@ -112,20 +125,14 @@ def main():
     # TODO: Determine which clustering model to use
     
     # Calculating Gower's Distance, MDS, and clustering
+    print("\t\t### ~ Started - Clust Phase 1: Calculating Gower's Distance ~ ###") ############### TEMP: For Tracking test progress
     gow_dist = clustering.calc_gowers(nc_data, cont_cols)
-    #pd.DataFrame(gow_dist).to_csv('gowers_scaled_no_units_data.csv') ############### TEMP: Write aggregation output to file to provide sample data for testing step 2, remove for final model
+    pd.DataFrame(gow_dist).to_csv('gowers_scaled_with_units_data.csv') ############### TEMP: Write aggregation output to file to provide sample data for testing step 2, remove for final model
+    print("\t\t### ~ Started - Clust Phase 2: Calculating MDS ~ ###") ############### TEMP: For Tracking test progress
     mds_data = clustering.multidim_scale(gow_dist, num_dim=2)
-    #pd.DataFrame(mds_data).to_csv('mds_2d_scaled_no_units_data.csv') ############### TEMP: Write aggregation output to file to provide sample data for testing step 2, remove for final model
-    clusters = clustering.cluster(mds_data, 'vbgm', num_clusts=35, input_type='mds')
-    
-    ###############################################################################
-    ############### TEMP: Included for testing the clustering model ###############
-    ###############       Shows how many observations belong to each cluster
-    ###############       Can delete once done testing clustering model
-    #cluster_df = pd.DataFrame(clusters, columns=["cluster"])
-    #cluster_df['cluster'].value_counts().sort_index()
-    ############### TEMP: Included for testing the clustering model ###############
-    ###############################################################################
+    pd.DataFrame(mds_data).to_csv('mds_2d_scaled_with_units_data.csv') ############### TEMP: Write aggregation output to file to provide sample data for testing step 2, remove for final model
+    print("\t\t### ~ Started - Clust Phase 3: Calculating Clusters ~ ###") ############### TEMP: For Tracking test progress
+    clusters = clustering.cluster(mds_data, 'vbgm', num_clusts=35, input_type='mds') # NOTE: To update once final model selected
     
     # Generating a list of the columns to keep when making the dataframe relating sensors to clusters(the unique identifiers for an NC sensor and cluster)
     unique_cols_idx = [i for i in range(len(SENSOR_ID_TAGS))]
@@ -146,6 +153,13 @@ def main():
         print("\t\t"+str(cnt)+": "+str(day)) ############### TEMP: For Tracking test progress
         # Querying and preping data for aggregations
         temp_df = data_preparation.query_csv(client=None, date=day, site=None)
+        weather_df = data_preparation.query_weather_csv(client=None, date=day, site=None) ############### TEMP: To be replaced by actual query functions in final product
+        if weather_df is None: ############### TEMP: To be replaced by actual query functions in final product
+            pass
+        else:
+            temp_df = pd.concat([temp_df, weather_df]) ############### TEMP: To be replaced by actual query functions in final product
+            temp_df = temp_df.fillna('empty') ############### TEMP: To be replaced by actual query functions in final product # Aggregation doesn't work with nan's, used empty as an obvious flag for value being nan
+        
         col_names = ['datetime']
         col_names.extend(temp_df.columns[1:])
         temp_df.columns = col_names
@@ -315,41 +329,9 @@ def main():
     ############### TEMP: Used to test the effectiveness of the chosen model ###############
     ########################################################################################
 
-    #    d) Join the predictions onto the  step 4 output dataframe
-    # TODO: Join the predictions onto the step 4 output dataframe (or populate the NRCan column with these values)
+    #    d) Create dataframe of sensors and labels to be input for step 6
+    # TODO: Create dataframe of sensors and associated predictions
+    # TODO: Make sure that known actual sensor labels are the values in the step 6 input dataframe (filter for and overwrite? drop and re-append? Don't pass those sensors into the model in the first place and then append?)
     
     #    OUTPUT OF STEP = dataframe with EC sensor ID fields and end-use group
     
-
-########################################################################################
-############### TEMP: Used for calibrating dbscan and hdbscan clustering ###############
-###############       Can delete once final model selection and calibration complete 
-###############                                     OR 
-###############       once dbscan AND hdbscan dismissed as possible models
-from matplotlib import pyplot as plt
-sorted_vals = gow_dist[0]
-sorted_vals = sorted_vals[np.argsort(-gow_dist[0])]
-plt.plot(sorted_vals)
-
-testGow = pd.DataFrame(sorted_vals, columns=["values"])
-testGow['values'].value_counts()#.sort_index()
-############### TEMP: Used for calibrating dbscan and hdbscan clustering ###############
-########################################################################################
-
-##################################################################
-############### TEMP: For visualizing the clusters ###############
-###############       Can delete after moved to a seperate file 
-###############                             OR 
-###############       once desired plots have been obtained for
-###############       the final report
-from matplotlib import pyplot as plt
-# Make Data into a Dataframe
-data_2d_df = pd.DataFrame(data=mds_data, columns = ['x','y'])
-data_2d_df['cluster'] = cluster_groups['cluster']
-
-# Plotting the dbscan clusters (Fit pre-MDS)
-plt.scatter(data_2d_df['x']*1000,data_2d_df['y']*1000, c=data_2d_df['cluster'])
-############### TEMP: For visualizing the clusters ###############
-##################################################################
-
-

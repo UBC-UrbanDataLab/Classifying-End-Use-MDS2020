@@ -1,0 +1,1093 @@
+,groupRef,typeRef,unit,value
+2020-05-01 00:04:49+00:00,weatherRef,UBC Running Mean Temp,°C,13.794187
+2020-05-01 00:04:49+00:00,weatherRef,UBC Target Comfort Temp,°C,23.352082
+2020-05-01 00:05:28+00:00,weatherRef,UBC Running Mean Temp,°C,13.832296
+2020-05-01 00:05:28+00:00,weatherRef,UBC Target Comfort Temp,°C,23.364658
+2020-05-01 00:11:45+00:00,weatherRef,UBC Running Mean Temp,°C,13.794188
+2020-05-01 00:11:45+00:00,weatherRef,UBC Target Comfort Temp,°C,23.352082
+2020-05-01 00:12:21+00:00,weatherRef,UBC Running Mean Temp,°C,13.832296
+2020-05-01 00:12:21+00:00,weatherRef,UBC Target Comfort Temp,°C,23.364658
+2020-05-01 00:18:35+00:00,weatherRef,UBC Running Mean Temp,°C,13.832296
+2020-05-01 00:18:35+00:00,weatherRef,UBC Target Comfort Temp,°C,23.364658
+2020-05-01 00:19:14+00:00,weatherRef,UBC Running Mean Temp,°C,13.832296
+2020-05-01 00:19:14+00:00,weatherRef,UBC Target Comfort Temp,°C,23.364658
+2020-05-01 00:25:28+00:00,weatherRef,UBC Running Mean Temp,°C,13.832296
+2020-05-01 00:25:28+00:00,weatherRef,UBC Target Comfort Temp,°C,23.364658
+2020-05-01 00:26:06+00:00,weatherRef,UBC Running Mean Temp,°C,13.832296
+2020-05-01 00:26:06+00:00,weatherRef,UBC Target Comfort Temp,°C,23.364658
+2020-05-01 00:32:21+00:00,weatherRef,UBC Running Mean Temp,°C,13.832297
+2020-05-01 00:32:21+00:00,weatherRef,UBC Target Comfort Temp,°C,23.364658
+2020-05-01 00:33:01+00:00,weatherRef,UBC Running Mean Temp,°C,13.832297
+2020-05-01 00:33:01+00:00,weatherRef,UBC Target Comfort Temp,°C,23.364658
+2020-05-01 00:39:14+00:00,weatherRef,UBC Running Mean Temp,°C,13.832297
+2020-05-01 00:39:14+00:00,weatherRef,UBC Target Comfort Temp,°C,23.364658
+2020-05-01 00:39:59+00:00,weatherRef,UBC Running Mean Temp,°C,13.832297
+2020-05-01 00:39:59+00:00,weatherRef,UBC Target Comfort Temp,°C,23.364658
+2020-05-01 00:46:06+00:00,weatherRef,UBC Running Mean Temp,°C,13.832297
+2020-05-01 00:46:06+00:00,weatherRef,UBC Target Comfort Temp,°C,23.364658
+2020-05-01 00:46:59+00:00,weatherRef,UBC Running Mean Temp,°C,13.832297
+2020-05-01 00:46:59+00:00,weatherRef,UBC Target Comfort Temp,°C,23.364658
+2020-05-01 00:53:01+00:00,weatherRef,UBC Running Mean Temp,°C,13.832297
+2020-05-01 00:53:01+00:00,weatherRef,UBC Target Comfort Temp,°C,23.364658
+2020-05-01 00:53:50+00:00,weatherRef,UBC Running Mean Temp,°C,13.863813
+2020-05-01 00:53:50+00:00,weatherRef,UBC Target Comfort Temp,°C,23.375058
+2020-05-01 00:59:59+00:00,weatherRef,UBC Running Mean Temp,°C,13.832297
+2020-05-01 00:59:59+00:00,weatherRef,UBC Target Comfort Temp,°C,23.364658
+2020-05-01 01:00:00+00:00,weatherRef,UBC Dewpoint,°C,5.840000
+2020-05-01 01:00:00+00:00,weatherRef,UBC Precipitation Probability,%,9.000000
+2020-05-01 01:00:00+00:00,weatherRef,UBC Precipitation Intensity,mm,0.000000
+2020-05-01 01:00:00+00:00,weatherRef,UBC Temp,°C,13.500000
+2020-05-01 01:00:00+00:00,weatherRef,UBC Visibility,km,16.093000
+2020-05-01 01:00:00+00:00,weatherRef,UBC Cloud Cover,%,45.000000
+2020-05-01 01:00:00+00:00,weatherRef,UBC Wind Bearing,deg,180.000000
+2020-05-01 01:00:00+00:00,weatherRef,UBC Precipitation Type,omit,rain
+2020-05-01 01:00:00+00:00,weatherRef,UBC Pressure,kPa,101.779999
+2020-05-01 01:00:00+00:00,weatherRef,UBC Windspeed,m/s,1.440000
+2020-05-01 01:00:00+00:00,weatherRef,UBC Condition,omit,partlyCloudy
+2020-05-01 01:00:00+00:00,weatherRef,UBC Humidity,%RH,65.000000
+2020-05-01 01:00:00+00:00,weatherRef,UBC Solar Radiation,W/m²,294.000000
+2020-05-01 01:00:50+00:00,weatherRef,UBC Running Mean Temp,°C,13.863813
+2020-05-01 01:00:50+00:00,weatherRef,UBC Target Comfort Temp,°C,23.375058
+2020-05-01 01:06:59+00:00,weatherRef,UBC Running Mean Temp,°C,13.832297
+2020-05-01 01:06:59+00:00,weatherRef,UBC Target Comfort Temp,°C,23.364658
+2020-05-01 01:07:48+00:00,weatherRef,UBC Running Mean Temp,°C,13.863813
+2020-05-01 01:07:48+00:00,weatherRef,UBC Target Comfort Temp,°C,23.375058
+2020-05-01 01:13:50+00:00,weatherRef,UBC Running Mean Temp,°C,13.863814
+2020-05-01 01:13:50+00:00,weatherRef,UBC Target Comfort Temp,°C,23.375058
+2020-05-01 01:14:49+00:00,weatherRef,UBC Running Mean Temp,°C,13.863814
+2020-05-01 01:14:49+00:00,weatherRef,UBC Target Comfort Temp,°C,23.375058
+2020-05-01 01:20:50+00:00,weatherRef,UBC Running Mean Temp,°C,13.863814
+2020-05-01 01:20:50+00:00,weatherRef,UBC Target Comfort Temp,°C,23.375059
+2020-05-01 01:21:47+00:00,weatherRef,UBC Running Mean Temp,°C,13.863814
+2020-05-01 01:21:47+00:00,weatherRef,UBC Target Comfort Temp,°C,23.375059
+2020-05-01 01:27:48+00:00,weatherRef,UBC Running Mean Temp,°C,13.863814
+2020-05-01 01:27:48+00:00,weatherRef,UBC Target Comfort Temp,°C,23.375059
+2020-05-01 01:28:43+00:00,weatherRef,UBC Running Mean Temp,°C,13.863814
+2020-05-01 01:28:43+00:00,weatherRef,UBC Target Comfort Temp,°C,23.375059
+2020-05-01 01:34:49+00:00,weatherRef,UBC Running Mean Temp,°C,13.863814
+2020-05-01 01:34:49+00:00,weatherRef,UBC Target Comfort Temp,°C,23.375059
+2020-05-01 01:35:43+00:00,weatherRef,UBC Running Mean Temp,°C,13.863814
+2020-05-01 01:35:43+00:00,weatherRef,UBC Target Comfort Temp,°C,23.375059
+2020-05-01 01:41:47+00:00,weatherRef,UBC Running Mean Temp,°C,13.863814
+2020-05-01 01:41:47+00:00,weatherRef,UBC Target Comfort Temp,°C,23.375059
+2020-05-01 01:42:46+00:00,weatherRef,UBC Running Mean Temp,°C,13.863814
+2020-05-01 01:42:46+00:00,weatherRef,UBC Target Comfort Temp,°C,23.375059
+2020-05-01 01:48:43+00:00,weatherRef,UBC Running Mean Temp,°C,13.863814
+2020-05-01 01:48:43+00:00,weatherRef,UBC Target Comfort Temp,°C,23.375059
+2020-05-01 01:49:45+00:00,weatherRef,UBC Running Mean Temp,°C,13.863814
+2020-05-01 01:49:45+00:00,weatherRef,UBC Target Comfort Temp,°C,23.375059
+2020-05-01 01:55:43+00:00,weatherRef,UBC Running Mean Temp,°C,13.863814
+2020-05-01 01:55:43+00:00,weatherRef,UBC Target Comfort Temp,°C,23.375059
+2020-05-01 01:56:44+00:00,weatherRef,UBC Running Mean Temp,°C,13.891534
+2020-05-01 01:56:44+00:00,weatherRef,UBC Target Comfort Temp,°C,23.384206
+2020-05-01 02:00:00+00:00,weatherRef,UBC Humidity,%RH,67.000000
+2020-05-01 02:00:00+00:00,weatherRef,UBC Precipitation Intensity,mm,0.000000
+2020-05-01 02:00:00+00:00,weatherRef,UBC Wind Bearing,deg,180.000000
+2020-05-01 02:00:00+00:00,weatherRef,UBC Dewpoint,°C,5.820000
+2020-05-01 02:00:00+00:00,weatherRef,UBC Temp,°C,13.500000
+2020-05-01 02:00:00+00:00,weatherRef,UBC Solar Radiation,W/m²,247.000000
+2020-05-01 02:00:00+00:00,weatherRef,UBC Precipitation Probability,%,8.000000
+2020-05-01 02:00:00+00:00,weatherRef,UBC Cloud Cover,%,48.000000
+2020-05-01 02:00:00+00:00,weatherRef,UBC Visibility,km,16.093000
+2020-05-01 02:00:00+00:00,weatherRef,UBC Condition,omit,partlyCloudy
+2020-05-01 02:00:00+00:00,weatherRef,UBC Windspeed,m/s,1.440000
+2020-05-01 02:00:00+00:00,weatherRef,UBC Precipitation Type,omit,rain
+2020-05-01 02:00:00+00:00,weatherRef,UBC Pressure,kPa,101.760002
+2020-05-01 02:02:46+00:00,weatherRef,UBC Running Mean Temp,°C,13.863815
+2020-05-01 02:02:46+00:00,weatherRef,UBC Target Comfort Temp,°C,23.375059
+2020-05-01 02:03:47+00:00,weatherRef,UBC Running Mean Temp,°C,13.891535
+2020-05-01 02:03:47+00:00,weatherRef,UBC Target Comfort Temp,°C,23.384206
+2020-05-01 02:09:45+00:00,weatherRef,UBC Running Mean Temp,°C,13.863815
+2020-05-01 02:09:45+00:00,weatherRef,UBC Target Comfort Temp,°C,23.375059
+2020-05-01 02:10:45+00:00,weatherRef,UBC Running Mean Temp,°C,13.891535
+2020-05-01 02:10:45+00:00,weatherRef,UBC Target Comfort Temp,°C,23.384206
+2020-05-01 02:16:44+00:00,weatherRef,UBC Running Mean Temp,°C,13.891535
+2020-05-01 02:16:44+00:00,weatherRef,UBC Target Comfort Temp,°C,23.384206
+2020-05-01 02:17:45+00:00,weatherRef,UBC Running Mean Temp,°C,13.891535
+2020-05-01 02:17:45+00:00,weatherRef,UBC Target Comfort Temp,°C,23.384206
+2020-05-01 02:23:47+00:00,weatherRef,UBC Running Mean Temp,°C,13.891535
+2020-05-01 02:23:47+00:00,weatherRef,UBC Target Comfort Temp,°C,23.384207
+2020-05-01 02:24:46+00:00,weatherRef,UBC Running Mean Temp,°C,13.891535
+2020-05-01 02:24:46+00:00,weatherRef,UBC Target Comfort Temp,°C,23.384207
+2020-05-01 02:30:45+00:00,weatherRef,UBC Running Mean Temp,°C,13.891535
+2020-05-01 02:30:45+00:00,weatherRef,UBC Target Comfort Temp,°C,23.384207
+2020-05-01 02:31:49+00:00,weatherRef,UBC Running Mean Temp,°C,13.891535
+2020-05-01 02:31:49+00:00,weatherRef,UBC Target Comfort Temp,°C,23.384207
+2020-05-01 02:37:45+00:00,weatherRef,UBC Running Mean Temp,°C,13.891535
+2020-05-01 02:37:45+00:00,weatherRef,UBC Target Comfort Temp,°C,23.384207
+2020-05-01 02:38:47+00:00,weatherRef,UBC Running Mean Temp,°C,13.891535
+2020-05-01 02:38:47+00:00,weatherRef,UBC Target Comfort Temp,°C,23.384207
+2020-05-01 02:44:46+00:00,weatherRef,UBC Running Mean Temp,°C,13.891535
+2020-05-01 02:44:46+00:00,weatherRef,UBC Target Comfort Temp,°C,23.384207
+2020-05-01 02:45:46+00:00,weatherRef,UBC Running Mean Temp,°C,13.891535
+2020-05-01 02:45:46+00:00,weatherRef,UBC Target Comfort Temp,°C,23.384207
+2020-05-01 02:51:49+00:00,weatherRef,UBC Running Mean Temp,°C,13.891536
+2020-05-01 02:51:49+00:00,weatherRef,UBC Target Comfort Temp,°C,23.384207
+2020-05-01 02:52:49+00:00,weatherRef,UBC Running Mean Temp,°C,13.891536
+2020-05-01 02:52:49+00:00,weatherRef,UBC Target Comfort Temp,°C,23.384207
+2020-05-01 02:58:47+00:00,weatherRef,UBC Running Mean Temp,°C,13.891536
+2020-05-01 02:58:47+00:00,weatherRef,UBC Target Comfort Temp,°C,23.384207
+2020-05-01 02:59:48+00:00,weatherRef,UBC Running Mean Temp,°C,13.913129
+2020-05-01 02:59:48+00:00,weatherRef,UBC Target Comfort Temp,°C,23.391333
+2020-05-01 03:00:00+00:00,weatherRef,UBC Wind Bearing,deg,157.500000
+2020-05-01 03:00:00+00:00,weatherRef,UBC Pressure,kPa,101.779999
+2020-05-01 03:00:00+00:00,weatherRef,UBC Precipitation Probability,%,7.000000
+2020-05-01 03:00:00+00:00,weatherRef,UBC Humidity,%RH,71.000000
+2020-05-01 03:00:00+00:00,weatherRef,UBC Dewpoint,°C,6.080000
+2020-05-01 03:00:00+00:00,weatherRef,UBC Precipitation Type,omit,rain
+2020-05-01 03:00:00+00:00,weatherRef,UBC Precipitation Intensity,mm,0.000000
+2020-05-01 03:00:00+00:00,weatherRef,UBC Solar Radiation,W/m²,42.000000
+2020-05-01 03:00:00+00:00,weatherRef,UBC Temp,°C,12.700000
+2020-05-01 03:00:00+00:00,weatherRef,UBC Windspeed,m/s,1.440000
+2020-05-01 03:00:00+00:00,weatherRef,UBC Condition,omit,partlyCloudy
+2020-05-01 03:00:00+00:00,weatherRef,UBC Cloud Cover,%,37.000000
+2020-05-01 03:00:00+00:00,weatherRef,UBC Visibility,km,16.093000
+2020-05-01 03:05:46+00:00,weatherRef,UBC Running Mean Temp,°C,13.891536
+2020-05-01 03:05:46+00:00,weatherRef,UBC Target Comfort Temp,°C,23.384207
+2020-05-01 03:06:52+00:00,weatherRef,UBC Running Mean Temp,°C,13.913129
+2020-05-01 03:06:52+00:00,weatherRef,UBC Target Comfort Temp,°C,23.391333
+2020-05-01 03:12:49+00:00,weatherRef,UBC Running Mean Temp,°C,13.891536
+2020-05-01 03:12:49+00:00,weatherRef,UBC Target Comfort Temp,°C,23.384207
+2020-05-01 03:13:56+00:00,weatherRef,UBC Running Mean Temp,°C,13.913129
+2020-05-01 03:13:56+00:00,weatherRef,UBC Target Comfort Temp,°C,23.391333
+2020-05-01 03:19:48+00:00,weatherRef,UBC Running Mean Temp,°C,13.913129
+2020-05-01 03:19:48+00:00,weatherRef,UBC Target Comfort Temp,°C,23.391333
+2020-05-01 03:21:10+00:00,weatherRef,UBC Running Mean Temp,°C,13.913129
+2020-05-01 03:21:10+00:00,weatherRef,UBC Target Comfort Temp,°C,23.391333
+2020-05-01 03:26:52+00:00,weatherRef,UBC Running Mean Temp,°C,13.913129
+2020-05-01 03:26:52+00:00,weatherRef,UBC Target Comfort Temp,°C,23.391333
+2020-05-01 03:28:14+00:00,weatherRef,UBC Running Mean Temp,°C,13.913129
+2020-05-01 03:28:14+00:00,weatherRef,UBC Target Comfort Temp,°C,23.391333
+2020-05-01 03:29:00+00:00,weatherRef,UBC Sunrise,omit,False
+2020-05-01 03:33:56+00:00,weatherRef,UBC Running Mean Temp,°C,13.913130
+2020-05-01 03:33:56+00:00,weatherRef,UBC Target Comfort Temp,°C,23.391333
+2020-05-01 03:35:17+00:00,weatherRef,UBC Running Mean Temp,°C,13.913130
+2020-05-01 03:35:17+00:00,weatherRef,UBC Target Comfort Temp,°C,23.391333
+2020-05-01 03:41:10+00:00,weatherRef,UBC Running Mean Temp,°C,13.913130
+2020-05-01 03:41:10+00:00,weatherRef,UBC Target Comfort Temp,°C,23.391333
+2020-05-01 03:42:21+00:00,weatherRef,UBC Running Mean Temp,°C,13.913130
+2020-05-01 03:42:21+00:00,weatherRef,UBC Target Comfort Temp,°C,23.391333
+2020-05-01 03:48:14+00:00,weatherRef,UBC Running Mean Temp,°C,13.913130
+2020-05-01 03:48:14+00:00,weatherRef,UBC Target Comfort Temp,°C,23.391333
+2020-05-01 03:49:23+00:00,weatherRef,UBC Running Mean Temp,°C,13.913130
+2020-05-01 03:49:23+00:00,weatherRef,UBC Target Comfort Temp,°C,23.391333
+2020-05-01 03:55:17+00:00,weatherRef,UBC Running Mean Temp,°C,13.913130
+2020-05-01 03:55:17+00:00,weatherRef,UBC Target Comfort Temp,°C,23.391333
+2020-05-01 03:56:23+00:00,weatherRef,UBC Running Mean Temp,°C,13.929504
+2020-05-01 03:56:23+00:00,weatherRef,UBC Target Comfort Temp,°C,23.396736
+2020-05-01 04:00:00+00:00,weatherRef,UBC Precipitation Intensity,mm,0.000000
+2020-05-01 04:00:00+00:00,weatherRef,UBC Cloud Cover,%,35.000000
+2020-05-01 04:00:00+00:00,weatherRef,UBC Wind Bearing,deg,135.000000
+2020-05-01 04:00:00+00:00,weatherRef,UBC Humidity,%RH,73.000000
+2020-05-01 04:00:00+00:00,weatherRef,UBC Precipitation Probability,%,8.000000
+2020-05-01 04:00:00+00:00,weatherRef,UBC Pressure,kPa,101.809998
+2020-05-01 04:00:00+00:00,weatherRef,UBC Precipitation Type,omit,rain
+2020-05-01 04:00:00+00:00,weatherRef,UBC Dewpoint,°C,6.240000
+2020-05-01 04:00:00+00:00,weatherRef,UBC Visibility,km,16.093000
+2020-05-01 04:00:00+00:00,weatherRef,UBC Windspeed,m/s,1.440000
+2020-05-01 04:00:00+00:00,weatherRef,UBC Solar Radiation,W/m²,0.000000
+2020-05-01 04:00:00+00:00,weatherRef,UBC Temp,°C,12.000000
+2020-05-01 04:00:00+00:00,weatherRef,UBC Condition,omit,partlyCloudy
+2020-05-01 04:02:21+00:00,weatherRef,UBC Target Comfort Temp,°C,23.391333
+2020-05-01 04:02:21+00:00,weatherRef,UBC Running Mean Temp,°C,13.913130
+2020-05-01 04:03:26+00:00,weatherRef,UBC Target Comfort Temp,°C,23.396736
+2020-05-01 04:03:26+00:00,weatherRef,UBC Running Mean Temp,°C,13.929504
+2020-05-01 04:09:23+00:00,weatherRef,UBC Target Comfort Temp,°C,23.391333
+2020-05-01 04:09:23+00:00,weatherRef,UBC Running Mean Temp,°C,13.913130
+2020-05-01 04:10:26+00:00,weatherRef,UBC Target Comfort Temp,°C,23.396736
+2020-05-01 04:10:26+00:00,weatherRef,UBC Running Mean Temp,°C,13.929504
+2020-05-01 04:16:23+00:00,weatherRef,UBC Target Comfort Temp,°C,23.396737
+2020-05-01 04:16:23+00:00,weatherRef,UBC Running Mean Temp,°C,13.929505
+2020-05-01 04:17:22+00:00,weatherRef,UBC Target Comfort Temp,°C,23.396737
+2020-05-01 04:17:22+00:00,weatherRef,UBC Running Mean Temp,°C,13.929505
+2020-05-01 04:23:26+00:00,weatherRef,UBC Target Comfort Temp,°C,23.396737
+2020-05-01 04:23:26+00:00,weatherRef,UBC Running Mean Temp,°C,13.929505
+2020-05-01 04:24:27+00:00,weatherRef,UBC Target Comfort Temp,°C,23.396737
+2020-05-01 04:24:27+00:00,weatherRef,UBC Running Mean Temp,°C,13.929505
+2020-05-01 04:30:26+00:00,weatherRef,UBC Target Comfort Temp,°C,23.396737
+2020-05-01 04:30:26+00:00,weatherRef,UBC Running Mean Temp,°C,13.929505
+2020-05-01 04:31:25+00:00,weatherRef,UBC Target Comfort Temp,°C,23.396737
+2020-05-01 04:31:25+00:00,weatherRef,UBC Running Mean Temp,°C,13.929505
+2020-05-01 04:37:22+00:00,weatherRef,UBC Target Comfort Temp,°C,23.396737
+2020-05-01 04:37:22+00:00,weatherRef,UBC Running Mean Temp,°C,13.929505
+2020-05-01 04:38:35+00:00,weatherRef,UBC Target Comfort Temp,°C,23.396737
+2020-05-01 04:38:35+00:00,weatherRef,UBC Running Mean Temp,°C,13.929505
+2020-05-01 04:44:27+00:00,weatherRef,UBC Target Comfort Temp,°C,23.396737
+2020-05-01 04:44:27+00:00,weatherRef,UBC Running Mean Temp,°C,13.929505
+2020-05-01 04:45:32+00:00,weatherRef,UBC Target Comfort Temp,°C,23.396737
+2020-05-01 04:45:32+00:00,weatherRef,UBC Running Mean Temp,°C,13.929505
+2020-05-01 04:51:25+00:00,weatherRef,UBC Target Comfort Temp,°C,23.396737
+2020-05-01 04:51:25+00:00,weatherRef,UBC Running Mean Temp,°C,13.929505
+2020-05-01 04:52:31+00:00,weatherRef,UBC Target Comfort Temp,°C,23.396737
+2020-05-01 04:52:31+00:00,weatherRef,UBC Running Mean Temp,°C,13.929505
+2020-05-01 04:58:35+00:00,weatherRef,UBC Target Comfort Temp,°C,23.396737
+2020-05-01 04:58:35+00:00,weatherRef,UBC Running Mean Temp,°C,13.929505
+2020-05-01 04:59:29+00:00,weatherRef,UBC Target Comfort Temp,°C,23.397943
+2020-05-01 04:59:29+00:00,weatherRef,UBC Running Mean Temp,°C,13.933162
+2020-05-01 05:00:00+00:00,weatherRef,UBC Cloud Cover,%,35.000000
+2020-05-01 05:00:00+00:00,weatherRef,UBC Condition,omit,partlyCloudy
+2020-05-01 05:00:00+00:00,weatherRef,UBC Pressure,kPa,101.870003
+2020-05-01 05:00:00+00:00,weatherRef,UBC Wind Bearing,deg,135.000000
+2020-05-01 05:00:00+00:00,weatherRef,UBC Temp,°C,11.800000
+2020-05-01 05:00:00+00:00,weatherRef,UBC Precipitation Intensity,mm,0.000000
+2020-05-01 05:00:00+00:00,weatherRef,UBC Precipitation Probability,%,5.000000
+2020-05-01 05:00:00+00:00,weatherRef,UBC Humidity,%RH,75.000000
+2020-05-01 05:00:00+00:00,weatherRef,UBC Solar Radiation,W/m²,0.000000
+2020-05-01 05:00:00+00:00,weatherRef,UBC Visibility,km,16.093000
+2020-05-01 05:00:00+00:00,weatherRef,UBC Precipitation Type,omit,rain
+2020-05-01 05:00:00+00:00,weatherRef,UBC Dewpoint,°C,6.480000
+2020-05-01 05:00:00+00:00,weatherRef,UBC Windspeed,m/s,3.240000
+2020-05-01 05:05:32+00:00,weatherRef,UBC Running Mean Temp,°C,13.929506
+2020-05-01 05:05:32+00:00,weatherRef,UBC Target Comfort Temp,°C,23.396737
+2020-05-01 05:06:32+00:00,weatherRef,UBC Running Mean Temp,°C,13.933162
+2020-05-01 05:06:32+00:00,weatherRef,UBC Target Comfort Temp,°C,23.397944
+2020-05-01 05:12:31+00:00,weatherRef,UBC Running Mean Temp,°C,13.929506
+2020-05-01 05:12:31+00:00,weatherRef,UBC Target Comfort Temp,°C,23.396737
+2020-05-01 05:13:35+00:00,weatherRef,UBC Running Mean Temp,°C,13.933162
+2020-05-01 05:13:35+00:00,weatherRef,UBC Target Comfort Temp,°C,23.397944
+2020-05-01 05:19:29+00:00,weatherRef,UBC Running Mean Temp,°C,13.933162
+2020-05-01 05:19:29+00:00,weatherRef,UBC Target Comfort Temp,°C,23.397944
+2020-05-01 05:20:46+00:00,weatherRef,UBC Running Mean Temp,°C,13.933162
+2020-05-01 05:20:46+00:00,weatherRef,UBC Target Comfort Temp,°C,23.397944
+2020-05-01 05:26:32+00:00,weatherRef,UBC Running Mean Temp,°C,13.933163
+2020-05-01 05:26:32+00:00,weatherRef,UBC Target Comfort Temp,°C,23.397944
+2020-05-01 05:27:46+00:00,weatherRef,UBC Running Mean Temp,°C,13.933163
+2020-05-01 05:27:46+00:00,weatherRef,UBC Target Comfort Temp,°C,23.397944
+2020-05-01 05:33:35+00:00,weatherRef,UBC Running Mean Temp,°C,13.933163
+2020-05-01 05:33:35+00:00,weatherRef,UBC Target Comfort Temp,°C,23.397944
+2020-05-01 05:34:50+00:00,weatherRef,UBC Running Mean Temp,°C,13.933163
+2020-05-01 05:34:50+00:00,weatherRef,UBC Target Comfort Temp,°C,23.397944
+2020-05-01 05:40:46+00:00,weatherRef,UBC Running Mean Temp,°C,13.933163
+2020-05-01 05:40:46+00:00,weatherRef,UBC Target Comfort Temp,°C,23.397944
+2020-05-01 05:41:51+00:00,weatherRef,UBC Running Mean Temp,°C,13.933163
+2020-05-01 05:41:51+00:00,weatherRef,UBC Target Comfort Temp,°C,23.397944
+2020-05-01 05:47:46+00:00,weatherRef,UBC Running Mean Temp,°C,13.933163
+2020-05-01 05:47:46+00:00,weatherRef,UBC Target Comfort Temp,°C,23.397944
+2020-05-01 05:48:52+00:00,weatherRef,UBC Running Mean Temp,°C,13.933163
+2020-05-01 05:48:52+00:00,weatherRef,UBC Target Comfort Temp,°C,23.397944
+2020-05-01 05:54:50+00:00,weatherRef,UBC Running Mean Temp,°C,13.933163
+2020-05-01 05:54:50+00:00,weatherRef,UBC Target Comfort Temp,°C,23.397944
+2020-05-01 05:55:52+00:00,weatherRef,UBC Running Mean Temp,°C,13.935087
+2020-05-01 05:55:52+00:00,weatherRef,UBC Target Comfort Temp,°C,23.398579
+2020-05-01 06:00:00+00:00,weatherRef,UBC Windspeed,m/s,0.000000
+2020-05-01 06:00:00+00:00,weatherRef,UBC Dewpoint,°C,5.930000
+2020-05-01 06:00:00+00:00,weatherRef,UBC Precipitation Intensity,mm,0.000000
+2020-05-01 06:00:00+00:00,weatherRef,UBC Pressure,kPa,101.860001
+2020-05-01 06:00:00+00:00,weatherRef,UBC Condition,omit,partlyCloudy
+2020-05-01 06:00:00+00:00,weatherRef,UBC Cloud Cover,%,36.000000
+2020-05-01 06:00:00+00:00,weatherRef,UBC Temp,°C,11.400000
+2020-05-01 06:00:00+00:00,weatherRef,UBC Wind Bearing,deg,135.000000
+2020-05-01 06:00:00+00:00,weatherRef,UBC Precipitation Type,omit,rain
+2020-05-01 06:00:00+00:00,weatherRef,UBC Solar Radiation,W/m²,0.000000
+2020-05-01 06:00:00+00:00,weatherRef,UBC Precipitation Probability,%,0.000000
+2020-05-01 06:00:00+00:00,weatherRef,UBC Humidity,%RH,77.000000
+2020-05-01 06:00:00+00:00,weatherRef,UBC Visibility,km,16.093000
+2020-05-01 06:01:51+00:00,weatherRef,UBC Target Comfort Temp,°C,23.397944
+2020-05-01 06:01:51+00:00,weatherRef,UBC Running Mean Temp,°C,13.933163
+2020-05-01 06:02:54+00:00,weatherRef,UBC Target Comfort Temp,°C,23.398579
+2020-05-01 06:02:54+00:00,weatherRef,UBC Running Mean Temp,°C,13.935087
+2020-05-01 06:08:52+00:00,weatherRef,UBC Target Comfort Temp,°C,23.397944
+2020-05-01 06:08:52+00:00,weatherRef,UBC Running Mean Temp,°C,13.933164
+2020-05-01 06:09:54+00:00,weatherRef,UBC Target Comfort Temp,°C,23.398579
+2020-05-01 06:09:54+00:00,weatherRef,UBC Running Mean Temp,°C,13.935087
+2020-05-01 06:15:52+00:00,weatherRef,UBC Target Comfort Temp,°C,23.398579
+2020-05-01 06:15:52+00:00,weatherRef,UBC Running Mean Temp,°C,13.935087
+2020-05-01 06:16:57+00:00,weatherRef,UBC Target Comfort Temp,°C,23.398579
+2020-05-01 06:16:57+00:00,weatherRef,UBC Running Mean Temp,°C,13.935087
+2020-05-01 06:22:54+00:00,weatherRef,UBC Target Comfort Temp,°C,23.398579
+2020-05-01 06:22:54+00:00,weatherRef,UBC Running Mean Temp,°C,13.935087
+2020-05-01 06:23:57+00:00,weatherRef,UBC Target Comfort Temp,°C,23.398579
+2020-05-01 06:23:57+00:00,weatherRef,UBC Running Mean Temp,°C,13.935087
+2020-05-01 06:29:54+00:00,weatherRef,UBC Target Comfort Temp,°C,23.398579
+2020-05-01 06:29:54+00:00,weatherRef,UBC Running Mean Temp,°C,13.935087
+2020-05-01 06:30:59+00:00,weatherRef,UBC Target Comfort Temp,°C,23.398579
+2020-05-01 06:30:59+00:00,weatherRef,UBC Running Mean Temp,°C,13.935087
+2020-05-01 06:36:57+00:00,weatherRef,UBC Target Comfort Temp,°C,23.398579
+2020-05-01 06:36:57+00:00,weatherRef,UBC Running Mean Temp,°C,13.935087
+2020-05-01 06:37:57+00:00,weatherRef,UBC Target Comfort Temp,°C,23.398579
+2020-05-01 06:37:57+00:00,weatherRef,UBC Running Mean Temp,°C,13.935087
+2020-05-01 06:43:57+00:00,weatherRef,UBC Target Comfort Temp,°C,23.398579
+2020-05-01 06:43:57+00:00,weatherRef,UBC Running Mean Temp,°C,13.935088
+2020-05-01 06:44:55+00:00,weatherRef,UBC Target Comfort Temp,°C,23.398579
+2020-05-01 06:44:55+00:00,weatherRef,UBC Running Mean Temp,°C,13.935088
+2020-05-01 06:50:59+00:00,weatherRef,UBC Target Comfort Temp,°C,23.398579
+2020-05-01 06:50:59+00:00,weatherRef,UBC Running Mean Temp,°C,13.935088
+2020-05-01 06:51:51+00:00,weatherRef,UBC Target Comfort Temp,°C,23.398579
+2020-05-01 06:51:51+00:00,weatherRef,UBC Running Mean Temp,°C,13.935088
+2020-05-01 06:57:57+00:00,weatherRef,UBC Target Comfort Temp,°C,23.398579
+2020-05-01 06:57:57+00:00,weatherRef,UBC Running Mean Temp,°C,13.935088
+2020-05-01 06:58:49+00:00,weatherRef,UBC Target Comfort Temp,°C,23.397828
+2020-05-01 06:58:49+00:00,weatherRef,UBC Running Mean Temp,°C,13.932814
+2020-05-01 07:00:00+00:00,weatherRef,UBC Target Comfort Temp,°C,22.477734
+2020-05-01 07:00:00+00:00,weatherRef,UBC Running Mean Temp,°C,11.144649
+2020-05-01 07:00:00+00:00,weatherRef,UBC Dewpoint,°C,5.750000
+2020-05-01 07:00:00+00:00,weatherRef,UBC Visibility,km,16.093000
+2020-05-01 07:00:00+00:00,weatherRef,UBC Cloud Cover,%,31.000000
+2020-05-01 07:00:00+00:00,weatherRef,UBC Precipitation Intensity,mm,0.000000
+2020-05-01 07:00:00+00:00,weatherRef,UBC Humidity,%RH,76.000000
+2020-05-01 07:00:00+00:00,weatherRef,UBC Windspeed,m/s,0.000000
+2020-05-01 07:00:00+00:00,weatherRef,UBC Condition,omit,partlyCloudy
+2020-05-01 07:00:00+00:00,weatherRef,UBC HDDs,°daysC,0.154167
+2020-05-01 07:00:00+00:00,weatherRef,UBC Pressure,kPa,101.870003
+2020-05-01 07:00:00+00:00,weatherRef,UBC Precipitation Probability,%,0.000000
+2020-05-01 07:00:00+00:00,weatherRef,UBC Precipitation Type,omit,rain
+2020-05-01 07:00:00+00:00,weatherRef,UBC Temp,°C,11.300000
+2020-05-01 07:00:00+00:00,weatherRef,UBC Wind Bearing,deg,112.500000
+2020-05-01 07:00:00+00:00,weatherRef,UBC Solar Radiation,W/m²,0.000000
+2020-05-01 07:00:00+00:00,weatherRef,UBC CDDs,°daysC,0.000000
+2020-05-01 07:00:00+00:00,weatherRef,UBC Max Acceptable Temp,°C,25.705363
+2020-05-01 07:54:51+00:00,weatherRef,UBC Running Mean Temp,°C,13.966458
+2020-05-01 07:54:51+00:00,weatherRef,UBC Target Comfort Temp,°C,23.408931
+2020-05-01 08:00:00+00:00,weatherRef,UBC Cloud Cover,%,20.000000
+2020-05-01 08:00:00+00:00,weatherRef,UBC Condition,omit,clear
+2020-05-01 08:00:00+00:00,weatherRef,UBC Visibility,km,16.093000
+2020-05-01 08:00:00+00:00,weatherRef,UBC Windspeed,m/s,1.440000
+2020-05-01 08:00:00+00:00,weatherRef,UBC Precipitation Intensity,mm,0.000000
+2020-05-01 08:00:00+00:00,weatherRef,UBC Humidity,%RH,77.000000
+2020-05-01 08:00:00+00:00,weatherRef,UBC Solar Radiation,W/m²,0.000000
+2020-05-01 08:00:00+00:00,weatherRef,UBC Precipitation Probability,%,0.000000
+2020-05-01 08:00:00+00:00,weatherRef,UBC Dewpoint,°C,5.490000
+2020-05-01 08:00:00+00:00,weatherRef,UBC Pressure,kPa,101.830002
+2020-05-01 08:00:00+00:00,weatherRef,UBC Wind Bearing,deg,67.500000
+2020-05-01 08:00:00+00:00,weatherRef,UBC Precipitation Type,omit,rain
+2020-05-01 08:00:00+00:00,weatherRef,UBC Temp,°C,10.900000
+2020-05-01 08:01:45+00:00,weatherRef,UBC Target Comfort Temp,°C,23.408931
+2020-05-01 08:01:45+00:00,weatherRef,UBC Running Mean Temp,°C,13.966458
+2020-05-01 08:09:02+00:00,weatherRef,UBC Target Comfort Temp,°C,23.408931
+2020-05-01 08:09:02+00:00,weatherRef,UBC Running Mean Temp,°C,13.966458
+2020-05-01 08:14:51+00:00,weatherRef,UBC Target Comfort Temp,°C,23.408931
+2020-05-01 08:14:51+00:00,weatherRef,UBC Running Mean Temp,°C,13.966459
+2020-05-01 08:15:58+00:00,weatherRef,UBC Target Comfort Temp,°C,23.408931
+2020-05-01 08:15:58+00:00,weatherRef,UBC Running Mean Temp,°C,13.966459
+2020-05-01 08:21:45+00:00,weatherRef,UBC Target Comfort Temp,°C,23.408931
+2020-05-01 08:21:45+00:00,weatherRef,UBC Running Mean Temp,°C,13.966459
+2020-05-01 08:22:55+00:00,weatherRef,UBC Target Comfort Temp,°C,23.408931
+2020-05-01 08:22:55+00:00,weatherRef,UBC Running Mean Temp,°C,13.966459
+2020-05-01 08:29:02+00:00,weatherRef,UBC Target Comfort Temp,°C,23.408931
+2020-05-01 08:29:02+00:00,weatherRef,UBC Running Mean Temp,°C,13.966459
+2020-05-01 08:30:10+00:00,weatherRef,UBC Target Comfort Temp,°C,23.408931
+2020-05-01 08:30:10+00:00,weatherRef,UBC Running Mean Temp,°C,13.966459
+2020-05-01 08:35:58+00:00,weatherRef,UBC Target Comfort Temp,°C,23.408932
+2020-05-01 08:35:58+00:00,weatherRef,UBC Running Mean Temp,°C,13.966459
+2020-05-01 08:37:05+00:00,weatherRef,UBC Target Comfort Temp,°C,23.408932
+2020-05-01 08:37:05+00:00,weatherRef,UBC Running Mean Temp,°C,13.966459
+2020-05-01 08:42:55+00:00,weatherRef,UBC Target Comfort Temp,°C,23.408932
+2020-05-01 08:42:55+00:00,weatherRef,UBC Running Mean Temp,°C,13.966459
+2020-05-01 08:43:59+00:00,weatherRef,UBC Target Comfort Temp,°C,23.408932
+2020-05-01 08:43:59+00:00,weatherRef,UBC Running Mean Temp,°C,13.966459
+2020-05-01 08:50:10+00:00,weatherRef,UBC Target Comfort Temp,°C,23.408932
+2020-05-01 08:50:10+00:00,weatherRef,UBC Running Mean Temp,°C,13.966460
+2020-05-01 08:51:00+00:00,weatherRef,UBC Target Comfort Temp,°C,23.408932
+2020-05-01 08:51:00+00:00,weatherRef,UBC Running Mean Temp,°C,13.966460
+2020-05-01 08:57:05+00:00,weatherRef,UBC Target Comfort Temp,°C,23.408932
+2020-05-01 08:57:05+00:00,weatherRef,UBC Running Mean Temp,°C,13.966460
+2020-05-01 08:57:57+00:00,weatherRef,UBC Target Comfort Temp,°C,23.395732
+2020-05-01 08:57:57+00:00,weatherRef,UBC Running Mean Temp,°C,13.926460
+2020-05-01 09:00:00+00:00,weatherRef,UBC Temp,°C,10.400000
+2020-05-01 09:00:00+00:00,weatherRef,UBC Precipitation Type,omit,rain
+2020-05-01 09:00:00+00:00,weatherRef,UBC Windspeed,m/s,1.440000
+2020-05-01 09:00:00+00:00,weatherRef,UBC Visibility,km,16.093000
+2020-05-01 09:00:00+00:00,weatherRef,UBC Cloud Cover,%,31.000000
+2020-05-01 09:00:00+00:00,weatherRef,UBC Condition,omit,clear
+2020-05-01 09:00:00+00:00,weatherRef,UBC Wind Bearing,deg,90.000000
+2020-05-01 09:00:00+00:00,weatherRef,UBC Solar Radiation,W/m²,0.000000
+2020-05-01 09:00:00+00:00,weatherRef,UBC Precipitation Intensity,mm,0.000000
+2020-05-01 09:00:00+00:00,weatherRef,UBC Humidity,%RH,81.000000
+2020-05-01 09:00:00+00:00,weatherRef,UBC Pressure,kPa,101.830002
+2020-05-01 09:00:00+00:00,weatherRef,UBC Precipitation Probability,%,11.000000
+2020-05-01 09:00:00+00:00,weatherRef,UBC Dewpoint,°C,5.530000
+2020-05-01 09:03:59+00:00,weatherRef,UBC Running Mean Temp,°C,13.966460
+2020-05-01 09:03:59+00:00,weatherRef,UBC Target Comfort Temp,°C,23.408932
+2020-05-01 09:04:57+00:00,weatherRef,UBC Running Mean Temp,°C,13.926460
+2020-05-01 09:04:57+00:00,weatherRef,UBC Target Comfort Temp,°C,23.395732
+2020-05-01 09:11:00+00:00,weatherRef,UBC Running Mean Temp,°C,13.966460
+2020-05-01 09:11:00+00:00,weatherRef,UBC Target Comfort Temp,°C,23.408932
+2020-05-01 09:12:02+00:00,weatherRef,UBC Running Mean Temp,°C,13.926460
+2020-05-01 09:12:02+00:00,weatherRef,UBC Target Comfort Temp,°C,23.395732
+2020-05-01 09:17:57+00:00,weatherRef,UBC Running Mean Temp,°C,13.926460
+2020-05-01 09:17:57+00:00,weatherRef,UBC Target Comfort Temp,°C,23.395732
+2020-05-01 09:19:07+00:00,weatherRef,UBC Running Mean Temp,°C,13.926460
+2020-05-01 09:19:07+00:00,weatherRef,UBC Target Comfort Temp,°C,23.395732
+2020-05-01 09:24:57+00:00,weatherRef,UBC Running Mean Temp,°C,13.926460
+2020-05-01 09:24:57+00:00,weatherRef,UBC Target Comfort Temp,°C,23.395732
+2020-05-01 09:26:09+00:00,weatherRef,UBC Running Mean Temp,°C,13.926460
+2020-05-01 09:26:09+00:00,weatherRef,UBC Target Comfort Temp,°C,23.395732
+2020-05-01 09:32:02+00:00,weatherRef,UBC Running Mean Temp,°C,13.926460
+2020-05-01 09:32:02+00:00,weatherRef,UBC Target Comfort Temp,°C,23.395732
+2020-05-01 09:33:07+00:00,weatherRef,UBC Running Mean Temp,°C,13.926461
+2020-05-01 09:33:07+00:00,weatherRef,UBC Target Comfort Temp,°C,23.395732
+2020-05-01 09:39:07+00:00,weatherRef,UBC Running Mean Temp,°C,13.926461
+2020-05-01 09:39:07+00:00,weatherRef,UBC Target Comfort Temp,°C,23.395732
+2020-05-01 09:40:04+00:00,weatherRef,UBC Running Mean Temp,°C,13.926461
+2020-05-01 09:40:04+00:00,weatherRef,UBC Target Comfort Temp,°C,23.395732
+2020-05-01 09:46:09+00:00,weatherRef,UBC Running Mean Temp,°C,13.926461
+2020-05-01 09:46:09+00:00,weatherRef,UBC Target Comfort Temp,°C,23.395732
+2020-05-01 09:47:03+00:00,weatherRef,UBC Running Mean Temp,°C,13.926461
+2020-05-01 09:47:03+00:00,weatherRef,UBC Target Comfort Temp,°C,23.395732
+2020-05-01 09:53:07+00:00,weatherRef,UBC Running Mean Temp,°C,13.926461
+2020-05-01 09:53:07+00:00,weatherRef,UBC Target Comfort Temp,°C,23.395732
+2020-05-01 09:53:58+00:00,weatherRef,UBC Running Mean Temp,°C,13.855350
+2020-05-01 09:53:58+00:00,weatherRef,UBC Target Comfort Temp,°C,23.372265
+2020-05-01 10:00:00+00:00,weatherRef,UBC Dewpoint,°C,5.710000
+2020-05-01 10:00:00+00:00,weatherRef,UBC Precipitation Probability,%,9.000000
+2020-05-01 10:00:00+00:00,weatherRef,UBC Visibility,km,16.093000
+2020-05-01 10:00:00+00:00,weatherRef,UBC Windspeed,m/s,0.000000
+2020-05-01 10:00:00+00:00,weatherRef,UBC Temp,°C,10.100000
+2020-05-01 10:00:00+00:00,weatherRef,UBC Precipitation Type,omit,rain
+2020-05-01 10:00:00+00:00,weatherRef,UBC Pressure,kPa,101.809998
+2020-05-01 10:00:00+00:00,weatherRef,UBC Wind Bearing,deg,90.000000
+2020-05-01 10:00:00+00:00,weatherRef,UBC Cloud Cover,%,48.000000
+2020-05-01 10:00:00+00:00,weatherRef,UBC Condition,omit,partlyCloudy
+2020-05-01 10:00:00+00:00,weatherRef,UBC Humidity,%RH,84.000000
+2020-05-01 10:00:00+00:00,weatherRef,UBC Solar Radiation,W/m²,0.000000
+2020-05-01 10:00:00+00:00,weatherRef,UBC Precipitation Intensity,mm,0.000000
+2020-05-01 10:00:04+00:00,weatherRef,UBC Target Comfort Temp,°C,23.395732
+2020-05-01 10:00:04+00:00,weatherRef,UBC Running Mean Temp,°C,13.926461
+2020-05-01 10:01:00+00:00,weatherRef,UBC Target Comfort Temp,°C,23.372266
+2020-05-01 10:01:00+00:00,weatherRef,UBC Running Mean Temp,°C,13.855350
+2020-05-01 10:07:03+00:00,weatherRef,UBC Target Comfort Temp,°C,23.395732
+2020-05-01 10:07:03+00:00,weatherRef,UBC Running Mean Temp,°C,13.926461
+2020-05-01 10:08:06+00:00,weatherRef,UBC Target Comfort Temp,°C,23.372266
+2020-05-01 10:08:06+00:00,weatherRef,UBC Running Mean Temp,°C,13.855350
+2020-05-01 10:13:58+00:00,weatherRef,UBC Target Comfort Temp,°C,23.372266
+2020-05-01 10:13:58+00:00,weatherRef,UBC Running Mean Temp,°C,13.855350
+2020-05-01 10:15:07+00:00,weatherRef,UBC Target Comfort Temp,°C,23.372266
+2020-05-01 10:15:07+00:00,weatherRef,UBC Running Mean Temp,°C,13.855350
+2020-05-01 10:21:00+00:00,weatherRef,UBC Target Comfort Temp,°C,23.372266
+2020-05-01 10:21:00+00:00,weatherRef,UBC Running Mean Temp,°C,13.855351
+2020-05-01 10:22:05+00:00,weatherRef,UBC Target Comfort Temp,°C,23.372266
+2020-05-01 10:22:05+00:00,weatherRef,UBC Running Mean Temp,°C,13.855351
+2020-05-01 10:28:06+00:00,weatherRef,UBC Target Comfort Temp,°C,23.372266
+2020-05-01 10:28:06+00:00,weatherRef,UBC Running Mean Temp,°C,13.855351
+2020-05-01 10:29:01+00:00,weatherRef,UBC Target Comfort Temp,°C,23.372266
+2020-05-01 10:29:01+00:00,weatherRef,UBC Running Mean Temp,°C,13.855351
+2020-05-01 10:35:07+00:00,weatherRef,UBC Target Comfort Temp,°C,23.372266
+2020-05-01 10:35:07+00:00,weatherRef,UBC Running Mean Temp,°C,13.855351
+2020-05-01 10:36:00+00:00,weatherRef,UBC Target Comfort Temp,°C,23.372266
+2020-05-01 10:36:00+00:00,weatherRef,UBC Running Mean Temp,°C,13.855351
+2020-05-01 10:42:05+00:00,weatherRef,UBC Target Comfort Temp,°C,23.372266
+2020-05-01 10:42:05+00:00,weatherRef,UBC Running Mean Temp,°C,13.855351
+2020-05-01 10:42:59+00:00,weatherRef,UBC Target Comfort Temp,°C,23.372266
+2020-05-01 10:42:59+00:00,weatherRef,UBC Running Mean Temp,°C,13.855351
+2020-05-01 10:49:01+00:00,weatherRef,UBC Target Comfort Temp,°C,23.372266
+2020-05-01 10:49:01+00:00,weatherRef,UBC Running Mean Temp,°C,13.855351
+2020-05-01 10:50:03+00:00,weatherRef,UBC Target Comfort Temp,°C,23.372266
+2020-05-01 10:50:03+00:00,weatherRef,UBC Running Mean Temp,°C,13.855351
+2020-05-01 10:56:00+00:00,weatherRef,UBC Target Comfort Temp,°C,23.372266
+2020-05-01 10:56:00+00:00,weatherRef,UBC Running Mean Temp,°C,13.855351
+2020-05-01 10:56:59+00:00,weatherRef,UBC Target Comfort Temp,°C,23.356894
+2020-05-01 10:56:59+00:00,weatherRef,UBC Running Mean Temp,°C,13.808770
+2020-05-01 11:00:00+00:00,weatherRef,UBC Windspeed,m/s,1.440000
+2020-05-01 11:00:00+00:00,weatherRef,UBC Precipitation Intensity,mm,0.000000
+2020-05-01 11:00:00+00:00,weatherRef,UBC Solar Radiation,W/m²,0.000000
+2020-05-01 11:00:00+00:00,weatherRef,UBC Visibility,km,16.093000
+2020-05-01 11:00:00+00:00,weatherRef,UBC Dewpoint,°C,5.660000
+2020-05-01 11:00:00+00:00,weatherRef,UBC Precipitation Probability,%,11.000000
+2020-05-01 11:00:00+00:00,weatherRef,UBC Humidity,%RH,85.000000
+2020-05-01 11:00:00+00:00,weatherRef,UBC Pressure,kPa,101.800003
+2020-05-01 11:00:00+00:00,weatherRef,UBC Temp,°C,9.900000
+2020-05-01 11:00:00+00:00,weatherRef,UBC Precipitation Type,omit,rain
+2020-05-01 11:00:00+00:00,weatherRef,UBC Condition,omit,partlyCloudy
+2020-05-01 11:00:00+00:00,weatherRef,UBC Wind Bearing,deg,90.000000
+2020-05-01 11:00:00+00:00,weatherRef,UBC Cloud Cover,%,43.000000
+2020-05-01 11:02:59+00:00,weatherRef,UBC Running Mean Temp,°C,13.855352
+2020-05-01 11:02:59+00:00,weatherRef,UBC Target Comfort Temp,°C,23.372266
+2020-05-01 11:03:55+00:00,weatherRef,UBC Running Mean Temp,°C,13.808770
+2020-05-01 11:03:55+00:00,weatherRef,UBC Target Comfort Temp,°C,23.356894
+2020-05-01 11:10:03+00:00,weatherRef,UBC Running Mean Temp,°C,13.855352
+2020-05-01 11:10:03+00:00,weatherRef,UBC Target Comfort Temp,°C,23.372266
+2020-05-01 11:10:54+00:00,weatherRef,UBC Running Mean Temp,°C,13.808771
+2020-05-01 11:10:54+00:00,weatherRef,UBC Target Comfort Temp,°C,23.356894
+2020-05-01 11:16:59+00:00,weatherRef,UBC Running Mean Temp,°C,13.808771
+2020-05-01 11:16:59+00:00,weatherRef,UBC Target Comfort Temp,°C,23.356894
+2020-05-01 11:17:55+00:00,weatherRef,UBC Running Mean Temp,°C,13.808771
+2020-05-01 11:17:55+00:00,weatherRef,UBC Target Comfort Temp,°C,23.356894
+2020-05-01 11:23:55+00:00,weatherRef,UBC Running Mean Temp,°C,13.808771
+2020-05-01 11:23:55+00:00,weatherRef,UBC Target Comfort Temp,°C,23.356894
+2020-05-01 11:24:55+00:00,weatherRef,UBC Running Mean Temp,°C,13.808771
+2020-05-01 11:24:55+00:00,weatherRef,UBC Target Comfort Temp,°C,23.356894
+2020-05-01 11:30:54+00:00,weatherRef,UBC Running Mean Temp,°C,13.808771
+2020-05-01 11:30:54+00:00,weatherRef,UBC Target Comfort Temp,°C,23.356894
+2020-05-01 11:32:01+00:00,weatherRef,UBC Running Mean Temp,°C,13.808771
+2020-05-01 11:32:01+00:00,weatherRef,UBC Target Comfort Temp,°C,23.356894
+2020-05-01 11:37:55+00:00,weatherRef,UBC Running Mean Temp,°C,13.808771
+2020-05-01 11:37:55+00:00,weatherRef,UBC Target Comfort Temp,°C,23.356895
+2020-05-01 11:38:56+00:00,weatherRef,UBC Running Mean Temp,°C,13.808771
+2020-05-01 11:38:56+00:00,weatherRef,UBC Target Comfort Temp,°C,23.356895
+2020-05-01 11:44:55+00:00,weatherRef,UBC Running Mean Temp,°C,13.808771
+2020-05-01 11:44:55+00:00,weatherRef,UBC Target Comfort Temp,°C,23.356895
+2020-05-01 11:45:58+00:00,weatherRef,UBC Running Mean Temp,°C,13.808771
+2020-05-01 11:45:58+00:00,weatherRef,UBC Target Comfort Temp,°C,23.356895
+2020-05-01 11:52:01+00:00,weatherRef,UBC Running Mean Temp,°C,13.808772
+2020-05-01 11:52:01+00:00,weatherRef,UBC Target Comfort Temp,°C,23.356895
+2020-05-01 11:52:54+00:00,weatherRef,UBC Running Mean Temp,°C,13.808772
+2020-05-01 11:52:54+00:00,weatherRef,UBC Target Comfort Temp,°C,23.356895
+2020-05-01 11:58:56+00:00,weatherRef,UBC Running Mean Temp,°C,13.808772
+2020-05-01 11:58:56+00:00,weatherRef,UBC Target Comfort Temp,°C,23.356895
+2020-05-01 12:00:00+00:00,weatherRef,UBC Wind Bearing,deg,67.500000
+2020-05-01 12:00:00+00:00,weatherRef,UBC Visibility,km,16.093000
+2020-05-01 12:00:00+00:00,weatherRef,UBC Cloud Cover,%,40.000000
+2020-05-01 12:00:00+00:00,weatherRef,UBC Solar Radiation,W/m²,0.000000
+2020-05-01 12:00:00+00:00,weatherRef,UBC Windspeed,m/s,1.440000
+2020-05-01 12:00:00+00:00,weatherRef,UBC Precipitation Intensity,mm,0.400000
+2020-05-01 12:00:00+00:00,weatherRef,UBC Condition,omit,partlyCloudy
+2020-05-01 12:00:00+00:00,weatherRef,UBC Humidity,%RH,89.000000
+2020-05-01 12:00:00+00:00,weatherRef,UBC Dewpoint,°C,5.740000
+2020-05-01 12:00:00+00:00,weatherRef,UBC Precipitation Probability,%,8.000000
+2020-05-01 12:00:00+00:00,weatherRef,UBC Precipitation Type,omit,rain
+2020-05-01 12:00:00+00:00,weatherRef,UBC Pressure,kPa,101.800003
+2020-05-01 12:00:00+00:00,weatherRef,UBC Temp,°C,9.400000
+2020-05-01 12:00:12+00:00,weatherRef,UBC Target Comfort Temp,°C,23.343904
+2020-05-01 12:00:12+00:00,weatherRef,UBC Running Mean Temp,°C,13.769405
+2020-05-01 12:05:58+00:00,weatherRef,UBC Target Comfort Temp,°C,23.356895
+2020-05-01 12:05:58+00:00,weatherRef,UBC Running Mean Temp,°C,13.808772
+2020-05-01 12:07:07+00:00,weatherRef,UBC Target Comfort Temp,°C,23.343904
+2020-05-01 12:07:07+00:00,weatherRef,UBC Running Mean Temp,°C,13.769405
+2020-05-01 12:12:54+00:00,weatherRef,UBC Target Comfort Temp,°C,23.356895
+2020-05-01 12:12:54+00:00,weatherRef,UBC Running Mean Temp,°C,13.808772
+2020-05-01 12:14:08+00:00,weatherRef,UBC Target Comfort Temp,°C,23.343904
+2020-05-01 12:14:08+00:00,weatherRef,UBC Running Mean Temp,°C,13.769406
+2020-05-01 12:20:12+00:00,weatherRef,UBC Target Comfort Temp,°C,23.343904
+2020-05-01 12:20:12+00:00,weatherRef,UBC Running Mean Temp,°C,13.769406
+2020-05-01 12:21:08+00:00,weatherRef,UBC Target Comfort Temp,°C,23.343904
+2020-05-01 12:21:08+00:00,weatherRef,UBC Running Mean Temp,°C,13.769406
+2020-05-01 12:27:07+00:00,weatherRef,UBC Target Comfort Temp,°C,23.343904
+2020-05-01 12:27:07+00:00,weatherRef,UBC Running Mean Temp,°C,13.769406
+2020-05-01 12:28:11+00:00,weatherRef,UBC Target Comfort Temp,°C,23.343904
+2020-05-01 12:28:11+00:00,weatherRef,UBC Running Mean Temp,°C,13.769406
+2020-05-01 12:34:08+00:00,weatherRef,UBC Target Comfort Temp,°C,23.343904
+2020-05-01 12:34:08+00:00,weatherRef,UBC Running Mean Temp,°C,13.769406
+2020-05-01 12:35:11+00:00,weatherRef,UBC Target Comfort Temp,°C,23.343904
+2020-05-01 12:35:11+00:00,weatherRef,UBC Running Mean Temp,°C,13.769406
+2020-05-01 12:41:08+00:00,weatherRef,UBC Target Comfort Temp,°C,23.343904
+2020-05-01 12:41:08+00:00,weatherRef,UBC Running Mean Temp,°C,13.769406
+2020-05-01 12:42:26+00:00,weatherRef,UBC Target Comfort Temp,°C,23.343904
+2020-05-01 12:42:26+00:00,weatherRef,UBC Running Mean Temp,°C,13.769406
+2020-05-01 12:48:11+00:00,weatherRef,UBC Target Comfort Temp,°C,23.343904
+2020-05-01 12:48:11+00:00,weatherRef,UBC Running Mean Temp,°C,13.769406
+2020-05-01 12:49:16+00:00,weatherRef,UBC Target Comfort Temp,°C,23.343904
+2020-05-01 12:49:16+00:00,weatherRef,UBC Running Mean Temp,°C,13.769407
+2020-05-01 12:51:00+00:00,weatherRef,UBC Sunrise,omit,True
+2020-05-01 12:55:11+00:00,weatherRef,UBC Target Comfort Temp,°C,23.343904
+2020-05-01 12:55:11+00:00,weatherRef,UBC Running Mean Temp,°C,13.769407
+2020-05-01 12:56:12+00:00,weatherRef,UBC Target Comfort Temp,°C,23.329576
+2020-05-01 12:56:12+00:00,weatherRef,UBC Running Mean Temp,°C,13.725989
+2020-05-01 13:00:00+00:00,weatherRef,UBC Dewpoint,°C,5.860000
+2020-05-01 13:00:00+00:00,weatherRef,UBC Temp,°C,9.100000
+2020-05-01 13:00:00+00:00,weatherRef,UBC Solar Radiation,W/m²,0.000000
+2020-05-01 13:00:00+00:00,weatherRef,UBC Pressure,kPa,101.790001
+2020-05-01 13:00:00+00:00,weatherRef,UBC Cloud Cover,%,40.000000
+2020-05-01 13:00:00+00:00,weatherRef,UBC Wind Bearing,deg,90.000000
+2020-05-01 13:00:00+00:00,weatherRef,UBC Visibility,km,16.093000
+2020-05-01 13:00:00+00:00,weatherRef,UBC Precipitation Type,omit,rain
+2020-05-01 13:00:00+00:00,weatherRef,UBC Condition,omit,partlyCloudy
+2020-05-01 13:00:00+00:00,weatherRef,UBC Windspeed,m/s,1.440000
+2020-05-01 13:00:00+00:00,weatherRef,UBC Precipitation Intensity,mm,0.000000
+2020-05-01 13:00:00+00:00,weatherRef,UBC Precipitation Probability,%,6.000000
+2020-05-01 13:00:00+00:00,weatherRef,UBC Humidity,%RH,91.000000
+2020-05-01 13:02:26+00:00,weatherRef,UBC Target Comfort Temp,°C,23.343904
+2020-05-01 13:02:26+00:00,weatherRef,UBC Running Mean Temp,°C,13.769407
+2020-05-01 13:03:09+00:00,weatherRef,UBC Target Comfort Temp,°C,23.329577
+2020-05-01 13:03:09+00:00,weatherRef,UBC Running Mean Temp,°C,13.725989
+2020-05-01 13:09:16+00:00,weatherRef,UBC Target Comfort Temp,°C,23.343904
+2020-05-01 13:09:16+00:00,weatherRef,UBC Running Mean Temp,°C,13.769407
+2020-05-01 13:10:01+00:00,weatherRef,UBC Target Comfort Temp,°C,23.329577
+2020-05-01 13:10:01+00:00,weatherRef,UBC Running Mean Temp,°C,13.725990
+2020-05-01 13:16:12+00:00,weatherRef,UBC Target Comfort Temp,°C,23.329577
+2020-05-01 13:16:12+00:00,weatherRef,UBC Running Mean Temp,°C,13.725990
+2020-05-01 13:16:59+00:00,weatherRef,UBC Target Comfort Temp,°C,23.329577
+2020-05-01 13:16:59+00:00,weatherRef,UBC Running Mean Temp,°C,13.725990
+2020-05-01 13:23:09+00:00,weatherRef,UBC Target Comfort Temp,°C,23.329577
+2020-05-01 13:23:09+00:00,weatherRef,UBC Running Mean Temp,°C,13.725990
+2020-05-01 13:23:57+00:00,weatherRef,UBC Target Comfort Temp,°C,23.329577
+2020-05-01 13:23:57+00:00,weatherRef,UBC Running Mean Temp,°C,13.725990
+2020-05-01 13:30:01+00:00,weatherRef,UBC Target Comfort Temp,°C,23.329577
+2020-05-01 13:30:01+00:00,weatherRef,UBC Running Mean Temp,°C,13.725990
+2020-05-01 13:30:47+00:00,weatherRef,UBC Target Comfort Temp,°C,23.329577
+2020-05-01 13:30:47+00:00,weatherRef,UBC Running Mean Temp,°C,13.725990
+2020-05-01 13:36:59+00:00,weatherRef,UBC Target Comfort Temp,°C,23.329577
+2020-05-01 13:36:59+00:00,weatherRef,UBC Running Mean Temp,°C,13.725990
+2020-05-01 13:37:40+00:00,weatherRef,UBC Target Comfort Temp,°C,23.329577
+2020-05-01 13:37:40+00:00,weatherRef,UBC Running Mean Temp,°C,13.725990
+2020-05-01 13:43:57+00:00,weatherRef,UBC Target Comfort Temp,°C,23.329577
+2020-05-01 13:43:57+00:00,weatherRef,UBC Running Mean Temp,°C,13.725990
+2020-05-01 13:44:35+00:00,weatherRef,UBC Target Comfort Temp,°C,23.329577
+2020-05-01 13:44:35+00:00,weatherRef,UBC Running Mean Temp,°C,13.725990
+2020-05-01 13:50:47+00:00,weatherRef,UBC Target Comfort Temp,°C,23.329577
+2020-05-01 13:50:47+00:00,weatherRef,UBC Running Mean Temp,°C,13.725991
+2020-05-01 13:51:39+00:00,weatherRef,UBC Target Comfort Temp,°C,23.329577
+2020-05-01 13:51:39+00:00,weatherRef,UBC Running Mean Temp,°C,13.725991
+2020-05-01 13:57:40+00:00,weatherRef,UBC Target Comfort Temp,°C,23.329577
+2020-05-01 13:57:40+00:00,weatherRef,UBC Running Mean Temp,°C,13.725991
+2020-05-01 13:58:41+00:00,weatherRef,UBC Target Comfort Temp,°C,23.314224
+2020-05-01 13:58:41+00:00,weatherRef,UBC Running Mean Temp,°C,13.679467
+2020-05-01 14:00:00+00:00,weatherRef,UBC Humidity,%RH,90.000000
+2020-05-01 14:00:00+00:00,weatherRef,UBC Precipitation Probability,%,5.000000
+2020-05-01 14:00:00+00:00,weatherRef,UBC Dewpoint,°C,6.350000
+2020-05-01 14:00:00+00:00,weatherRef,UBC Cloud Cover,%,50.000000
+2020-05-01 14:00:00+00:00,weatherRef,UBC Pressure,kPa,101.779999
+2020-05-01 14:00:00+00:00,weatherRef,UBC Temp,°C,9.600000
+2020-05-01 14:00:00+00:00,weatherRef,UBC Solar Radiation,W/m²,72.000000
+2020-05-01 14:00:00+00:00,weatherRef,UBC Precipitation Intensity,mm,0.000000
+2020-05-01 14:00:00+00:00,weatherRef,UBC Precipitation Type,omit,rain
+2020-05-01 14:00:00+00:00,weatherRef,UBC Wind Bearing,deg,112.500000
+2020-05-01 14:00:00+00:00,weatherRef,UBC Visibility,km,16.093000
+2020-05-01 14:00:00+00:00,weatherRef,UBC Windspeed,m/s,1.440000
+2020-05-01 14:00:00+00:00,weatherRef,UBC Condition,omit,partlyCloudy
+2020-05-01 14:04:35+00:00,weatherRef,UBC Target Comfort Temp,°C,23.329577
+2020-05-01 14:04:35+00:00,weatherRef,UBC Running Mean Temp,°C,13.725991
+2020-05-01 14:05:48+00:00,weatherRef,UBC Target Comfort Temp,°C,23.314224
+2020-05-01 14:05:48+00:00,weatherRef,UBC Running Mean Temp,°C,13.679467
+2020-05-01 14:11:39+00:00,weatherRef,UBC Target Comfort Temp,°C,23.329577
+2020-05-01 14:11:39+00:00,weatherRef,UBC Running Mean Temp,°C,13.725991
+2020-05-01 14:12:49+00:00,weatherRef,UBC Target Comfort Temp,°C,23.314224
+2020-05-01 14:12:49+00:00,weatherRef,UBC Running Mean Temp,°C,13.679467
+2020-05-01 14:18:41+00:00,weatherRef,UBC Target Comfort Temp,°C,23.314224
+2020-05-01 14:18:41+00:00,weatherRef,UBC Running Mean Temp,°C,13.679468
+2020-05-01 14:19:53+00:00,weatherRef,UBC Target Comfort Temp,°C,23.314224
+2020-05-01 14:19:53+00:00,weatherRef,UBC Running Mean Temp,°C,13.679468
+2020-05-01 14:25:48+00:00,weatherRef,UBC Target Comfort Temp,°C,23.314224
+2020-05-01 14:25:48+00:00,weatherRef,UBC Running Mean Temp,°C,13.679468
+2020-05-01 14:27:00+00:00,weatherRef,UBC Target Comfort Temp,°C,23.314224
+2020-05-01 14:27:00+00:00,weatherRef,UBC Running Mean Temp,°C,13.679468
+2020-05-01 14:32:49+00:00,weatherRef,UBC Target Comfort Temp,°C,23.314224
+2020-05-01 14:32:49+00:00,weatherRef,UBC Running Mean Temp,°C,13.679468
+2020-05-01 14:33:59+00:00,weatherRef,UBC Target Comfort Temp,°C,23.314224
+2020-05-01 14:33:59+00:00,weatherRef,UBC Running Mean Temp,°C,13.679468
+2020-05-01 14:39:53+00:00,weatherRef,UBC Target Comfort Temp,°C,23.314224
+2020-05-01 14:39:53+00:00,weatherRef,UBC Running Mean Temp,°C,13.679468
+2020-05-01 14:41:01+00:00,weatherRef,UBC Target Comfort Temp,°C,23.314224
+2020-05-01 14:41:01+00:00,weatherRef,UBC Running Mean Temp,°C,13.679468
+2020-05-01 14:47:00+00:00,weatherRef,UBC Target Comfort Temp,°C,23.314225
+2020-05-01 14:47:00+00:00,weatherRef,UBC Running Mean Temp,°C,13.679468
+2020-05-01 14:48:03+00:00,weatherRef,UBC Target Comfort Temp,°C,23.314225
+2020-05-01 14:48:03+00:00,weatherRef,UBC Running Mean Temp,°C,13.679468
+2020-05-01 14:53:59+00:00,weatherRef,UBC Target Comfort Temp,°C,23.314225
+2020-05-01 14:53:59+00:00,weatherRef,UBC Running Mean Temp,°C,13.679468
+2020-05-01 14:55:13+00:00,weatherRef,UBC Target Comfort Temp,°C,23.305383
+2020-05-01 14:55:13+00:00,weatherRef,UBC Running Mean Temp,°C,13.652675
+2020-05-01 15:00:00+00:00,weatherRef,UBC Condition,omit,partlyCloudy
+2020-05-01 15:00:00+00:00,weatherRef,UBC Windspeed,m/s,4.680000
+2020-05-01 15:00:00+00:00,weatherRef,UBC Humidity,%RH,86.000000
+2020-05-01 15:00:00+00:00,weatherRef,UBC Pressure,kPa,101.750000
+2020-05-01 15:00:00+00:00,weatherRef,UBC Cloud Cover,%,53.000000
+2020-05-01 15:00:00+00:00,weatherRef,UBC Precipitation Probability,%,2.000000
+2020-05-01 15:00:00+00:00,weatherRef,UBC Dewpoint,°C,6.640000
+2020-05-01 15:00:00+00:00,weatherRef,UBC Visibility,km,16.093000
+2020-05-01 15:00:00+00:00,weatherRef,UBC Precipitation Intensity,mm,0.000000
+2020-05-01 15:00:00+00:00,weatherRef,UBC Temp,°C,10.300000
+2020-05-01 15:00:00+00:00,weatherRef,UBC Solar Radiation,W/m²,160.000000
+2020-05-01 15:00:00+00:00,weatherRef,UBC Wind Bearing,deg,67.500000
+2020-05-01 15:00:00+00:00,weatherRef,UBC Precipitation Type,omit,rain
+2020-05-01 15:01:01+00:00,weatherRef,UBC Target Comfort Temp,°C,23.314225
+2020-05-01 15:01:01+00:00,weatherRef,UBC Running Mean Temp,°C,13.679469
+2020-05-01 15:02:15+00:00,weatherRef,UBC Target Comfort Temp,°C,23.305383
+2020-05-01 15:02:15+00:00,weatherRef,UBC Running Mean Temp,°C,13.652676
+2020-05-01 15:08:03+00:00,weatherRef,UBC Target Comfort Temp,°C,23.314225
+2020-05-01 15:08:03+00:00,weatherRef,UBC Running Mean Temp,°C,13.679469
+2020-05-01 15:09:14+00:00,weatherRef,UBC Target Comfort Temp,°C,23.305383
+2020-05-01 15:09:14+00:00,weatherRef,UBC Running Mean Temp,°C,13.652676
+2020-05-01 15:15:13+00:00,weatherRef,UBC Target Comfort Temp,°C,23.305383
+2020-05-01 15:15:13+00:00,weatherRef,UBC Running Mean Temp,°C,13.652676
+2020-05-01 15:16:16+00:00,weatherRef,UBC Target Comfort Temp,°C,23.305383
+2020-05-01 15:16:16+00:00,weatherRef,UBC Running Mean Temp,°C,13.652676
+2020-05-01 15:22:15+00:00,weatherRef,UBC Target Comfort Temp,°C,23.305383
+2020-05-01 15:22:15+00:00,weatherRef,UBC Running Mean Temp,°C,13.652676
+2020-05-01 15:23:14+00:00,weatherRef,UBC Target Comfort Temp,°C,23.305383
+2020-05-01 15:23:14+00:00,weatherRef,UBC Running Mean Temp,°C,13.652676
+2020-05-01 15:29:14+00:00,weatherRef,UBC Target Comfort Temp,°C,23.305383
+2020-05-01 15:29:14+00:00,weatherRef,UBC Running Mean Temp,°C,13.652676
+2020-05-01 15:30:15+00:00,weatherRef,UBC Target Comfort Temp,°C,23.305383
+2020-05-01 15:30:15+00:00,weatherRef,UBC Running Mean Temp,°C,13.652676
+2020-05-01 15:36:16+00:00,weatherRef,UBC Target Comfort Temp,°C,23.305383
+2020-05-01 15:36:16+00:00,weatherRef,UBC Running Mean Temp,°C,13.652676
+2020-05-01 15:37:16+00:00,weatherRef,UBC Target Comfort Temp,°C,23.305383
+2020-05-01 15:37:16+00:00,weatherRef,UBC Running Mean Temp,°C,13.652676
+2020-05-01 15:43:14+00:00,weatherRef,UBC Target Comfort Temp,°C,23.305383
+2020-05-01 15:43:14+00:00,weatherRef,UBC Running Mean Temp,°C,13.652677
+2020-05-01 15:44:22+00:00,weatherRef,UBC Target Comfort Temp,°C,23.305383
+2020-05-01 15:44:22+00:00,weatherRef,UBC Running Mean Temp,°C,13.652677
+2020-05-01 15:50:15+00:00,weatherRef,UBC Target Comfort Temp,°C,23.305383
+2020-05-01 15:50:15+00:00,weatherRef,UBC Running Mean Temp,°C,13.652677
+2020-05-01 15:51:30+00:00,weatherRef,UBC Target Comfort Temp,°C,23.305383
+2020-05-01 15:51:30+00:00,weatherRef,UBC Running Mean Temp,°C,13.652677
+2020-05-01 15:57:16+00:00,weatherRef,UBC Target Comfort Temp,°C,23.305383
+2020-05-01 15:57:16+00:00,weatherRef,UBC Running Mean Temp,°C,13.652677
+2020-05-01 15:58:35+00:00,weatherRef,UBC Target Comfort Temp,°C,23.306685
+2020-05-01 15:58:35+00:00,weatherRef,UBC Running Mean Temp,°C,13.656622
+2020-05-01 16:00:00+00:00,weatherRef,UBC Precipitation Type,omit,rain
+2020-05-01 16:00:00+00:00,weatherRef,UBC Wind Bearing,deg,135.000000
+2020-05-01 16:00:00+00:00,weatherRef,UBC Condition,omit,partlyCloudy
+2020-05-01 16:00:00+00:00,weatherRef,UBC Cloud Cover,%,56.000000
+2020-05-01 16:00:00+00:00,weatherRef,UBC Pressure,kPa,101.739998
+2020-05-01 16:00:00+00:00,weatherRef,UBC Windspeed,m/s,4.680000
+2020-05-01 16:00:00+00:00,weatherRef,UBC Humidity,%RH,81.000000
+2020-05-01 16:00:00+00:00,weatherRef,UBC Solar Radiation,W/m²,165.000000
+2020-05-01 16:00:00+00:00,weatherRef,UBC Visibility,km,16.093000
+2020-05-01 16:00:00+00:00,weatherRef,UBC Precipitation Probability,%,4.000000
+2020-05-01 16:00:00+00:00,weatherRef,UBC Dewpoint,°C,6.870000
+2020-05-01 16:00:00+00:00,weatherRef,UBC Temp,°C,10.800000
+2020-05-01 16:00:00+00:00,weatherRef,UBC Precipitation Intensity,mm,0.000000
+2020-05-01 16:04:22+00:00,weatherRef,UBC Target Comfort Temp,°C,23.305383
+2020-05-01 16:04:22+00:00,weatherRef,UBC Running Mean Temp,°C,13.652677
+2020-05-01 16:05:39+00:00,weatherRef,UBC Target Comfort Temp,°C,23.306685
+2020-05-01 16:05:39+00:00,weatherRef,UBC Running Mean Temp,°C,13.656622
+2020-05-01 16:11:30+00:00,weatherRef,UBC Target Comfort Temp,°C,23.305383
+2020-05-01 16:11:30+00:00,weatherRef,UBC Running Mean Temp,°C,13.652677
+2020-05-01 16:12:38+00:00,weatherRef,UBC Target Comfort Temp,°C,23.306685
+2020-05-01 16:12:38+00:00,weatherRef,UBC Running Mean Temp,°C,13.656622
+2020-05-01 16:18:35+00:00,weatherRef,UBC Target Comfort Temp,°C,23.306685
+2020-05-01 16:18:35+00:00,weatherRef,UBC Running Mean Temp,°C,13.656622
+2020-05-01 16:19:39+00:00,weatherRef,UBC Target Comfort Temp,°C,23.306685
+2020-05-01 16:19:39+00:00,weatherRef,UBC Running Mean Temp,°C,13.656622
+2020-05-01 16:25:39+00:00,weatherRef,UBC Target Comfort Temp,°C,23.306685
+2020-05-01 16:25:39+00:00,weatherRef,UBC Running Mean Temp,°C,13.656622
+2020-05-01 16:26:40+00:00,weatherRef,UBC Target Comfort Temp,°C,23.306685
+2020-05-01 16:26:40+00:00,weatherRef,UBC Running Mean Temp,°C,13.656622
+2020-05-01 16:32:38+00:00,weatherRef,UBC Target Comfort Temp,°C,23.306685
+2020-05-01 16:32:38+00:00,weatherRef,UBC Running Mean Temp,°C,13.656622
+2020-05-01 16:33:40+00:00,weatherRef,UBC Target Comfort Temp,°C,23.306685
+2020-05-01 16:33:40+00:00,weatherRef,UBC Running Mean Temp,°C,13.656622
+2020-05-01 16:39:39+00:00,weatherRef,UBC Target Comfort Temp,°C,23.306685
+2020-05-01 16:39:39+00:00,weatherRef,UBC Running Mean Temp,°C,13.656623
+2020-05-01 16:40:41+00:00,weatherRef,UBC Target Comfort Temp,°C,23.306685
+2020-05-01 16:40:41+00:00,weatherRef,UBC Running Mean Temp,°C,13.656623
+2020-05-01 16:46:40+00:00,weatherRef,UBC Target Comfort Temp,°C,23.306685
+2020-05-01 16:46:40+00:00,weatherRef,UBC Running Mean Temp,°C,13.656623
+2020-05-01 16:47:42+00:00,weatherRef,UBC Target Comfort Temp,°C,23.306685
+2020-05-01 16:47:42+00:00,weatherRef,UBC Running Mean Temp,°C,13.656623
+2020-05-01 16:53:40+00:00,weatherRef,UBC Target Comfort Temp,°C,23.306686
+2020-05-01 16:53:40+00:00,weatherRef,UBC Running Mean Temp,°C,13.656623
+2020-05-01 16:54:44+00:00,weatherRef,UBC Target Comfort Temp,°C,23.313057
+2020-05-01 16:54:44+00:00,weatherRef,UBC Running Mean Temp,°C,13.675931
+2020-05-01 17:00:00+00:00,weatherRef,UBC Precipitation Intensity,mm,0.000000
+2020-05-01 17:00:00+00:00,weatherRef,UBC Temp,°C,12.100000
+2020-05-01 17:00:00+00:00,weatherRef,UBC Precipitation Type,omit,rain
+2020-05-01 17:00:00+00:00,weatherRef,UBC Pressure,kPa,101.720001
+2020-05-01 17:00:00+00:00,weatherRef,UBC Cloud Cover,%,59.000000
+2020-05-01 17:00:00+00:00,weatherRef,UBC Wind Bearing,deg,135.000000
+2020-05-01 17:00:00+00:00,weatherRef,UBC Condition,omit,partlyCloudy
+2020-05-01 17:00:00+00:00,weatherRef,UBC Dewpoint,°C,7.160000
+2020-05-01 17:00:00+00:00,weatherRef,UBC Solar Radiation,W/m²,586.000000
+2020-05-01 17:00:00+00:00,weatherRef,UBC Windspeed,m/s,3.240000
+2020-05-01 17:00:00+00:00,weatherRef,UBC Humidity,%RH,77.000000
+2020-05-01 17:00:00+00:00,weatherRef,UBC Precipitation Probability,%,3.000000
+2020-05-01 17:00:00+00:00,weatherRef,UBC Visibility,km,16.093000
+2020-05-01 17:00:41+00:00,weatherRef,UBC Target Comfort Temp,°C,23.306686
+2020-05-01 17:00:41+00:00,weatherRef,UBC Running Mean Temp,°C,13.656623
+2020-05-01 17:01:59+00:00,weatherRef,UBC Target Comfort Temp,°C,23.313057
+2020-05-01 17:01:59+00:00,weatherRef,UBC Running Mean Temp,°C,13.675931
+2020-05-01 17:07:42+00:00,weatherRef,UBC Target Comfort Temp,°C,23.306686
+2020-05-01 17:07:42+00:00,weatherRef,UBC Running Mean Temp,°C,13.656623
+2020-05-01 17:08:57+00:00,weatherRef,UBC Target Comfort Temp,°C,23.313057
+2020-05-01 17:08:57+00:00,weatherRef,UBC Running Mean Temp,°C,13.675931
+2020-05-01 17:14:44+00:00,weatherRef,UBC Target Comfort Temp,°C,23.313057
+2020-05-01 17:14:44+00:00,weatherRef,UBC Running Mean Temp,°C,13.675931
+2020-05-01 17:16:03+00:00,weatherRef,UBC Target Comfort Temp,°C,23.313057
+2020-05-01 17:16:03+00:00,weatherRef,UBC Running Mean Temp,°C,13.675931
+2020-05-01 17:21:59+00:00,weatherRef,UBC Target Comfort Temp,°C,23.313057
+2020-05-01 17:21:59+00:00,weatherRef,UBC Running Mean Temp,°C,13.675932
+2020-05-01 17:23:21+00:00,weatherRef,UBC Target Comfort Temp,°C,23.313057
+2020-05-01 17:23:21+00:00,weatherRef,UBC Running Mean Temp,°C,13.675932
+2020-05-01 17:28:57+00:00,weatherRef,UBC Target Comfort Temp,°C,23.313057
+2020-05-01 17:28:57+00:00,weatherRef,UBC Running Mean Temp,°C,13.675932
+2020-05-01 17:30:20+00:00,weatherRef,UBC Target Comfort Temp,°C,23.313057
+2020-05-01 17:30:20+00:00,weatherRef,UBC Running Mean Temp,°C,13.675932
+2020-05-01 17:36:03+00:00,weatherRef,UBC Target Comfort Temp,°C,23.313058
+2020-05-01 17:36:03+00:00,weatherRef,UBC Running Mean Temp,°C,13.675932
+2020-05-01 17:37:19+00:00,weatherRef,UBC Target Comfort Temp,°C,23.313058
+2020-05-01 17:37:19+00:00,weatherRef,UBC Running Mean Temp,°C,13.675932
+2020-05-01 17:43:21+00:00,weatherRef,UBC Target Comfort Temp,°C,23.313058
+2020-05-01 17:43:21+00:00,weatherRef,UBC Running Mean Temp,°C,13.675932
+2020-05-01 17:44:19+00:00,weatherRef,UBC Target Comfort Temp,°C,23.313058
+2020-05-01 17:44:19+00:00,weatherRef,UBC Running Mean Temp,°C,13.675932
+2020-05-01 17:50:20+00:00,weatherRef,UBC Target Comfort Temp,°C,23.313058
+2020-05-01 17:50:20+00:00,weatherRef,UBC Running Mean Temp,°C,13.675932
+2020-05-01 17:51:31+00:00,weatherRef,UBC Target Comfort Temp,°C,23.313058
+2020-05-01 17:51:31+00:00,weatherRef,UBC Running Mean Temp,°C,13.675932
+2020-05-01 17:57:19+00:00,weatherRef,UBC Target Comfort Temp,°C,23.313058
+2020-05-01 17:57:19+00:00,weatherRef,UBC Running Mean Temp,°C,13.675932
+2020-05-01 17:58:24+00:00,weatherRef,UBC Target Comfort Temp,°C,23.322210
+2020-05-01 17:58:24+00:00,weatherRef,UBC Running Mean Temp,°C,13.703668
+2020-05-01 18:00:00+00:00,weatherRef,UBC Visibility,km,16.093000
+2020-05-01 18:00:00+00:00,weatherRef,UBC Precipitation Probability,%,3.000000
+2020-05-01 18:00:00+00:00,weatherRef,UBC Precipitation Intensity,mm,0.000000
+2020-05-01 18:00:00+00:00,weatherRef,UBC Cloud Cover,%,64.000000
+2020-05-01 18:00:00+00:00,weatherRef,UBC Pressure,kPa,101.709999
+2020-05-01 18:00:00+00:00,weatherRef,UBC Temp,°C,11.900000
+2020-05-01 18:00:00+00:00,weatherRef,UBC Precipitation Type,omit,rain
+2020-05-01 18:00:00+00:00,weatherRef,UBC Humidity,%RH,79.000000
+2020-05-01 18:00:00+00:00,weatherRef,UBC Dewpoint,°C,7.370000
+2020-05-01 18:00:00+00:00,weatherRef,UBC Wind Bearing,deg,180.000000
+2020-05-01 18:00:00+00:00,weatherRef,UBC Condition,omit,cloudy
+2020-05-01 18:00:00+00:00,weatherRef,UBC Windspeed,m/s,0.000000
+2020-05-01 18:00:00+00:00,weatherRef,UBC Solar Radiation,W/m²,373.000000
+2020-05-01 18:04:19+00:00,weatherRef,UBC Target Comfort Temp,°C,23.313058
+2020-05-01 18:04:19+00:00,weatherRef,UBC Running Mean Temp,°C,13.675933
+2020-05-01 18:05:21+00:00,weatherRef,UBC Target Comfort Temp,°C,23.322211
+2020-05-01 18:05:21+00:00,weatherRef,UBC Running Mean Temp,°C,13.703668
+2020-05-01 18:11:31+00:00,weatherRef,UBC Target Comfort Temp,°C,23.313058
+2020-05-01 18:11:31+00:00,weatherRef,UBC Running Mean Temp,°C,13.675933
+2020-05-01 18:12:19+00:00,weatherRef,UBC Target Comfort Temp,°C,23.322211
+2020-05-01 18:12:19+00:00,weatherRef,UBC Running Mean Temp,°C,13.703668
+2020-05-01 18:18:24+00:00,weatherRef,UBC Target Comfort Temp,°C,23.322211
+2020-05-01 18:18:24+00:00,weatherRef,UBC Running Mean Temp,°C,13.703669
+2020-05-01 18:19:19+00:00,weatherRef,UBC Target Comfort Temp,°C,23.322211
+2020-05-01 18:19:19+00:00,weatherRef,UBC Running Mean Temp,°C,13.703669
+2020-05-01 18:25:21+00:00,weatherRef,UBC Target Comfort Temp,°C,23.322211
+2020-05-01 18:25:21+00:00,weatherRef,UBC Running Mean Temp,°C,13.703669
+2020-05-01 18:26:23+00:00,weatherRef,UBC Target Comfort Temp,°C,23.322211
+2020-05-01 18:26:23+00:00,weatherRef,UBC Running Mean Temp,°C,13.703669
+2020-05-01 18:32:19+00:00,weatherRef,UBC Target Comfort Temp,°C,23.322211
+2020-05-01 18:32:19+00:00,weatherRef,UBC Running Mean Temp,°C,13.703669
+2020-05-01 18:33:27+00:00,weatherRef,UBC Target Comfort Temp,°C,23.322211
+2020-05-01 18:33:27+00:00,weatherRef,UBC Running Mean Temp,°C,13.703669
+2020-05-01 18:39:19+00:00,weatherRef,UBC Target Comfort Temp,°C,23.322211
+2020-05-01 18:39:19+00:00,weatherRef,UBC Running Mean Temp,°C,13.703669
+2020-05-01 18:40:27+00:00,weatherRef,UBC Target Comfort Temp,°C,23.322211
+2020-05-01 18:40:27+00:00,weatherRef,UBC Running Mean Temp,°C,13.703669
+2020-05-01 18:46:23+00:00,weatherRef,UBC Target Comfort Temp,°C,23.322211
+2020-05-01 18:46:23+00:00,weatherRef,UBC Running Mean Temp,°C,13.703669
+2020-05-01 18:47:39+00:00,weatherRef,UBC Target Comfort Temp,°C,23.322211
+2020-05-01 18:47:39+00:00,weatherRef,UBC Running Mean Temp,°C,13.703669
+2020-05-01 18:53:27+00:00,weatherRef,UBC Target Comfort Temp,°C,23.322211
+2020-05-01 18:53:27+00:00,weatherRef,UBC Running Mean Temp,°C,13.703669
+2020-05-01 18:54:41+00:00,weatherRef,UBC Target Comfort Temp,°C,23.322211
+2020-05-01 18:54:41+00:00,weatherRef,UBC Running Mean Temp,°C,13.703669
+2020-05-01 19:00:00+00:00,weatherRef,UBC Solar Radiation,W/m²,627.000000
+2020-05-01 19:00:00+00:00,weatherRef,UBC Windspeed,m/s,1.440000
+2020-05-01 19:00:00+00:00,weatherRef,UBC Visibility,km,16.093000
+2020-05-01 19:00:00+00:00,weatherRef,UBC Pressure,kPa,101.699997
+2020-05-01 19:00:00+00:00,weatherRef,UBC Cloud Cover,%,62.000000
+2020-05-01 19:00:00+00:00,weatherRef,UBC Precipitation Probability,%,0.000000
+2020-05-01 19:00:00+00:00,weatherRef,UBC Precipitation Intensity,mm,0.000000
+2020-05-01 19:00:00+00:00,weatherRef,UBC Condition,omit,cloudy
+2020-05-01 19:00:00+00:00,weatherRef,UBC Humidity,%RH,82.000000
+2020-05-01 19:00:00+00:00,weatherRef,UBC Temp,°C,11.700000
+2020-05-01 19:00:00+00:00,weatherRef,UBC Wind Bearing,deg,157.500000
+2020-05-01 19:00:00+00:00,weatherRef,UBC Dewpoint,°C,7.410000
+2020-05-01 19:00:27+00:00,weatherRef,UBC Target Comfort Temp,°C,23.322211
+2020-05-01 19:00:27+00:00,weatherRef,UBC Running Mean Temp,°C,13.703670
+2020-05-01 19:01:41+00:00,weatherRef,UBC Target Comfort Temp,°C,23.334320
+2020-05-01 19:01:41+00:00,weatherRef,UBC Running Mean Temp,°C,13.740363
+2020-05-01 19:07:39+00:00,weatherRef,UBC Target Comfort Temp,°C,23.322211
+2020-05-01 19:07:39+00:00,weatherRef,UBC Running Mean Temp,°C,13.703670
+2020-05-01 19:08:42+00:00,weatherRef,UBC Target Comfort Temp,°C,23.334320
+2020-05-01 19:08:42+00:00,weatherRef,UBC Running Mean Temp,°C,13.740364
+2020-05-01 19:14:41+00:00,weatherRef,UBC Target Comfort Temp,°C,23.322211
+2020-05-01 19:14:41+00:00,weatherRef,UBC Running Mean Temp,°C,13.703670
+2020-05-01 19:15:47+00:00,weatherRef,UBC Target Comfort Temp,°C,23.334320
+2020-05-01 19:15:47+00:00,weatherRef,UBC Running Mean Temp,°C,13.740364
+2020-05-01 19:21:41+00:00,weatherRef,UBC Target Comfort Temp,°C,23.334320
+2020-05-01 19:21:41+00:00,weatherRef,UBC Running Mean Temp,°C,13.740364
+2020-05-01 19:22:43+00:00,weatherRef,UBC Target Comfort Temp,°C,23.334320
+2020-05-01 19:22:43+00:00,weatherRef,UBC Running Mean Temp,°C,13.740364
+2020-05-01 19:28:42+00:00,weatherRef,UBC Target Comfort Temp,°C,23.334320
+2020-05-01 19:28:42+00:00,weatherRef,UBC Running Mean Temp,°C,13.740364
+2020-05-01 19:29:38+00:00,weatherRef,UBC Target Comfort Temp,°C,23.334320
+2020-05-01 19:29:38+00:00,weatherRef,UBC Running Mean Temp,°C,13.740364
+2020-05-01 19:35:47+00:00,weatherRef,UBC Target Comfort Temp,°C,23.334320
+2020-05-01 19:35:47+00:00,weatherRef,UBC Running Mean Temp,°C,13.740364
+2020-05-01 19:36:32+00:00,weatherRef,UBC Target Comfort Temp,°C,23.334320
+2020-05-01 19:36:32+00:00,weatherRef,UBC Running Mean Temp,°C,13.740364
+2020-05-01 19:42:43+00:00,weatherRef,UBC Target Comfort Temp,°C,23.334320
+2020-05-01 19:42:43+00:00,weatherRef,UBC Running Mean Temp,°C,13.740364
+2020-05-01 19:43:32+00:00,weatherRef,UBC Target Comfort Temp,°C,23.334320
+2020-05-01 19:43:32+00:00,weatherRef,UBC Running Mean Temp,°C,13.740364
+2020-05-01 19:49:38+00:00,weatherRef,UBC Target Comfort Temp,°C,23.334320
+2020-05-01 19:49:38+00:00,weatherRef,UBC Running Mean Temp,°C,13.740365
+2020-05-01 19:50:33+00:00,weatherRef,UBC Target Comfort Temp,°C,23.334320
+2020-05-01 19:50:33+00:00,weatherRef,UBC Running Mean Temp,°C,13.740365
+2020-05-01 19:56:32+00:00,weatherRef,UBC Target Comfort Temp,°C,23.334320
+2020-05-01 19:56:32+00:00,weatherRef,UBC Running Mean Temp,°C,13.740365
+2020-05-01 19:57:32+00:00,weatherRef,UBC Target Comfort Temp,°C,23.341253
+2020-05-01 19:57:32+00:00,weatherRef,UBC Running Mean Temp,°C,13.761374
+2020-05-01 20:00:00+00:00,weatherRef,UBC Dewpoint,°C,6.950000
+2020-05-01 20:00:00+00:00,weatherRef,UBC Wind Bearing,deg,225.000000
+2020-05-01 20:00:00+00:00,weatherRef,UBC Solar Radiation,W/m²,819.000000
+2020-05-01 20:00:00+00:00,weatherRef,UBC Cloud Cover,%,61.000000
+2020-05-01 20:00:00+00:00,weatherRef,UBC Pressure,kPa,101.669998
+2020-05-01 20:00:00+00:00,weatherRef,UBC Windspeed,m/s,1.440000
+2020-05-01 20:00:00+00:00,weatherRef,UBC Visibility,km,16.093000
+2020-05-01 20:00:00+00:00,weatherRef,UBC Temp,°C,13.000000
+2020-05-01 20:00:00+00:00,weatherRef,UBC Precipitation Intensity,mm,0.000000
+2020-05-01 20:00:00+00:00,weatherRef,UBC Precipitation Probability,%,0.000000
+2020-05-01 20:00:00+00:00,weatherRef,UBC Humidity,%RH,73.000000
+2020-05-01 20:00:00+00:00,weatherRef,UBC Condition,omit,cloudy
+2020-05-01 20:03:32+00:00,weatherRef,UBC Target Comfort Temp,°C,23.334320
+2020-05-01 20:03:32+00:00,weatherRef,UBC Running Mean Temp,°C,13.740365
+2020-05-01 20:04:31+00:00,weatherRef,UBC Target Comfort Temp,°C,23.341253
+2020-05-01 20:04:31+00:00,weatherRef,UBC Running Mean Temp,°C,13.761374
+2020-05-01 20:10:33+00:00,weatherRef,UBC Target Comfort Temp,°C,23.334320
+2020-05-01 20:10:33+00:00,weatherRef,UBC Running Mean Temp,°C,13.740365
+2020-05-01 20:11:40+00:00,weatherRef,UBC Target Comfort Temp,°C,23.341253
+2020-05-01 20:11:40+00:00,weatherRef,UBC Running Mean Temp,°C,13.761374
+2020-05-01 20:17:32+00:00,weatherRef,UBC Target Comfort Temp,°C,23.341254
+2020-05-01 20:17:32+00:00,weatherRef,UBC Running Mean Temp,°C,13.761374
+2020-05-01 20:18:46+00:00,weatherRef,UBC Target Comfort Temp,°C,23.341254
+2020-05-01 20:18:46+00:00,weatherRef,UBC Running Mean Temp,°C,13.761374
+2020-05-01 20:24:31+00:00,weatherRef,UBC Target Comfort Temp,°C,23.341254
+2020-05-01 20:24:31+00:00,weatherRef,UBC Running Mean Temp,°C,13.761375
+2020-05-01 20:26:06+00:00,weatherRef,UBC Target Comfort Temp,°C,23.341254
+2020-05-01 20:26:06+00:00,weatherRef,UBC Running Mean Temp,°C,13.761375
+2020-05-01 20:31:40+00:00,weatherRef,UBC Target Comfort Temp,°C,23.341254
+2020-05-01 20:31:40+00:00,weatherRef,UBC Running Mean Temp,°C,13.761375
+2020-05-01 20:33:07+00:00,weatherRef,UBC Target Comfort Temp,°C,23.341254
+2020-05-01 20:33:07+00:00,weatherRef,UBC Running Mean Temp,°C,13.761375
+2020-05-01 20:38:46+00:00,weatherRef,UBC Target Comfort Temp,°C,23.341254
+2020-05-01 20:38:46+00:00,weatherRef,UBC Running Mean Temp,°C,13.761375
+2020-05-01 20:39:58+00:00,weatherRef,UBC Target Comfort Temp,°C,23.341254
+2020-05-01 20:39:58+00:00,weatherRef,UBC Running Mean Temp,°C,13.761375
+2020-05-01 20:46:06+00:00,weatherRef,UBC Target Comfort Temp,°C,23.341254
+2020-05-01 20:46:06+00:00,weatherRef,UBC Running Mean Temp,°C,13.761375
+2020-05-01 20:46:43+00:00,weatherRef,UBC Target Comfort Temp,°C,23.341254
+2020-05-01 20:46:43+00:00,weatherRef,UBC Running Mean Temp,°C,13.761375
+2020-05-01 20:53:07+00:00,weatherRef,UBC Target Comfort Temp,°C,23.341254
+2020-05-01 20:53:07+00:00,weatherRef,UBC Running Mean Temp,°C,13.761375
+2020-05-01 20:53:28+00:00,weatherRef,UBC Target Comfort Temp,°C,23.341254
+2020-05-01 20:53:28+00:00,weatherRef,UBC Running Mean Temp,°C,13.761375
+2020-05-01 20:59:58+00:00,weatherRef,UBC Target Comfort Temp,°C,23.341254
+2020-05-01 20:59:58+00:00,weatherRef,UBC Running Mean Temp,°C,13.761375
+2020-05-01 21:00:00+00:00,weatherRef,UBC Condition,omit,cloudy
+2020-05-01 21:00:00+00:00,weatherRef,UBC Humidity,%RH,66.000000
+2020-05-01 21:00:00+00:00,weatherRef,UBC Dewpoint,°C,6.220000
+2020-05-01 21:00:00+00:00,weatherRef,UBC Pressure,kPa,101.629997
+2020-05-01 21:00:00+00:00,weatherRef,UBC Cloud Cover,%,61.000000
+2020-05-01 21:00:00+00:00,weatherRef,UBC Wind Bearing,deg,225.000000
+2020-05-01 21:00:00+00:00,weatherRef,UBC Solar Radiation,W/m²,536.000000
+2020-05-01 21:00:00+00:00,weatherRef,UBC Precipitation Probability,%,0.000000
+2020-05-01 21:00:00+00:00,weatherRef,UBC Visibility,km,16.093000
+2020-05-01 21:00:00+00:00,weatherRef,UBC Windspeed,m/s,1.440000
+2020-05-01 21:00:00+00:00,weatherRef,UBC Precipitation Type,omit,rain
+2020-05-01 21:00:00+00:00,weatherRef,UBC Precipitation Intensity,mm,0.000000
+2020-05-01 21:00:00+00:00,weatherRef,UBC Temp,°C,13.200000
+2020-05-01 21:00:21+00:00,weatherRef,UBC Target Comfort Temp,°C,23.352277
+2020-05-01 21:00:21+00:00,weatherRef,UBC Running Mean Temp,°C,13.794779
+2020-05-01 21:06:43+00:00,weatherRef,UBC Target Comfort Temp,°C,23.341254
+2020-05-01 21:06:43+00:00,weatherRef,UBC Running Mean Temp,°C,13.761376
+2020-05-01 21:07:08+00:00,weatherRef,UBC Target Comfort Temp,°C,23.352277
+2020-05-01 21:07:08+00:00,weatherRef,UBC Running Mean Temp,°C,13.794779
+2020-05-01 21:13:28+00:00,weatherRef,UBC Target Comfort Temp,°C,23.341254
+2020-05-01 21:13:28+00:00,weatherRef,UBC Running Mean Temp,°C,13.761376
+2020-05-01 21:13:52+00:00,weatherRef,UBC Target Comfort Temp,°C,23.352277
+2020-05-01 21:13:52+00:00,weatherRef,UBC Running Mean Temp,°C,13.794780
+2020-05-01 21:20:21+00:00,weatherRef,UBC Target Comfort Temp,°C,23.352277
+2020-05-01 21:20:21+00:00,weatherRef,UBC Running Mean Temp,°C,13.794780
+2020-05-01 21:20:40+00:00,weatherRef,UBC Target Comfort Temp,°C,23.352277
+2020-05-01 21:20:40+00:00,weatherRef,UBC Running Mean Temp,°C,13.794780
+2020-05-01 21:27:08+00:00,weatherRef,UBC Target Comfort Temp,°C,23.352277
+2020-05-01 21:27:08+00:00,weatherRef,UBC Running Mean Temp,°C,13.794780
+2020-05-01 21:27:25+00:00,weatherRef,UBC Target Comfort Temp,°C,23.352277
+2020-05-01 21:27:25+00:00,weatherRef,UBC Running Mean Temp,°C,13.794780
+2020-05-01 21:33:52+00:00,weatherRef,UBC Target Comfort Temp,°C,23.352277
+2020-05-01 21:33:52+00:00,weatherRef,UBC Running Mean Temp,°C,13.794780
+2020-05-01 21:34:11+00:00,weatherRef,UBC Target Comfort Temp,°C,23.352277
+2020-05-01 21:34:11+00:00,weatherRef,UBC Running Mean Temp,°C,13.794780
+2020-05-01 21:40:40+00:00,weatherRef,UBC Target Comfort Temp,°C,23.352278
+2020-05-01 21:40:40+00:00,weatherRef,UBC Running Mean Temp,°C,13.794780
+2020-05-01 21:41:15+00:00,weatherRef,UBC Target Comfort Temp,°C,23.352278
+2020-05-01 21:41:15+00:00,weatherRef,UBC Running Mean Temp,°C,13.794780
+2020-05-01 21:47:25+00:00,weatherRef,UBC Target Comfort Temp,°C,23.352278
+2020-05-01 21:47:25+00:00,weatherRef,UBC Running Mean Temp,°C,13.794780
+2020-05-01 21:48:15+00:00,weatherRef,UBC Target Comfort Temp,°C,23.352278
+2020-05-01 21:48:15+00:00,weatherRef,UBC Running Mean Temp,°C,13.794780
+2020-05-01 21:54:11+00:00,weatherRef,UBC Target Comfort Temp,°C,23.352278
+2020-05-01 21:54:11+00:00,weatherRef,UBC Running Mean Temp,°C,13.794781
+2020-05-01 21:55:17+00:00,weatherRef,UBC Target Comfort Temp,°C,23.364793
+2020-05-01 21:55:17+00:00,weatherRef,UBC Running Mean Temp,°C,13.832707
+2020-05-01 22:00:00+00:00,weatherRef,UBC Temp,°C,13.400000
+2020-05-01 22:00:00+00:00,weatherRef,UBC Precipitation Intensity,mm,0.000000
+2020-05-01 22:00:00+00:00,weatherRef,UBC Condition,omit,partlyCloudy
+2020-05-01 22:00:00+00:00,weatherRef,UBC Cloud Cover,%,55.000000
+2020-05-01 22:00:00+00:00,weatherRef,UBC Pressure,kPa,101.589996
+2020-05-01 22:00:00+00:00,weatherRef,UBC Humidity,%RH,65.000000
+2020-05-01 22:00:00+00:00,weatherRef,UBC Dewpoint,°C,5.530000
+2020-05-01 22:00:00+00:00,weatherRef,UBC Visibility,km,16.093000
+2020-05-01 22:00:00+00:00,weatherRef,UBC Precipitation Probability,%,0.000000
+2020-05-01 22:00:00+00:00,weatherRef,UBC Wind Bearing,deg,247.500000
+2020-05-01 22:00:00+00:00,weatherRef,UBC Solar Radiation,W/m²,580.000000
+2020-05-01 22:00:00+00:00,weatherRef,UBC Windspeed,m/s,1.440000
+2020-05-01 22:01:15+00:00,weatherRef,UBC Target Comfort Temp,°C,23.352278
+2020-05-01 22:01:15+00:00,weatherRef,UBC Running Mean Temp,°C,13.794781
+2020-05-01 22:02:18+00:00,weatherRef,UBC Target Comfort Temp,°C,23.364793
+2020-05-01 22:02:18+00:00,weatherRef,UBC Running Mean Temp,°C,13.832707
+2020-05-01 22:08:15+00:00,weatherRef,UBC Target Comfort Temp,°C,23.352278
+2020-05-01 22:08:15+00:00,weatherRef,UBC Running Mean Temp,°C,13.794781
+2020-05-01 22:09:00+00:00,weatherRef,UBC Target Comfort Temp,°C,23.364793
+2020-05-01 22:09:00+00:00,weatherRef,UBC Running Mean Temp,°C,13.832707
+2020-05-01 22:15:17+00:00,weatherRef,UBC Target Comfort Temp,°C,23.364793
+2020-05-01 22:15:17+00:00,weatherRef,UBC Running Mean Temp,°C,13.832707
+2020-05-01 22:15:42+00:00,weatherRef,UBC Target Comfort Temp,°C,23.364793
+2020-05-01 22:15:42+00:00,weatherRef,UBC Running Mean Temp,°C,13.832707
+2020-05-01 22:22:18+00:00,weatherRef,UBC Target Comfort Temp,°C,23.364793
+2020-05-01 22:22:18+00:00,weatherRef,UBC Running Mean Temp,°C,13.832708
+2020-05-01 22:22:24+00:00,weatherRef,UBC Target Comfort Temp,°C,23.364793
+2020-05-01 22:22:24+00:00,weatherRef,UBC Running Mean Temp,°C,13.832708
+2020-05-01 22:29:00+00:00,weatherRef,UBC Target Comfort Temp,°C,23.364794
+2020-05-01 22:29:00+00:00,weatherRef,UBC Running Mean Temp,°C,13.832708
+2020-05-01 22:29:19+00:00,weatherRef,UBC Target Comfort Temp,°C,23.364794
+2020-05-01 22:29:19+00:00,weatherRef,UBC Running Mean Temp,°C,13.832708
+2020-05-01 22:35:42+00:00,weatherRef,UBC Target Comfort Temp,°C,23.364794
+2020-05-01 22:35:42+00:00,weatherRef,UBC Running Mean Temp,°C,13.832708
+2020-05-01 22:36:01+00:00,weatherRef,UBC Target Comfort Temp,°C,23.364794
+2020-05-01 22:36:01+00:00,weatherRef,UBC Running Mean Temp,°C,13.832708
+2020-05-01 22:42:24+00:00,weatherRef,UBC Target Comfort Temp,°C,23.364794
+2020-05-01 22:42:24+00:00,weatherRef,UBC Running Mean Temp,°C,13.832708
+2020-05-01 22:42:45+00:00,weatherRef,UBC Target Comfort Temp,°C,23.364794
+2020-05-01 22:42:45+00:00,weatherRef,UBC Running Mean Temp,°C,13.832708
+2020-05-01 22:49:19+00:00,weatherRef,UBC Target Comfort Temp,°C,23.364794
+2020-05-01 22:49:19+00:00,weatherRef,UBC Running Mean Temp,°C,13.832708
+2020-05-01 22:49:28+00:00,weatherRef,UBC Target Comfort Temp,°C,23.364794
+2020-05-01 22:49:28+00:00,weatherRef,UBC Running Mean Temp,°C,13.832708
+2020-05-01 22:56:01+00:00,weatherRef,UBC Target Comfort Temp,°C,23.364794
+2020-05-01 22:56:01+00:00,weatherRef,UBC Running Mean Temp,°C,13.832708
+2020-05-01 22:56:16+00:00,weatherRef,UBC Target Comfort Temp,°C,23.378373
+2020-05-01 22:56:16+00:00,weatherRef,UBC Running Mean Temp,°C,13.873857
+2020-05-01 23:00:00+00:00,weatherRef,UBC Windspeed,m/s,1.440000
+2020-05-01 23:00:00+00:00,weatherRef,UBC Solar Radiation,W/m²,457.000000
+2020-05-01 23:00:00+00:00,weatherRef,UBC Dewpoint,°C,5.130000
+2020-05-01 23:00:00+00:00,weatherRef,UBC Humidity,%RH,61.000000
+2020-05-01 23:00:00+00:00,weatherRef,UBC Condition,omit,partlyCloudy
+2020-05-01 23:00:00+00:00,weatherRef,UBC Precipitation Intensity,mm,0.000000
+2020-05-01 23:00:00+00:00,weatherRef,UBC Temp,°C,14.900000
+2020-05-01 23:00:00+00:00,weatherRef,UBC Pressure,kPa,101.559998
+2020-05-01 23:00:00+00:00,weatherRef,UBC Precipitation Probability,%,0.000000
+2020-05-01 23:00:00+00:00,weatherRef,UBC Visibility,km,16.093000
+2020-05-01 23:00:00+00:00,weatherRef,UBC Cloud Cover,%,46.000000
+2020-05-01 23:00:00+00:00,weatherRef,UBC Wind Bearing,deg,225.000000
+2020-05-01 23:02:45+00:00,weatherRef,UBC Running Mean Temp,°C,13.832709
+2020-05-01 23:02:45+00:00,weatherRef,UBC Target Comfort Temp,°C,23.364794
+2020-05-01 23:03:02+00:00,weatherRef,UBC Running Mean Temp,°C,13.873858
+2020-05-01 23:03:02+00:00,weatherRef,UBC Target Comfort Temp,°C,23.378373
+2020-05-01 23:09:28+00:00,weatherRef,UBC Running Mean Temp,°C,13.832709
+2020-05-01 23:09:28+00:00,weatherRef,UBC Target Comfort Temp,°C,23.364794
+2020-05-01 23:09:46+00:00,weatherRef,UBC Running Mean Temp,°C,13.873858
+2020-05-01 23:09:46+00:00,weatherRef,UBC Target Comfort Temp,°C,23.378373
+2020-05-01 23:16:16+00:00,weatherRef,UBC Running Mean Temp,°C,13.873858
+2020-05-01 23:16:16+00:00,weatherRef,UBC Target Comfort Temp,°C,23.378373
+2020-05-01 23:16:30+00:00,weatherRef,UBC Running Mean Temp,°C,13.873858
+2020-05-01 23:16:30+00:00,weatherRef,UBC Target Comfort Temp,°C,23.378373
+2020-05-01 23:23:02+00:00,weatherRef,UBC Running Mean Temp,°C,13.873858
+2020-05-01 23:23:02+00:00,weatherRef,UBC Target Comfort Temp,°C,23.378373
+2020-05-01 23:23:16+00:00,weatherRef,UBC Running Mean Temp,°C,13.873858
+2020-05-01 23:23:16+00:00,weatherRef,UBC Target Comfort Temp,°C,23.378373
+2020-05-01 23:29:46+00:00,weatherRef,UBC Running Mean Temp,°C,13.873858
+2020-05-01 23:29:46+00:00,weatherRef,UBC Target Comfort Temp,°C,23.378373
+2020-05-01 23:30:01+00:00,weatherRef,UBC Running Mean Temp,°C,13.873858
+2020-05-01 23:30:01+00:00,weatherRef,UBC Target Comfort Temp,°C,23.378373
+2020-05-01 23:36:30+00:00,weatherRef,UBC Running Mean Temp,°C,13.873858
+2020-05-01 23:36:30+00:00,weatherRef,UBC Target Comfort Temp,°C,23.378373
+2020-05-01 23:36:45+00:00,weatherRef,UBC Running Mean Temp,°C,13.873858
+2020-05-01 23:36:45+00:00,weatherRef,UBC Target Comfort Temp,°C,23.378373
+2020-05-01 23:43:16+00:00,weatherRef,UBC Running Mean Temp,°C,13.873858
+2020-05-01 23:43:16+00:00,weatherRef,UBC Target Comfort Temp,°C,23.378373
+2020-05-01 23:43:33+00:00,weatherRef,UBC Running Mean Temp,°C,13.873858
+2020-05-01 23:43:33+00:00,weatherRef,UBC Target Comfort Temp,°C,23.378373
+2020-05-01 23:50:01+00:00,weatherRef,UBC Running Mean Temp,°C,13.873859
+2020-05-01 23:50:01+00:00,weatherRef,UBC Target Comfort Temp,°C,23.378373
+2020-05-01 23:50:17+00:00,weatherRef,UBC Running Mean Temp,°C,13.873859
+2020-05-01 23:50:17+00:00,weatherRef,UBC Target Comfort Temp,°C,23.378373
+2020-05-01 23:56:45+00:00,weatherRef,UBC Running Mean Temp,°C,13.873859
+2020-05-01 23:56:45+00:00,weatherRef,UBC Target Comfort Temp,°C,23.378373
+2020-05-01 23:57:01+00:00,weatherRef,UBC Running Mean Temp,°C,13.924943
+2020-05-01 23:57:01+00:00,weatherRef,UBC Target Comfort Temp,°C,23.395231
