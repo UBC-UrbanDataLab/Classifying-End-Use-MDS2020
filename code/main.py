@@ -312,7 +312,7 @@ def main():
         ## Merge specific sensor to cluster data
         new_merged=pd.merge(nc_data, new_df, how='inner', left_on=['date','hour'], right_on=['date','hour'])
         ## Ridge does not allow NANs, seems like some sensors are not 'on' during specific hours
-        new_merged=new_merged.dropna()
+        new_merged=new_merged.fillna(0)
 
         ## All NC predictor variables
         X=new_merged.iloc[:,2:22]
