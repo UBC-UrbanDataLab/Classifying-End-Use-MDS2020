@@ -54,8 +54,8 @@ Summary of our activities on a weekly basis:
 |2|2020-05-11|Prepared presentation for Tuesdays meeting|Logistics|1|
 |2|2020-05-11|Updated team & personal logs on github|Logistics|1|
 |2|2020-05-11|daily standup meeting|Weekly Meetings|0.5|
-|2|2020-05-11|Work on weekly presentation |Logistics|1.5|
-|2|2020-05-11|Coding for missing values|Coding|2|
+|2|2020-05-11|Work on weekly presentation |Logistics|2|
+|2|2020-05-11|Coding for missing values|Coding|3|
 |3|2020-05-12|Practice Weekly presentation|Presentation|0.5|
 |3|2020-05-12|Coding for missing values|Logistics|2|
 |3|2020-05-12|daily standup meeting|Daily Meetings|0.5|
@@ -76,7 +76,7 @@ Summary of our activities on a weekly basis:
 |3|2020-05-15|meeting with UDL|Weekly Meetings|1|
 |3|2020-05-15|preparing for data labelling|Logistics|1.5|
 |3|2020-05-15|debrief meeting|Weekly Meetings|0.5|
-|3|2020-05-15|Data Labelling|Data Prep|1.5|
+|3|2020-05-15|Data Labelling|Data Prep|2.5|
 |3|2020-05-15|Research semi-supervised methods|Research|2|
 |3|2020-05-18|Data Labelling|Data Prep|2|
 |4|2020-05-19|daily standup meeting|Daily Meetings|1.5|
@@ -87,8 +87,8 @@ Summary of our activities on a weekly basis:
 |4|2020-05-20|Team meeting: labelling, feature selection|Other Meeting|0.75|
 |4|2020-05-20|Research and create code review checklist|Coding|1.5|
 |4|2020-05-20|Reviewed Connors code|Coding|2|
-|4|2020-05-20|Research & coding feature selection|Research|2|
-|4|2020-05-21|Research encoding for categorical data|Research|2|
+|4|2020-05-20|Research & coding feature selection|Research|3|
+|4|2020-05-21|Research encoding for categorical data|Research|3|
 |4|2020-05-21|Daily standup meeting|Daily Meetings|0.25|
 |4|2020-05-21|Team meeting|Logistics|0.5|
 |4|2020-05-21|Retrospective Meeting|Weekly Meetings|0.75|
@@ -98,10 +98,10 @@ Summary of our activities on a weekly basis:
 |4|2020-05-22|Sprint pre-planning meeting|Weekly Meetings|1|
 |4|2020-05-22|Meeting to prepare for meeting with UDL|Weekly Meetings|1|
 |4|2020-05-22|Meeting with UDL|Weekly Meetings|1|
-|4|2020-05-22|categorizing equipRef column for feature selection|Data Prep|1|
+|4|2020-05-22|categorizing equipRef column for feature selection|Data Prep|2|
 |4|2020-05-22|worked on weekly presentation|Presentation|1|
 |4|2020-05-25|Daily standup meeting|Daily Meetings|0.25|
-|4|2020-05-25|Research feature selection for categorical data|Research|3|
+|4|2020-05-25|Research feature selection for categorical data|Research|3.5|
 |4|2020-05-25|coded for numerical feature selection|Coding|2.5|
 |5|2020-05-26|Daily standup meeting|Daily Meetings|0.25|
 |5|2020-05-26|practice Weekly presentation|Presentation|0.5|
@@ -110,7 +110,7 @@ Summary of our activities on a weekly basis:
 |5|2020-05-26|code review for aggregating data|Coding|2|
 |5|2020-05-27|Daily standup meeting|Daily Meetings|0.25|
 |5|2020-05-27|Team meeting|Logistics|1.5|
-|5|2020-05-27|Coded for cv for numerical feature selection|Coding|2|
+|5|2020-05-27|Coded for cv for numerical feature selection|Coding|3.5|
 |5|2020-05-27|research more about continous feature selection and ANOVA|Research|2|
 |5|2020-05-28|Daily standup meeting|Daily Meetings|0.25|
 |5|2020-05-28|Retrospective Meeting|Weekly Meetings|0.75|
@@ -144,4 +144,27 @@ Summary of our activities on a weekly basis:
 |6|2020-06-05|code review|Coding|2.5|
 |6|2020-06-08|daily standup meeting|Daily Meetings|0.25|
 |6|2020-06-08|make weekly presentation|Logistics|2|
-|6|2020-06-08|update github with team progress|Logistics|0.5|
+|6|2020-06-08|update github with team progress|Logistics|2|
+|7|2020-06-09|practice presentation |Logistics|2|
+|7|2020-06-09|daily standup meeting|Daily Meetings|0.25|
+|7|2020-06-09|Weekly meeting with Scott|Weekly Meetings|1|
+|7|2020-06-09|team meeting|Logistics|1|
+|7|2020-06-09|review ridge regression code & research testing model|Research|2|
+|7|2020-06-10|daily standup meeting|Daily Meetings|0.5|
+|7|2020-06-10|try and fix ridge regression code|Coding|2.5|
+|7|2020-06-10|review connors code|Coding|2|
+|7|2020-06-11|daily standup meeting|Daily Meetings|0.25|
+|7|2020-06-11|Retrospective Meeting|Weekly Meetings|1|
+|7|2020-06-11|ridge regression issue|Coding|3|
+|7|2020-06-11|review outline for final report|Logistics|1.5|
+|7|2020-06-12|daily standup meeting|Daily Meetings|0.25|
+|7|2020-06-12|Sprint pre-planning meeting|Weekly Meetings|1|
+|7|2020-06-12|Meeting to prepare for meeting with UDL|Weekly Meetings|0.5|
+|7|2020-06-12|Meeting with UDL|Weekly Meetings|1|
+|7|2020-06-12|look into date merging issue for step 2|Coding|1|
+|7|2020-06-12|created weekly presentation |Presentation|1.5|
+|7|2020-06-15|daily standup meeting|Daily Meetings|0.75|
+|7|2020-06-15|team meeting for presentation |Logistics|0.5|
+|7|2020-06-15|report writing|Report|5|
+|8|2020-06-16|daily standup meeting|Daily Meetings|0.5|
+|8|2020-06-16|practice presentation |Logistics|0.5|

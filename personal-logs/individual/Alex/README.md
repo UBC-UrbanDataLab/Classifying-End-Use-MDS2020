@@ -190,3 +190,41 @@ Summary of our activities on a weekly basis:
 |6|2020-06-05|Continued to look at date-range of "stable" data|Data Analysis|1|
 |6|2020-06-06|Learn to write to local influxDB|Research|3.75|
 |6|2020-06-06|Test impact of storing data with different field sets in influxDB|Research|1.25|
+|6|2020-06-07|Worked on finding stable date-range|Data Analysis|2|
+|6|2020-06-08|Worked on finding stable date-range|Data Analysis|1.25|
+|6|2020-06-08|Daily Standup|Daily Meetings|0.25|
+|6|2020-06-08|Worked on finding stable date-range|Data Analysis|1.5|
+|6|2020-06-08|Review append-agg pull request (#15?)|Git management|0.75|
+|7|2020-06-09|Made new summary notebook for salvaging influx Pharmacy Building data that links to skyspark|Data Analysis|1.5|
+|7|2020-06-09|Presentation Review|Logistics|0.5|
+|7|2020-06-09|Daily Standup|Daily Meetings|1.5|
+|7|2020-06-09|Edit/Prep/Practice Presentation|Logistics|1.5|
+|7|2020-06-09|Weekly presentation|Weekly Meetings|0.75|
+|7|2020-06-09|Review step2 code|Coding|0.75|
+|7|2020-06-09|Continue to look into salvaging influx data that links to skyspark|Data Analysis|3.5|
+|7|2020-06-10|Continue to look into salvaging influx data that links to skyspark|Data Analysis|4|
+|7|2020-06-10|Debug GridSearch warnings for Ridge Regression|Debugging|4|
+|7|2020-06-11|Comment and package notebooks and files for salvaging influx data that links to skyspark|Logistics|2|
+|7|2020-06-11|Misc Kanban+Personal Log updates|Logistics|0.5|
+|7|2020-06-11|Daily Standup|Daily Meetings|0.25|
+|7|2020-06-11|Retrospective Meeting|Weekly Meetings|0.5|
+|7|2020-06-11|Work on influxDB point writing (step6) code|Coding|0.75|
+|7|2020-06-11|Update end-use labels|Data Analysis|2.5|
+|7|2020-06-11|Work on influxDB point writing (step6) code|Coding|2|
+|7|2020-06-12|Work on influxDB point writing (step6) code|Coding|2|
+|7|2020-06-12|Daily Standup|Daily Meetings|0.25|
+|7|2020-06-12|Sprint Planning|Weekly Meetings|0.5|
+|7|2020-06-12|Meeting to make agenda for client meeting|Weekly Meetings|0.5|
+|7|2020-06-12|Work on influxDB point writing (step6) code|Coding|1|
+|7|2020-06-12|Client Meeting|Weekly Meetings|1|
+|7|2020-06-12|Work on figuring out best schema for end use label measurement in influxDB|Coding|3.5|
+|7|2020-06-13|Try to use Grafana 7's transformations to join endlabel data in influx|Coding|5|
+|7|2020-06-14|Figure out how to enable flux in influxdb docker|Research|1.5|
+|7|2020-06-14|Write a flux query to join end use labels to energy consumption|Coding|6|
+|7|2020-06-14|Get grafana working with flux|Research|2.5|
+|7|2020-06-15|Test flux in earlier version of influxdb|Coding|1.5|
+|7|2020-06-15|Try to get variables working with flux in grafana|Coding|0.5|
+|7|2020-06-15|Daily Standup|Daily Meetings|0.25|
+|7|2020-06-15|Add a couple slides to the presentation|Logistics|0.75|
+|7|2020-06-15|Pass some info+questions on to Jiachen|Client Meetings|0.75|
+|7|2020-06-15|Work on code for writing to influxDB|Coding|3.5|
