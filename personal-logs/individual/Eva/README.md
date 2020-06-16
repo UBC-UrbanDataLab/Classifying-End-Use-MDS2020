@@ -231,3 +231,66 @@ Summary of our activities on a weekly basis:
 |6|2020-06-04|Created uniqueId module|Coding|1.33|
 |6|2020-06-04|Updated sprint planning|Logistics|0.33|
 |6|2020-06-04|Updated Personal Log|Logistics|0.33|
+|6|2020-06-05|Prepped for daily stand up|Logistics|0.25|
+|6|2020-06-05|Daily stand up + sprint planning|Other Meeting|1|
+|6|2020-06-05|Prepped agenda for UDL meeting|Logistics|0.75|
+|6|2020-06-05|Updated sprint planning tasks on jira|Logistics|0.25|
+|6|2020-06-05|Looked into creating step 4 dataset|Research|0.92|
+|6|2020-06-05|UDL meeting|Client Meetings|1.25|
+|6|2020-06-05|Meeting minutes|Logistics|0.25|
+|6|2020-06-05|Created csv for step 4 dataset|Coding|0.18|
+|6|2020-06-08|Prepped for daily stand up + added create_unique_id function to data_preparation.py + looked at main.py format|Coding|0.75|
+|6|2020-06-08|Daily stand up|Daily Stand Up|0.42|
+|6|2020-06-08|Cleaned up step 4 code for Claudia and modified data_preparation.py to include feature selection data prep functions|Coding|2.68|
+|6|2020-06-08|Finalized ridge regression code and pushed to git branch|Coding|0.42|
+|6|2020-06-08|Tried to figure out main.py + git pull request|Code Review|2|
+|6|2020-06-08|More main.py review |Code Review|1|
+|7|2020-06-09|Prepped for daily stand up|Logistics|0.25|
+|7|2020-06-09|Daily stand up|Daily Stand Up|0.25|
+|7|2020-06-09|Practiced presentation|Development|0.75|
+|7|2020-06-09|Practiced presentation + walked through git review with Alex|Development|1.25|
+|7|2020-06-09|Meeting with Scott|Weekly Meetings|0.75|
+|7|2020-06-09|Meeting about future scope|Other Meeting|0.5|
+|7|2020-06-09|Investigated why our ridge regression outputs have 0s|Research|0.5|
+|7|2020-06-09|Worked on main.py for ec/nc model|Coding|0.25|
+|7|2020-06-09|Worked on main.py for ec/nc model|Coding|1.58|
+|7|2020-06-09|Updated personal log|Logistics|0.17|
+|7|2020-06-10|Finished step 2 for main.py|Coding|1.2|
+|7|2020-06-10|Worked with Claudia about step 2 and 4 outputs|Other Meeting|0.3|
+|7|2020-06-10|Merging with master branch|Logistics|0.33|
+|7|2020-06-10|Tried to think about how to optimize uom code|Coding|1|
+|7|2020-06-10|Tried to think about how to optimize uom code|Coding|0.83|
+|7|2020-06-10|Tried to think about how to optimize uom code|Coding|0.33|
+|7|2020-06-10|Looked at main_pseudocode|Research|0.5|
+|7|2020-06-10|Updated main_pseudocode with outputs and added step 4 into main.py|Coding|1.5|
+|7|2020-06-11|Worked on uom code|Coding|0.5|
+|7|2020-06-11|Daily stand up|Daily Stand Up|0.25|
+|7|2020-06-11|Retrospective meeting + what still needs to be done + sent Scott slack message|Other Meeting|1.08|
+|7|2020-06-11|Looked into uom code|Coding|1.75|
+|7|2020-06-11|Modified uom in data_preparation.py|Coding|0.33|
+|7|2020-06-11|Edited main.py|Coding|1.17|
+|7|2020-06-11|Edited main.py + met with Connor to review aggregation functions|Coding|1|
+|7|2020-06-11|Edited main.py|Coding|0.5|
+|7|2020-06-11|Feature selection module + main.py output + added new training data|Coding|1.5|
+|7|2020-06-11|Feature selection module + tried troubleshooting main.py|Coding|1.5|
+|7|2020-06-12|Looked at feature selection module + trying to debug main.py|Coding|0.5|
+|7|2020-06-12|Sprint planning tasks|Logistics|0.33|
+|7|2020-06-12|Daily stand up prep + daily stand up + sprint planning + client agenda meetings|Other Meeting|1.33|
+|7|2020-06-12|Explained to Claudia the main.py issues and asked for help|Other Meeting|0.25|
+|7|2020-06-12|Troubleshooting main.py|Code Review|1.5|
+|7|2020-06-12|Meeting with UDL|Client Meetings|1|
+|7|2020-06-12|Finished troubleshooting step 2 and step 4|Code Review|0.5|
+|7|2020-06-12|Troubleshooting step 5 + feature selection module|Coding|0.5|
+|7|2020-06-15|Daily stand up prep|Logistics|0.25|
+|7|2020-06-15|Daily stand up + reviewing outstanding tasks|Other Meeting|0.67|
+|7|2020-06-15|Feature selection module|Coding|2.33|
+|7|2020-06-15|Review presentation|Other Meeting|0.25|
+|7|2020-06-15|Downloading csvs + finished main.py and pushed to git|Coding|0.75|
+|7|2020-06-15|Downloading csvs + reviewed git pull comments|Code Review|0.33|
+|7|2020-06-15|Reviewed git pull comments + downloading csvs|Code Review|0.67|
+|7|2020-06-15|Made changes to main.py per code review|Coding|1.5|
+|7|2020-06-15|Wrote down what to say for the presentation|Logistics|0.25|
+|7|2020-06-15|Updated personal log|Logistics|0.42|
+|7|2020-06-15|Organized git branches|Logistics|0.33|
+|7|2020-06-15|Updated jira with progress + created new git branch|Logistics|0.33|
+|7|2020-06-15|Aggregated step 2 and step 4 with January 8th - June 8th data |Coding|0.83|
