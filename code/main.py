@@ -244,7 +244,7 @@ def main():
             continue
         temp_df2 = aggregation.split_datetime(temp_df2)
         # Filter for EC data, this step will be done in the query
-        temp_df2=temp_df2[temp_df2['unit']=='kWh']
+        temp_df2=temp_df2[(temp_df2['unit']=='kWh') | (temp_df2['unit']=='m³')]
         # Creating uniqueId
         temp_df2=data_preparation.create_unique_id(temp_df2)
         # Filtering dataframe for only relevant fields
@@ -254,7 +254,7 @@ def main():
             struct_df2 = temp_df2.head(1)
             # Aggregating the first date's data
             ec_data1=aggregation.agg_numeric_by_col(temp_df2, col_idx=[0,1,2,3], how='mean')
-    #    b) Also create second DF by aggregating further just using sensor ID fields (end result=1row per sensor)
+     ##### b) Also create second DF by aggregating further just using sensor ID fields (end result=1row per sensor)
             ec_data2=aggregation.agg_numeric_by_col(temp_df2, col_idx=[0,3], how='all')
             is_first_iter = False
         else:
@@ -315,7 +315,7 @@ def main():
         new_merged=new_merged.fillna(0)
 
         ## All NC predictor variables
-        X=new_merged.iloc[:,2:22]
+        X=new_merged.iloc[:,2:(len(new_merged.columns)-3)]
 
         ## Mean value of EC data
         Y=new_merged['EC_mean_value']
@@ -327,7 +327,7 @@ def main():
         reg.fit(X, Y)
         alpha_best=reg.alpha_
 
-      ## Ridge model using optimal alpha value found in step above
+      ### Ridge model using optimal alpha value found in step above
         ridge_test=Ridge(alpha=alpha_best, tol=.01, max_iter=10e7,normalize=True)
         ridge_test.fit(X,Y)
         coef=ridge_test.coef_
@@ -335,7 +335,7 @@ def main():
         score=score+mse
 
         ## Store coefficients into a dataframe
-        new=pd.DataFrame(data=coef.reshape(1,20))
+        new=pd.DataFrame(data=coef.reshape(1,((len(new_merged.columns)-3)-2)))
 
         ## Add uniqueId to the dataframe
         new['uniqueId']=sensor
@@ -352,7 +352,7 @@ def main():
     print("avg_mse:",avg_mse)
 
     #    OUTPUT OF STEP2 = dataframe with EC sensor ID fields, mean response, and all n coeffecients from
-    #        that unique EC sensor's LASSO model
+    #        that unique EC sensor's Ridge model
     print("####### ~~~~~ Complete - Step 2: Model EC/NC Relationship ~~~~~ #######") ############### TEMP: For Tracking test progress
 
 
@@ -368,9 +368,9 @@ def main():
     """
 
     print("####### ~~~~~ Starting - Step 4: Prep EC Data for Classification Model ~~~~~ #######") ############### TEMP: For Tracking test progress
-    #     4) Prep EC data for classification model
-    #     ########################################
-    #         a) Load metadata and join with 2b_EC_data_df
+    #### 4) Prep EC data for classification model
+    ################################################
+    #### a) Load metadata and join with 2b_EC_data_df
     metadata=pd.read_csv('~/data-599-capstone-ubc-urban-data-lab/code/test_data/PharmacyQuery.csv')
     # Make uniqueIDs
     metadata=data_preparation.create_unique_id(metadata, metadata=True)
@@ -384,10 +384,10 @@ def main():
     metadata['sensor']=metadata['sensor'].apply(lambda x: 'yes_sensor' if x=='✓' else 'no_sensor')
     metadata['water']=metadata['water'].apply(lambda x: 'yes_water' if x=='✓' else 'no_water')
     metadata['unit']=metadata['unit'].apply(lambda x: 'omit' if x=='_' else x)
-    # inner join metadata and 2b_EC_data_df
-    merged_inner=pd.merge(ec_data2, metadata, left_on='uniqueId', right_on='uniqueId', how='inner')
+    # left join metadata and 2b_EC_data_df
+    merged_left=pd.merge(ec_data2, metadata, how='left', left_on='uniqueId', right_on='uniqueId')
 
-    #         b) Apply feature selection function(s) to the joined EC+metadata
+    #### b) Apply feature selection function(s) to the joined EC+metadata
     # load NRCan classifications training data
     nrcan_labels=pd.read_csv('~/data-599-capstone-ubc-urban-data-lab/data/FinalPharmacyECSensorList-WithLabels - PharmacyECSensorsWithLabels.csv')
     # make uniqueId
@@ -408,12 +408,12 @@ def main():
     # selecting relevant training data fields
     nrcan_labels=nrcan_labels[['uniqueId', 'isGas', 'equipRef', 'groupRef', 'navName', 'endUseLabel']]
     nrcan_labels=nrcan_labels.drop_duplicates()
-    merged_outer=pd.merge(left=merged_inner, right=nrcan_labels, how='outer', left_on='uniqueId', right_on='uniqueId')
+    merged_outer=pd.merge(left=merged_left, right=nrcan_labels, how='outer', left_on='uniqueId', right_on='uniqueId')
     # make equipRef and navName into smaller categories for feature engineering
     merged_outer=merged_outer.assign(equipRef=merged_outer.equipRef.apply(lambda x: data_preparation.equip_label(str(x))))
     merged_outer=merged_outer.assign(navName=merged_outer.navName.apply(lambda x: data_preparation.nav_label(str(x))))
 
-#             c) Encode and scale the EC+metadata
+    #### c) Encode and scale the EC+metadata
 #     encoding after feature selection
     merged_outer=merged_outer.assign(energy_no_energy=merged_outer.energy.apply(lambda x: 1 if x=='no_energy' else 0))
     merged_outer=merged_outer.assign(energy_yes_energy=merged_outer.energy.apply(lambda x: 1 if x=='yes_energy' else 0))
@@ -423,16 +423,16 @@ def main():
     merged_outer=merged_outer.assign(equipRef_Cooling=merged_outer.equipRef.apply(lambda x: 1 if x=='Cooling' else 0))
     merged_outer=merged_outer.assign(equipRef_Heating=merged_outer.equipRef.apply(lambda x: 1 if x=='Heating' else 0))
     merged_outer=merged_outer.assign(equipRef_LEED=merged_outer.equipRef.apply(lambda x: 1 if x=='LEED' else 0))
-#     scaling after feature selection
+    # scaling after feature selection
     for i in range(1,6):
         merged_outer.iloc[:,i]=data_preparation.scale_continuous(merged_outer, indexes=[i])
-#             d) Join the model coeffecients from step2 output to the EC+metadata
+    #### d) Join the model coeffecients from step2 output to the EC+metadata
     step4_data = pd.merge(merged_outer, final_df, left_on='uniqueId', right_on='uniqueId', how='outer')
-#     dropping unnessary columns to feed into classification
+    # dropping unnessary columns to feed into classification
     step4_data = step4_data.drop(['kind', 'energy', 'power', 'sensor', 'water', 'isGas', 'equipRef', 'groupRef', 'navName', 'unit'], axis=1)
-#             OUTPUT OF STEP = dataframe with EC sensor ID fields, selected EC features, model coeffecients
+    #### OUTPUT OF STEP = dataframe with EC sensor ID fields, selected EC features, model coeffecients
 
-    print("####### ~~~~~ Complete - Step 4: Prep EC Data for Classification Model ~~~~~ #######")
+    print("####### ~~~~~ Complete - Step 4: Prep EC Data for Classification Model ~~~~~ #######") ############### TEMP: For Tracking test progress
     ############### TEMP: For Tracking test progress
     # 5) Classification model
     #######################
@@ -498,7 +498,6 @@ def main():
     # TODO: Join the predictions onto the step 4 output dataframe (or populate the NRCan column with these values)
 
     #    OUTPUT OF STEP = dataframe with EC sensor ID fields and end-use group
-
 
 ########################################################################################
 ############### TEMP: Used for calibrating dbscan and hdbscan clustering ###############
