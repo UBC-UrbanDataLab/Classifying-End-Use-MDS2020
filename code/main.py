@@ -6,27 +6,29 @@ Created on Wed May 27 16:27:50 2020
 @author: connor
 """
 ### ~ Library Imports ~ ###
+# General Imports
+from datetime import datetime, date, timedelta
 # Data Formatting and Manipulation Imports
 import pandas as pd
-import numpy as np
-
-# Supervised Learning Imports
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import train_test_split
+# Clustering Step Imports
+from sklearn.cluster import AgglomerativeClustering
+# Regression Step Imports
 from sklearn.linear_model import Ridge, RidgeCV
 from sklearn.metrics import mean_squared_error
-
+# Supervised Classification Step Imports
+from sklearn.ensemble import BaggingClassifier
 # Project Module Imports
 import data_preparation
 import aggregation
 import clustering
 
 
-def main():
+def main(display_prediction_metrics=False):
     #0) Set Constants (remember, constants are named in all caps with underscores between words)
-    #################
-
-    # TODO: write code to create a proper list of each day in the decided upon date-range store as DATELIST
+    display_prediction_metrics = True # Set True to display prediciton metrics (confusion matrix, accuracy, precission, recall, f1 score, logloss), else set False
+    # Getting a list of the last 90 dates
+    DATELIST =  [(date.today() + timedelta(days=x)).strftime('%Y-%m-%d') for x in range(91)] # NOTE: To update with the number of days desired to pull data for (currently has 91)
+    DATELIST.sort(key=lambda date: datetime.strptime(date, "%Y-%m-%d"))
 
     ##############################################################################################################
     ############### TEMP: for testing from csvs to delete once actual querying code is implemented ###############
@@ -35,12 +37,11 @@ def main():
     from os.path import isfile, join
     mypath = 'test_data'
     DATELIST = [f.split(".")[0] for f in listdir(mypath) if isfile(join(mypath, f))]
-    # DATELIST = ["2020-03-16","2020-05-01"] # These dates are in the test_data folder so this is just here for testing purposes
+    DATELIST = DATELIST[0:2]
     ############### TEMP: for testing from csvs to delete once actual querying code is implemented ###############
     ##############################################################################################################
 
-    SENSOR_ID_TAGS = [1,2,3,4,5,6] # order is ["groupRef","equipRef","navName","siteRef","typeRef","unit"] #NOTE: Including "unit" here means that we WILL have inconsistent units after aggregations unless we address them in the for loop BEFORE running agg_all, it's fine for now but this will need to be addressed
-                                 # Contiued from above: including "unit" causes issues when there are duplicate items with mixed units (need to run the code to fix the units during this for loop or ignore units in the clustering phase)
+    SENSOR_ID_TAGS = [1,2,3,4,5,6] # order is ["groupRef","equipRef","navName","siteRef","typeRef","unit"]
 
     # The planned update to the InfluxDB may change SENSOR_ID_TAGS to only [1] as in ["uniqueID"]
 
@@ -48,16 +49,20 @@ def main():
     ###################
     print("####### ~~~~~ Started - Step 1: Clustering Phase ~~~~~ #######") ############### TEMP: For Tracking test progress
     # a) load+aggregate NC data (including weather), grouping by sensor ID fields [and 'unit'?]
-    # TODO: Determine what aggregation period to cluster for (Current is just overall values, could hour of the day, 6 hour increments, 12 hour increments, etc...) (I think every hour will likely be too computationally expensive if we need to calculate Gower's distance, and will be if we need MDS)
-    # TODO: Update to include weather data (should be as simple as expanding the query to include weather data, or having a seperate query for weather data and appending the weather dataframe to the bottom)
-    print("\t##### ~~~ Started - Aggregation Phase 1 ~~~ #####") ############### TEMP: For Tracking test progress
+    print("\t##### ~~~ Started - Step 1 a): Aggregation Phase 1 ~~~ #####") ############### TEMP: For Tracking test progress
     last_idx_as_cols = False
     is_first_iter = True
     cnt=1
     for day in DATELIST:
         print("\t\t"+str(cnt)+": "+str(day)) ############### TEMP: For Tracking test progress
         # Querying and preping data for aggregations
-        temp_df = data_preparation.query_csv(client=None, date=day, site=None)
+        temp_df = data_preparation.query_csv(client=None, date=day, site=None) ############### TEMP: To be replaced by actual query functions in final product
+        weather_df = data_preparation.query_weather_csv(client=None, date=day, site=None) ############### TEMP: To be replaced by actual query functions in final product
+        if weather_df is None: ############### TEMP: To be replaced by actual query functions in final product
+            pass
+        else:
+            temp_df = pd.concat([temp_df, weather_df]) ############### TEMP: To be replaced by actual query functions in final product
+            temp_df = temp_df.fillna('empty') ############### TEMP: To be replaced by actual query functions in final product # Aggregation doesn't work with nan's, used empty as an obvious flag for value being nan
         col_names = ['datetime']
         col_names.extend(temp_df.columns[1:])
         temp_df.columns = col_names
@@ -75,28 +80,23 @@ def main():
             temp_df = aggregation.agg_all(temp_df, how="all", col_idx=SENSOR_ID_TAGS, last_idx_to_col=last_idx_as_cols)
             nc_data = aggregation.append_agg(df1=temp_df, df2=nc_data, struct_df=struct_df, col_idx=SENSOR_ID_TAGS, last_idx_to_col=last_idx_as_cols)
         cnt += 1
-        if cnt == 15: ############### TEMP: For speeding up testing of updated code for main function delete once updates confirmed to work
-            break ############### TEMP: For speeding up testing of updated code for main function delete once updates confirmed to work
+        #if cnt == 15: ############### TEMP: For speeding up testing of updated code for main function delete once updates confirmed to work
+        #    break ############### TEMP: For speeding up testing of updated code for main function delete once updates confirmed to work
 
-    print("\t\t### ~ Started - Agg Phase 1: Calculating Update Rates ~ ###") ############### TEMP: For Tracking test progress
+    print("\t\t### ~ Started - Step 1 a): Agg Phase 1: Calculating Update Rates ~ ###") ############### TEMP: For Tracking test progress
     # Freeing up some memory
     temp_df = None
+    weather_df = None
     # Calculating the update rate
     nc_data["update_rate"] = nc_data["count"] / cnt
     nc_data.drop("count", inplace=True, axis=1)
 
-
     #nc_data.to_csv('aggregated_no_units_data.csv') ############### TEMP: Write aggregation output to file to provide sample data for testing step 2, remove for final model
-
 
     # b) Encode and scale NC data
     # TODO: Look up the correct function name for fixing units of measurement (getting added to the query function, can remove/update to DONE once confirmed complete)
     # TODO: clean and correct units of measurement (getting added to the query function, can remove/update to DONE once confirmed complete)
-    # TODO: Test performance for categorical variables included vs excluded
-    # TODO: Scale continuous variables
-    # TODO: Test performance for continuous variables scaled vs not scaled
-
-    print("\t##### ~~~ Started - Clustering Phase ~~~ #####") ############### TEMP: For Tracking test progress
+    print("\t##### ~~~ Step 1 b): Started - Clustering Phase ~~~ #####") ############### TEMP: For Tracking test progress
 
     # Getting Indexes of the continuous columns
     cont_cols = [i for i in range(len(SENSOR_ID_TAGS),len(nc_data.columns))]
@@ -104,30 +104,28 @@ def main():
     # Scale Continuous
     scaled_data = data_preparation.scale_continuous(nc_data, cont_cols)
     nc_data = pd.concat([nc_data.iloc[:, 0:len(SENSOR_ID_TAGS)], pd.DataFrame(scaled_data, index=nc_data.index, columns=nc_data.columns[cont_cols].tolist())], axis=1)
-
+    scaled_data = None
+    
     # Encoding units
     nc_data = data_preparation.encode_units(nc_data)
 
     # c) cluster NC data to get df of sensor id fields + cluster group number
-    # TODO: Determine if the model we are using requires Gower's distance (if not including categorical variables then may not need it)
-    # TODO: Determine if the model we are using requires MDS
-    # TODO: Determine which clustering model to use
-
     # Calculating Gower's Distance, MDS, and clustering
+    print("\t\t### ~ Started - Step 1 c): Clust Phase 1: Calculating Gower's Distance ~ ###") ############### TEMP: For Tracking test progress
     gow_dist = clustering.calc_gowers(nc_data, cont_cols)
-    #pd.DataFrame(gow_dist).to_csv('gowers_scaled_no_units_data.csv') ############### TEMP: Write aggregation output to file to provide sample data for testing step 2, remove for final model
-    mds_data = clustering.multidim_scale(gow_dist, num_dim=2)
-    #pd.DataFrame(mds_data).to_csv('mds_2d_scaled_no_units_data.csv') ############### TEMP: Write aggregation output to file to provide sample data for testing step 2, remove for final model
-    clusters = clustering.cluster(mds_data, 'vbgm', num_clusts=35, input_type='mds')
-
-    ###############################################################################
-    ############### TEMP: Included for testing the clustering model ###############
-    ###############       Shows how many observations belong to each cluster
-    ###############       Can delete once done testing clustering model
-    #cluster_df = pd.DataFrame(clusters, columns=["cluster"])
-    #cluster_df['cluster'].value_counts().sort_index()
-    ############### TEMP: Included for testing the clustering model ###############
-    ###############################################################################
+    
+    ###################################################################
+    ############### NOTE: Doesn't look like we need MDS ###############
+    ##########    keeping it here for now just incase the scaled up model
+    ##########    performs worse without, but I don't see why it should
+    #print("\t\t### ~ Started - Step 1 c): Clust Phase 2: Calculating MDS ~ ###") ############### TEMP: For Tracking test progress
+    #mds_data = clustering.multidim_scale(gow_dist, num_dim=2)
+    #clusters = AgglomerativeClustering(linkage = 'single', n_clusters=20).fit_predict(mds_data)
+    ############### NOTE: Doesn't look like we need MDS ###############
+    ###################################################################
+    
+    print("\t\t### ~ Started - Step 1 c): Clust Phase 3: Calculating Clusters ~ ###") ############### TEMP: For Tracking test progress
+    clusters = AgglomerativeClustering(linkage = 'single', affinity='precomputed', n_clusters=20).fit_predict(gow_dist)
 
     # Generating a list of the columns to keep when making the dataframe relating sensors to clusters(the unique identifiers for an NC sensor and cluster)
     unique_cols_idx = [i for i in range(len(SENSOR_ID_TAGS))]
@@ -138,9 +136,8 @@ def main():
     cluster_groups = pd.concat([nc_data, pd.DataFrame(clusters, columns=["cluster"])], axis=1)
     cluster_groups = cluster_groups.drop(drop_cols, axis=1)
 
-    print("\t##### ~~~ Started - Aggregation Phase 2 ~~~ #####") ############### TEMP: For Tracking test progress
-
     # d) Reload NC data + join cluster group num + aggregate, this time grouping by date, time, and clust_group_num
+    print("\t##### ~~~ Started - Step 1 d): Aggregation Phase 2 ~~~ #####") ############### TEMP: For Tracking test progress
     last_idx_as_cols = True
     is_first_iter = True
     cnt=1
@@ -148,6 +145,13 @@ def main():
         print("\t\t"+str(cnt)+": "+str(day)) ############### TEMP: For Tracking test progress
         # Querying and preping data for aggregations
         temp_df = data_preparation.query_csv(client=None, date=day, site=None)
+        weather_df = data_preparation.query_weather_csv(client=None, date=day, site=None) ############### TEMP: To be replaced by actual query functions in final product
+        if weather_df is None: ############### TEMP: To be replaced by actual query functions in final product
+            pass
+        else:
+            temp_df = pd.concat([temp_df, weather_df]) ############### TEMP: To be replaced by actual query functions in final product
+            temp_df = temp_df.fillna('empty') ############### TEMP: To be replaced by actual query functions in final product # Aggregation doesn't work with nan's, used empty as an obvious flag for value being nan
+        
         col_names = ['datetime']
         col_names.extend(temp_df.columns[1:])
         temp_df.columns = col_names
@@ -203,10 +207,10 @@ def main():
                 temp_df_aggs = temp_df_aggs.rename(columns={'count_x':'count'})
             nc_data = aggregation.append_agg(df1=temp_df_aggs, df2=nc_data, struct_df=struct_df, col_idx=cluster_id_tags, last_idx_to_col=last_idx_as_cols)
         cnt += 1
-        if cnt == 15: ############### TEMP: For speeding up testing of updated code for main function delete once updates confirmed to work
-            break ############### TEMP: For speeding up testing of updated code for main function delete once updates confirmed to work
+        #if cnt == 15: ############### TEMP: For speeding up testing of updated code for main function delete once updates confirmed to work
+        #    break ############### TEMP: For speeding up testing of updated code for main function delete once updates confirmed to work
 
-    print("\t\t### ~ Started - Agg Phase 2: Calculating Update Rates ~ ###") ############### TEMP: For Tracking test progress
+    print("\t\t### ~ Started - Step 1 d): Agg Phase 2: Calculating Update Rates ~ ###") ############### TEMP: For Tracking test progress
     # Re-format update rates so that clusters are columns
     update_rates = update_rates.unstack()
     update_rates.columns = update_rates.columns.droplevel(level=0)
@@ -227,13 +231,9 @@ def main():
 
     print("####### ~~~~~ Complete - Step 1: NC Aggregation and Clustering Phase ~~~~~ #######") ############### TEMP: For Tracking test progress
 
-    print("####### ~~~~~ Starting - Step 2: Model EC/NC Relationship ~~~~~ #######") ############### TEMP: For Tracking test progress
-
     #2) Model EC/NC relationship
     ############################
-    #    temp) Make a fake version of the output dataframe from step 1 so that step 2 can be (mostly) developed
-    #        without waiting for step 1 to be finished!
-
+    print("####### ~~~~~ Starting - Step 2: Model EC/NC Relationship ~~~~~ #######") ############### TEMP: For Tracking test progress
     last_idx_as_cols = False
     is_first_iter = True
     cnt=1
@@ -242,6 +242,9 @@ def main():
         temp_df2 = data_preparation.query_csv(client=None, date=day, site=None)
         if temp_df2 is None:
             continue
+        col_names = ['datetime']
+        col_names.extend(temp_df2.columns[1:])
+        temp_df2.columns = col_names
         temp_df2 = aggregation.split_datetime(temp_df2)
         # Filter for EC data, this step will be done in the query
         temp_df2=temp_df2[(temp_df2['unit']=='kWh') | (temp_df2['unit']=='m³')]
@@ -355,23 +358,11 @@ def main():
     #        that unique EC sensor's Ridge model
     print("####### ~~~~~ Complete - Step 2: Model EC/NC Relationship ~~~~~ #######") ############### TEMP: For Tracking test progress
 
-
-    """
-    3) Mid-Process cleanup
-    ######################
-        a) set all NC data dataframes = None (clear up memory)
-        b) set 2a_EC_data_df = None (clear up memory)
-        [c) we could also save any EC dataframes to temporary csvs if we want to split the program up and allow a user
-            to just run only the first two steps which maybe take a long time if all data has to be queried? That would
-            make this step a checkpoint of sorts...just a thought]
-        OUTPUT OF STEP = nothing! Just more available memory.
-    """
-
-    print("####### ~~~~~ Starting - Step 4: Prep EC Data for Classification Model ~~~~~ #######") ############### TEMP: For Tracking test progress
-    #### 4) Prep EC data for classification model
+    #### 3) Prep EC data for classification model
     ################################################
+    print("####### ~~~~~ Starting - Step 3: Prep EC Data for Classification Model ~~~~~ #######") ############### TEMP: For Tracking test progress
     #### a) Load metadata and join with 2b_EC_data_df
-    metadata=pd.read_csv('~/data-599-capstone-ubc-urban-data-lab/code/test_data/PharmacyQuery.csv')
+    metadata=pd.read_csv('test_data/PharmacyQuery.csv')
     # Make uniqueIDs
     metadata=data_preparation.create_unique_id(metadata, metadata=True)
     # Drop duplicates
@@ -389,7 +380,7 @@ def main():
 
     #### b) Apply feature selection function(s) to the joined EC+metadata
     # load NRCan classifications training data
-    nrcan_labels=pd.read_csv('~/data-599-capstone-ubc-urban-data-lab/data/FinalPharmacyECSensorList-WithLabels - PharmacyECSensorsWithLabels.csv')
+    nrcan_labels=pd.read_csv('../data/FinalPharmacyECSensorList-WithLabels - PharmacyECSensorsWithLabels.csv')
     # make uniqueId
     nrcan_labels['siteRef']='Pharmacy'
     nrcan_labels=data_preparation.create_unique_id(nrcan_labels)
@@ -427,105 +418,83 @@ def main():
     for i in range(1,6):
         merged_outer.iloc[:,i]=data_preparation.scale_continuous(merged_outer, indexes=[i])
     #### d) Join the model coeffecients from step2 output to the EC+metadata
-    step4_data = pd.merge(merged_outer, final_df, left_on='uniqueId', right_on='uniqueId', how='outer')
+    step3_data = pd.merge(merged_outer, final_df, left_on='uniqueId', right_on='uniqueId', how='outer')
     # dropping unnessary columns to feed into classification
-    step4_data = step4_data.drop(['kind', 'energy', 'power', 'sensor', 'water', 'isGas', 'equipRef', 'groupRef', 'navName', 'unit'], axis=1)
+    step3_data = step3_data.drop(['kind', 'energy', 'power', 'sensor', 'water', 'isGas', 'equipRef', 'groupRef', 'navName', 'unit'], axis=1)
+    # Populating endUseLabel that are null with 99_UNKNOWN so that they can be predicted
+    step3_data.loc[:, 'endUseLabel'] = step3_data.loc[:, 'endUseLabel'].fillna('99_UNKNOWN')
     #### OUTPUT OF STEP = dataframe with EC sensor ID fields, selected EC features, model coeffecients
 
-    print("####### ~~~~~ Complete - Step 4: Prep EC Data for Classification Model ~~~~~ #######") ############### TEMP: For Tracking test progress
+    print("####### ~~~~~ Complete - Step 3: Prep EC Data for Classification Model ~~~~~ #######") ############### TEMP: For Tracking test progress
     ############### TEMP: For Tracking test progress
-    # 5) Classification model
+    # 4) Classification model
     #######################
-    #    a) Dataprep to get the step 4 data into an appropriate format for prediction
-    # TODO: Ensure that the step 4 output data is in the same format as the training_data dataframe (with the NRCan labels column as null for now)
-
-    #    b)
-    # TODO: Update read_csv() path to the correct location and file name for final product
-    # TODO: Remove the train_test_split() code for final product
-    # TODO: Ensure that the training_data dataframe is formated the same as the step 4 output (same as TODO for part a b/c it is that important)
-    training_data=step4_data
-    # training_data = pd.read_csv('../../step4_data.csv') # Reading in the training data file
+    print("####### ~~~~~ Starting - Step 4: Supervised Modeling and Predicting End-Use Labels ~~~~~ #######") ############### TEMP: For Tracking test progress
+    #    a) Dataprep to get the step 3 data into an appropriate format for prediction
+    training_data=step3_data
     # Manipulating dataset to be in the appropriate format for creating seperate predictor and response datasets
     cols = training_data.columns.tolist()
     cols.remove('endUseLabel')
     cols.append('endUseLabel')
     training_data = training_data[cols]
-    training_data = training_data.iloc[:,2:]
-    training_data = training_data.fillna(0)
     # Extracting just the number from the label
     training_data['endUseLabel'] = training_data['endUseLabel'].apply(lambda x: int(str(x)[0:2]))
+    predicting_data = training_data[(training_data['endUseLabel']==99)]
     training_data=training_data[(training_data['endUseLabel']!=99)]
-
+    # Storing Training and Prediction labels
+    predicting_labels = predicting_data['uniqueId']
+    predicting_labels = pd.concat([predicting_labels, predicting_data['endUseLabel']], axis=1)
+    training_labels = training_data['uniqueId']
+    training_labels = pd.concat([training_labels, training_data['endUseLabel']], axis=1)
+    # Dropping uniqueid and filling na's with 0
+    training_data = training_data.drop('uniqueId', axis=1)
+    training_data = training_data.fillna(0)
+    predicting_data = predicting_data.drop('uniqueId', axis=1)
+    predicting_data = predicting_data.fillna(0)
+    
     # Creating seperate predictor variable and response variable numpy arrays
-    x = training_data.iloc[:, :-1].values
-    y = training_data.iloc[:, -1].values
-    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.2, random_state = 0) ############### TEMP: For testing the model, remove for final product
-
+    x_train = training_data.iloc[:, :-1].values
+    y_train = training_data.iloc[:, -1].values
+    x_pred = predicting_data.iloc[:, :-1].values
+    
     #    b) Create and train the selected model
     # Creating and fitting the classifier
-    # TODO: Test various models and select a final model
-    # TODO: Update model to the selected model (if not RandomForrestClassifier)
-    # TODO: Change x_train and y_train to x and y once final model has been selcted
-    classifier = RandomForestClassifier(n_estimators = 100, criterion = 'gini') # can include random_state=0 if we want to set the seed to be constant
-    classifier.fit(x_train, y_train) # Can change x_train and y_train to just x and y for final model
+    classifier = BaggingClassifier(n_estimators = 100)
+    classifier.fit(x_train, y_train)
 
     #    c) Predict the outputs for the new data
     # Predicting the outputs
-    # TODO: Change x_test to whatever the numpy data to be predicted is (NOTE: Must have same format as the training_data dataframe)
-    y_pred = classifier.predict(x_test) # TODO: Change x_test to whatever the actual data to be predicted's variable for final model
-
-    ########################################################################################
-    ############### TEMP: Used to test the effectiveness of the chosen model ###############
-    ###############       To delete for the final model, just here so we can see some actual
-    ###############       output from step 5
-    from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, f1_score, log_loss
-    cm = confusion_matrix(y_test, y_pred)
-    print(cm)
-    accuracy = accuracy_score(y_test, y_pred)
-    precision = precision_score(y_test, y_pred, average='weighted')
-    recall = recall_score(y_test, y_pred, average='weighted')
-    f1 = f1_score(y_test, y_pred, average='weighted')
-    logloss = log_loss(y_true=y_test, y_pred=classifier.predict_proba(x_test))
-    print("accuracy: "+str(accuracy))
-    print("precision: "+str(precision))
-    print("recall: "+str(recall))
-    print("f1: "+str(f1))
-    print("logloss: "+str(logloss))
-    ############### TEMP: Used to test the effectiveness of the chosen model ###############
-    ########################################################################################
-
-    #    d) Join the predictions onto the  step 4 output dataframe
-    # TODO: Join the predictions onto the step 4 output dataframe (or populate the NRCan column with these values)
-
+    y_pred = classifier.predict(x_pred)
+    
+    #    d) Create dataframe of sensors and labels to be input for step 5
+    predicting_labels['endUseLabel'] = y_pred
+    sensor_labels = pd.concat([training_labels, predicting_labels])
     #    OUTPUT OF STEP = dataframe with EC sensor ID fields and end-use group
 
-########################################################################################
-############### TEMP: Used for calibrating dbscan and hdbscan clustering ###############
-###############       Can delete once final model selection and calibration complete
-###############                                     OR
-###############       once dbscan AND hdbscan dismissed as possible models
-from matplotlib import pyplot as plt
-sorted_vals = gow_dist[0]
-sorted_vals = sorted_vals[np.argsort(-gow_dist[0])]
-plt.plot(sorted_vals)
-
-testGow = pd.DataFrame(sorted_vals, columns=["values"])
-testGow['values'].value_counts()#.sort_index()
-############### TEMP: Used for calibrating dbscan and hdbscan clustering ###############
-########################################################################################
-
-##################################################################
-############### TEMP: For visualizing the clusters ###############
-###############       Can delete after moved to a seperate file
-###############                             OR
-###############       once desired plots have been obtained for
-###############       the final report
-from matplotlib import pyplot as plt
-# Make Data into a Dataframe
-data_2d_df = pd.DataFrame(data=mds_data, columns = ['x','y'])
-data_2d_df['cluster'] = cluster_groups['cluster']
-
-# Plotting the dbscan clusters (Fit pre-MDS)
-plt.scatter(data_2d_df['x']*1000,data_2d_df['y']*1000, c=data_2d_df['cluster'])
-############### TEMP: For visualizing the clusters ###############
-##################################################################
+    #   e) Display prediction metrics on a train-test split of the testing data if desired
+    if display_prediction_metrics:
+        print("\t##### ~~~ Step 4: Displaying Prediction Metrics ~~~ #####")
+        # Creating training and testing sets (need to retrain b/c training predicting on the data you trained on results in overconfident predictions)
+        from sklearn.model_selection import train_test_split
+        x_train, x_test, y_train, y_test = train_test_split(x_train, y_train, test_size = 0.2) ############### TEMP: For testing the model, remove for final product
+        # Creating the classifier and predicting the output for the test set
+        classifier = BaggingClassifier(n_estimators = 100)
+        classifier.fit(x_train, y_train)
+        y_pred = classifier.predict(x_test)
+        
+        # Calculating and displaying the comparison metrics
+        from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, f1_score, log_loss
+        cm = confusion_matrix(y_test, y_pred)
+        print(cm)
+        accuracy = accuracy_score(y_test, y_pred)
+        precision = precision_score(y_test, y_pred, average='weighted')
+        recall = recall_score(y_test, y_pred, average='weighted')
+        f1 = f1_score(y_test, y_pred, average='weighted')
+        logloss = log_loss(y_true=y_test, y_pred=classifier.predict_proba(x_test))
+        print("accuracy: "+str(accuracy))
+        print("precision: "+str(precision))
+        print("recall: "+str(recall))
+        print("f1: "+str(f1))
+        print("logloss: "+str(logloss))
+        
+    print("####### ~~~~~ Complete - Step 4: Supervised Modeling and Predicting End-Use Labels ~~~~~ #######") ############### TEMP: For Tracking test progress
