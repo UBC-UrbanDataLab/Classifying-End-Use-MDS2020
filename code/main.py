@@ -8,25 +8,24 @@ Created on Wed May 27 16:27:50 2020
 ### ~ Library Imports ~ ###
 # General Imports
 from datetime import datetime, date, timedelta
-
 # Data Formatting and Manipulation Imports
 import pandas as pd
-
-# Supervised Learning Imports
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import train_test_split
+# Clustering Step Imports
+from sklearn.cluster import AgglomerativeClustering
+# Regression Step Imports
 from sklearn.linear_model import Ridge, RidgeCV
 from sklearn.metrics import mean_squared_error
-
+# Supervised Classification Step Imports
+from sklearn.ensemble import BaggingClassifier
 # Project Module Imports
 import data_preparation
 import aggregation
 import clustering
 
 
-def main():
+def main(display_prediction_metrics=False):
     #0) Set Constants (remember, constants are named in all caps with underscores between words)
-    
+    #display_prediction_metrics = True # Set True to display prediciton metrics (confusion matrix, accuracy, precission, recall, f1 score, logloss), else set False
     # Getting a list of the last 90 dates
     DATELIST =  [(date.today() + timedelta(days=x)).strftime('%Y-%m-%d') for x in range(91)] # NOTE: To update with the number of days desired to pull data for (currently has 91)
     DATELIST.sort(key=lambda date: datetime.strptime(date, "%Y-%m-%d"))
@@ -50,8 +49,6 @@ def main():
     ###################
     print("####### ~~~~~ Started - Step 1: Clustering Phase ~~~~~ #######") ############### TEMP: For Tracking test progress
     # a) load+aggregate NC data (including weather), grouping by sensor ID fields [and 'unit'?]
-    # TODO: Determine what aggregation period to cluster for (Current is just overall values, could hour of the day, 6 hour increments, 12 hour increments, etc...) (I think every hour will likely be too computationally expensive if we need to calculate Gower's distance, and will be if we need MDS)
-    # TODO: Update to include weather data (should be as simple as expanding the query to include weather data, or having a seperate query for weather data and appending the weather dataframe to the bottom)
     print("\t##### ~~~ Started - Aggregation Phase 1 ~~~ #####") ############### TEMP: For Tracking test progress
     last_idx_as_cols = False
     is_first_iter = True
@@ -117,19 +114,22 @@ def main():
     nc_data = data_preparation.encode_units(nc_data)
 
     # c) cluster NC data to get df of sensor id fields + cluster group number
-    # TODO: Determine if the model we are using requires Gower's distance (if not including categorical variables then may not need it)
-    # TODO: Determine if the model we are using requires MDS
-    # TODO: Determine which clustering model to use
-
     # Calculating Gower's Distance, MDS, and clustering
     print("\t\t### ~ Started - Clust Phase 1: Calculating Gower's Distance ~ ###") ############### TEMP: For Tracking test progress
     gow_dist = clustering.calc_gowers(nc_data, cont_cols)
-    #pd.DataFrame(gow_dist).to_csv('gowers_scaled_with_units_data.csv') ############### TEMP: Write aggregation output to file to provide sample data for testing step 2, remove for final model
-    print("\t\t### ~ Started - Clust Phase 2: Calculating MDS ~ ###") ############### TEMP: For Tracking test progress
-    mds_data = clustering.multidim_scale(gow_dist, num_dim=2)
-    #pd.DataFrame(mds_data).to_csv('mds_2d_scaled_with_units_data.csv') ############### TEMP: Write aggregation output to file to provide sample data for testing step 2, remove for final model
+    
+    ###################################################################
+    ############### NOTE: Doesn't look like we need MDS ###############
+    ##########    keeping it here for now just incase the scaled up model
+    ##########    performs worse without, but I don't see why it should
+    #print("\t\t### ~ Started - Clust Phase 2: Calculating MDS ~ ###") ############### TEMP: For Tracking test progress
+    #mds_data = clustering.multidim_scale(gow_dist, num_dim=2)
+    #clusters = AgglomerativeClustering(linkage = 'single', n_clusters=20).fit_predict(mds_data)
+    ############### NOTE: Doesn't look like we need MDS ###############
+    ###################################################################
+    
     print("\t\t### ~ Started - Clust Phase 3: Calculating Clusters ~ ###") ############### TEMP: For Tracking test progress
-    clusters = clustering.cluster(mds_data, 'vbgm', num_clusts=35, input_type='mds') # NOTE: To update once final model selected
+    clusters = AgglomerativeClustering(linkage = 'single', affinity='precomputed', n_clusters=20).fit_predict(gow_dist)
 
     # Generating a list of the columns to keep when making the dataframe relating sensors to clusters(the unique identifiers for an NC sensor and cluster)
     unique_cols_idx = [i for i in range(len(SENSOR_ID_TAGS))]
@@ -442,6 +442,8 @@ def main():
     step4_data = pd.merge(merged_outer, final_df, left_on='uniqueId', right_on='uniqueId', how='outer')
     # dropping unnessary columns to feed into classification
     step4_data = step4_data.drop(['kind', 'energy', 'power', 'sensor', 'water', 'isGas', 'equipRef', 'groupRef', 'navName', 'unit'], axis=1)
+    # Populating endUseLabel that are null with 99_UNKNOWN so that they can be predicted
+    step4_data.loc[:, 'endUseLabel'] = step4_data.loc[:, 'endUseLabel'].fillna('99_UNKNOWN')
     #### OUTPUT OF STEP = dataframe with EC sensor ID fields, selected EC features, model coeffecients
 
     print("####### ~~~~~ Complete - Step 4: Prep EC Data for Classification Model ~~~~~ #######") ############### TEMP: For Tracking test progress
@@ -463,53 +465,66 @@ def main():
     cols.remove('endUseLabel')
     cols.append('endUseLabel')
     training_data = training_data[cols]
-    training_data = training_data.iloc[:,2:]
-    training_data = training_data.fillna(0)
     # Extracting just the number from the label
     training_data['endUseLabel'] = training_data['endUseLabel'].apply(lambda x: int(str(x)[0:2]))
+    predicting_data = training_data[(training_data['endUseLabel']==99)]
     training_data=training_data[(training_data['endUseLabel']!=99)]
-
+    # Storing Training and Prediction labels
+    predicting_labels = predicting_data['uniqueId']
+    predicting_labels = pd.concat([predicting_labels, predicting_data['endUseLabel']], axis=1)
+    training_labels = training_data['uniqueId']
+    training_labels = pd.concat([training_labels, training_data['endUseLabel']], axis=1)
+    # Dropping uniqueid and filling na's with 0
+    training_data = training_data.drop('uniqueId', axis=1)
+    training_data = training_data.fillna(0)
+    predicting_data = predicting_data.drop('uniqueId', axis=1)
+    predicting_data = predicting_data.fillna(0)
+    
     # Creating seperate predictor variable and response variable numpy arrays
-    x = training_data.iloc[:, :-1].values
-    y = training_data.iloc[:, -1].values
-    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.2, random_state = 0) ############### TEMP: For testing the model, remove for final product
-
+    x_train = training_data.iloc[:, :-1].values
+    y_train = training_data.iloc[:, -1].values
+    x_pred = predicting_data.iloc[:, :-1].values
+    
     #    b) Create and train the selected model
     # Creating and fitting the classifier
-    # TODO: Test various models and select a final model
-    # TODO: Update model to the selected model (if not RandomForrestClassifier)
-    # TODO: Change x_train and y_train to x and y once final model has been selcted
-    classifier = RandomForestClassifier(n_estimators = 100, criterion = 'gini') # can include random_state=0 if we want to set the seed to be constant
-    classifier.fit(x_train, y_train) # Can change x_train and y_train to just x and y for final model
+    classifier = BaggingClassifier(n_estimators = 100)
+    classifier.fit(x_train, y_train)
 
     #    c) Predict the outputs for the new data
     # Predicting the outputs
-    # TODO: Change x_test to whatever the numpy data to be predicted is (NOTE: Must have same format as the training_data dataframe)
-    y_pred = classifier.predict(x_test) # TODO: Change x_test to whatever the actual data to be predicted's variable for final model
+    y_pred = classifier.predict(x_pred)
 
-    ########################################################################################
-    ############### TEMP: Used to test the effectiveness of the chosen model ###############
-    ###############       To delete for the final model, just here so we can see some actual
-    ###############       output from step 5
-    from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, f1_score, log_loss
-    cm = confusion_matrix(y_test, y_pred)
-    print(cm)
-    accuracy = accuracy_score(y_test, y_pred)
-    precision = precision_score(y_test, y_pred, average='weighted')
-    recall = recall_score(y_test, y_pred, average='weighted')
-    f1 = f1_score(y_test, y_pred, average='weighted')
-    logloss = log_loss(y_true=y_test, y_pred=classifier.predict_proba(x_test))
-    print("accuracy: "+str(accuracy))
-    print("precision: "+str(precision))
-    print("recall: "+str(recall))
-    print("f1: "+str(f1))
-    print("logloss: "+str(logloss))
-    ############### TEMP: Used to test the effectiveness of the chosen model ###############
-    ########################################################################################
-
-    #    d) Create dataframe of sensors and labels to be input for step 6
-    # TODO: Create dataframe of sensors and associated predictions
-    # TODO: Make sure that known actual sensor labels are the values in the step 6 input dataframe (filter for and overwrite? drop and re-append? Don't pass those sensors into the model in the first place and then append?)
+    if display_prediction_metrics:
+        ########################################################################################
+        ############### TEMP: Used to test the effectiveness of the chosen model ###############
+        ###############       To delete for the final model, just here so we can see some actual
+        ###############       output from step 5
+        from sklearn.model_selection import train_test_split
+        x_train, x_test, y_train, y_test = train_test_split(x_train, y_train, test_size = 0.2) ############### TEMP: For testing the model, remove for final product
+        classifier = BaggingClassifier(n_estimators = 100)
+        classifier.fit(x_train, y_train)
+        y_pred = classifier.predict(x_test)
+        
+        from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, f1_score, log_loss
+        cm = confusion_matrix(y_test, y_pred)
+        print(cm)
+        accuracy = accuracy_score(y_test, y_pred)
+        precision = precision_score(y_test, y_pred, average='weighted')
+        recall = recall_score(y_test, y_pred, average='weighted')
+        f1 = f1_score(y_test, y_pred, average='weighted')
+        logloss = log_loss(y_true=y_test, y_pred=classifier.predict_proba(x_test))
+        print("accuracy: "+str(accuracy))
+        print("precision: "+str(precision))
+        print("recall: "+str(recall))
+        print("f1: "+str(f1))
+        print("logloss: "+str(logloss))
+        ############### TEMP: Used to test the effectiveness of the chosen model ###############
+        ########################################################################################
     
+    #    d) Create dataframe of sensors and labels to be input for step 6
+    predicting_labels['endUseLabel'] = y_pred
+    sensor_labels = pd.concat([training_labels, predicting_labels])
+    print("####### ~~~~~ Complete - Step 5: Supervised Modeling and Predicting End-Use Labels ~~~~~ #######") ############### TEMP: For Tracking test progress
     #    OUTPUT OF STEP = dataframe with EC sensor ID fields and end-use group
+
     
