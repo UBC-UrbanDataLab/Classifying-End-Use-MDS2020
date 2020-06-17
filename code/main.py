@@ -25,7 +25,7 @@ import clustering
 
 def main(display_prediction_metrics=False):
     #0) Set Constants (remember, constants are named in all caps with underscores between words)
-    #display_prediction_metrics = True # Set True to display prediciton metrics (confusion matrix, accuracy, precission, recall, f1 score, logloss), else set False
+    display_prediction_metrics = True # Set True to display prediciton metrics (confusion matrix, accuracy, precission, recall, f1 score, logloss), else set False
     # Getting a list of the last 90 dates
     DATELIST =  [(date.today() + timedelta(days=x)).strftime('%Y-%m-%d') for x in range(91)] # NOTE: To update with the number of days desired to pull data for (currently has 91)
     DATELIST.sort(key=lambda date: datetime.strptime(date, "%Y-%m-%d"))
@@ -49,7 +49,7 @@ def main(display_prediction_metrics=False):
     ###################
     print("####### ~~~~~ Started - Step 1: Clustering Phase ~~~~~ #######") ############### TEMP: For Tracking test progress
     # a) load+aggregate NC data (including weather), grouping by sensor ID fields [and 'unit'?]
-    print("\t##### ~~~ Started - Aggregation Phase 1 ~~~ #####") ############### TEMP: For Tracking test progress
+    print("\t##### ~~~ Started - Step 1 a): Aggregation Phase 1 ~~~ #####") ############### TEMP: For Tracking test progress
     last_idx_as_cols = False
     is_first_iter = True
     cnt=1
@@ -83,7 +83,7 @@ def main(display_prediction_metrics=False):
         #if cnt == 15: ############### TEMP: For speeding up testing of updated code for main function delete once updates confirmed to work
         #    break ############### TEMP: For speeding up testing of updated code for main function delete once updates confirmed to work
 
-    print("\t\t### ~ Started - Agg Phase 1: Calculating Update Rates ~ ###") ############### TEMP: For Tracking test progress
+    print("\t\t### ~ Started - Step 1 a): Agg Phase 1: Calculating Update Rates ~ ###") ############### TEMP: For Tracking test progress
     # Freeing up some memory
     temp_df = None
     weather_df = None
@@ -96,11 +96,7 @@ def main(display_prediction_metrics=False):
     # b) Encode and scale NC data
     # TODO: Look up the correct function name for fixing units of measurement (getting added to the query function, can remove/update to DONE once confirmed complete)
     # TODO: clean and correct units of measurement (getting added to the query function, can remove/update to DONE once confirmed complete)
-    # TODO: Test performance for categorical variables included vs excluded
-    # TODO: Scale continuous variables
-    # TODO: Test performance for continuous variables scaled vs not scaled
-
-    print("\t##### ~~~ Started - Clustering Phase ~~~ #####") ############### TEMP: For Tracking test progress
+    print("\t##### ~~~ Step 1 b): Started - Clustering Phase ~~~ #####") ############### TEMP: For Tracking test progress
 
     # Getting Indexes of the continuous columns
     cont_cols = [i for i in range(len(SENSOR_ID_TAGS),len(nc_data.columns))]
@@ -115,20 +111,20 @@ def main(display_prediction_metrics=False):
 
     # c) cluster NC data to get df of sensor id fields + cluster group number
     # Calculating Gower's Distance, MDS, and clustering
-    print("\t\t### ~ Started - Clust Phase 1: Calculating Gower's Distance ~ ###") ############### TEMP: For Tracking test progress
+    print("\t\t### ~ Started - Step 1 c): Clust Phase 1: Calculating Gower's Distance ~ ###") ############### TEMP: For Tracking test progress
     gow_dist = clustering.calc_gowers(nc_data, cont_cols)
     
     ###################################################################
     ############### NOTE: Doesn't look like we need MDS ###############
     ##########    keeping it here for now just incase the scaled up model
     ##########    performs worse without, but I don't see why it should
-    #print("\t\t### ~ Started - Clust Phase 2: Calculating MDS ~ ###") ############### TEMP: For Tracking test progress
+    #print("\t\t### ~ Started - Step 1 c): Clust Phase 2: Calculating MDS ~ ###") ############### TEMP: For Tracking test progress
     #mds_data = clustering.multidim_scale(gow_dist, num_dim=2)
     #clusters = AgglomerativeClustering(linkage = 'single', n_clusters=20).fit_predict(mds_data)
     ############### NOTE: Doesn't look like we need MDS ###############
     ###################################################################
     
-    print("\t\t### ~ Started - Clust Phase 3: Calculating Clusters ~ ###") ############### TEMP: For Tracking test progress
+    print("\t\t### ~ Started - Step 1 c): Clust Phase 3: Calculating Clusters ~ ###") ############### TEMP: For Tracking test progress
     clusters = AgglomerativeClustering(linkage = 'single', affinity='precomputed', n_clusters=20).fit_predict(gow_dist)
 
     # Generating a list of the columns to keep when making the dataframe relating sensors to clusters(the unique identifiers for an NC sensor and cluster)
@@ -140,9 +136,8 @@ def main(display_prediction_metrics=False):
     cluster_groups = pd.concat([nc_data, pd.DataFrame(clusters, columns=["cluster"])], axis=1)
     cluster_groups = cluster_groups.drop(drop_cols, axis=1)
 
-    print("\t##### ~~~ Started - Aggregation Phase 2 ~~~ #####") ############### TEMP: For Tracking test progress
-
     # d) Reload NC data + join cluster group num + aggregate, this time grouping by date, time, and clust_group_num
+    print("\t##### ~~~ Started - Step 1 d): Aggregation Phase 2 ~~~ #####") ############### TEMP: For Tracking test progress
     last_idx_as_cols = True
     is_first_iter = True
     cnt=1
@@ -215,7 +210,7 @@ def main(display_prediction_metrics=False):
         #if cnt == 15: ############### TEMP: For speeding up testing of updated code for main function delete once updates confirmed to work
         #    break ############### TEMP: For speeding up testing of updated code for main function delete once updates confirmed to work
 
-    print("\t\t### ~ Started - Agg Phase 2: Calculating Update Rates ~ ###") ############### TEMP: For Tracking test progress
+    print("\t\t### ~ Started - Step 1 d): Agg Phase 2: Calculating Update Rates ~ ###") ############### TEMP: For Tracking test progress
     # Re-format update rates so that clusters are columns
     update_rates = update_rates.unstack()
     update_rates.columns = update_rates.columns.droplevel(level=0)
@@ -236,13 +231,9 @@ def main(display_prediction_metrics=False):
 
     print("####### ~~~~~ Complete - Step 1: NC Aggregation and Clustering Phase ~~~~~ #######") ############### TEMP: For Tracking test progress
 
-    print("####### ~~~~~ Starting - Step 2: Model EC/NC Relationship ~~~~~ #######") ############### TEMP: For Tracking test progress
-
     #2) Model EC/NC relationship
     ############################
-    #    temp) Make a fake version of the output dataframe from step 1 so that step 2 can be (mostly) developed
-    #        without waiting for step 1 to be finished!
-
+    print("####### ~~~~~ Starting - Step 2: Model EC/NC Relationship ~~~~~ #######") ############### TEMP: For Tracking test progress
     last_idx_as_cols = False
     is_first_iter = True
     cnt=1
@@ -367,21 +358,9 @@ def main(display_prediction_metrics=False):
     #        that unique EC sensor's Ridge model
     print("####### ~~~~~ Complete - Step 2: Model EC/NC Relationship ~~~~~ #######") ############### TEMP: For Tracking test progress
 
-
-    """
-    3) Mid-Process cleanup
-    ######################
-        a) set all NC data dataframes = None (clear up memory)
-        b) set 2a_EC_data_df = None (clear up memory)
-        [c) we could also save any EC dataframes to temporary csvs if we want to split the program up and allow a user
-            to just run only the first two steps which maybe take a long time if all data has to be queried? That would
-            make this step a checkpoint of sorts...just a thought]
-        OUTPUT OF STEP = nothing! Just more available memory.
-    """
-
-    print("####### ~~~~~ Starting - Step 4: Prep EC Data for Classification Model ~~~~~ #######") ############### TEMP: For Tracking test progress
-    #### 4) Prep EC data for classification model
+    #### 3) Prep EC data for classification model
     ################################################
+    print("####### ~~~~~ Starting - Step 3: Prep EC Data for Classification Model ~~~~~ #######") ############### TEMP: For Tracking test progress
     #### a) Load metadata and join with 2b_EC_data_df
     metadata=pd.read_csv('test_data/PharmacyQuery.csv')
     # Make uniqueIDs
@@ -439,27 +418,20 @@ def main(display_prediction_metrics=False):
     for i in range(1,6):
         merged_outer.iloc[:,i]=data_preparation.scale_continuous(merged_outer, indexes=[i])
     #### d) Join the model coeffecients from step2 output to the EC+metadata
-    step4_data = pd.merge(merged_outer, final_df, left_on='uniqueId', right_on='uniqueId', how='outer')
+    step3_data = pd.merge(merged_outer, final_df, left_on='uniqueId', right_on='uniqueId', how='outer')
     # dropping unnessary columns to feed into classification
-    step4_data = step4_data.drop(['kind', 'energy', 'power', 'sensor', 'water', 'isGas', 'equipRef', 'groupRef', 'navName', 'unit'], axis=1)
+    step3_data = step3_data.drop(['kind', 'energy', 'power', 'sensor', 'water', 'isGas', 'equipRef', 'groupRef', 'navName', 'unit'], axis=1)
     # Populating endUseLabel that are null with 99_UNKNOWN so that they can be predicted
-    step4_data.loc[:, 'endUseLabel'] = step4_data.loc[:, 'endUseLabel'].fillna('99_UNKNOWN')
+    step3_data.loc[:, 'endUseLabel'] = step3_data.loc[:, 'endUseLabel'].fillna('99_UNKNOWN')
     #### OUTPUT OF STEP = dataframe with EC sensor ID fields, selected EC features, model coeffecients
 
-    print("####### ~~~~~ Complete - Step 4: Prep EC Data for Classification Model ~~~~~ #######") ############### TEMP: For Tracking test progress
-    print("####### ~~~~~ Starting - Step 5: Supervised Modeling and Predicting End-Use Labels ~~~~~ #######") ############### TEMP: For Tracking test progress
+    print("####### ~~~~~ Complete - Step 3: Prep EC Data for Classification Model ~~~~~ #######") ############### TEMP: For Tracking test progress
     ############### TEMP: For Tracking test progress
-    # 5) Classification model
+    # 4) Classification model
     #######################
-    #    a) Dataprep to get the step 4 data into an appropriate format for prediction
-    # TODO: Ensure that the step 4 output data is in the same format as the training_data dataframe (with the NRCan labels column as null for now)
-
-    #    b)
-    # TODO: Update read_csv() path to the correct location and file name for final product
-    # TODO: Remove the train_test_split() code for final product
-    # TODO: Ensure that the training_data dataframe is formated the same as the step 4 output (same as TODO for part a b/c it is that important)
-    training_data=step4_data
-    # training_data = pd.read_csv('../../step4_data.csv') # Reading in the training data file
+    print("####### ~~~~~ Starting - Step 4: Supervised Modeling and Predicting End-Use Labels ~~~~~ #######") ############### TEMP: For Tracking test progress
+    #    a) Dataprep to get the step 3 data into an appropriate format for prediction
+    training_data=step3_data
     # Manipulating dataset to be in the appropriate format for creating seperate predictor and response datasets
     cols = training_data.columns.tolist()
     cols.remove('endUseLabel')
@@ -493,18 +465,24 @@ def main(display_prediction_metrics=False):
     #    c) Predict the outputs for the new data
     # Predicting the outputs
     y_pred = classifier.predict(x_pred)
+    
+    #    d) Create dataframe of sensors and labels to be input for step 5
+    predicting_labels['endUseLabel'] = y_pred
+    sensor_labels = pd.concat([training_labels, predicting_labels])
+    #    OUTPUT OF STEP = dataframe with EC sensor ID fields and end-use group
 
+    #   e) Display prediction metrics on a train-test split of the testing data if desired
     if display_prediction_metrics:
-        ########################################################################################
-        ############### TEMP: Used to test the effectiveness of the chosen model ###############
-        ###############       To delete for the final model, just here so we can see some actual
-        ###############       output from step 5
+        print("\t##### ~~~ Step 4: Displaying Prediction Metrics ~~~ #####")
+        # Creating training and testing sets (need to retrain b/c training predicting on the data you trained on results in overconfident predictions)
         from sklearn.model_selection import train_test_split
         x_train, x_test, y_train, y_test = train_test_split(x_train, y_train, test_size = 0.2) ############### TEMP: For testing the model, remove for final product
+        # Creating the classifier and predicting the output for the test set
         classifier = BaggingClassifier(n_estimators = 100)
         classifier.fit(x_train, y_train)
         y_pred = classifier.predict(x_test)
         
+        # Calculating and displaying the comparison metrics
         from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, f1_score, log_loss
         cm = confusion_matrix(y_test, y_pred)
         print(cm)
@@ -518,13 +496,5 @@ def main(display_prediction_metrics=False):
         print("recall: "+str(recall))
         print("f1: "+str(f1))
         print("logloss: "+str(logloss))
-        ############### TEMP: Used to test the effectiveness of the chosen model ###############
-        ########################################################################################
-    
-    #    d) Create dataframe of sensors and labels to be input for step 6
-    predicting_labels['endUseLabel'] = y_pred
-    sensor_labels = pd.concat([training_labels, predicting_labels])
-    print("####### ~~~~~ Complete - Step 5: Supervised Modeling and Predicting End-Use Labels ~~~~~ #######") ############### TEMP: For Tracking test progress
-    #    OUTPUT OF STEP = dataframe with EC sensor ID fields and end-use group
-
-    
+        
+    print("####### ~~~~~ Complete - Step 4: Supervised Modeling and Predicting End-Use Labels ~~~~~ #######") ############### TEMP: For Tracking test progress
