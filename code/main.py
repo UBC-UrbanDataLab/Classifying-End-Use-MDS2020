@@ -23,12 +23,16 @@ import aggregation
 import clustering
 
 
-def main(display_prediction_metrics=False):
+def main():
     #0) Set Constants (remember, constants are named in all caps with underscores between words)
-    display_prediction_metrics = True # Set True to display prediciton metrics (confusion matrix, accuracy, precission, recall, f1 score, logloss), else set False
+    # Defining if the prediction metrics should be shown (show if True, don't show if False)
+    display_prediction_metrics = True     
     # Getting a list of the last 90 dates
     DATELIST =  [(date.today() + timedelta(days=x)).strftime('%Y-%m-%d') for x in range(91)] # NOTE: To update with the number of days desired to pull data for (currently has 91)
     DATELIST.sort(key=lambda date: datetime.strptime(date, "%Y-%m-%d"))
+    
+    # Dictionary of End Use Labels
+    #end_use_labels = {0:'00_HEATING_SPACE_AND_WATER', 1:'01_SPACE_COOLING', 2:'02_HEATING_COOLING_COMBINED', 3:'03_LIGHTING_NORMAL', 4:'04_LIGHTING_EMERGENCY', 5:'05_OTHER', 99:'99_UNKNOWN'}
 
     ##############################################################################################################
     ############### TEMP: for testing from csvs to delete once actual querying code is implemented ###############
@@ -437,6 +441,10 @@ def main(display_prediction_metrics=False):
     cols.remove('endUseLabel')
     cols.append('endUseLabel')
     training_data = training_data[cols]
+    # Creating End Use Label Dictionary
+    end_use_labels = {}
+    for label in training_data['endUseLabel'].unique():
+        end_use_labels[int(str(label)[0:2])] = label
     # Extracting just the number from the label
     training_data['endUseLabel'] = training_data['endUseLabel'].apply(lambda x: int(str(x)[0:2]))
     predicting_data = training_data[(training_data['endUseLabel']==99)]
@@ -469,6 +477,8 @@ def main(display_prediction_metrics=False):
     #    d) Create dataframe of sensors and labels to be input for step 5
     predicting_labels['endUseLabel'] = y_pred
     sensor_labels = pd.concat([training_labels, predicting_labels])
+    sensor_labels['endUseLabel'] = sensor_labels['endUseLabel'].apply(lambda x: end_use_labels[x])
+    sensor_labels.to_csv('predicted_end_use_labels.csv', index=False)
     #    OUTPUT OF STEP = dataframe with EC sensor ID fields and end-use group
 
     #   e) Display prediction metrics on a train-test split of the testing data if desired
