@@ -18,7 +18,7 @@ if influxdb.__version__=="5.3.0":
 
 ## Constants
 ##--------------
-model_output_file_location = 'test_data/placeholder-data-to-write-to-influx.csv'
+model_output_file_location = 'predicted_end_use_labels.csv'
 host_address = '206.12.92.81'
 host_port = '8086'
 database_name = 'SKYSPARK'
@@ -45,6 +45,8 @@ except:
 
 #Load the output from the model into a dataframe
 output = pd.read_csv(model_output_file_location)
+if 'uniqueID' not in output.columns:
+    output.rename(columns={'uniqueId':'uniqueID'}, inplace=True)
 if len(output['uniqueID'].unique())<len(output):
     raise Exception("There are duplicated uniqueID's in the data, correct the output file and run again.")
 
@@ -58,7 +60,7 @@ output['time'] = TIMESTAMP
 output.set_index(['time'], inplace=True)
 
 #Write new points to the database using influxdb.DataframeClient().write_points()
-#Note that all the uniqueID is a tag and the endUseLabel is a field.
+#Note that all the uniqueId is a tag and the endUseLabel is a field.
 #Since there can only be one point for every unique combo of timestamp+tag+field, if the
 # uniqueID already exists in the database, the endUseLabel field's value will simply be
 # overwritten with the new value. 
