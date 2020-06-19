@@ -52,9 +52,9 @@ def separate_cat_and_cont(df, idx=0):
         cont_df (pandas.DataFrame): original dataframe filterd down to only include observations with continuous values
     """
     df = df.copy()
-    df['dtype'] = df.iloc[:,idx].apply(lambda x: get_data_type(x))
-    cat_df = df[df['dtype']!='num']
-    cont_df = df[df['dtype']=='num']
+    df.loc[:,'dtype'] = df.iloc[:,idx].apply(lambda x: get_data_type(x))
+    cat_df = df.loc[df.loc[:,'dtype']!='num']
+    cont_df = df.loc[df.loc[:,'dtype']=='num']
     return cat_df, cont_df
 
 def encode_categorical(df, indexes = [0]):
@@ -476,10 +476,10 @@ def connect_to_db(database = 'SKYSPARK'):
                                       username='public', password='public',database=database)
     try:
         client.ping()
-        print("Successful Connection")
+        print("Successful Connection to "+database+"\n")
         return client
     except:
-        print("Failure to Connect")
+        print("Failed to Connect to "+database+"\n")
         return None
 
 def check_connection(client):
@@ -517,26 +517,22 @@ def query_db_ec(client, date, num_days=1, site='Pharmacy'):
         None: return value if the query found no data
     """
     for i in range(0,num_days):
-        print(date)
         time1 = '00:00:00'
         time2 = '23:59:59'
         query = 'select * from UBC_EWS where siteRef=$siteRef and (unit=$unit1 or unit=$unit2 or navName=~/^(.*?(\bEnergy\b)[^$]*)$/ or typeRef=~/^(.*?(\bkWh\b)[^$]*)$/) and (time > $time1 and time < $time2)'
         where_params = {'siteRef':site,'unit1': 'kWh', 'unit2':'m³', 'time1':date+' '+time1, 'time2':date+' '+time2}
         result = client.query(query = query, bind_params = where_params, chunked=True, chunk_size=10000)
+    try:
         if i==0:
             df=result['UBC_EWS']
         else:
             df=pd.concat([df,result['UBC_EWS']],axis=0)
             time.sleep(5)
-    try:
-        print("Time zone in InfluxDB:",df.index.tz)
         my_timezone = pytz.timezone('Canada/Pacific')
         df.index=df.index.tz_convert(my_timezone)
-        print("Converted to",my_timezone,"in dataframe")
-        print("Dataframe memory usage in bytes:",f"{df.memory_usage().values.sum():,d}")
         return df
     except:
-        print("No data found for specified query")
+        print("\t\t\tNo data found for specified date")
         return None
     
 def query_db_nc(client, date, num_days=1, site='Pharmacy'):
@@ -555,26 +551,22 @@ def query_db_nc(client, date, num_days=1, site='Pharmacy'):
         None: return value if the query found no data
     """
     for i in range(0,num_days):
-        print(date)
         time1 = '00:00:00'
         time2 = '23:59:59'
         query = 'select * from UBC_EWS where siteRef=$siteRef and ((unit!=$unit1 and unit!=$unit2 and navName!~/^(.*?(\bEnergy\b)[^$]*)$/ and typeRef!~/^(.*?(\bkWh\b)[^$]*)$/) or groupRef=$groupRef )and (time > $time1 and time < $time2)'
         where_params = {'siteRef':site,'unit1': 'kWh', 'unit2':'m³', 'groupRef':'weatherRef','time1':date+' '+time1, 'time2':date+' '+time2}
         result = client.query(query = query, bind_params = where_params, chunked=True, chunk_size=10000)
+    try:
         if i==0:
             df=result['UBC_EWS']
         else:
             df=pd.concat([df,result['UBC_EWS']],axis=0)
             time.sleep(5)
-    try:
-        print("Time zone in InfluxDB:",df.index.tz)
         my_timezone = pytz.timezone('Canada/Pacific')
         df.index=df.index.tz_convert(my_timezone)
-        print("Converted to",my_timezone,"in dataframe")
-        print("Dataframe memory usage in bytes:",f"{df.memory_usage().values.sum():,d}")
         return df
     except:
-        print("No data found for specified query")
+        print("\t\t\tNo data found for specified date")
         return None
     
 
