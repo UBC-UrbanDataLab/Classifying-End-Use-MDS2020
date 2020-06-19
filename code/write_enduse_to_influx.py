@@ -65,6 +65,16 @@ output.set_index(['time'], inplace=True)
 # uniqueID already exists in the database, the endUseLabel field's value will simply be
 # overwritten with the new value. 
 
+#NOTE: If things really get messed up you can delete the entire measurement from influx
+# and it will be recreated when you write new points to it.
+# But be careful as there is no undo so if you are storing quite a few end-use records
+# in Influx you will lose them all and have to re-write them.
+# here is the function you would use to do it:
+#--------------
+#client.delete_series(measurement="END_USE")
+#-------------
+
+
 #Check that connection exists:
 prompt = "Enter 'y' to write all " + str(len(output))+" points to the influx database."
 if input(prompt)=='y':
