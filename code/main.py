@@ -44,6 +44,11 @@ def main():
     DISPLAY_PREDICTION_METRICS = True
     # Boolean defining if the output dataframes from each step should be saved (save if True, else False)
     SAVE_STEP_OUTPUTS = True
+    # Strings defining the location to save the dataframe csv's
+    STEP1_SAVE_PATH = '../data/csv_outputs/step1_clustering_phase_output.csv'
+    STEP2_SAVE_PATH = '../data/csv_outputs/step2_model_ec_and_nc_relationship_output.csv'
+    STEP3_SAVE_PATH = '../data/csv_outputs/step3_data_prep_for_classification_output.csv'
+    PREDICTED_SAVE_PATH = '../data/csv_outputs/predicted_end_use_labels.csv'
     # Boolean defining if the model should query from the database or pull from csv's (from database if True, else False)
     QUERY_FROM_DB = False
     # Strings containing the paths to the folders that contains the csv's to pull data from if QUERY_FROM_DB==False
@@ -118,8 +123,6 @@ def main():
     nc_data.drop("count", inplace=True, axis=1)
 
     ###   b) Encode and scale NC data
-    # TODO: Look up the correct function name for fixing units of measurement (getting added to the query function, can remove/update to DONE once confirmed complete)
-    # TODO: clean and correct units of measurement (getting added to the query function, can remove/update to DONE once confirmed complete)
     print("\t##### ~~~ Step 1 b): Started - Clustering Phase ~~~ #####") # For tracking program progress
 
     # Getting Indexes of the continuous columns
@@ -250,7 +253,7 @@ def main():
     nc_data = nc_data.join(update_rates, how='left', on=['hour', 'date'])
     nc_data = nc_data.drop('count', axis=1)
     if SAVE_STEP_OUTPUTS:
-        nc_data.to_csv('step1_clustering_phase_output.csv')
+        nc_data.to_csv(STEP1_SAVE_PATH)
     
     # Freeing up some space
     temp_df_aggs = None
@@ -394,7 +397,7 @@ def main():
     print("avg_mse:",avg_mse)
     
     if SAVE_STEP_OUTPUTS:
-        pass # TODO: I'm not sure what data should be getting save here
+        final_df.to_csv(STEP2_SAVE_PATH) # TODO: Update df to write to csv once known
     print("####### ~~~~~ Complete - Step 2: Model EC/NC Relationship ~~~~~ #######") # For tracking program progress
 
     ##### 3) Prep EC data for classification model
@@ -407,7 +410,7 @@ def main():
     # Drop duplicates
     metadata=metadata.sort_values('lastSynced').drop_duplicates('uniqueId',keep='last')
     # Choose relevant fields
-    metadata=metadata[['uniqueId','kind', 'energy','power', 'sensor', 'unit', 'water']] # ???QUESTION???: Is this something that is user defined and needs to be at the top???
+    metadata=metadata[['uniqueId','kind', 'energy','power', 'sensor', 'unit', 'water']] 
     # Changing boolean to easily identify during encoding process
     metadata['energy']=metadata['energy'].apply(lambda x: 'yes_energy' if x=='✓' else 'no_energy')
     metadata['power']=metadata['power'].apply(lambda x: 'yes_power' if x=='✓' else 'no_power')
@@ -464,7 +467,7 @@ def main():
     # Populating endUseLabel that are null with 99_UNKNOWN so that they can be predicted
     step3_data.loc[:, 'endUseLabel'] = step3_data.loc[:, 'endUseLabel'].fillna('99_UNKNOWN')
     if SAVE_STEP_OUTPUTS:
-        step3_data.to_csv('step3_data_prep_for_classification_output.csv')
+        step3_data.to_csv(STEP3_SAVE_PATH)
     print("####### ~~~~~ Complete - Step 3: Prep EC Data for Classification Model ~~~~~ #######") # For tracking program progress
 
     ##### 4) Classification model
@@ -513,7 +516,7 @@ def main():
     predicting_labels['endUseLabel'] = y_pred
     sensor_labels = pd.concat([training_labels, predicting_labels])
     sensor_labels['endUseLabel'] = sensor_labels['endUseLabel'].apply(lambda x: end_use_labels[x])
-    sensor_labels.to_csv('predicted_end_use_labels.csv', index=False)
+    sensor_labels.to_csv(PREDICTED_SAVE_PATH, index=False)
 
     ###   e) Display prediction metrics on a train-test split of the testing data if desired
     if DISPLAY_PREDICTION_METRICS:
