@@ -33,7 +33,7 @@ def main():
     # String defining which site to run the model for
     QUERY_SITE = 'Pharmacy'
     # String defining the path to the metadata csv for the given building
-    METADATA_CSV_PATH = 'test_data/PharmacyQuery.csv'
+    METADATA_CSV_PATH = '../data/PharmacyQuery.csv'
     # String defining the path to the training dataset
     TRAINING_SET_PATH = '../data/FinalPharmacyECSensorList-WithLabels - PharmacyECSensorsWithLabels.csv'
     # List of indices that can be combined to uniquely identify a sensor (used to group on each sensors)
@@ -45,10 +45,11 @@ def main():
     # Boolean defining if the output dataframes from each step should be saved (save if True, else False)
     SAVE_STEP_OUTPUTS = True
     # Boolean defining if the model should query from the database or pull from csv's (from database if True, else False)
-    QUERY_FROM_DB = True
-    # String containing the path to the folder that contains the csv's to pull data from if QUERY_FROM_DB==True
-    # All file names within the folder must be formatted as "YYYY-MM-DD.csv"
-    QUERY_CSV_PATH = 'test_data'
+    QUERY_FROM_DB = False
+    # Strings containing the paths to the folders that contains the csv's to pull data from if QUERY_FROM_DB==False
+    # All file names within the folders must be formatted as "YYYY-MM-DD.csv"
+    QUERY_CSV_PATH = '../data/sensor_data/'
+    QUERY_WEATHER_CSV_PATH = '../data/weather_data/'
         
     if QUERY_FROM_DB:
         # Getting a list of the last 90 dates or the list of date files to query from if QUERY_FROM_DB==False
@@ -63,10 +64,10 @@ def main():
     if QUERY_FROM_DB:
         client = data_preparation.connect_to_db()
 
-    #1) Cluster NC data
-    ###################
+    ##### 1) Cluster NC data
+    ###########################################################################
     print("####### ~~~~~ Started - Step 1: Clustering Phase ~~~~~ #######") # For tracking program progress
-    # a) load+aggregate NC data including weather, grouping by sensor ID fields
+    ###   a) load+aggregate NC data including weather, grouping by sensor ID fields
     print("\t##### ~~~ Started - Step 1 a): Aggregation Phase 1 ~~~ #####") # For tracking program progress
     last_idx_as_cols = False
     is_first_iter = True
@@ -80,8 +81,8 @@ def main():
                 # Making the datetime index into a column so that date and hour can be extracted later
                 temp_df.reset_index(level=0, inplace=True)
         else:
-            temp_df = data_preparation.query_csv(client=None, date=day, site=None)
-            weather_df = data_preparation.query_weather_csv(client=None, date=day, site=None)
+            temp_df = data_preparation.query_csv(client=QUERY_CSV_PATH, date=day, site=None)
+            weather_df = data_preparation.query_weather_csv(client=QUERY_WEATHER_CSV_PATH, date=day, site=None)
             if weather_df is None:
                 pass
             else:
@@ -116,7 +117,7 @@ def main():
     nc_data["update_rate"] = nc_data["count"] / cnt
     nc_data.drop("count", inplace=True, axis=1)
 
-    # b) Encode and scale NC data
+    ###   b) Encode and scale NC data
     # TODO: Look up the correct function name for fixing units of measurement (getting added to the query function, can remove/update to DONE once confirmed complete)
     # TODO: clean and correct units of measurement (getting added to the query function, can remove/update to DONE once confirmed complete)
     print("\t##### ~~~ Step 1 b): Started - Clustering Phase ~~~ #####") # For tracking program progress
@@ -132,7 +133,7 @@ def main():
     # Encoding units
     nc_data = data_preparation.encode_units(nc_data)
 
-    # c) cluster NC data to get df of sensor id fields + cluster group number
+    ###   c) cluster NC data to get df of sensor id fields + cluster group number
     # Calculating Gower's Distance, and clusters
     print("\t\t### ~ Started - Step 1 c): Clust Phase 1: Calculating Gower's Distance ~ ###") # For tracking program progress
     gow_dist = clustering.calc_gowers(nc_data, cont_cols)
@@ -150,7 +151,7 @@ def main():
     cluster_groups = pd.concat([nc_data, pd.DataFrame(clusters, columns=["cluster"])], axis=1)
     cluster_groups = cluster_groups.drop(drop_cols, axis=1)
 
-    # d) Reload NC data + join cluster group num + aggregate, this time grouping by date, time, and clust_group_num
+    ###   d) Reload NC data + join cluster group num + aggregate, this time grouping by date, time, and clust_group_num
     print("\t##### ~~~ Started - Step 1 d): Aggregation Phase 2 ~~~ #####") # For tracking program progress
     last_idx_as_cols = True
     is_first_iter = True
@@ -164,8 +165,8 @@ def main():
                 # Making the datetime index into a column so that date and hour can be extracted later
                 temp_df.reset_index(level=0, inplace=True)
         else:
-            temp_df = data_preparation.query_csv(client=None, date=day, site=None)
-            weather_df = data_preparation.query_weather_csv(client=None, date=day, site=None)
+            temp_df = data_preparation.query_csv(client=QUERY_CSV_PATH, date=day, site=None)
+            weather_df = data_preparation.query_weather_csv(client=QUERY_WEATHER_CSV_PATH, date=day, site=None)
             if weather_df is None:
                 pass
             else:
@@ -259,15 +260,10 @@ def main():
     
     print("####### ~~~~~ Complete - Step 1: NC Aggregation and Clustering Phase ~~~~~ #######") # For tracking program progress
 
-###############################################################################################################
-###################################### Review complete up to this point #######################################
-###################################### Reviewed above 2020-06-19 by Connor ####################################
-###############################################################################################################
-
-    #2) Model EC/NC relationship
-    ############################
+    ##### 2) Model EC/NC relationship
+    ###########################################################################
     print("####### ~~~~~ Starting - Step 2: Model EC/NC Relationship ~~~~~ #######") # For tracking program progress
-    #    a) Aggregate EC sensors to be response variables for the regression model
+    ###   a) Aggregate EC sensors to be response variables for the regression model
     print("\t##### ~~~ Started - Step 2 a): Aggregation ~~~ #####") # For tracking program progress
     last_idx_as_cols = False
     is_first_iter = True
@@ -278,9 +274,10 @@ def main():
         if QUERY_FROM_DB:
             temp_df2 = data_preparation.query_db_ec(client, day, num_days=1, site=QUERY_SITE)
             if temp_df2 is not None:
+                # Making the datetime index into a column so that date and hour can be extracted later
                 temp_df2.reset_index(level=0, inplace=True)
         else:
-            temp_df2 = data_preparation.query_csv(client=None, date=day, site=None)
+            temp_df2 = data_preparation.query_csv(client=QUERY_CSV_PATH, date=day, site=None)
             # Filter for EC data, this step will be done in the query
             if temp_df2 is not None:
                 temp_df2=temp_df2[(temp_df2['unit']=='kWh') | (temp_df2['unit']=='m³')]
@@ -327,95 +324,91 @@ def main():
     # Dataframe with unique sensor ids
     uniqueSensors=ec_data2['uniqueId'].unique()
 
-    ### Scaling EC data
+    # Scaling EC data
     ec_data1['EC_mean_value']=data_preparation.scale_continuous(ec_data1, indexes=[4])
 
 
-    ### Scaling Cluster data
+    # Scaling Cluster data
     for i in range(6,len(nc_data.columns)):
         nc_data.iloc[:,i]=data_preparation.scale_continuous(nc_data, indexes=[i])
 
-    #    b) For each unique EC sensorID (i.e. row in 2b_EC_data_df), create Ridge Regression model using 2a_EC_data_df and
-    #       step1_output_NC_data_df. Model is basically: Y=EC response and Xn=NC data
+    ###   b) For each unique EC sensorID (i.e. row in 2b_EC_data_df), create Ridge Regression model using
+    #       2a_EC_data_df and step1_output_NC_data_df. Model is basically: Y=EC response and Xn=NC data
     print("\t##### ~~~ Started - Step 2 b): Regression ~~~ #####") # For tracking program progress
 
-    ### Will store each ridge output into a list and append all the dataframes
+    # Will store each ridge output into a list and append all the dataframes
     coefficients_list=[]
 
-    ### total sum of mse from each ridge regression model (accumulative)
+    # total sum of mse from each ridge regression model (accumulative)
     score=0
 
-    ### Creating individual data frames for each sensor and implementing Ridge Regression
+    # Creating individual data frames for each sensor and implementing Ridge Regression
     for sensor in uniqueSensors:
-
-        ## Create data frame for only that relevant sensor
+        # Create data frame for only that relevant sensor
         new_df=ec_data1[ec_data1['uniqueId']==sensor]
-        ######## Changing EC data types for merging later. Might not need depending on step 1 output types
+        # Changing EC data types for merging later
         nc_data = nc_data.astype({"date": str})
         new_df = new_df.astype({"date": object, "hour": object})
         new_df.loc[:,'date']=new_df['date'].apply(lambda x: str(x)[0:10])
 
-        ## Merge specific sensor to cluster data
+        # Merge specific sensor to cluster data
         new_merged=pd.merge(nc_data, new_df, how='inner', left_on=['date','hour'], right_on=['date','hour'])
-        ## Ridge does not allow NANs, seems like some sensors are not 'on' during specific hours
+        # Replacing NaN's with 0 (Ridge Regression doesn't allow NANs)
         new_merged=new_merged.fillna(0)
 
-        ## All NC predictor variables
+        # All NC predictor variables
         X=new_merged.iloc[:,2:(len(new_merged.columns)-3)]
 
-        ## Mean value of EC data
+        # Mean value of EC data
         Y=new_merged['EC_mean_value']
         Y=Y.to_numpy().reshape(len(Y),1)
 
-        #Ridge CV to find optimal alpha value
+        # Ridge CV to find optimal alpha value
         alphas=[0.000001, 0.00001, 0.0001, 0.001, 0.01, 0.1, 1, 10, 100, 1e3, 1e4, 1e5, 1e6, 1e7, 1e8]
         reg=RidgeCV(alphas=alphas, store_cv_values=True)
         reg.fit(X, Y)
         alpha_best=reg.alpha_
 
-      ### Ridge model using optimal alpha value found in step above
+        # Ridge model using optimal alpha value found in step above
         ridge_test=Ridge(alpha=alpha_best, tol=.01, max_iter=10e7,normalize=True)
         ridge_test.fit(X,Y)
         coef=ridge_test.coef_
         mse=mean_squared_error(y_true=Y, y_pred=ridge_test.predict(X))
         score=score+mse
 
-        ## Store coefficients into a dataframe
+        # Store coefficients into a dataframe
         new=pd.DataFrame(data=coef.reshape(1,((len(new_merged.columns)-3)-2)))
 
-        ## Add uniqueId to the dataframe
+        # Add uniqueId to the dataframe
         new['uniqueId']=sensor
 
-        ## Store each sensorID's ridge coefficients into a list
+        # Store each sensorID's ridge coefficients into a list
         coefficients_list.append(new)
 
-    ### Append all ridge coefficients for all sensors into a single dataframe
+    # Append all ridge coefficients for all sensors into a single dataframe
     for df in uniqueSensors:
         final_df = pd.concat(coefficients_list)
 
-    ### calculate the avarge mse across all ridge regression models
+    # calculate the avarge mse across all ridge regression models
     avg_mse=score/len(uniqueSensors)
     print("avg_mse:",avg_mse)
     
     if SAVE_STEP_OUTPUTS:
         pass # TODO: I'm not sure what data should be getting save here
-
-    #    OUTPUT OF STEP2 = dataframe with EC sensor ID fields, mean response, and all n coeffecients from
-    #        that unique EC sensor's Ridge model
     print("####### ~~~~~ Complete - Step 2: Model EC/NC Relationship ~~~~~ #######") # For tracking program progress
 
-    #### 3) Prep EC data for classification model
-    ################################################
+    ##### 3) Prep EC data for classification model
+    ###########################################################################
     print("####### ~~~~~ Starting - Step 3: Prep EC Data for Classification Model ~~~~~ #######") # For tracking program progress
-    #### a) Load metadata and join with 2b_EC_data_df
+    ###   a) Load metadata and join with 2b_EC_data_df
     metadata=pd.read_csv(METADATA_CSV_PATH, dtype=object)
     # Make uniqueIDs
     metadata=data_preparation.create_unique_id(metadata, metadata=True)
     # Drop duplicates
     metadata=metadata.sort_values('lastSynced').drop_duplicates('uniqueId',keep='last')
     # Choose relevant fields
-    metadata=metadata[['uniqueId','kind', 'energy','power', 'sensor', 'unit', 'water']]
-    ### Changing boolean to easily identify during encoding process
+    metadata=metadata[['uniqueId','kind', 'energy','power', 'sensor', 'unit', 'water']] # ???QUESTION???: Is this something that is user defined and needs to be at the top???
+    # Changing boolean to easily identify during encoding process
     metadata['energy']=metadata['energy'].apply(lambda x: 'yes_energy' if x=='✓' else 'no_energy')
     metadata['power']=metadata['power'].apply(lambda x: 'yes_power' if x=='✓' else 'no_power')
     metadata['sensor']=metadata['sensor'].apply(lambda x: 'yes_sensor' if x=='✓' else 'no_sensor')
@@ -424,7 +417,7 @@ def main():
     # left join metadata and 2b_EC_data_df
     merged_left=pd.merge(ec_data2, metadata, how='left', left_on='uniqueId', right_on='uniqueId')
 
-    #### b) Apply feature selection function(s) to the joined EC+metadata
+    ###   b) Apply feature selection function(s) to the joined EC+metadata
     # load NRCan classifications training data
     nrcan_labels=pd.read_csv(TRAINING_SET_PATH)
     # make uniqueId
@@ -436,8 +429,8 @@ def main():
     # run correct_df_units function
     nrcan_labels=data_preparation.correct_df_units(nrcan_labels)
 
-    # TRAINING DATA CLEANING (maybe its own module with metadata?)
-    # can change ? to 0 since uom fixed
+    # TRAINING DATA CLEANING
+    # Change ? to 0 since uom fixed
     nrcan_labels=nrcan_labels.assign(isGas=nrcan_labels.isGas.apply(lambda x: '0' if x=='?' else x))
     # changing boolean for more descriptive encoding
     nrcan_labels=nrcan_labels.assign(isGas=nrcan_labels.isGas.apply(lambda x: 'no_gas' if x=='0' else 'yes_gas'))
@@ -450,8 +443,8 @@ def main():
     merged_outer=merged_outer.assign(equipRef=merged_outer.equipRef.apply(lambda x: data_preparation.equip_label(str(x))))
     merged_outer=merged_outer.assign(navName=merged_outer.navName.apply(lambda x: data_preparation.nav_label(str(x))))
 
-    #### c) Encode and scale the EC+metadata
-#     encoding after feature selection
+    ###   c) Encode and scale the EC+metadata
+    # encoding after feature selection
     merged_outer=merged_outer.assign(energy_no_energy=merged_outer.energy.apply(lambda x: 1 if x=='no_energy' else 0))
     merged_outer=merged_outer.assign(energy_yes_energy=merged_outer.energy.apply(lambda x: 1 if x=='yes_energy' else 0))
     merged_outer=merged_outer.assign(sensor_no_sensor=merged_outer.sensor.apply(lambda x: 1 if x=='no_sensor' else 0))
@@ -463,21 +456,21 @@ def main():
     # scaling after feature selection
     for i in range(1,6):
         merged_outer.iloc[:,i]=data_preparation.scale_continuous(merged_outer, indexes=[i])
-    #### d) Join the model coeffecients from step2 output to the EC+metadata
+    
+    ###   d) Join the model coeffecients from step2 output to the EC+metadata
     step3_data = pd.merge(merged_outer, final_df, left_on='uniqueId', right_on='uniqueId', how='outer')
     # dropping unnessary columns to feed into classification
     step3_data = step3_data.drop(['kind', 'energy', 'power', 'sensor', 'water', 'isGas', 'equipRef', 'groupRef', 'navName', 'unit'], axis=1)
     # Populating endUseLabel that are null with 99_UNKNOWN so that they can be predicted
     step3_data.loc[:, 'endUseLabel'] = step3_data.loc[:, 'endUseLabel'].fillna('99_UNKNOWN')
-    #### OUTPUT OF STEP = dataframe with EC sensor ID fields, selected EC features, model coeffecients
     if SAVE_STEP_OUTPUTS:
         step3_data.to_csv('step3_data_prep_for_classification_output.csv')
     print("####### ~~~~~ Complete - Step 3: Prep EC Data for Classification Model ~~~~~ #######") # For tracking program progress
 
-    # 4) Classification model
-    #######################
+    ##### 4) Classification model
+    ###########################################################################
     print("####### ~~~~~ Starting - Step 4: Supervised Modeling and Predicting End-Use Labels ~~~~~ #######") # For tracking program progress
-    #    a) Dataprep to get the step 3 data into an appropriate format for prediction
+    ###   a) Dataprep to get the step 3 data into an appropriate format for prediction
     training_data=step3_data
     # Manipulating dataset to be in the appropriate format for creating seperate predictor and response datasets
     cols = training_data.columns.tolist()
@@ -502,33 +495,31 @@ def main():
     training_data = training_data.fillna(0)
     predicting_data = predicting_data.drop('uniqueId', axis=1)
     predicting_data = predicting_data.fillna(0)
-    
     # Creating seperate predictor variable and response variable numpy arrays
     x_train = training_data.iloc[:, :-1].values
     y_train = training_data.iloc[:, -1].values
     x_pred = predicting_data.iloc[:, :-1].values
     
-    #    b) Create and train the selected model
+    ###   b) Create and train the selected model
     # Creating and fitting the classifier
     classifier = BaggingClassifier(n_estimators = 100)
     classifier.fit(x_train, y_train)
 
-    #    c) Predict the outputs for the new data
+    ###   c) Predict the outputs for the new data
     # Predicting the outputs
     y_pred = classifier.predict(x_pred)
     
-    #    d) Create dataframe of sensors and labels to be input for step 5
+    ###   d) Create dataframe of sensors and labels to be input for step 5
     predicting_labels['endUseLabel'] = y_pred
     sensor_labels = pd.concat([training_labels, predicting_labels])
     sensor_labels['endUseLabel'] = sensor_labels['endUseLabel'].apply(lambda x: end_use_labels[x])
     sensor_labels.to_csv('predicted_end_use_labels.csv', index=False)
-    #    OUTPUT OF STEP = dataframe with EC sensor ID fields and end-use group
 
-    #   e) Display prediction metrics on a train-test split of the testing data if desired
+    ###   e) Display prediction metrics on a train-test split of the testing data if desired
     if DISPLAY_PREDICTION_METRICS:
         print("\t##### ~~~ Step 4: Displaying Prediction Metrics ~~~ #####")
-        # Creating training and testing sets (need to retrain b/c training predicting on the data you trained on results in overconfident predictions)
-        x_train, x_test, y_train, y_test = train_test_split(x_train, y_train, test_size = 0.2) ############### TEMP: For testing the model, remove for final product
+        # Creating training and testing sets
+        x_train, x_test, y_train, y_test = train_test_split(x_train, y_train, test_size = 0.2)
         # Creating the classifier and predicting the output for the test set
         classifier = BaggingClassifier(n_estimators = 100)
         classifier.fit(x_train, y_train)
