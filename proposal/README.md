@@ -5,7 +5,7 @@ Create a program that queries live streaming sensor data from the UDL SkySpark d
 Based on a building’s sensor data, how can the data be grouped automatically into NRCan secondary end use classifications?
 
 # Statement of Work 
-In order to develop a viable end-use classification product the following steps were completed:
+In order to develop a viable end-use classification product the following steps need to be completed:
 1. Data Collection and Cleaning
 2. Feature Selection and Engineering
 3. End-Use Classification
