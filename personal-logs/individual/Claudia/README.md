@@ -168,3 +168,22 @@ Summary of our activities on a weekly basis:
 |7|2020-06-15|report writing|Report|5|
 |8|2020-06-16|daily standup meeting|Daily Meetings|0.5|
 |8|2020-06-16|practice presentation |Logistics|0.5|
+|8|2020-06-16|update github|Logistics|1|
+|8|2020-06-16|presentation with Scott|Weekly Meetings|0.5|
+|8|2020-06-16|worked on report |Report|4|
+|8|2020-06-17|daily standup meeting|Daily Meetings|0.25|
+|8|2020-06-17|writing the final report|Report|5.5|
+|8|2020-06-18|daily standup meeting|Daily Meetings|0.25|
+|8|2020-06-18|Retrospective Meeting|Weekly Meetings|1|
+|8|2020-06-18|create visualization |Logistics|2.5|
+|8|2020-06-18|Start on final presentation |Presentation|4|
+|8|2020-06-19|daily standup meeting|Daily Meetings|0.25|
+|8|2020-06-19|Sprint pre-planning meeting|Weekly Meetings|0.75|
+|8|2020-06-19|Meeting to prepare for meeting with UDL|Weekly Meetings|0.5|
+|8|2020-06-19|Meeting with UDL|Weekly Meetings|1|
+|8|2020-06-19|work on presentation |Presentation|3|
+|8|2020-06-19|edit visualizations for presentation & report|Logistics|1.5|
+|8|2020-06-22|daily standup meeting|Daily Meetings|0.25|
+|8|2020-06-22|sort out & practice presentation |Presentation|4|
+|8|2020-06-22|format final report|Report|1.5|
+|9|2020-06-23|daily standup meeting|Daily Meetings|0|
