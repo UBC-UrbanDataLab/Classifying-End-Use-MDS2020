@@ -5,5 +5,15 @@ The proposed project was to create a Python program that queries, cleans, and cl
 As seen in the Table 1 below, the classification model was able to predict and classify all 208 unknown energy consumption instruments into end-use categories.
 
 Table 1: Number of Sensors per End-Use
+| End-Use Label | Sensor Count | % of Sensors  | 
+| ------------- | ------------- | ------------- |
+|00_HEATING_SPACE_AND_WATER|54|26%|
+|01_SPACE_COOLING|35|17%|
+|02_HEATING_COOLING_COMBINED|39|19%|
+|03_LIGHTING_NORMAL|26|13%|
+|04_LIGHTING_EMERGENCY|10|5%|
+|05_OTHER|44|21%|
+|Total|208|100%|
+
 
 The project achieved its goal by delivering a Python program that queries, cleans, and classifies instruments by end-use from live-streaming InfluxDB data for the Pharmacy building. The prediction accuracy of the program when applied to the testing dataset was 94.3%. The Python program assists with UDL’s vision of assisted Artificial Intelligence (AI) for proactive and preventive maintenance. A few recommendations for future work include increasing the size of the labeled training set and modifying code to work with the updated UDL database. 
