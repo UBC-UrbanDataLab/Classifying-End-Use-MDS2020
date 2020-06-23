@@ -294,3 +294,37 @@ Summary of our activities on a weekly basis:
 |7|2020-06-15|Organized git branches|Logistics|0.33|
 |7|2020-06-15|Updated jira with progress + created new git branch|Logistics|0.33|
 |7|2020-06-15|Aggregated step 2 and step 4 with January 8th - June 8th data |Coding|0.83|
+|8|2020-06-16|Presentation + provided Connor aggregated data|Development|0.67|
+|8|2020-06-16|Daily stand up + practiced presentation |Other Meeting|1|
+|8|2020-06-16|Worked on feature selection module|Coding|0.67|
+|8|2020-06-16|Meeting with Scott|Weekly Meetings|0.5|
+|8|2020-06-16|Worked on feature selection module|Coding|1.5|
+|8|2020-06-16|Investigated scaling issues|Coding|1|
+|8|2020-06-16|Google colab|Logistics|0.42|
+|8|2020-06-16|Worked on feature selection module|Coding|0.6|
+|8|2020-06-17|Updaetd jira|Updating Jira|0.33|
+|8|2020-06-17|Daily stand up|Daily Stand Up|0.75|
+|8|2020-06-17|Code Review|Code Review|0.75|
+|8|2020-06-17|1-Page Summary formatting + read Scott's email|Development|0.67|
+|8|2020-06-17|Final Report|Development|0.67|
+|8|2020-06-17|Final Report|Development|1|
+|8|2020-06-17|Final Report|Development|0.83|
+|8|2020-06-17|Final Report|Development|1|
+|8|2020-06-18|Retrospective|Other Meeting|1|
+|8|2020-06-18|1-Page Summary|Development|3.33|
+|8|2020-06-18|1-Page Summary|Development|0.75|
+|8|2020-06-18|Feature Selection Module|Coding|1.08|
+|8|2020-06-19|Prepped for daily stand up + daily stand up + sprint planning + client agenda + sent meeting agenda|Other Meeting|1.92|
+|8|2020-06-19|Add main.py to feature selection module|Coding|0.5|
+|8|2020-06-19|Client Meeting|Client Meetings|1|
+|8|2020-06-19|Feature selection module|Coding|1|
+|8|2020-06-19|Submitted 1-page summary|Logistics|0.25|
+|8|2020-06-19|Feature selection module|Coding|0.75|
+|8|2020-06-19|Jira spint planning updates|Logistics|0.33|
+|8|2020-06-21|Updated personal log|Logistics|0.25|
+|8|2020-06-22|Daily stand up + presentation overview|Other Meeting|1.08|
+|8|2020-06-22|Presentation practice + sent UDL meeting invite|Development|0.5|
+|8|2020-06-22|Practiced presentation|Development|2|
+|8|2020-06-22|Practiced presentation|Development|0.25|
+|8|2020-06-22|Practiced presentation|Development|1.25|
+|8|2020-06-22|Final Report|Development|1|
