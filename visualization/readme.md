@@ -112,7 +112,7 @@ Details on how to enable and use Flux can be found on the [official influxDB doc
 
 
 
-**InfluxDB's default GUI software (Chronograf) is currently one of best ways to learn/write Flux code as it has text-completion features and is smarter than Grafana at handling situations where the user has inadvertently queried a huge amount of data. **
+**InfluxDB's default GUI software (Chronograf) is currently one of best ways to learn/write Flux code as it has text-completion features and is smarter than Grafana at handling situations where the user has inadvertently queried a huge amount of data.**
 
 
 ### Why Flux?
