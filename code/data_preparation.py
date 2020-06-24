@@ -1,30 +1,23 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # File for Testing the Functions and Showing how to call them
-
-# ***
-## Data Preparation
-
-# Library Imports
-
+### ~ Library Imports ~ ###
+# General Imports
 import re
-
-# Data storing Imports
+import time
+# Data Formatting and Manipulation Imports
 import numpy as np
 import pandas as pd
-
 # Influx Imports
 import influxdb
 import pytz
-import time
-
 # Feature Engieering Imports
 from sklearn.preprocessing import OneHotEncoder, MinMaxScaler
 
-# Data Preparation Functions
+### ~ Data Scaling and Encoding Functions ~ ###
 def get_data_type(x):
     """Function to identify the value type of the string passed in
+    
     Args:
         x (str): string format of data that is either a boolean, numeric value, or string
 
@@ -43,12 +36,13 @@ def get_data_type(x):
 
 def separate_cat_and_cont(df, idx=0):
     """Function to separate continuous and categorical data into separate dataframes
+    
     Args:
-        df (pandas.DataFrame): dataframe to containing a column of mixed categorical and continuous data
+        df (pandas.DataFrame): dataframe to containing a column of mixed categorical and continuous data \n
         idx (int): index of the column containing mixed categorical and continuous data
 
     Returns:
-        cat_df (pandas.DataFrame): original dataframe filterd down to only include observations with categorical values
+        cat_df (pandas.DataFrame): original dataframe filterd down to only include observations with categorical values \n
         cont_df (pandas.DataFrame): original dataframe filterd down to only include observations with continuous values
     """
     df = df.copy()
@@ -59,56 +53,60 @@ def separate_cat_and_cont(df, idx=0):
 
 def encode_categorical(df, indexes = [0]):
     """Function to encode categorical data, the user must define which columns have categorical data
+    
     Args:
-        df (pandas.DataFrame): dataframe to containing at least one column of categorical data
+        df (pandas.DataFrame): dataframe to containing at least one column of categorical data \n
         indexes (list): list of indexes with categorical data to encode
 
     Returns:
         np_arr (numpy.array): numpy array of encode categorical values
     """
     df = df.copy()
-    isFirst = True
+    is_first = True
     for idx in indexes:
-        unit2idx = dict(map(reversed,pd.DataFrame(df.iloc[:,idx].unique()).to_dict()[0].items()))
-        df.iloc[:,idx] = df.iloc[:,idx].apply(lambda x: unit2idx[x])
+        unit_2_idx = dict(map(reversed,pd.DataFrame(df.iloc[:,idx].unique()).to_dict()[0].items()))
+        df.iloc[:,idx] = df.iloc[:,idx].apply(lambda x: unit_2_idx[x])
         encoder = OneHotEncoder(handle_unknown='ignore')
         encodedUnits = encoder.fit_transform(np.reshape(df.iloc[:,idx].to_numpy(),(-1,1))).toarray()
-        if isFirst:
+        if is_first:
             np_arr = encodedUnits
-            isFirst = False
+            is_first = False
         else:
             np_arr = np.append(np_arr, encodedUnits,axis=1)
     return np_arr
 
 def scale_continuous(df, indexes=[0]):
     """Function to scale continuous data, the user must define which columns have continuous data
+    
     Args:
-        df (pandas.DataFrame): dataframe to containing at least one column of continuous data
+        df (pandas.DataFrame): dataframe to containing at least one column of continuous data \n
         indexes (list): list of indexes with continuous data to scale
 
     Returns:
         np_arr (numpy.array): numpy array of scaled continuous values
     """
-    isFirst = True
+    is_first = True
     for idx in indexes:
         scaler = MinMaxScaler()
         scaled_data = scaler.fit_transform(np.reshape(df.iloc[:,idx].to_numpy(),(-1,1)))
-        if isFirst:
+        if is_first:
             np_arr = scaled_data
-            isFirst = False
+            is_first = False
         else:
             np_arr = np.append(np_arr, scaled_data ,axis=1)
     return np_arr
 
 
 def encode_and_scale_values(df):
-    """Function to encode and scale values, outputs a dataframe with a scaled values column, and separate dummy variable columns for each category option
+    """Function to encode and scale values, outputs a dataframe with a scaled values column, 
+    and separate dummy variable columns for each category option
+    
     Args:
         df (pandas.DataFrame): dataframe to containing a "value" column
 
     Returns:
-        encoded_units_df (pandas.DataFrame): dataframe containing scaled numeric values, and encoded categorical values
-                                             (with appropriate dummy variables)
+        encoded_units_df (pandas.DataFrame): dataframe containing scaled numeric values, and 
+        encoded categorical values (with appropriate dummy variables)
     """
     df = df.copy()
     # Generate separate dataframes for categorical and continous data
@@ -142,6 +140,7 @@ def encode_and_scale_values(df):
 
 def encode_units(df):
     """Function to encode units
+    
     Args:
         df (pandas.DataFrame): dataframe to containing a "unit" column
 
@@ -154,21 +153,19 @@ def encode_units(df):
     encoded_units_df = pd.concat([df, pd.DataFrame(encoded_units, index=df.index, columns=[str(i) for i in range(len(encoded_units[0]))]).add_prefix('unit_')], axis=1)
     return encoded_units_df
 
+### ~ Data Cleaning Functions ~ ###
 def fix_units_incons(nav, equip, val, u, typeref):
     """Function to analyze a set of values for and correct the unit of measurement if needed.
-        The rules used to make the decision are based on errors found in actual data.
+    The rules used to make the decision are based on errors found in actual data.
 
     Args:
-        nav (string): navName value
-        equip (string): equipRef value
-        val (string): value field
-        typeref (string): typeRef value
+        nav (string): navName value \n
+        equip (string): equipRef value \n
+        val (string): value field \n
+        typeref (string): typeRef value \n
     Returns:
-        The correct unit of measurement for that entry.
+        (str): The correct unit of measurement for that entry.
     """
-   # rows 2-4 on Connor's csv
-    #print("executing fix_units_incons")
-
     if nav.find('ALRM')!=-1:
         try:
             val = float(val)
@@ -176,7 +173,6 @@ def fix_units_incons(nav, equip, val, u, typeref):
             val = float(bool(val))
         if (val==1 or val==0):
             return "omit"
-    # rows 5-7, 40-42, 51-53 on Connor's csv
     elif nav.find('Enable Cmd')!=-1 or nav.find('Run Cmd')!=-1:
         try:
             val = float(val)
@@ -184,7 +180,6 @@ def fix_units_incons(nav, equip, val, u, typeref):
             val = float(bool(val))
         if (val==1 or val==0):
             return "omit"
-    # rows 8-13 on Connor's csv
     elif nav.find('Outside Air Damper')!=-1:
         try:
             val = float(val)
@@ -192,59 +187,41 @@ def fix_units_incons(nav, equip, val, u, typeref):
             val = float(bool(val))
         if (val==1 or val==0):
             return "omit"
-    # rows 14-15 on Connor's csv
     elif (nav=='Hot Water Flow') and (u=='°C'):
         return "gal/min"
-    # rows 16-19 on Connor's csv
     elif (nav=='ESB_CHIL1_PCE01_CHWFLW' or nav=='ESB_CHIL2_PCE02_CHWFLW') and (u=='°C'):
         return "gal/min"
-    # rows 22-23, 64-65, 74-97, 104-115 on Connor's csv
     elif (val=='True'):
         return "omit"
-    # rows 24-31 on Connor's csv
     elif (nav=='Valve Feedback') and (u=='_'):
         return '%'
-    # rows 32-33, 54-55 on Connor's csv
     elif nav=='Exhaust Air Duct Static Pressure' and (u=='°C' or u=='ft/min'):
         return "Pa"
-    # rows 43-33 on Connor's csv
     elif nav.find('Speed')!=-1 and (u=='°C'):
         return "%"
-    # rows 56-63 on Connor's csv
     elif nav.find('JCL-NAE43/FCB-01.FEC-50.BLDG')!=-1 and (u=='Pa'):
         return "°C"
-    # rows 66-67, 70-73 on Connor's csv
     elif (nav=='Heating Valve Cmd') and (u=='_' or u=='A'):
         return "%"
-    # rows 68-69 on Connor's csv
     elif nav.find('Discharge Air Damper')!=-1 and (u=='_'):
         return "%"
-    # rows 98-103, 124-135 on Connor's csv
     elif nav.find('Flow Alarm')!=-1 and (u=='%' or u=='_' or u=='L/s'):
         return "omit"
-    # rows 116-123 on Connor's csv
     elif nav=='Exhaust Air Flow' and (u=='°C'):
         return "L/s"
-    # rows 136-171, 184-291 on Connor's csv
     elif nav.find('Water Temp')!=-1 and (u=='%'):
         return "°C"
-    # rows 172-183 on Connor's csv
     elif nav.find('ESB_TMX')!=-1 and equip.find('Thermanex Header')!=-1 and u=='%':
         return "°C"
-    # rows 220-221 on Connor's csv
     elif nav.find('Outside Air Temp')!=-1 and equip.find('Thermanex Header')!=-1 and u=='%':
         return "°C"
-    ##### unsure rows ######
-    # rows 20-21 on Connor's csv
     elif nav.find('JCL-NAE29/BACnet-IP.FOL-MHP4.Analog Values.AV-1002')!=-1 and u=='_':
         return "°C"
-    # rows 34-50 on Connor's csv
     elif nav.find('ISOD')!=-1 and equip.find('LEF-4 EF-4')!=-1 and (u=='_' or u=='°C'):
         return "omit"
-    # changing all '_' of kWh typeRefs  to kWh from Alex's training data
     elif u.find('_')!=-1 and typeref.find('kWh')!=-1:
         return "kWh"
-    # changing all '_' units to 'omit' to standardize unknowns from Alex's training data
+    # changing all '_' units to 'omit' to standardize unknowns
     elif u.find('_')!=-1:
         return "omit"
     else:
@@ -256,7 +233,7 @@ def correct_df_units(df):
     Args:
         df (pandas Dataframe): dataframe containing the columns uniqueId, navName, equipRef, value, and unit
     Returns:
-        inputted dataframe with values in units column corrected
+        final_df (pandas Dataframe): inputted dataframe with values in units column corrected
     """
     df_with_update = df.copy()
     try:
@@ -287,6 +264,7 @@ def correct_df_units(df):
 
 def equip_label(equip):
     """Function to group equipRef categorical levels into smaller ones
+    
     Args:
         equip (str): equipRef categorical level
 
@@ -340,6 +318,7 @@ def equip_label(equip):
 
 def nav_label(nav):
     """Function to group equipRef categorical levels into smaller ones
+    
     Args:
         equip (str): equipRef categorical level
 
@@ -349,37 +328,34 @@ def nav_label(nav):
     if nav.lower().find('alarm')!=-1:
         return 'Alarm'
     elif nav.lower().find('temp')!=-1 or nav.lower().find('lwt')!=-1 or nav.lower().find('ewt')!=-1 or nav.lower().find('humidity')!=-1:
-        #leaving and entering water temperature # humidity sensors measures moisture&air temps
         return 'Temp'
     elif nav.lower().find('water')!=-1 or nav.lower().find('_cw')!=-1 or nav.lower().find('chw')!=-1 or nav.find('SB1_2_FWT_T')!=-1 or nav.lower().find('lwco')!=-1:
-        # I think FW = Feed Water # CW = Condenser Water # CHW = Chilled Water metrics # LWCO = low water cut off
         return 'Water'
     elif nav.lower().find('air')!=-1 or nav.lower().find('ach')!=-1 or nav.lower().find('ahu')!=-1 or nav.lower().find('inlet')!=-1:
-        # AHU = Air Handling Unit # ACH = Air Changes per Hour # Inlet Air Temperature sensor
         return 'Air'
-    elif nav.lower().find('press')!=-1 or nav.lower().find('_dp')!=-1: # DP = differential pressure
+    elif nav.lower().find('press')!=-1 or nav.lower().find('_dp')!=-1:
         return 'Pressure'
-    elif nav.lower().find('heat')!=-1 or nav.lower().find('hrv')!=-1 or nav.lower().find('_rh')!=-1: # HRV = heat recovery ventilator # RH = Reheat
+    elif nav.lower().find('heat')!=-1 or nav.lower().find('hrv')!=-1 or nav.lower().find('_rh')!=-1:
         return 'Heat'
     elif nav.lower().find('fire_rate')!=-1 or nav.lower().find('firing_rate')!=-1:
         return 'Fire Rate'
-    elif nav.lower().find('power')!=-1 or nav.lower().find('voltage')!=-1 or nav.lower().find('vfd')!=-1: # VFD = variable frequency drive
+    elif nav.lower().find('power')!=-1 or nav.lower().find('voltage')!=-1 or nav.lower().find('vfd')!=-1:
         return 'Power'
-    elif nav.lower().find('energy')!=-1 or nav.lower().find('curr')!=-1 or nav.lower().find('btu')!=-1 or nav.find('kW')!=-1: # eletrical current
+    elif nav.lower().find('energy')!=-1 or nav.lower().find('curr')!=-1 or nav.lower().find('btu')!=-1 or nav.find('kW')!=-1:
         return 'Energy'
-    elif nav.lower().find('fan')!=-1 or nav.lower().find('fcu')!=-1 or (nav.lower().find('ef')!=-1 and  nav.lower().find('efficiency')==-1): # FCU = fan coil unit # EF = exhaust fan
+    elif nav.lower().find('fan')!=-1 or nav.lower().find('fcu')!=-1 or (nav.lower().find('ef')!=-1 and  nav.lower().find('efficiency')==-1):
         return 'Fan'
     elif nav.find('Instant_Power')!=-1:
         return 'Instant_Power'
     elif nav.lower().find('open_percent')!=-1 or nav.lower().find('occupancy')!=-1:
         return 'Occupancy'
-    elif nav.lower().find('feedback')!=-1 or nav.lower().find('demand')!=-1: # demand controlled ventilation
+    elif nav.lower().find('feedback')!=-1 or nav.lower().find('demand')!=-1:
         return 'Feedback'
     elif nav.find('CO2')!=-1:
         return 'CO2'
     elif nav.lower().find('power')!=-1:
         return 'Power'
-    elif nav.lower().find('cool')!=-1 or nav.lower().find('_ct_')!=-1: # CT = cooling tower
+    elif nav.lower().find('cool')!=-1 or nav.lower().find('_ct_')!=-1:
         return 'Cooling'
     elif nav.lower().find('speed')!=-1:
         return 'Speed'
@@ -426,25 +402,23 @@ def nav_label(nav):
     else:
         return "NEED TO LABEL"
 
-
-
 def create_unique_id(df, metadata=False, indexes=['equipRef', 'groupRef', 'navName', 'siteRef', 'typeRef', 'bmsName']):
-    """
-    Function to add uniqueIds for sensors to a dataframe
+    """Function to add uniqueIds for sensors to a dataframe
+    
     Args:
-        df (dataframe): any pandas dataframe
-        metadata (bool): False if data is not metadata
+        df (dataframe): any pandas dataframe \n
+        metadata (bool): False if data is not metadata \n
         indexes (list): list of field names
     Returns:
         df (dataframe): original dataframe with sensor uniqueId
     """
     if metadata==False:
         # concatenates the 5 fields
-        uniqueid=df[indexes[0]].fillna('')+' '+df[indexes[1]].fillna('')+' '+df[indexes[2]].fillna('')+' '+df[indexes[3]].fillna('')+' '+df[indexes[4]].fillna('')
+        unique_id=df[indexes[0]].fillna('')+' '+df[indexes[1]].fillna('')+' '+df[indexes[2]].fillna('')+' '+df[indexes[3]].fillna('')+' '+df[indexes[4]].fillna('')
         # removes Pharmacy from uniqueId
-        uniqueid=uniqueid.str.replace('Pharmacy ', '')
+        unique_id=unique_id.str.replace('Pharmacy ', '')
         # moves uniqueId to the front of df
-        df.insert(0, 'uniqueId', uniqueid)
+        df.insert(0, 'uniqueId', unique_id)
         return df
     elif metadata==True:
         # removes the database id from equipRef, groupRef, siteRef
@@ -452,25 +426,24 @@ def create_unique_id(df, metadata=False, indexes=['equipRef', 'groupRef', 'navNa
         df[indexes[1]]=df[indexes[1]].str.extract('[^ ]* (.*)', expand=True)
         df[indexes[3]]=df[indexes[3]].str.extract('[^ ]* (.*)', expand=True)
         # concatenates the 5 fields
-        uniqueid=df[indexes[0]].fillna('')+' '+df[indexes[1]].fillna('')+' '+df[indexes[2]].fillna('')+' '+df[indexes[3]].fillna('')+' '+df[indexes[5]].fillna('')
+        unique_id=df[indexes[0]].fillna('')+' '+df[indexes[1]].fillna('')+' '+df[indexes[2]].fillna('')+' '+df[indexes[3]].fillna('')+' '+df[indexes[5]].fillna('')
         # removes Pharmacy from uniqueId
-        uniqueid=uniqueid.str.replace('Pharmacy ', '')
+        unique_id=unique_id.str.replace('Pharmacy ', '')
         # moves uniqueId to the front of df
-        df.insert(0, 'uniqueId', uniqueid)
+        df.insert(0, 'uniqueId', unique_id)
         return df
-        
-# ***
-# # Database Connection and Querying
 
+### ~ Data Collection Functions ~ ###        
 def connect_to_db(database = 'SKYSPARK'):
     """Function to connect to the database
+    
     Args:
         database (string): name of the database to connect to options are 'SKYSPARK' (default) and 'ION'
 
     Returns:
-        client (influxdb-python client object): database connection object
-        OR
-        None: If the database connection failed
+        client (influxdb-python client object): database connection object \n
+        OR \n
+        (None): If the database connection failed
     """
     client = influxdb.DataFrameClient(host='206.12.92.81',port=8086,
                                       username='public', password='public',database=database)
@@ -489,32 +462,32 @@ def check_connection(client):
         client (influxdb-python client object): database connection object
 
     Returns:
-        True: If the database connection is live
-        OR
-        False: If the database connection is not live
+        True (bool): If the database connection is live \n
+        OR \n
+        False (bool): If the database connection is not live
     """
     try:
         client.ping()
         print("Connected")
         return True
     except:
-        print("Disconnected")
+        print("Not Connected")
         return False
 
 def query_db_ec(client, date, num_days=1, site='Pharmacy'):
-    """Function to query the UBC_EWS database for the EC sensors for the user defined start date, 
-       number of days (default=1), and site (default=Pharmacy)
+    """Function to query the UBC_EWS measurement for the EC sensors for the user defined start date,
+    number of days (default=1), and site (default=Pharmacy)
 
     Args:
-        client (influxdb-python client object): database connection object
-        date (string): date of interest in format 'YYYY-MM-DD' such as '2020-05-05'
-        num_days (int): number of days to query data
-        site (string): name of builing of interest
+        client (influxdb-python client object): database connection object \n
+        date (string): date of interest in format 'YYYY-MM-DD' such as '2020-05-05' \n
+        num_days (int): number of days to query data (default=1) \n
+        site (string): name of builing of interest  (default='Pharmacy')
 
     Returns:
-        pandas.DataFrame: data from the queried date(s)
-        OR
-        None: return value if the query found no data
+        df (pandas.DataFrame): data from the queried date(s) \n
+        OR \n
+        (None): return value if the query found no data
     """
     for i in range(0,num_days):
         time1 = '00:00:00'
@@ -536,18 +509,18 @@ def query_db_ec(client, date, num_days=1, site='Pharmacy'):
         return None
     
 def query_db_nc(client, date, num_days=1, site='Pharmacy'):
-    """Function to query the UBC_EWS database for the Non-Energy Consumption (NC) sensors 
-       for the user defined start date, number of days (default=1), and site (default=Pharmacy)
+    """Function to query the UBC_EWS measurement for the Non-Energy Consumption (NC) sensors
+    for the user defined start date, number of days (default=1), and site (default=Pharmacy)
 
     Args:
-        client (influxdb-python client object): database connection object
-        date (string): date of interest in format 'YYYY-MM-DD' such as '2020-05-05'
-        num_days (int): number of days to query data
-        site (string): name of builing of interest
+        client (influxdb-python client object): database connection object \n
+        date (string): date of interest in format 'YYYY-MM-DD' such as '2020-05-05' \n
+        num_days (int): number of days to query data (default=1) \n
+        site (string): name of builing of interest  (default='Pharmacy')
         
     Returns:
-        pandas.DataFrame: data from the queried date(s)
-        OR
+        pandas.DataFrame: data from the queried date(s) \n
+        OR \n
         None: return value if the query found no data
     """
     for i in range(0,num_days):
@@ -572,31 +545,28 @@ def query_db_nc(client, date, num_days=1, site='Pharmacy'):
 
 def query_csv(client, date, site):
     """Function to read the csv of saved data from the influxDB for the specified date. Requires csv files
-    to already be saved in a test_data subfolder. This is a temporary function to make testing faster while
-    developing code. It is meant to be replaced with query_db() so that the project will actually pull data
-    directly from the database.
+    to already be saved in a sensor_data subfolder. This is an alternative to querying directly from the database
+    if the data has previously been queried and saved as csv.
 
     Args:
+        client (string): path to the folder in which the csv's to read are stored
         date (string): date of interest in format 'YYYY-MM-DD' such as '2020-05-05'
 
     Dummy Args:
-        site (string): name of builing of interest. Not actually used but will make it easier to replace
-                        this function with the proper query_db() function in main
-        client (influxdb-python client object): database connection object. Not actually used, kept as a placeholder
-                        to make it easier to replace query_csv with query_db() function when it comes time to do so
-                        in the main() function.
+        site (string): name of building of interest. Not actually used but will make it easier to replace
+        this function with the proper query_db() function in main
+        
     Returns:
-        pandas.DataFrame: contents of the specific csv
-        OR
+        pandas.DataFrame: contents of the specific csv \n
+        OR \n
         None: couldn't find/access the specified csv
-
     """
     regexp = re.compile(r'^[0-9]{4}-[0-9]{2}-[0-9]{2}')
     if not regexp.search(date):
         raise ValueError("Date was not entered in usable format: YYYY-MM-DD")
     try:
-        filename = date+".csv"
-        temp_df = pd.read_csv('test_data/'+filename)
+        file_name = date+".csv"
+        temp_df = pd.read_csv(client+file_name)
         return temp_df
     except ValueError as e:
         print("ERROR: ", e)
@@ -608,32 +578,29 @@ def query_csv(client, date, site):
         return None
     
 def query_weather_csv(client, date, site):
-    """Function to read the csv of saved data from the influxDB for the specified date. Requires csv files
-    to already be saved in a weather_data subfolder. This is a temporary function to make testing faster while
-    developing code. It is meant to be replaced with query_db() so that the project will actually pull data
-    directly from the database.
+    """Function to read the weather data csv of saved data from the influxDB for the specified date. Requires csv files
+    to already be saved in a weather_data subfolder. This is an alternative to querying directly from the database
+    if the data has previously been queried and saved as csv.
 
     Args:
+        client (string): path to the folder in which the csv's to read are stored
         date (string): date of interest in format 'YYYY-MM-DD' such as '2020-05-05'
-        
+
     Dummy Args:
         site (string): name of builing of interest. Not actually used but will make it easier to replace
-                        this function with the proper query_db() function in main
-        client (influxdb-python client object): database connection object. Not actually used, kept as a placeholder
-                        to make it easier to replace query_csv with query_db() function when it comes time to do so
-                        in the main() function.
+        this function with the proper query_db() function in main
+        
     Returns:
-        pandas.DataFrame: contents of the specific csv
-        OR
+        pandas.DataFrame: contents of the specific csv \n
+        OR \n
         None: couldn't find/access the specified csv
-
     """
     regexp = re.compile(r'^[0-9]{4}-[0-9]{2}-[0-9]{2}')
     if not regexp.search(date):
         raise ValueError("Date was not entered in usable format: YYYY-MM-DD")
     try:
-        filename = date+".csv"
-        temp_df = pd.read_csv('weather_data/'+filename)
+        file_name = date+".csv"
+        temp_df = pd.read_csv(client+file_name)
         return temp_df
     except ValueError as e:
         print("ERROR: ", e)
