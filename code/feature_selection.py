@@ -450,7 +450,7 @@ def feature_selection():
 
 
     ##########################################################################
-    ############# Choosing K=maxFeature through Cross-Validation #############
+    ############# Choosing K=max_feature through Cross-Validation #############
     ##########################################################################
 
     ### Create the RFE object and compute a cross-validated score.
@@ -464,7 +464,7 @@ def feature_selection():
     Scores=pd.DataFrame({'scores':rfecv.grid_scores_,'num_features':range(1, len(rfecv.grid_scores_) + 1)})
 
     ### Choosing max number of features depending on how many features are recommended
-    maxFeature=rfecv.n_features_
+    max_feature=rfecv.n_features_
 
     print("Optimal number of features : %d" % rfecv.n_features_)
 
@@ -482,9 +482,9 @@ def feature_selection():
 
 
     ##########################################################################
-    ###########  Mutual Information Technique using K=maxFeature #############
+    ###########  Mutual Information Technique using K=max_feature #############
     ##########################################################################
-    fs = SelectKBest(score_func=mutual_info_classif, k=int(maxFeature))
+    fs = SelectKBest(score_func=mutual_info_classif, k=int(max_feature))
     fs.fit(X_train_enc, y_train_enc)
     X_train_fs = fs.transform(X_train_enc)
     X_test_fs = fs.transform(X_test_enc)
@@ -521,7 +521,7 @@ def feature_selection():
 
     print('Original number of features: {:.0f}'.format(all_features_count))
     print('')
-    print('These are the {:.0f} recommended categorical features:'.format(maxFeature))
+    print('These are the {:.0f} recommended categorical features:'.format(max_feature))
     print('')
     print(new_feature_names)
     print('')
