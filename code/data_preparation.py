@@ -475,7 +475,7 @@ def check_connection(client):
         return False
 
 def query_db_ec(client, date, num_days=1, site='Pharmacy'):
-    """Function to query the UBC_EWS database for the EC sensors for the user defined start date,
+    """Function to query the UBC_EWS measurement for the EC sensors for the user defined start date,
     number of days (default=1), and site (default=Pharmacy)
 
     Args:
@@ -509,7 +509,7 @@ def query_db_ec(client, date, num_days=1, site='Pharmacy'):
         return None
     
 def query_db_nc(client, date, num_days=1, site='Pharmacy'):
-    """Function to query the UBC_EWS database for the Non-Energy Consumption (NC) sensors
+    """Function to query the UBC_EWS measurement for the Non-Energy Consumption (NC) sensors
     for the user defined start date, number of days (default=1), and site (default=Pharmacy)
 
     Args:
@@ -553,7 +553,7 @@ def query_csv(client, date, site):
         date (string): date of interest in format 'YYYY-MM-DD' such as '2020-05-05'
 
     Dummy Args:
-        site (string): name of builing of interest. Not actually used but will make it easier to replace
+        site (string): name of building of interest. Not actually used but will make it easier to replace
         this function with the proper query_db() function in main
         
     Returns:
