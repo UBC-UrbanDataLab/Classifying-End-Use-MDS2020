@@ -1,0 +1,698 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 6,
+  "iteration": 1593015267281,
+  "links": [],
+  "panels": [
+    {
+      "aliasColors": {},
+      "breakPoint": "50%",
+      "cacheTimeout": null,
+      "combine": {
+        "label": "Others",
+        "threshold": 0
+      },
+      "datasource": "flux_SKYSPARK",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": null
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "fontSize": "80%",
+      "format": "kwatth",
+      "gridPos": {
+        "h": 12,
+        "w": 14,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "interval": "",
+      "legend": {
+        "percentage": true,
+        "show": true,
+        "values": true
+      },
+      "legendType": "Right side",
+      "links": [],
+      "maxDataPoints": 1,
+      "nullPointMode": "connected",
+      "pieType": "pie",
+      "pluginVersion": "7.0.3",
+      "strokeWidth": 1,
+      "targets": [
+        {
+          "query": "import \"strings\"\n\n//query all the numeric sensor readings for selected building in selected time range\n//convert the values from string to float\n//create a uniqueID column from several of the other columns with the siteRef\n//   value removed from anywhere it appears in the uniqueID - this is to match\n//   the way that the uniqueID has been created in the end-use classifying model code\n\nrawreadings=from(bucket: \"SKYSPARK\")\n  |> range($range)\n  |> filter(fn: (r) => r._measurement == \"UBC_EWS\" and\n  r.siteRef == \"$userSite\" and\n    r._value =~ /^[0-9]\\d*(\\.\\d+)?$/)\n  |> map(fn: (r) => ({\n    r with\n    uniqueID: strings.replaceAll(v: r.equipRef + \" \"+r.groupRef+\" \"+r.navName+\" \"+r.typeRef,t: \" \"+r.siteRef+\" \",u: \" \"),\n    _value: float(v: r._value)\n    }))\n  |> group(columns: [\"uniqueID\"], mode:\"by\")\n  |> drop(columns: [\"equipRef\", \"groupRef\",\"navName\",\"siteRef\",\"typeRef\",\"unit\",\"_measurement\"])\n\n//use rawreadings table to calculate difference between min and max reading for each sensor\nmintable=rawreadings|> min()\n\nmaxtable=rawreadings|> max()\n\nreadings=join(tables: {mintbl: mintable, maxtbl: maxtable}, on: [\"uniqueID\"], method: \"inner\")\n  |> map(fn: (r) => ({\n    r with\n    _value: r._value_maxtbl - r._value_mintbl\n    }))\n  \n//query all the end use tags \nsdate = 2019-12-01T23:30:00\nenduses=from(bucket: \"SKYSPARK\")\n  |> range(start: sdate)\n  |> filter(fn: (r) =>\n  r._measurement == \"END_USE\")\n\n\n//join end-use tags with readings, group by end use tags, and sum readings values\njoin(\n  tables: {reads:readings, euse:enduses},\n  on: [\"uniqueID\"],\n  method: \"inner\"\n)\n  |> rename(columns: {_value_reads: \"_value\", _value_euse: \"end_use_category\"})\n  |> group(columns: [\"end_use_category\"], mode:\"by\")\n  |> sum()\n  |> yield()\n\n",
+          "refId": "A",
+          "resultFormat": "time_series"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "$userSite Building Energy use by end-use type",
+      "type": "grafana-piechart-panel",
+      "valueName": "current"
+    },
+    {
+      "content": "### Energy By End-Use Category Dashboard\n\n##### Created June 2020 by UBCO MDS Capstone team\n\n\nThis dashboard demonstrates how data can be queried from the `UBC_EWS` measurement and the `END_USE` measurement, joined, and displayed in a pie-chart.\n\nLimitations:\n- This is a general proof of concept and at time of creation only works with the older `UBC_EWS` data and End Use Category labels were only available for the Pharmacy Building.\n- This visualization does not take into account that there is a hierarchy of meters measuring energy consumption of buildings. Thus there is some instances of multiple counts of the same energy being consumed (i.e. the main meter for the entire building + all of the sub-meters of that main meter + all of the equipment-specific meters fed by the sub-meters.)\n\n\n",
+      "datasource": "-- Grafana --",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 10,
+        "x": 14,
+        "y": 0
+      },
+      "id": 4,
+      "mode": "markdown",
+      "pluginVersion": "7.0.3",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Notes",
+      "type": "text"
+    }
+  ],
+  "refresh": false,
+  "schemaVersion": 25,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "selected": true,
+          "text": "Pharmacy",
+          "value": "Pharmacy"
+        },
+        "datasource": "flux_SKYSPARK",
+        "definition": "from(bucket: \"SKYSPARK\")\n  |> range(start: 2020-01-01T23:30:00)\n  |> filter(fn: (r) =>\n  r._measurement == \"UBC_EWS\")\n  |> group(columns: [\"_measurement\"], mode:\"by\")\n  |> distinct(column: \"siteRef\")",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Choose Building",
+        "multi": false,
+        "name": "userSite",
+        "options": [
+          {
+            "selected": false,
+            "text": "AERL",
+            "value": "AERL"
+          },
+          {
+            "selected": false,
+            "text": "AMS Nest",
+            "value": "AMS Nest"
+          },
+          {
+            "selected": false,
+            "text": "Allard Hall",
+            "value": "Allard Hall"
+          },
+          {
+            "selected": false,
+            "text": "Alumni Centre",
+            "value": "Alumni Centre"
+          },
+          {
+            "selected": false,
+            "text": "Aquatic Centre",
+            "value": "Aquatic Centre"
+          },
+          {
+            "selected": false,
+            "text": "Asian Centre",
+            "value": "Asian Centre"
+          },
+          {
+            "selected": false,
+            "text": "Auditorium Annex",
+            "value": "Auditorium Annex"
+          },
+          {
+            "selected": false,
+            "text": "BC Binning",
+            "value": "BC Binning"
+          },
+          {
+            "selected": false,
+            "text": "BRDF",
+            "value": "BRDF"
+          },
+          {
+            "selected": false,
+            "text": "Beaty",
+            "value": "Beaty"
+          },
+          {
+            "selected": false,
+            "text": "Belkin Art Gallery",
+            "value": "Belkin Art Gallery"
+          },
+          {
+            "selected": false,
+            "text": "Bio Sci South",
+            "value": "Bio Sci South"
+          },
+          {
+            "selected": false,
+            "text": "Bio Sci West",
+            "value": "Bio Sci West"
+          },
+          {
+            "selected": false,
+            "text": "Biomed",
+            "value": "Biomed"
+          },
+          {
+            "selected": false,
+            "text": "Bookstore-NCE",
+            "value": "Bookstore-NCE"
+          },
+          {
+            "selected": false,
+            "text": "Brimacombe-QMI",
+            "value": "Brimacombe-QMI"
+          },
+          {
+            "selected": false,
+            "text": "Brock Hall",
+            "value": "Brock Hall"
+          },
+          {
+            "selected": false,
+            "text": "Buchanan A,B,C",
+            "value": "Buchanan A,B,C"
+          },
+          {
+            "selected": false,
+            "text": "Buchanan D,E",
+            "value": "Buchanan D,E"
+          },
+          {
+            "selected": false,
+            "text": "Buchanan Tower",
+            "value": "Buchanan Tower"
+          },
+          {
+            "selected": false,
+            "text": "C.K. Choi",
+            "value": "C.K. Choi"
+          },
+          {
+            "selected": false,
+            "text": "CEME",
+            "value": "CEME"
+          },
+          {
+            "selected": false,
+            "text": "CEME Labs",
+            "value": "CEME Labs"
+          },
+          {
+            "selected": false,
+            "text": "CICSR",
+            "value": "CICSR"
+          },
+          {
+            "selected": false,
+            "text": "CIRS",
+            "value": "CIRS"
+          },
+          {
+            "selected": false,
+            "text": "Campus Energy Centre",
+            "value": "Campus Energy Centre"
+          },
+          {
+            "selected": false,
+            "text": "Central",
+            "value": "Central"
+          },
+          {
+            "selected": false,
+            "text": "Chan Centre",
+            "value": "Chan Centre"
+          },
+          {
+            "selected": false,
+            "text": "Chem Bio",
+            "value": "Chem Bio"
+          },
+          {
+            "selected": false,
+            "text": "Chem Centre",
+            "value": "Chem Centre"
+          },
+          {
+            "selected": false,
+            "text": "Chem East",
+            "value": "Chem East"
+          },
+          {
+            "selected": false,
+            "text": "Chem North",
+            "value": "Chem North"
+          },
+          {
+            "selected": false,
+            "text": "Chem Phys",
+            "value": "Chem Phys"
+          },
+          {
+            "selected": false,
+            "text": "Chem South",
+            "value": "Chem South"
+          },
+          {
+            "selected": false,
+            "text": "Continuing Studies",
+            "value": "Continuing Studies"
+          },
+          {
+            "selected": false,
+            "text": "Cunningham",
+            "value": "Cunningham"
+          },
+          {
+            "selected": false,
+            "text": "David Lam",
+            "value": "David Lam"
+          },
+          {
+            "selected": false,
+            "text": "EOS",
+            "value": "EOS"
+          },
+          {
+            "selected": false,
+            "text": "ESB",
+            "value": "ESB"
+          },
+          {
+            "selected": false,
+            "text": "ESC",
+            "value": "ESC"
+          },
+          {
+            "selected": false,
+            "text": "Exchange Residence",
+            "value": "Exchange Residence"
+          },
+          {
+            "selected": false,
+            "text": "FNH",
+            "value": "FNH"
+          },
+          {
+            "selected": false,
+            "text": "Focal",
+            "value": "Focal"
+          },
+          {
+            "selected": false,
+            "text": "Forest Sci",
+            "value": "Forest Sci"
+          },
+          {
+            "selected": false,
+            "text": "Fred Kaiser",
+            "value": "Fred Kaiser"
+          },
+          {
+            "selected": false,
+            "text": "Freddy Wood Theatre",
+            "value": "Freddy Wood Theatre"
+          },
+          {
+            "selected": false,
+            "text": "Friedman",
+            "value": "Friedman"
+          },
+          {
+            "selected": false,
+            "text": "Gage Res - All",
+            "value": "Gage Res - All"
+          },
+          {
+            "selected": false,
+            "text": "Green College (All)",
+            "value": "Green College (All)"
+          },
+          {
+            "selected": false,
+            "text": "Hebb",
+            "value": "Hebb"
+          },
+          {
+            "selected": false,
+            "text": "Hennings",
+            "value": "Hennings"
+          },
+          {
+            "selected": false,
+            "text": "I.K. Barber",
+            "value": "I.K. Barber"
+          },
+          {
+            "selected": false,
+            "text": "ICICS",
+            "value": "ICICS"
+          },
+          {
+            "selected": false,
+            "text": "International House",
+            "value": "International House"
+          },
+          {
+            "selected": false,
+            "text": "J.B. MacDonald",
+            "value": "J.B. MacDonald"
+          },
+          {
+            "selected": false,
+            "text": "Jack Bell",
+            "value": "Jack Bell"
+          },
+          {
+            "selected": false,
+            "text": "Kenny",
+            "value": "Kenny"
+          },
+          {
+            "selected": false,
+            "text": "Klinck",
+            "value": "Klinck"
+          },
+          {
+            "selected": false,
+            "text": "Koerner Library",
+            "value": "Koerner Library"
+          },
+          {
+            "selected": false,
+            "text": "Lasserre",
+            "value": "Lasserre"
+          },
+          {
+            "selected": false,
+            "text": "Life Building",
+            "value": "Life Building"
+          },
+          {
+            "selected": false,
+            "text": "Liu",
+            "value": "Liu"
+          },
+          {
+            "selected": false,
+            "text": "Longhouse",
+            "value": "Longhouse"
+          },
+          {
+            "selected": false,
+            "text": "MEDC",
+            "value": "MEDC"
+          },
+          {
+            "selected": false,
+            "text": "MOA",
+            "value": "MOA"
+          },
+          {
+            "selected": false,
+            "text": "MacLeod",
+            "value": "MacLeod"
+          },
+          {
+            "selected": false,
+            "text": "Mary Bollert Hall",
+            "value": "Mary Bollert Hall"
+          },
+          {
+            "selected": false,
+            "text": "Michael Smith",
+            "value": "Michael Smith"
+          },
+          {
+            "selected": false,
+            "text": "Music",
+            "value": "Music"
+          },
+          {
+            "selected": false,
+            "text": "NSDC",
+            "value": "NSDC"
+          },
+          {
+            "selected": false,
+            "text": "Neville Scarfe",
+            "value": "Neville Scarfe"
+          },
+          {
+            "selected": false,
+            "text": "Old Auditorium",
+            "value": "Old Auditorium"
+          },
+          {
+            "selected": false,
+            "text": "Orchard Commons",
+            "value": "Orchard Commons"
+          },
+          {
+            "selected": false,
+            "text": "Parc Library",
+            "value": "Parc Library"
+          },
+          {
+            "selected": true,
+            "text": "Pharmacy",
+            "value": "Pharmacy"
+          },
+          {
+            "selected": false,
+            "text": "Ponderosa North",
+            "value": "Ponderosa North"
+          },
+          {
+            "selected": false,
+            "text": "Pulp & Paper",
+            "value": "Pulp & Paper"
+          },
+          {
+            "selected": false,
+            "text": "SPPH",
+            "value": "SPPH"
+          },
+          {
+            "selected": false,
+            "text": "Sing Tao",
+            "value": "Sing Tao"
+          },
+          {
+            "selected": false,
+            "text": "Strangway",
+            "value": "Strangway"
+          },
+          {
+            "selected": false,
+            "text": "Student Recreation Centre",
+            "value": "Student Recreation Centre"
+          },
+          {
+            "selected": false,
+            "text": "Tall Wood House",
+            "value": "Tall Wood House"
+          },
+          {
+            "selected": false,
+            "text": "Thea Koerner House",
+            "value": "Thea Koerner House"
+          },
+          {
+            "selected": false,
+            "text": "Totem Cesnaem",
+            "value": "Totem Cesnaem"
+          },
+          {
+            "selected": false,
+            "text": "Totem Park Res - Qelexen/Hemlesen",
+            "value": "Totem Park Res - Qelexen/Hemlesen"
+          },
+          {
+            "selected": false,
+            "text": "UBC Tennis Centre (New)",
+            "value": "UBC Tennis Centre (New)"
+          },
+          {
+            "selected": false,
+            "text": "ULTL",
+            "value": "ULTL"
+          },
+          {
+            "selected": false,
+            "text": "University Centre",
+            "value": "University Centre"
+          },
+          {
+            "selected": false,
+            "text": "Vanier - Aldyen Hamber",
+            "value": "Vanier - Aldyen Hamber"
+          },
+          {
+            "selected": false,
+            "text": "Vanier - Cariboo",
+            "value": "Vanier - Cariboo"
+          },
+          {
+            "selected": false,
+            "text": "Vanier - Gordon Shrum",
+            "value": "Vanier - Gordon Shrum"
+          },
+          {
+            "selected": false,
+            "text": "Vanier - Kootenay",
+            "value": "Vanier - Kootenay"
+          },
+          {
+            "selected": false,
+            "text": "Vanier - Mackenzie",
+            "value": "Vanier - Mackenzie"
+          },
+          {
+            "selected": false,
+            "text": "Vanier - Mawdsley",
+            "value": "Vanier - Mawdsley"
+          },
+          {
+            "selected": false,
+            "text": "Vanier - Phyllis Ross",
+            "value": "Vanier - Phyllis Ross"
+          },
+          {
+            "selected": false,
+            "text": "Vanier - Robson",
+            "value": "Vanier - Robson"
+          },
+          {
+            "selected": false,
+            "text": "Vanier - Sherwood Lett",
+            "value": "Vanier - Sherwood Lett"
+          },
+          {
+            "selected": false,
+            "text": "Vanier - Tweedsmuir",
+            "value": "Vanier - Tweedsmuir"
+          },
+          {
+            "selected": false,
+            "text": "War Memorial Gymnasium",
+            "value": "War Memorial Gymnasium"
+          },
+          {
+            "selected": false,
+            "text": "Wesbrook Building",
+            "value": "Wesbrook Building"
+          },
+          {
+            "selected": false,
+            "text": "West Mall Annex",
+            "value": "West Mall Annex"
+          },
+          {
+            "selected": false,
+            "text": "Woodward IRC",
+            "value": "Woodward IRC"
+          },
+          {
+            "selected": false,
+            "text": "Woodward Library",
+            "value": "Woodward Library"
+          }
+        ],
+        "query": "from(bucket: \"SKYSPARK\")\n  |> range(start: 2020-01-01T23:30:00)\n  |> filter(fn: (r) =>\n  r._measurement == \"UBC_EWS\")\n  |> group(columns: [\"_measurement\"], mode:\"by\")\n  |> distinct(column: \"siteRef\")",
+        "refresh": 0,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
+  },
+  "time": {
+    "from": "2020-05-27T07:00:00.000Z",
+    "to": "2020-05-27T09:00:00.000Z"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ]
+  },
+  "timezone": "",
+  "title": "MDS2020_CAPSTONE",
+  "uid": "4GlqacWGz",
+  "version": 3
+}
