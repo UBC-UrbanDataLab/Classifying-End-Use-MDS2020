@@ -47,6 +47,10 @@ def feature_selection():
     ### ~ Alows customization of outputs ~ ###
     # Boolean defining if the output dataframes from each step should be saved (save if True, else False)
     SAVE_STEP_OUTPUTS = True
+    # Strings defining the location to save the dataframe csv's
+    STEP1_SAVE_PATH = '../data/csv_outputs/step1_clustering_phase_output.csv'
+    STEP2_SAVE_PATH_FINAL_DF = '../data/csv_outputs/step2_ridge_regression_output.csv'
+    STEP2_SAVE_PATH_EC_DATA2 = '../data/csv_outputs/step2_aggregated_ec_data_output.csv'
     # Boolean defining if the model should query from the database or pull from csv's (from database if True, else False)
     QUERY_FROM_DB = False
     # Strings containing the paths to the folders that contains the csv's to pull data from if QUERY_FROM_DB==False
@@ -251,7 +255,7 @@ def feature_selection():
     nc_data = nc_data.join(update_rates, how='left', on=['hour', 'date'])
     nc_data = nc_data.drop('count', axis=1)
     if SAVE_STEP_OUTPUTS:
-        nc_data.to_csv('step1_clustering_phase_output.csv')
+        nc_data.to_csv(STEP1_SAVE_PATH)
     
     # Freeing up some space
     temp_df_aggs = None
@@ -395,7 +399,8 @@ def feature_selection():
     print("avg_mse:",avg_mse)
     
     if SAVE_STEP_OUTPUTS:
-        pass # TODO: I'm not sure what data should be getting save here
+        final_df.to_csv(STEP2_SAVE_PATH_FINAL_DF)
+        ec_data2.to_csv(STEP2_SAVE_PATH_EC_DATA2)
     print("####### ~~~~~ Complete - Step 2: Model EC/NC Relationship ~~~~~ #######") # For tracking program progress
 
     ##### 3) Prep EC data for classification model
@@ -419,27 +424,27 @@ def feature_selection():
     merged_left=pd.merge(ec_data2, metadata, how='left', left_on='uniqueId', right_on='uniqueId')
 
     ###   b) Apply feature selection function(s) to the joined EC+metadata
-    # load NRCan classifications training data
-    nrcan_labels=pd.read_csv(TRAINING_SET_PATH)
+    # load end_use classifications training data
+    end_use_labels=pd.read_csv(TRAINING_SET_PATH)
     # make uniqueId
-    nrcan_labels['siteRef']=QUERY_SITE
-    nrcan_labels=data_preparation.create_unique_id(nrcan_labels)
+    end_use_labels['siteRef']=QUERY_SITE
+    end_use_labels=data_preparation.create_unique_id(end_use_labels)
 
     # rename columns to fix unit of measurements
-    nrcan_labels.rename(columns={'UBC_EWS.firstValue':'value'}, inplace=True)
+    end_use_labels.rename(columns={'UBC_EWS.firstValue':'value'}, inplace=True)
     # run correct_df_units function
-    nrcan_labels=data_preparation.correct_df_units(nrcan_labels)
+    end_use_labels=data_preparation.correct_df_units(end_use_labels)
 
     # TRAINING DATA CLEANING
     # Change ? to 0 since uom fixed
-    nrcan_labels=nrcan_labels.assign(isGas=nrcan_labels.isGas.apply(lambda x: '0' if x=='?' else x))
+    end_use_labels=end_use_labels.assign(isGas=end_use_labels.isGas.apply(lambda x: '0' if x=='?' else x))
     # changing boolean for more descriptive encoding
-    nrcan_labels=nrcan_labels.assign(isGas=nrcan_labels.isGas.apply(lambda x: 'no_gas' if x=='0' else 'yes_gas'))
+    end_use_labels=end_use_labels.assign(isGas=end_use_labels.isGas.apply(lambda x: 'no_gas' if x=='0' else 'yes_gas'))
 
     # selecting relevant training data fields
-    nrcan_labels=nrcan_labels[['uniqueId', 'isGas', 'equipRef', 'groupRef', 'navName', 'endUseLabel']]
-    nrcan_labels=nrcan_labels.drop_duplicates()
-    merged_outer=pd.merge(left=merged_left, right=nrcan_labels, how='left', left_on='uniqueId', right_on='uniqueId')
+    end_use_labels=end_use_labels[['uniqueId', 'isGas', 'equipRef', 'groupRef', 'navName', 'endUseLabel']]
+    end_use_labels=end_use_labels.drop_duplicates()
+    merged_outer=pd.merge(left=merged_left, right=end_use_labels, how='left', left_on='uniqueId', right_on='uniqueId')
     # make equipRef and navName into smaller categories for feature engineering
     merged_outer=merged_outer.assign(equipRef=merged_outer.equipRef.apply(lambda x: data_preparation.equip_label(str(x))))
     merged_outer=merged_outer.assign(navName=merged_outer.navName.apply(lambda x: data_preparation.nav_label(str(x))))
