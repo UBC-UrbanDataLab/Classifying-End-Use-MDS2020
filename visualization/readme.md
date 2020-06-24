@@ -2,6 +2,12 @@
 
 ![](images/dashboard_screenshot.png "Screenshot of the dashboard that was created as part of the 2020 UBCO Capstone project")
 
+1. [ Introduction ](#desc)
+2. [ Grafana Setup ](#setup)
+3. [ About the Flux Query ](#query)
+4. [ Future Work For Query ](#future)
+
+<a name="intro"></a>
 # Introduction)   
 
 The Grafana dashboard created to visualize energy consumption by end-use category for the Pharmacy building uses a simple pie-chart as the visualization. The focus of this document is on the setup of the data source in Grafana and the query used to retrieve the data for the pie-chart.
@@ -10,7 +16,7 @@ The Grafana dashboard created to visualize energy consumption by end-use categor
 
 The dashboard has been saved as **MDS2020_CAPSTONE** in UDL's grafana account: https://udl.grafana.net/d/4GlqacWGz/
 
-A copy of the dashboard in .json format has been saved on this git repo under visualization/grafana_MDS2020-CAPSTONE.json
+A copy of the dashboard in .json format has been saved on this git repo under [visualization/grafana_MDS2020-CAPSTONE.json](grafana_MDS2020-CAPSTONE.json)
 
 ### Limitations of dashboard
 
@@ -19,6 +25,7 @@ Due to the calculations required to process the data, the influxDB server is onl
 &nbsp;  
 &nbsp;  
 
+<a name="setup"></a>
 # Grafana Setup & Importing Dashboard)
 
 Grafana can either be setup as a standalone service on a server/docker container by installing the open source Grafana software (https://grafana.com/oss/grafana/) or can be used through the commerical cloud-based implementation (https://grafana.com/products/cloud/). Note that a free-use tier exists for the cloud-based service and simply requires the user to make an account, login, and start a grafana instance. This free-tier limits the user to only 5 dashboards, 1 user account, and only the non-enterprise plugins. For the purpose of the MDS2020_CAPSTONE dashboard, the free-tier has all necessary features.
@@ -98,6 +105,7 @@ MDS2020-CAPSTONE should now be listed in the dashboards.
 &nbsp;  
 &nbsp;  
 
+<a name="query"></a>
 # About the Flux Query)  
 ### Notes on Flux
 Details on how to enable and use Flux can be found on the [official influxDB documentation page](https://docs.influxdata.com/flux/v0.65/introduction/) on the topic.
@@ -205,6 +213,7 @@ The last step performs a join between the table of sensor readings and the end-u
 &nbsp;  
 &nbsp;  
 
+<a name="future"></a>
 # Future Work For Flux Query)
 
 #### -Use Updated Database Structure
