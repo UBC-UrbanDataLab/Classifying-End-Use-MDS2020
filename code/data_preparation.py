@@ -553,7 +553,7 @@ def query_csv(client, date, site):
         date (string): date of interest in format 'YYYY-MM-DD' such as '2020-05-05'
 
     Dummy Args:
-        site (string): name of builing of interest. Not actually used but will make it easier to replace
+        site (string): name of building of interest. Not actually used but will make it easier to replace
         this function with the proper query_db() function in main
         
     Returns:
