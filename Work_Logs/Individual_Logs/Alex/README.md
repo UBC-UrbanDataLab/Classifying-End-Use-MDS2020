@@ -228,3 +228,50 @@ Summary of our activities on a weekly basis:
 |7|2020-06-15|Add a couple slides to the presentation|Logistics|0.75|
 |7|2020-06-15|Pass some info+questions on to Jiachen|Client Meetings|0.75|
 |7|2020-06-15|Work on code for writing to influxDB|Coding|3.5|
+|8|2020-06-16|Continue to work on tweaking/testing code for output pipeline|Coding|0.75|
+|8|2020-06-16|Review info on Flux vs influxQL for discussion with Jiachen|Research|0.75|
+|8|2020-06-16|Meeting with Jiachen to discuss enabling Flux|Client Meetings|0.25|
+|8|2020-06-16|Practice presentation slides|Logistics|0.25|
+|8|2020-06-16|Daily Standup|Daily Meetings|0.25|
+|8|2020-06-16|Weekly Presentation Dry-run|Logistics|0.25|
+|8|2020-06-16|Clean up code for writing to influxDB|Coding|1.5|
+|8|2020-06-16|Weekly Presentation|Weekly Meetings|0.5|
+|8|2020-06-16|Test Flux on UDL database + get it working with Grafana|Debugging|2.5|
+|8|2020-06-16|Test writing/deleting/updating points on UDL database|Coding|1.25|
+|8|2020-06-16|Get Grafana Dashboard Variables working in Flux queries in Grafana|Coding|1|
+|8|2020-06-16|Create query for counting datatypes in UDL influxdb. Contact Jiachen re: problems with update|Client Meetings|0.5|
+|8|2020-06-17|Sort out and test alternate schema for storing end-use labels|Coding|2.25|
+|8|2020-06-17|Daily Standup|Daily Meetings|0.5|
+|8|2020-06-17|First pass through draft report|Logistics|1|
+|8|2020-06-17|Move code into write_enduses_to_influx python file, add rudimentary error checking and comment|Coding|2.25|
+|8|2020-06-17|Work on report|Logistics|3.5|
+|8|2020-06-18|Update Personal logs|Logistics|0.75|
+|8|2020-06-18|Update Jira cards|Logistics|0.5|
+|8|2020-06-18|Misc report updates|Logistics|0.25|
+|8|2020-06-18|Daily Standup|Daily Meetings|0.25|
+|8|2020-06-18|Retrospective Meeting||0.5|
+|8|2020-06-18|Update write_to_py code|Coding|2|
+|8|2020-06-18|Work on report|Logistics|3.5|
+|8|2020-06-18|Got flux query working with UBC_EWS (including casting numeric values and making uniqueID) |Coding|2.25|
+|8|2020-06-19|Got min/max functions working in flux query|Coding|1|
+|8|2020-06-19|Draft "visualization" section on report|Logistics|0.75|
+|8|2020-06-19|Daily Standup|Daily Meetings|0.25|
+|8|2020-06-19|Sprint Planning|Weekly Meetings|0.75|
+|8|2020-06-19|Agenda for Client Meeting|Weekly Meetings|0.5|
+|8|2020-06-19|Improve vis for client meeting|Coding|1.5|
+|8|2020-06-19|Look into container hosting|Research|0.75|
+|8|2020-06-19|Client Meeting|Client Meetings|1|
+|8|2020-06-19|Setup grafana cloud account + get draft dashboard in UDL account|Coding|1.5|
+|8|2020-06-20|Got query to join with real data outputted from model. Messed with various dashboard improvements|Coding|4|
+|8|2020-06-20|Added some slides|Logistics|1.5|
+|8|2020-06-21|Tested dashboard import/export. Updated some Jira cards. |Debugging|3.5|
+|8|2020-06-22|Started writing visualization markdown doc|Logistics|1|
+|8|2020-06-22|Tested query runtimes|Coding|0.75|
+|8|2020-06-22|Attemped to improve query speed|Coding|0.75|
+|8|2020-06-22|Daily Standup + discuss presentation|Daily Meetings|0.5|
+|8|2020-06-22|Work on presentation|Logistics|3.25|
+|8|2020-06-22|Practice presentation with group|Other Meeting|1|
+|8|2020-06-22|Update+practice presentation on own|Logistics|1.5|
+|9|2020-06-23|Tested query speed improvement with "READINGS" influx measurement|Debugging|2|
+|9|2020-06-23|Updated Personal Log|Logistics|0.25|
+|9|2020-06-23|Daily Standup|Daily Meetings|0|

@@ -7,6 +7,9 @@ Created on Fri May 22 17:06:05 2020
 """
 # Library Imports
 import pandas as pd
+pd.options.mode.chained_assignment = None # Disabling chained_assignment warning as it is not a concern here
+import warnings
+warnings.simplefilter(action='ignore', category=pd.errors.PerformanceWarning) # Disabling the lexsort performance warning as it has minimal relevance at this point
 
 # Function imports from other files
 import data_preparation as dp
@@ -23,10 +26,10 @@ def split_datetime(df):
     """
     df = df.copy()
     # Extracting the date and hour of the day from the timestamp column
-    df['datetime'] = pd.to_datetime(df['datetime'])
-    df['date'] = df['datetime'].dt.date
-    df['month'] = df['datetime'].dt.month.astype(str)
-    df['hour'] = df['datetime'].dt.hour.astype(str) # Want as str so that it doesn't get aggregated when not aggregating on it
+    df.loc[:,'datetime'] = pd.to_datetime(df.loc[:,'datetime'])
+    df.loc[:,'date'] = df.loc[:,'datetime'].dt.date.astype(str)
+    df.loc[:,'month'] = df.loc[:,'datetime'].dt.month.astype(str)
+    df.loc[:,'hour'] = df.loc[:,'datetime'].dt.hour.astype(str) # Want as str so that it doesn't get aggregated when not aggregating on it
     return df
 
 def agg_numeric_by_col(df, col_idx, how='all'):
@@ -48,10 +51,10 @@ def agg_numeric_by_col(df, col_idx, how='all'):
     """
     df = df.copy()
     # Filtering down just to the numeric values
-    df['dtype'] = df['value'].apply(dp.get_data_type)
-    df = df.loc[df['dtype']=='num']
+    df.loc[:,'dtype'] = df.loc[:,'value'].apply(dp.get_data_type)
+    df = df.loc[df.loc[:,'dtype']=='num']
     # Converting value column to float
-    df['value'] = df['value'].astype(float)
+    df.loc[:,'value'] = df.loc[:,'value'].astype(float)
     # Get column names to aggregate by
     group_names = df.columns[col_idx].values.tolist()
     if how=='all':
@@ -85,17 +88,17 @@ def agg_bool_by_col(df, col_idx, how='all'):
     """
     df = df.copy()
     # Filtering down just to the boolean values
-    df['dtype'] = df['value'].apply(dp.get_data_type)
-    df = df.loc[df['dtype']=='bool']
+    df.loc[:,'dtype'] = df.loc[:,'value'].apply(dp.get_data_type)
+    df = df.loc[df.loc[:,'dtype']=='bool']
     # Converting value column to 0 (False) and 1 (True)
-    df['value'] = df['value'].apply(lambda x: 1 if x=='True' else 0)
+    df.loc[:,'value'] = df.loc[:,'value'].apply(lambda x: 1 if x=='True' else 0)
     # Converting indexes to group by to the column names
     group_names = df.columns[col_idx].values.tolist()
     group_names.extend(['hour']) # First aggregation is by hour
     # Sorting observations by their timestamp
     df = df.sort_values(by='datetime')
     # Creating column for easy aggregation (always aggregate by hour first so do hour first)
-    df['groups'] = ''
+    df.loc[:, 'groups'] = ''
     for idx in col_idx:
             df.loc[:,'groups'] += df.iloc[:,idx].astype(str)
     # Adding hr_idx to the end of groups for initial grouping on hours
@@ -103,7 +106,7 @@ def agg_bool_by_col(df, col_idx, how='all'):
     groupList = df.loc[:,'groups'].unique()
     # For loop to identify the number of changes for each group individually
     for group in groupList:
-        temp_df = df[df.loc[:,'groups']==group]
+        temp_df = df.loc[df.loc[:,'groups']==group]
         temp_df.loc[:,'value'] = temp_df.loc[:,'value'].diff().abs() # If value changes then will be 1, else will be 0
         temp_df = temp_df.drop(labels='groups', axis=1)
         temp_df.loc[:,'value'] = temp_df.loc[:,'value'].fillna(0)
@@ -147,29 +150,29 @@ def agg_cat_by_col(df, col_idx, how='all'):
     """
     df = df.copy()
     # Filtering down just to the categorical values
-    df['dtype'] = df['value'].apply(dp.get_data_type)
-    df = df.loc[df['dtype']=='str']
+    df.loc[:,'dtype'] = df.loc[:,'value'].apply(dp.get_data_type)
+    df = df.loc[df.loc[:,'dtype']=='str']
     # Converting value column numeric indexes related to unique states in the value column
-    cat2idx = dict(map(reversed,pd.DataFrame(df['value'].unique()).to_dict()[0].items()))
-    df['value'] = df['value'].apply(lambda x: cat2idx[x])
+    cat2idx = dict(map(reversed,pd.DataFrame(df.loc[:,'value'].unique()).to_dict()[0].items()))
+    df.loc[:,'value'] = df.loc[:,'value'].apply(lambda x: cat2idx[x])
     # Converting indexes to group by to the column names
     group_names = df.columns[col_idx].values.tolist()
     group_names.extend(['hour']) # First aggregation is by hour
     # Sorting observations by their timestamp
     df = df.sort_values(by='datetime')
     # Creating column for easy aggregation
-    df['groups'] = ''
+    df.loc[:, 'groups'] = ''
     for idx in col_idx:
             df.loc[:,'groups'] += df.iloc[:,idx].astype(str)
     isFirst = True
     groupList = df.loc[:,'groups'].unique()
     # For loop to identify the number of changes for each group individually
     for group in groupList:
-        temp_df = df[df.loc[:,'groups']==group]
+        temp_df = df.loc[df.loc[:,'groups']==group]
         temp_df.loc[:,'value'] = temp_df.loc[:,'value'].diff().abs()
         temp_df = temp_df.drop(labels='groups', axis=1)
-        temp_df['value'] = temp_df.loc[:,'value'].fillna(0)
-        temp_df['value'] = temp_df['value'].apply(lambda x: 1 if x>0 else 0)
+        temp_df.loc[:,'value'] = temp_df.loc[:,'value'].fillna(0)
+        temp_df.loc[:,'value'] = temp_df.loc[:,'value'].apply(lambda x: 1 if x>0 else 0)
         temp_df = temp_df.groupby(group_names).agg({'value':['sum','count']},axis=1)
         if isFirst==True:
                 return_df = temp_df
@@ -205,29 +208,29 @@ def combine_mixed_agg(df, struct_df, col_idx):
     df = df.copy()
     group_names = struct_df.columns[col_idx].values.tolist()
     dupes = df.duplicated(subset = group_names, keep=False)
-    dupes = df[dupes]
+    dupes = df.loc[dupes]
     if len(dupes) == 0:
         return df
     else:
         df = df.drop_duplicates(subset=group_names, keep=False)
-        dupes['id'] = ''
+        dupes.loc[:,'id'] = ''
         for group in group_names:
-            dupes['id'] += dupes[group].astype(str)
+            dupes.loc[:,'id'] += dupes.loc[:,group].astype(str)
         dupe_list = dupes['id'].unique()
         agg_types = list(set(df.columns.tolist())-set(group_names))
         for dupe in dupe_list:
-            cur_dupe = dupes.loc[dupes['id']==dupe]
+            cur_dupe = dupes.loc[dupes.loc[:,'id']==dupe]
             #cur_dupe = pd.DataFrame(cur_dupe).transpose()
             dupe_agg = dupes.loc[dupes['id']==dupe].iloc[0,:]
             dupe_agg = pd.DataFrame(dupe_agg).transpose()
-            dupe_agg['count'] = cur_dupe['count'].sum()
+            dupe_agg.loc[:,'count'] = cur_dupe.loc[:,'count'].sum()
             for agg in agg_types:
                 if agg == 'max':
-                    dupe_agg['max'] = cur_dupe['max'].max()
+                    dupe_agg.loc[:,'max'] = cur_dupe.loc[:,'max'].max()
                 elif agg == 'min':
-                    dupe_agg['min'] = cur_dupe['min'].min()
+                    dupe_agg.loc[:,'min'] = cur_dupe.loc[:,'min'].min()
                 elif agg == 'mean' or agg == 'std':
-                    dupe_agg[agg] = sum(cur_dupe[agg]*cur_dupe['count'])/sum(cur_dupe['count'])
+                    dupe_agg.loc[:,agg] = sum(cur_dupe.loc[:,agg]*cur_dupe.loc[:,'count'])/sum(cur_dupe.loc[:,'count'])
             dupe_agg = dupe_agg.drop('id', axis=1)
             df = df.append(dupe_agg)
         return df
@@ -281,7 +284,7 @@ def agg_all(df, col_idx, how='all', last_idx_to_col=True):
                 is_first = False
                 first_group = group
             else:
-                new_df['count_'+str(first_group)] += new_df['count_'+str(group)]
+                new_df.loc[:,'count_'+str(first_group)] += new_df.loc[:,'count_'+str(group)]
                 new_df = new_df.drop(labels='count_'+str(group), axis=1)
         new_df = new_df.rename(columns={'count_'+str(first_group):'count'})
         all_agg = new_df.fillna(0)

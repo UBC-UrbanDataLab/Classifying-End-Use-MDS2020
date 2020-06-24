@@ -70,7 +70,7 @@ Summary of our activities on a weekly basis:
 |2|2020-05-08|Sprint Planning|Weekly Meetings|1|
 |2|2020-05-08|Preping for UDL meeting|Weekly Meetings|0.5|
 |2|2020-05-08|Research implementing Gower's distance|Research|1.25|
-|2|2020-05-08|Meeting with UDL|Weekly Meetings|0.5|
+|2|2020-05-08|Meeting with UDL|Client Meetings|0.5|
 |2|2020-05-08|UDL meeting debrief and finish sprint planning|Weekly Meetings|0.75|
 |2|2020-05-08|Research implementing Gower's distance|Research|1.75|
 |2|2020-05-11|Prep for daily standup|Meeting Prep|0.5|
@@ -105,7 +105,7 @@ Summary of our activities on a weekly basis:
 |3|2020-05-15|Daily Standup Prep|Meeting Prep|0.33|
 |3|2020-05-15|Daily Standup|Daily Meetings|0.25|
 |3|2020-05-15|Sprint Planning Meeting|Weekly Meetings|1.75|
-|3|2020-05-15|Meeting with UDL|Weekly Meetings|1|
+|3|2020-05-15|Meeting with UDL|Client Meetings|1|
 |3|2020-05-15|UDL meeting debrief|Weekly Meetings|0.5|
 |3|2020-05-15|Clean up data prep and database conneciton code and comments and push to GitHub|Coding|1.5|
 |3|2020-05-18|Review presentation|Meeting Prep|0.5|
@@ -176,7 +176,7 @@ Summary of our activities on a weekly basis:
 |5|2020-05-29|Sprint planning|Weekly Meetings|0.75|
 |5|2020-05-29|UDL meeting prep|Meeting Prep|0.83|
 |5|2020-05-29|Work on aggregation function fixes as discussed|Coding|1.83|
-|5|2020-05-29|UDL Meeting|Weekly Meetings|1|
+|5|2020-05-29|UDL Meeting|Client Meetings|1|
 |5|2020-05-29|Finish Sprint planning, discuss schedule, and discuss presentations|Weekly Meetings|0.5|
 |5|2020-05-29|Work on aggregation function fixes as discussed|Coding|2.5|
 |5|2020-05-31|Add docstrings to functions|Coding|3|
@@ -209,7 +209,7 @@ Summary of our activities on a weekly basis:
 |6|2020-06-05|Daily standup|Daily Meetings|0.25|
 |6|2020-06-05|Sprint planning|Weekly Meetings|0.83|
 |6|2020-06-05|Prep for UDL Meeting|Weekly Meetings|0.5|
-|6|2020-06-05|UDL Meeting|Weekly Meetings|1.17|
+|6|2020-06-05|UDL Meeting|Client Meetings|1.17|
 |6|2020-06-05|Research comparison metrics, thought about how to prep data for next week's model comparisons|Research|1.33|
 |6|2020-06-06|Queried more skyspark data, ran dataprep steps (agg, gower's calcs, mds calcs) on 97 days of data and stored various configurations as .csv (prep for next week)|Coding|2|
 |6|2020-06-07|Setup and ran more possible dataprep configurations on 97 days of data (prep for next week)|Coding|0.5|
@@ -275,3 +275,41 @@ Monitor and restart running of step 1 final output code as needed|Coding|1|"
 |7|2020-06-15|Go over what to say for my slides and practice my slides for tomorrow's presentation|Meeting Prep|0.83|
 |7|2020-06-15|Go over various final report requirement documents and look through the final report template to come up with questions about report|Meeting Prep|0.67|
 |7|2020-06-15|Put together a modified version of Eva's code for generating regression output for each of the clustering models|Coding|1.17|
+|8|2020-06-16|Supervised and Unsupervised model comparisons|Data Analysis|0.5|
+|8|2020-06-16|Prep for Daily standup|Meeting Prep|0.25|
+|8|2020-06-16|Daily standup|Daily Meetings|0.25|
+|8|2020-06-16|Practice presentation|Weekly Meetings|0.58|
+|8|2020-06-16|Supervised and Unsupervised model comparisons and presentation updates based on results|Data Analysis|1.5|
+|8|2020-06-16|Meeting with Scott|Weekly Meetings|0.5|
+|8|2020-06-16|Resolve conflicts between Eva's and my code and confirm that nothing broke|Coding|0.75|
+|8|2020-06-16|Update step 1 and step 5 to reflect the selected models|Coding|1|
+|8|2020-06-16|Update step 5 to do predictions on new data|Coding|2.17|
+|8|2020-06-17|Prep for Daily standup and update Jira|Meeting Prep|0.75|
+|8|2020-06-17|Daily standup|Daily Meetings|0.25|
+|8|2020-06-17|Discussion on predicted labels output dataframe format for feeding into the write to InfluxDB step with Alex|Other Meeting|0.33|
+|8|2020-06-17|Update main.py to query from database and so that the end-use labels are in the correct format|Coding|1.92|
+|8|2020-06-17|Updated reason for selected clustering model in Jira|Reports|0.5|
+|8|2020-06-17|Testing the updated main.py that now includes code to query from the database and adjusting code as needed to get it working|Coding|0.67|
+|8|2020-06-17|Work on Clustering Methodology Section of the report|Reports|3.17|
+|8|2020-06-18|Look into the slow regression runtime issue when querying from the database|Coding|0.58|
+|8|2020-06-18|Prep for daily standup|Meeting Prep|0.17|
+|8|2020-06-18|Daily standup|Daily Meetings|0.25|
+|8|2020-06-18|Weekly retrospective|Weekly Meetings|0.75|
+|8|2020-06-18|Fix the slow regression runtime issue when querying from the database|Coding|0.83|
+|8|2020-06-18|Fix the various warnings that are poping up when we run the main function|Coding|2|
+|8|2020-06-18|Review  1 page summary, finish draft of the clustering methodology section of the report and provide updated plots and tables|Reports|3.58|
+|8|2020-06-19|Daily standup prep|Meeting Prep|0.5|
+|8|2020-06-19|Daily standup|Daily Meetings|0.25|
+|8|2020-06-19|Sprint planning|Weekly Meetings|0.5|
+|8|2020-06-19|Prep for UDL meeting|Weekly Meetings|0.42|
+|8|2020-06-19|Worked on supervised learning methodology draft|Reports|2.5|
+|8|2020-06-19|UDL meeting|Client Meetings|1|
+|8|2020-06-19|Finished supervised learning methodology draft|Reports|1.75|
+|8|2020-06-19|Started first pass of code cleanup|Coding|1.5|
+|8|2020-06-22|Daily Standup Prep|Meeting Prep|0.75|
+|8|2020-06-22|Daily Standup|Daily Meetings|0.25|
+|8|2020-06-22|Presentation Logistics Discussion|Other Meeting|0.5|
+|8|2020-06-22|Go over what I plan to say in the presentation and practice presentation|Meeting Prep|2.83|
+|8|2020-06-22|First pass of code cleanup|Coding|0.5|
+|8|2020-06-22|Practice presentation as a team, discuss it, and make some updates|Meeting Prep|1.17|
+|8|2020-06-22|First pass of code cleanup|Coding|2.25|

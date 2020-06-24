@@ -23,27 +23,36 @@ import aggregation
 import clustering
 
 
-def main(display_prediction_metrics=False):
+def main():
     #0) Set Constants (remember, constants are named in all caps with underscores between words)
-    display_prediction_metrics = True # Set True to display prediciton metrics (confusion matrix, accuracy, precission, recall, f1 score, logloss), else set False
-    # Getting a list of the last 90 dates
-    DATELIST =  [(date.today() + timedelta(days=x)).strftime('%Y-%m-%d') for x in range(91)] # NOTE: To update with the number of days desired to pull data for (currently has 91)
-    DATELIST.sort(key=lambda date: datetime.strptime(date, "%Y-%m-%d"))
-
-    ##############################################################################################################
-    ############### TEMP: for testing from csvs to delete once actual querying code is implemented ###############
-    ###############       (gets list of file names in the given path)
-    from os import listdir
-    from os.path import isfile, join
-    mypath = 'test_data'
-    DATELIST = [f.split(".")[0] for f in listdir(mypath) if isfile(join(mypath, f))]
-    DATELIST = DATELIST[0:2]
-    ############### TEMP: for testing from csvs to delete once actual querying code is implemented ###############
-    ##############################################################################################################
-
+    
+    # Boolean defining if the prediction metrics should be shown (show if True, don't show if False)
+    display_prediction_metrics = True
+    # Boolean defining if the output dataframes from each step should be saved
+    save_step_outputs = True
+    # Boolean defining if the model should query from the database or pull from csv's
+    query_from_db = True
+    # String containing the path to the folder that contains the csv's to pull data from if query_from_db=True
+    query_csv_path = 'test_data'
+    # String to define which site to run the model for
+    query_site = 'Pharmacy'
+    # List of indices that can be combined to uniquely identify a sensor (used to group on each sensors)
     SENSOR_ID_TAGS = [1,2,3,4,5,6] # order is ["groupRef","equipRef","navName","siteRef","typeRef","unit"]
-
-    # The planned update to the InfluxDB may change SENSOR_ID_TAGS to only [1] as in ["uniqueID"]
+                                   # The planned update to the InfluxDB may change SENSOR_ID_TAGS to only [1] as in ["uniqueID"]
+    
+    # Getting a list of the last 90 dates or the list of date files to query from if query_from_db==False
+    DATELIST =  [(date.today() - timedelta(days=x)).strftime('%Y-%m-%d') for x in range(1,91)] # NOTE: To update with the number of days desired to pull data for (currently has 91)
+    DATELIST.sort(key=lambda date: datetime.strptime(date, "%Y-%m-%d"))
+    
+    if not query_from_db: 
+        from os import listdir
+        from os.path import isfile, join
+        DATELIST = [f.split(".")[0] for f in listdir(query_csv_path) if isfile(join(query_csv_path, f))]
+        DATELIST = DATELIST[0:2]
+    
+    # Connecting to influxDB
+    if query_from_db:
+        client = data_preparation.connect_to_db()
 
     #1) Cluster NC data
     ###################
@@ -56,18 +65,23 @@ def main(display_prediction_metrics=False):
     for day in DATELIST:
         print("\t\t"+str(cnt)+": "+str(day)) ############### TEMP: For Tracking test progress
         # Querying and preping data for aggregations
-        temp_df = data_preparation.query_csv(client=None, date=day, site=None) ############### TEMP: To be replaced by actual query functions in final product
-        weather_df = data_preparation.query_weather_csv(client=None, date=day, site=None) ############### TEMP: To be replaced by actual query functions in final product
-        if weather_df is None: ############### TEMP: To be replaced by actual query functions in final product
-            pass
+        if query_from_db:
+            temp_df = data_preparation.query_db_nc(client, day, num_days=1, site=query_site)
+            if temp_df is not None:
+                temp_df.reset_index(level=0, inplace=True)
         else:
-            temp_df = pd.concat([temp_df, weather_df]) ############### TEMP: To be replaced by actual query functions in final product
-            temp_df = temp_df.fillna('empty') ############### TEMP: To be replaced by actual query functions in final product # Aggregation doesn't work with nan's, used empty as an obvious flag for value being nan
+            temp_df = data_preparation.query_csv(client=None, date=day, site=None) ############### TEMP: To be replaced by actual query functions in final product
+            weather_df = data_preparation.query_weather_csv(client=None, date=day, site=None) ############### TEMP: To be replaced by actual query functions in final product
+            if weather_df is None: ############### TEMP: To be replaced by actual query functions in final product
+                pass
+            else:
+                temp_df = pd.concat([temp_df, weather_df]) ############### TEMP: To be replaced by actual query functions in final product
+                temp_df = temp_df.fillna('empty') ############### TEMP: To be replaced by actual query functions in final product # Aggregation doesn't work with nan's, used empty as an obvious flag for value being nan
+        if temp_df is None:
+            continue
         col_names = ['datetime']
         col_names.extend(temp_df.columns[1:])
         temp_df.columns = col_names
-        if temp_df is None:
-            continue
         temp_df = aggregation.split_datetime(temp_df)
         if is_first_iter:
             # Creating a low memory dataframe for the append_agg function before the structure is changed by agg_all
@@ -90,8 +104,6 @@ def main(display_prediction_metrics=False):
     # Calculating the update rate
     nc_data["update_rate"] = nc_data["count"] / cnt
     nc_data.drop("count", inplace=True, axis=1)
-
-    #nc_data.to_csv('aggregated_no_units_data.csv') ############### TEMP: Write aggregation output to file to provide sample data for testing step 2, remove for final model
 
     # b) Encode and scale NC data
     # TODO: Look up the correct function name for fixing units of measurement (getting added to the query function, can remove/update to DONE once confirmed complete)
@@ -144,19 +156,23 @@ def main(display_prediction_metrics=False):
     for day in DATELIST:
         print("\t\t"+str(cnt)+": "+str(day)) ############### TEMP: For Tracking test progress
         # Querying and preping data for aggregations
-        temp_df = data_preparation.query_csv(client=None, date=day, site=None)
-        weather_df = data_preparation.query_weather_csv(client=None, date=day, site=None) ############### TEMP: To be replaced by actual query functions in final product
-        if weather_df is None: ############### TEMP: To be replaced by actual query functions in final product
-            pass
+        if query_from_db:
+            temp_df = data_preparation.query_db_nc(client, day, num_days=1, site=query_site)
+            if temp_df is not None:
+                temp_df.reset_index(level=0, inplace=True)
         else:
-            temp_df = pd.concat([temp_df, weather_df]) ############### TEMP: To be replaced by actual query functions in final product
-            temp_df = temp_df.fillna('empty') ############### TEMP: To be replaced by actual query functions in final product # Aggregation doesn't work with nan's, used empty as an obvious flag for value being nan
-        
+            temp_df = data_preparation.query_csv(client=None, date=day, site=None)
+            weather_df = data_preparation.query_weather_csv(client=None, date=day, site=None) ############### TEMP: To be replaced by actual query functions in final product
+            if weather_df is None: ############### TEMP: To be replaced by actual query functions in final product
+                pass
+            else:
+                temp_df = pd.concat([temp_df, weather_df]) ############### TEMP: To be replaced by actual query functions in final product
+                temp_df = temp_df.fillna('empty') ############### TEMP: To be replaced by actual query functions in final product # Aggregation doesn't work with nan's, used empty as an obvious flag for value being nan
+        if temp_df is None:
+            continue
         col_names = ['datetime']
         col_names.extend(temp_df.columns[1:])
         temp_df.columns = col_names
-        if temp_df is None:
-            continue
         temp_df = aggregation.split_datetime(temp_df) # Added to create month and hour columns (must have at least hour for aggs)
         temp_df = temp_df.merge(cluster_groups, how='left', on=cluster_groups.columns[:-1].tolist())
         if is_first_iter:
@@ -228,26 +244,36 @@ def main(display_prediction_metrics=False):
     update_rates = update_rates.add_prefix('urate_')
     nc_data = nc_data.join(update_rates, how='left', on=['hour', 'date'])
     nc_data = nc_data.drop('count', axis=1)
-
+    if save_step_outputs:
+        nc_data.to_csv('step1_clustering_phase_output.csv')
     print("####### ~~~~~ Complete - Step 1: NC Aggregation and Clustering Phase ~~~~~ #######") ############### TEMP: For Tracking test progress
 
     #2) Model EC/NC relationship
     ############################
     print("####### ~~~~~ Starting - Step 2: Model EC/NC Relationship ~~~~~ #######") ############### TEMP: For Tracking test progress
+    #    a) Aggregate EC sensors to be response variables for the regression model
+    print("\t##### ~~~ Started - Step 2 a): Aggregation ~~~ #####") ############### TEMP: For Tracking test progress
     last_idx_as_cols = False
     is_first_iter = True
     cnt=1
     for day in DATELIST:
+        print("\t\t"+str(cnt)+": "+str(day)) ############### TEMP: For Tracking test progress
         # Querying and preping data for aggregations
-        temp_df2 = data_preparation.query_csv(client=None, date=day, site=None)
+        if query_from_db:
+            temp_df2 = data_preparation.query_db_ec(client, day, num_days=1, site=query_site)
+            if temp_df2 is not None:
+                temp_df2.reset_index(level=0, inplace=True)
+        else:
+            temp_df2 = data_preparation.query_csv(client=None, date=day, site=None)
+            # Filter for EC data, this step will be done in the query
+            if temp_df2 is not None:
+                temp_df2=temp_df2[(temp_df2['unit']=='kWh') | (temp_df2['unit']=='m³')]
         if temp_df2 is None:
             continue
         col_names = ['datetime']
         col_names.extend(temp_df2.columns[1:])
         temp_df2.columns = col_names
         temp_df2 = aggregation.split_datetime(temp_df2)
-        # Filter for EC data, this step will be done in the query
-        temp_df2=temp_df2[(temp_df2['unit']=='kWh') | (temp_df2['unit']=='m³')]
         # Creating uniqueId
         temp_df2=data_preparation.create_unique_id(temp_df2)
         # Filtering dataframe for only relevant fields
@@ -257,7 +283,7 @@ def main(display_prediction_metrics=False):
             struct_df2 = temp_df2.head(1)
             # Aggregating the first date's data
             ec_data1=aggregation.agg_numeric_by_col(temp_df2, col_idx=[0,1,2,3], how='mean')
-     ##### b) Also create second DF by aggregating further just using sensor ID fields (end result=1row per sensor)
+            # Also create second DF by aggregating further just using sensor ID fields (end result=1row per sensor)
             ec_data2=aggregation.agg_numeric_by_col(temp_df2, col_idx=[0,3], how='all')
             is_first_iter = False
         else:
@@ -293,8 +319,9 @@ def main(display_prediction_metrics=False):
     for i in range(6,len(nc_data.columns)):
         nc_data.iloc[:,i]=data_preparation.scale_continuous(nc_data, indexes=[i])
 
-    #    c) For each unique EC sensorID (i.e. row in 2b_EC_data_df), create Ridge Regression model using 2a_EC_data_df and
+    #    b) For each unique EC sensorID (i.e. row in 2b_EC_data_df), create Ridge Regression model using 2a_EC_data_df and
     #       step1_output_NC_data_df. Model is basically: Y=EC response and Xn=NC data
+    print("\t##### ~~~ Started - Step 2 b): Regression ~~~ #####") ############### TEMP: For Tracking test progress
 
     ### Will store each ridge output into a list and append all the dataframes
     coefficients_list=[]
@@ -302,7 +329,7 @@ def main(display_prediction_metrics=False):
     ### total sum of mse from each ridge regression model (accumulative)
     score=0
 
-    ### Creating individual data frames for each sensor and implementing lasso
+    ### Creating individual data frames for each sensor and implementing Ridge Regression
     for sensor in uniqueSensors:
 
         ## Create data frame for only that relevant sensor
@@ -353,6 +380,9 @@ def main(display_prediction_metrics=False):
     ### calculate the avarge mse across all ridge regression models
     avg_mse=score/len(uniqueSensors)
     print("avg_mse:",avg_mse)
+    
+    if save_step_outputs:
+        pass # TODO: I'm not sure what data should be getting save here
 
     #    OUTPUT OF STEP2 = dataframe with EC sensor ID fields, mean response, and all n coeffecients from
     #        that unique EC sensor's Ridge model
@@ -362,7 +392,7 @@ def main(display_prediction_metrics=False):
     ################################################
     print("####### ~~~~~ Starting - Step 3: Prep EC Data for Classification Model ~~~~~ #######") ############### TEMP: For Tracking test progress
     #### a) Load metadata and join with 2b_EC_data_df
-    metadata=pd.read_csv('test_data/PharmacyQuery.csv')
+    metadata=pd.read_csv('test_data/PharmacyQuery.csv', dtype=object)
     # Make uniqueIDs
     metadata=data_preparation.create_unique_id(metadata, metadata=True)
     # Drop duplicates
@@ -382,7 +412,7 @@ def main(display_prediction_metrics=False):
     # load NRCan classifications training data
     nrcan_labels=pd.read_csv('../data/FinalPharmacyECSensorList-WithLabels - PharmacyECSensorsWithLabels.csv')
     # make uniqueId
-    nrcan_labels['siteRef']='Pharmacy'
+    nrcan_labels['siteRef']=query_site
     nrcan_labels=data_preparation.create_unique_id(nrcan_labels)
 
     # rename columns to fix unit of measurements
@@ -399,7 +429,7 @@ def main(display_prediction_metrics=False):
     # selecting relevant training data fields
     nrcan_labels=nrcan_labels[['uniqueId', 'isGas', 'equipRef', 'groupRef', 'navName', 'endUseLabel']]
     nrcan_labels=nrcan_labels.drop_duplicates()
-    merged_outer=pd.merge(left=merged_left, right=nrcan_labels, how='outer', left_on='uniqueId', right_on='uniqueId')
+    merged_outer=pd.merge(left=merged_left, right=nrcan_labels, how='left', left_on='uniqueId', right_on='uniqueId')
     # make equipRef and navName into smaller categories for feature engineering
     merged_outer=merged_outer.assign(equipRef=merged_outer.equipRef.apply(lambda x: data_preparation.equip_label(str(x))))
     merged_outer=merged_outer.assign(navName=merged_outer.navName.apply(lambda x: data_preparation.nav_label(str(x))))
@@ -424,9 +454,10 @@ def main(display_prediction_metrics=False):
     # Populating endUseLabel that are null with 99_UNKNOWN so that they can be predicted
     step3_data.loc[:, 'endUseLabel'] = step3_data.loc[:, 'endUseLabel'].fillna('99_UNKNOWN')
     #### OUTPUT OF STEP = dataframe with EC sensor ID fields, selected EC features, model coeffecients
-
+    if save_step_outputs:
+        step3_data.to_csv('step3_data_prep_for_classification_output.csv')
     print("####### ~~~~~ Complete - Step 3: Prep EC Data for Classification Model ~~~~~ #######") ############### TEMP: For Tracking test progress
-    ############### TEMP: For Tracking test progress
+
     # 4) Classification model
     #######################
     print("####### ~~~~~ Starting - Step 4: Supervised Modeling and Predicting End-Use Labels ~~~~~ #######") ############### TEMP: For Tracking test progress
@@ -437,6 +468,10 @@ def main(display_prediction_metrics=False):
     cols.remove('endUseLabel')
     cols.append('endUseLabel')
     training_data = training_data[cols]
+    # Creating End Use Label Dictionary
+    end_use_labels = {}
+    for label in training_data['endUseLabel'].unique():
+        end_use_labels[int(str(label)[0:2])] = label
     # Extracting just the number from the label
     training_data['endUseLabel'] = training_data['endUseLabel'].apply(lambda x: int(str(x)[0:2]))
     predicting_data = training_data[(training_data['endUseLabel']==99)]
@@ -469,6 +504,8 @@ def main(display_prediction_metrics=False):
     #    d) Create dataframe of sensors and labels to be input for step 5
     predicting_labels['endUseLabel'] = y_pred
     sensor_labels = pd.concat([training_labels, predicting_labels])
+    sensor_labels['endUseLabel'] = sensor_labels['endUseLabel'].apply(lambda x: end_use_labels[x])
+    sensor_labels.to_csv('predicted_end_use_labels.csv', index=False)
     #    OUTPUT OF STEP = dataframe with EC sensor ID fields and end-use group
 
     #   e) Display prediction metrics on a train-test split of the testing data if desired
@@ -490,11 +527,13 @@ def main(display_prediction_metrics=False):
         precision = precision_score(y_test, y_pred, average='weighted')
         recall = recall_score(y_test, y_pred, average='weighted')
         f1 = f1_score(y_test, y_pred, average='weighted')
-        logloss = log_loss(y_true=y_test, y_pred=classifier.predict_proba(x_test))
+        try:
+            logloss = log_loss(y_true=y_test, y_pred=classifier.predict_proba(x_test))
+        except:
+            logloss = "Unable to calculate logloss: Random train/test split did not provide at least 1 item from each class in both the trianing and testing set"
         print("accuracy: "+str(accuracy))
         print("precision: "+str(precision))
         print("recall: "+str(recall))
         print("f1: "+str(f1))
         print("logloss: "+str(logloss))
-        
     print("####### ~~~~~ Complete - Step 4: Supervised Modeling and Predicting End-Use Labels ~~~~~ #######") ############### TEMP: For Tracking test progress
