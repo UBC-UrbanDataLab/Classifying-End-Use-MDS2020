@@ -86,7 +86,7 @@ Log into [Grafana Cloud](https://grafana.com/login) and navigate to the details 
 
 Click the Find More Plugins button to get a list of available plugins, click on the piechart plugin, and then click the Install button.
 
-![](images/listed_plugins.png "Click Find More Plugins to navigate to a page of all available plugins)
+![](images/listed_plugins.png "Click Find More Plugins to navigate to a page of all available plugins.")
 
 You may need to log out of grafana and log back in for the plugin to become active.
 
