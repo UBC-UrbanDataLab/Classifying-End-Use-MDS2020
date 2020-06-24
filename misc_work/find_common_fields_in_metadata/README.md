@@ -1,6 +1,6 @@
 # Common Fields in "Metadata"
 
-This folder contains code and data for exploring POINTS data exported from [EWS's SkySpark Database](https://energy.ubc.ca/energy-and-water-data/skyspark/). This was refered to as "metadata" in the UBCO MDS2020 Capstone Project. The main purpose of the code was to find common fields between the various buildings (not every building has the same fields!).
+This folder contains code and data for exploring POINTS data exported from [EWS's SkySpark Database](https://energy.ubc.ca/energy-and-water-data/skyspark/). This was referred to as "metadata" in the UBCO MDS2020 Capstone Project. The main purpose of the code was to find common fields between the various buildings (not every building has the same fields!).
 
 The code [select_md_fields.py](select_md_fields.py) is fully commented but the main purpose of it is to process all of the individual building's csv files stored in the data subfolder and find the fields that are common amongst them. As an initial filter, only the fields located in the Pharmacy Building's file are allowed (i.e. if it isn't in the Pharmacy Building it isn't even considered). This is then whittled down to fields that also exist in at least 95% of all the other buildings. 
 
@@ -49,4 +49,3 @@ The following buildings have no data (query reports "empty") so no CSVs are incl
 - Thunderbird Parkade   
 - Vanier Complex (maybe has been split into indv. Vanier entries?)   
 - West Parkade   
-
