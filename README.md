@@ -18,7 +18,13 @@ Table 1: Number of Sensors per End-Use
 |03_LIGHTING_NORMAL|26|13%|
 |04_LIGHTING_EMERGENCY|10|5%|
 |05_OTHER|44|21%|
-|Total|208|100%|
+|**Total**|**208**|**100%**|
 
 
 The project achieved its goal by delivering a Python program that queries, cleans, and classifies instruments by end-use from live-streaming InfluxDB data for the Pharmacy building. The prediction accuracy of the program when applied to the testing dataset was 94.3%. The Python program assists with UDL’s vision of assisted Artificial Intelligence (AI) for proactive and preventive maintenance. A few recommendations for future work include increasing the size of the labeled training set and modifying code to work with the updated UDL database. 
+
+## Project Approach
+![](Logistics/Diagrams/Project_Approach.png)
+
+## Project Flowchart
+![](Logistics/Diagrams/Project_Flowchart.png)
