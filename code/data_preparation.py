@@ -475,7 +475,7 @@ def check_connection(client):
         return False
 
 def query_db_ec(client, date, num_days=1, site='Pharmacy'):
-    """Function to query the UBC_EWS database for the EC sensors for the user defined start date,
+    """Function to query the UBC_EWS measurement for the EC sensors for the user defined start date,
     number of days (default=1), and site (default=Pharmacy)
 
     Args:
