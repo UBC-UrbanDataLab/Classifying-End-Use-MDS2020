@@ -1,2 +1,0 @@
-id,navName,disMacro,point,his,siteRef,equipRef,hisEnd,hisSize,hisStart,kind,unit,tz,sensor,ancillaryImport,elec,groupRef,pointType,hisMode,energy,mod
-@p:ubcv:r:2527d644-41c47529 Acadia North Elec Main Meter Energy,Energy,$equipRef $navName,✓,✓,@p:ubcv:r:250ae518-dd1aa161 Acadia North,@p:ubcv:r:2527d644-cf7a0600 Acadia North Elec Main Meter,2020-01-01T00:00:00-08:00 Los_Angeles,201700,2014-04-01T00:00:00-07:00 Los_Angeles,Number,kWh,Los_Angeles,✓,✓,✓,@p:ubcv:r:2527d644-3a01db64 Acadia North Utilities,"",consumption,✓,2020-04-28T00:03:36.141Z UTC
