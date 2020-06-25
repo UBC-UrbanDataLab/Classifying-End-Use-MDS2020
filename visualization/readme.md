@@ -96,7 +96,7 @@ You may need to log out of Grafana and log back in for the plugin to become acti
 
 To import the grafana_MDS2020-CAPSTONE.json file, go to Dashboards -> Manage (shown in screenshot below)
 
-![](images/manage_dashboards.png)
+![](images/manage_dashboard.png "Dashboard management can be accessed from the tool panel on the left of the Grafana workspace")
 
 Click the blue "Import" button and then either upload the json file or copy paste the contents of the json file into the "Import via panel json" box. Then click the blue "Load" button.
 
