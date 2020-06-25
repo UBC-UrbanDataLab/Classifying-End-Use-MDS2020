@@ -220,7 +220,7 @@ The last step performs a join between the table of sensor readings and the end-u
 
 UDL is in the process of updating the structure of SKYSPARK database in InfluxDB. Sensor readings are now being stored in `READINGS` instead of `UBC_EWS` and there are specific fields for each datatype. So now all numeric values can be found in the `val_num` field, strings in the `val_str` field, and true/false values in the `val_bool` field. Also, there is a real `uniqueID` tag that ties the data to the `POINTS` measurement where descriptive information for each sensor can be found. This eliminates the need to do much of the computationally expensive parts of step 1 and step 2.
 
-The python code that generates the end-uses will need to be updated to match the same `uniqueID` before this new query can be implemented. Specifically, the python code will need query and retain the `uniqueID` when it gathers data from the `READINGS` measurement as the input to the end-use classification model. Currently it creates its own `uniqueID` by concatenating several other fields.
+The python code that generates the end-uses will need to be updated to match the same `uniqueID` before this new query can be implemented. Specifically, the python code will need to query and retain the `uniqueID` when it gathers data from the `READINGS` measurement as the input to the end-use classification model. Currently, it creates its own `uniqueID` by concatenating several other fields.
 
 **The updated Flux query would likely look something like the following:**
 
