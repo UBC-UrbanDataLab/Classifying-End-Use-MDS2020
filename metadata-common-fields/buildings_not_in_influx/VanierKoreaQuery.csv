@@ -1,2 +1,0 @@
-id,navName,disMacro,point,his,siteRef,equipRef,hisEnd,hisSize,hisStart,kind,unit,tz,sensor,ancillaryImport,gas,groupRef,hisMode,energy,mod
-@p:ubcv:r:252a61e4-7cc56e48 Vanier - Korea Gas Main Meter Energy,Energy,$equipRef $navName,✓,✓,@p:ubcv:r:24b8e8e3-8d4a6504 Vanier - Korea,@p:ubcv:r:250ecf08-52995878 Vanier - Korea Gas Main Meter,2020-01-01T00:00:00-08:00 Los_Angeles,201700,2014-04-01T00:15:00-07:00 Los_Angeles,Number,GJ,Los_Angeles,✓,✓,✓,@p:ubcv:r:250ecf08-fd955f93 Vanier - Korea Utilities,consumption,✓,2020-04-28T00:03:35.297Z UTC

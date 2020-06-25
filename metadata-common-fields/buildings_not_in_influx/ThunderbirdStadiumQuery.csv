@@ -1,2 +1,0 @@
-id,navName,disMacro,point,his,siteRef,equipRef,hisEnd,hisSize,hisStart,kind,unit,tz,sensor,ancillaryImport,elec,groupRef,hisMode,energy,mod
-@p:ubcv:r:250ecf08-b0d8c437 Thunderbird Stadium Elec Main Meter Energy,Energy,$equipRef $navName,✓,✓,@p:ubcv:r:24b8e8e3-06d49b22 Thunderbird Stadium,@p:ubcv:r:250ecf08-9e16e8ce Thunderbird Stadium Elec Main Meter,2020-01-01T00:00:00-08:00 Los_Angeles,201700,2014-04-01T00:00:00-07:00 Los_Angeles,Number,kWh,Los_Angeles,✓,✓,✓,@p:ubcv:r:250ecf08-fc737087 Thunderbird Stadium Utilities,consumption,✓,2020-04-28T00:03:36.123Z UTC

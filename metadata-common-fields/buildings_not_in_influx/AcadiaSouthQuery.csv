@@ -1,2 +1,0 @@
-id,navName,disMacro,point,his,siteRef,equipRef,hisEnd,hisSize,hisStart,kind,unit,tz,sensor,ancillaryImport,elec,groupRef,hisMode,energy,mod
-@p:ubcv:r:2527d645-b4de59e6 Acadia South Elec Main Meter Energy,Energy,$equipRef $navName,✓,✓,@p:ubcv:r:250ae574-bb0db4cb Acadia South,@p:ubcv:r:2527d645-f837635a Acadia South Elec Main Meter,2020-01-01T00:00:00-08:00 Los_Angeles,201700,2014-04-01T00:00:00-07:00 Los_Angeles,Number,kWh,Los_Angeles,✓,✓,✓,@p:ubcv:r:2527d645-687eff01 Acadia South Utilities,consumption,✓,2020-04-28T00:03:35.961Z UTC
