@@ -9,7 +9,7 @@ Created on Wed May 27 16:27:50 2020
 # General Imports
 from os import listdir
 from os.path import isfile, join
-from datetime import datetime, date, timedelta
+from datetime import datetime, timedelta
 # Data Formatting and Manipulation Imports
 import pandas as pd
 # Clustering Step Imports
@@ -18,9 +18,9 @@ from sklearn.cluster import AgglomerativeClustering
 from sklearn.linear_model import Ridge, RidgeCV
 from sklearn.metrics import mean_squared_error
 # Supervised Classification Step Imports
-from sklearn.ensemble import BaggingClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, f1_score, log_loss
+from sklearn.ensemble import BaggingClassifier
 # Modules Developed for this Project Imports
 import data_preparation
 import aggregation
@@ -32,6 +32,8 @@ def main():
     ### ~ Required for base functionality ~ ###
     # String defining which site to run the model for
     QUERY_SITE = 'Pharmacy'
+    # String defining which measurement from the database to query
+    MEASUREMENT='UBC_EWS'
     # String defining the path to the metadata csv for the given building
     METADATA_CSV_PATH = '../data/PharmacyQuery.csv'
     # String defining the path to the training dataset
@@ -52,17 +54,20 @@ def main():
     PREDICTED_SAVE_PATH = '../data/csv_outputs/predicted_end_use_labels.csv'
     # Boolean defining if the model should query from the database or pull from csv's (from database if True, else False)
     QUERY_FROM_DB = False
+    # Strings defining the start and end date fo the date range to query (if QUERY_FROM_DB==True)
+    START_DATE = '2020-03-16'
+    END_DATE = '2020-03-17'
     # Strings containing the paths to the folders that contains the csv's to pull data from if QUERY_FROM_DB==False
     # All file names within the folders must be formatted as "YYYY-MM-DD.csv"
     QUERY_CSV_PATH = '../data/sensor_data/'
     QUERY_WEATHER_CSV_PATH = '../data/weather_data/'
         
     if QUERY_FROM_DB:
-        # Getting a list of the last 90 dates or the list of date files to query from if QUERY_FROM_DB==False
-        DATELIST =  [(date.today() - timedelta(days=x)).strftime('%Y-%m-%d') for x in range(1,91)]
-        DATELIST.sort(key=lambda date: datetime.strptime(date, "%Y-%m-%d"))
+        # Generating a list of the dates within the daterange to query (if QUERY_FROM_DB==True)
+        DELTA = (datetime.strptime(END_DATE, "%Y-%m-%d")-datetime.strptime(START_DATE, "%Y-%m-%d")).days
+        DATELIST =  [(datetime.strptime(END_DATE, "%Y-%m-%d") - timedelta(days=x)).strftime('%Y-%m-%d') for x in range(0,DELTA+1)]
     else:
-        # Getting the list of files stored in the path provided in QUERY_CSV_PATH
+        # Getting the list of files stored in the path provided in QUERY_CSV_PATH (if QUERY_FROM_DB==False)
         # All files names must be formatted as "YYYY-MM-DD.csv"
         DATELIST = [f.split(".")[0] for f in listdir(QUERY_CSV_PATH) if isfile(join(QUERY_CSV_PATH, f))]
     
@@ -82,7 +87,7 @@ def main():
         print("\t\t"+str(cnt)+": "+str(day)) # For tracking program progress
         # Querying and preping data for aggregations
         if QUERY_FROM_DB:
-            temp_df = data_preparation.query_db_nc(client, day, num_days=1, site=QUERY_SITE)
+            temp_df = data_preparation.query_db_nc(client, day, measurement=MEASUREMENT, num_days=1, site=QUERY_SITE)
             if temp_df is not None:
                 # Making the datetime index into a column so that date and hour can be extracted later
                 temp_df.reset_index(level=0, inplace=True)
@@ -164,7 +169,7 @@ def main():
         print("\t\t"+str(cnt)+": "+str(day)) # For tracking program progress
         # Querying and preping data for aggregations
         if QUERY_FROM_DB:
-            temp_df = data_preparation.query_db_nc(client, day, num_days=1, site=QUERY_SITE)
+            temp_df = data_preparation.query_db_nc(client, day, measurement=MEASUREMENT, num_days=1, site=QUERY_SITE)
             if temp_df is not None:
                 # Making the datetime index into a column so that date and hour can be extracted later
                 temp_df.reset_index(level=0, inplace=True)
@@ -276,7 +281,7 @@ def main():
         print("\t\t"+str(cnt)+": "+str(day)) # For tracking program progress
         # Querying and preping data for aggregations
         if QUERY_FROM_DB:
-            temp_df2 = data_preparation.query_db_ec(client, day, num_days=1, site=QUERY_SITE)
+            temp_df2 = data_preparation.query_db_ec(client, day, measurement=MEASUREMENT, num_days=1, site=QUERY_SITE)
             if temp_df2 is not None:
                 # Making the datetime index into a column so that date and hour can be extracted later
                 temp_df2.reset_index(level=0, inplace=True)

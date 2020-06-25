@@ -11,7 +11,7 @@
 # General Imports
 from os import listdir
 from os.path import isfile, join
-from datetime import datetime, date, timedelta
+from datetime import datetime, timedelta
 # Data Formatting and Manipulation Imports
 import pandas as pd
 import numpy as np
@@ -53,15 +53,18 @@ def feature_selection():
     STEP2_SAVE_PATH_EC_DATA2 = '../data/csv_outputs/step2_aggregated_ec_data_output.csv'
     # Boolean defining if the model should query from the database or pull from csv's (from database if True, else False)
     QUERY_FROM_DB = False
+    # Strings defining the start and end date fo the date range to query (if QUERY_FROM_DB==True)
+    START_DATE = '2020-03-16'
+    END_DATE = '2020-03-17'
     # Strings containing the paths to the folders that contains the csv's to pull data from if QUERY_FROM_DB==False
     # All file names within the folders must be formatted as "YYYY-MM-DD.csv"
     QUERY_CSV_PATH = '../data/sensor_data/'
     QUERY_WEATHER_CSV_PATH = '../data/weather_data/'
         
     if QUERY_FROM_DB:
-        # Getting a list of the last 90 dates or the list of date files to query from if QUERY_FROM_DB==False
-        DATELIST =  [(date.today() - timedelta(days=x)).strftime('%Y-%m-%d') for x in range(1,91)]
-        DATELIST.sort(key=lambda date: datetime.strptime(date, "%Y-%m-%d"))
+        # Generating a list of the dates within the daterange to query (if QUERY_FROM_DB==True)
+        DELTA = (datetime.strptime(END_DATE, "%Y-%m-%d")-datetime.strptime(START_DATE, "%Y-%m-%d")).days
+        DATELIST =  [(datetime.strptime(END_DATE, "%Y-%m-%d") - timedelta(days=x)).strftime('%Y-%m-%d') for x in range(0,DELTA+1)]
     else:
         # Getting the list of files stored in the path provided in QUERY_CSV_PATH
         # All files names must be formatted as "YYYY-MM-DD.csv"

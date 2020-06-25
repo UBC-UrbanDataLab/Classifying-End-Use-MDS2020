@@ -474,7 +474,7 @@ def check_connection(client):
         print("Not Connected")
         return False
 
-def query_db_ec(client, date, num_days=1, site='Pharmacy'):
+def query_db_ec(client, date, measurement='UBC_EWS', num_days=1, site='Pharmacy'):
     """Function to query the UBC_EWS measurement for the EC sensors for the user defined start date,
     number of days (default=1), and site (default=Pharmacy)
 
@@ -497,9 +497,9 @@ def query_db_ec(client, date, num_days=1, site='Pharmacy'):
         result = client.query(query = query, bind_params = where_params, chunked=True, chunk_size=10000)
     try:
         if i==0:
-            df=result['UBC_EWS']
+            df=result[measurement]
         else:
-            df=pd.concat([df,result['UBC_EWS']],axis=0)
+            df=pd.concat([df,result[measurement]],axis=0)
             time.sleep(5)
         my_timezone = pytz.timezone('Canada/Pacific')
         df.index=df.index.tz_convert(my_timezone)
@@ -508,7 +508,7 @@ def query_db_ec(client, date, num_days=1, site='Pharmacy'):
         print("\t\t\tNo data found for specified date")
         return None
     
-def query_db_nc(client, date, num_days=1, site='Pharmacy'):
+def query_db_nc(client, date, measurement='UBC_EWS', num_days=1, site='Pharmacy'):
     """Function to query the UBC_EWS measurement for the Non-Energy Consumption (NC) sensors
     for the user defined start date, number of days (default=1), and site (default=Pharmacy)
 
@@ -531,9 +531,9 @@ def query_db_nc(client, date, num_days=1, site='Pharmacy'):
         result = client.query(query = query, bind_params = where_params, chunked=True, chunk_size=10000)
     try:
         if i==0:
-            df=result['UBC_EWS']
+            df=result[measurement]
         else:
-            df=pd.concat([df,result['UBC_EWS']],axis=0)
+            df=pd.concat([df,result[measurement]],axis=0)
             time.sleep(5)
         my_timezone = pytz.timezone('Canada/Pacific')
         df.index=df.index.tz_convert(my_timezone)
