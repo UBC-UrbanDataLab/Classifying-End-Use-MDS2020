@@ -28,7 +28,7 @@ Due to the calculations required to process the data, the influxDB server is onl
 <a name="setup"></a>
 # Grafana Setup & Importing Dashboard)
 
-Grafana can either be setup as a standalone service on a server/docker container by installing the open source Grafana software (https://grafana.com/oss/grafana/) or can be used through the commerical cloud-based implementation (https://grafana.com/products/cloud/). Note that a free-use tier exists for the cloud-based service and simply requires the user to make an account, login, and start a grafana instance. This free-tier limits the user to only 5 dashboards, 1 user account, and only the non-enterprise plugins. For the purpose of the MDS2020_CAPSTONE dashboard, the free-tier has all necessary features.
+Grafana can either be set up as a standalone service on a server/docker container by installing the open-source Grafana software (https://grafana.com/oss/grafana/) or can be used through the commercial cloud-based implementation (https://grafana.com/products/cloud/). Note that a free-use tier exists for the cloud-based service and simply requires the user to make an account, login, and start a Grafana instance. This free-tier limits the user to only 5 dashboards, 1 user account, and only the non-enterprise plugins. For the purpose of the MDS2020_CAPSTONE dashboard, the free-tier has all the necessary features.
 
 The current version of Grafana at time of writing is 7.0.3. The older 6.5.4 version was originally used to create earlier versions of this dashboard and will also work if the user doesn't/can't run the latest version.
 
@@ -287,4 +287,3 @@ So the query really only needs to pull the first and last day of data (assuming 
 #### -Investigate Usefulness of Creating a "Rolled-Up" Version of the Data
 
 Most queries of energy consumption are likely interested in lower resolution than the data is currently stored at. For example, storing hourly average or daily readings in a separate measurement. This will increase storage requirements but decrease processing time for any queries that can use lower resolution data (i.e. only interested in daily readings). 
-
