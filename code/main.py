@@ -56,7 +56,7 @@ def main():
     # All file names within the folders must be formatted as "YYYY-MM-DD.csv"
     QUERY_CSV_PATH = '../data/sensor_data/'
     QUERY_WEATHER_CSV_PATH = '../data/weather_data/'
-        
+
     if QUERY_FROM_DB:
         # Getting a list of the last 90 dates or the list of date files to query from if QUERY_FROM_DB==False
         DATELIST =  [(date.today() - timedelta(days=x)).strftime('%Y-%m-%d') for x in range(1,91)]
@@ -65,7 +65,7 @@ def main():
         # Getting the list of files stored in the path provided in QUERY_CSV_PATH
         # All files names must be formatted as "YYYY-MM-DD.csv"
         DATELIST = [f.split(".")[0] for f in listdir(QUERY_CSV_PATH) if isfile(join(QUERY_CSV_PATH, f))]
-    
+
     # Connecting to influxDB
     if QUERY_FROM_DB:
         client = data_preparation.connect_to_db()
@@ -113,7 +113,7 @@ def main():
             temp_df = aggregation.agg_all(temp_df, how="all", col_idx=SENSOR_ID_TAGS, last_idx_to_col=last_idx_as_cols)
             nc_data = aggregation.append_agg(df1=temp_df, df2=nc_data, struct_df=struct_df, col_idx=SENSOR_ID_TAGS, last_idx_to_col=last_idx_as_cols)
         cnt += 1
-       
+
     print("\t\t### ~ Started - Step 1 a): Agg Phase 1: Calculating Update Rates ~ ###") # For tracking program progress
     # Freeing up some memory
     temp_df = None
@@ -133,7 +133,7 @@ def main():
     scaled_data = data_preparation.scale_continuous(nc_data, cont_cols)
     nc_data = pd.concat([nc_data.iloc[:, 0:len(SENSOR_ID_TAGS)], pd.DataFrame(scaled_data, index=nc_data.index, columns=nc_data.columns[cont_cols].tolist())], axis=1)
     scaled_data = None
-    
+
     # Encoding units
     nc_data = data_preparation.encode_units(nc_data)
 
@@ -145,7 +145,7 @@ def main():
     clusters = AgglomerativeClustering(linkage = 'single', affinity='precomputed', n_clusters=20).fit_predict(gow_dist)
     # Freeing up some memory
     gow_dist = None
-    
+
     # Generating a list of the columns to keep when making the dataframe relating sensors to clusters(the unique identifiers for an NC sensor and cluster)
     unique_cols_idx = [i for i in range(len(SENSOR_ID_TAGS))]
     unique_cols = nc_data.columns[unique_cols_idx].values.tolist()
@@ -234,7 +234,7 @@ def main():
                 temp_df_aggs = temp_df_aggs.rename(columns={'count_x':'count'})
             nc_data = aggregation.append_agg(df1=temp_df_aggs, df2=nc_data, struct_df=struct_df, col_idx=cluster_id_tags, last_idx_to_col=last_idx_as_cols)
         cnt += 1
-        
+
     print("\t\t### ~ Started - Step 1 d): Agg Phase 2: Calculating Update Rates ~ ###") # For tracking program progress
     # Re-format update rates so that clusters are columns
     update_rates = update_rates.unstack()
@@ -255,13 +255,13 @@ def main():
     nc_data = nc_data.drop('count', axis=1)
     if SAVE_STEP_OUTPUTS:
         nc_data.to_csv(STEP1_SAVE_PATH)
-    
+
     # Freeing up some space
     temp_df_aggs = None
     struct_df = None
     temp_df = None
     update_rates = None
-    
+
     print("####### ~~~~~ Complete - Step 1: NC Aggregation and Clustering Phase ~~~~~ #######") # For tracking program progress
 
     ##### 2) Model EC/NC relationship
@@ -396,7 +396,7 @@ def main():
     # calculate the avarge mse across all ridge regression models
     avg_mse=score/len(uniqueSensors)
     print("avg_mse:",avg_mse)
-    
+
     if SAVE_STEP_OUTPUTS:
         final_df.to_csv(STEP2_SAVE_PATH_FINAL_DF)
         ec_data2.to_csv(STEP2_SAVE_PATH_EC_DATA2)
@@ -412,7 +412,7 @@ def main():
     # Drop duplicates
     metadata=metadata.sort_values('lastSynced').drop_duplicates('uniqueId',keep='last')
     # Choose relevant fields
-    metadata=metadata[['uniqueId','kind', 'energy','power', 'sensor', 'unit', 'water']] 
+    metadata=metadata[['uniqueId','kind', 'energy','power', 'sensor', 'unit', 'water']]
     # Changing boolean to easily identify during encoding process
     metadata['energy']=metadata['energy'].apply(lambda x: 'yes_energy' if x=='✓' else 'no_energy')
     metadata['power']=metadata['power'].apply(lambda x: 'yes_power' if x=='✓' else 'no_power')
@@ -458,10 +458,12 @@ def main():
     merged_outer=merged_outer.assign(equipRef_Cooling=merged_outer.equipRef.apply(lambda x: 1 if x=='Cooling' else 0))
     merged_outer=merged_outer.assign(equipRef_Heating=merged_outer.equipRef.apply(lambda x: 1 if x=='Heating' else 0))
     merged_outer=merged_outer.assign(equipRef_LEED=merged_outer.equipRef.apply(lambda x: 1 if x=='LEED' else 0))
+    merged_outer=merged_outer.assign(navName_Energy=merged_outer.navName.apply(lambda x: 1 if x=='Energy' else 0))
+
     # scaling after feature selection
     for i in range(1,6):
         merged_outer.iloc[:,i]=data_preparation.scale_continuous(merged_outer, indexes=[i])
-    
+
     ###   d) Join the model coeffecients from step2 output to the EC+metadata
     step3_data = pd.merge(merged_outer, final_df, left_on='uniqueId', right_on='uniqueId', how='outer')
     # dropping unnessary columns to feed into classification
@@ -504,7 +506,7 @@ def main():
     x_train = training_data.iloc[:, :-1].values
     y_train = training_data.iloc[:, -1].values
     x_pred = predicting_data.iloc[:, :-1].values
-    
+
     ###   b) Create and train the selected model
     # Creating and fitting the classifier
     classifier = BaggingClassifier(n_estimators = 100)
@@ -513,7 +515,7 @@ def main():
     ###   c) Predict the outputs for the new data
     # Predicting the outputs
     y_pred = classifier.predict(x_pred)
-    
+
     ###   d) Create dataframe of sensors and labels to be input for step 5
     predicting_labels['endUseLabel'] = y_pred
     sensor_labels = pd.concat([training_labels, predicting_labels])
@@ -529,7 +531,7 @@ def main():
         classifier = BaggingClassifier(n_estimators = 100)
         classifier.fit(x_train, y_train)
         y_pred = classifier.predict(x_test)
-        
+
         # Calculating and displaying the comparison metrics
         cm = confusion_matrix(y_test, y_pred)
         print(cm)
