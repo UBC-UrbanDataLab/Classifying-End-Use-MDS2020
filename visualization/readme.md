@@ -263,7 +263,7 @@ join(
   |> yield()
 ```
 
-The query is basically the same as before but points at `READINGS` instead of `EWS_UBC` and instead of having to filter and convert the numberic values we can simply select directly from the field that stores only the numeric values in the new database structure `val_num`. Lastly, since the data in this new database structure now includes a uniqueID, the query no longer needs to create one.
+The query is basically the same as before but points at `READINGS` instead of `EWS_UBC`. Also, we can simply select directly from the field that stores only the numeric values in the new database structure `val_num` instead of having to filter and convert the numeric values. Lastly, since the data in this new database structure now includes a uniqueID, the query no longer needs to create one.
 
 #### -Use uniqueID from END_USE To Filter Sensors in Readings
 
