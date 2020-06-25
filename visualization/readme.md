@@ -1,6 +1,8 @@
 # Grafana Visualization of Energy Consumption By End-Use Category
 
-![](images/dashboard_screenshot.png "Screenshot of the dashboard that was created as part of the 2020 UBCO Capstone project")
+![](images/dashboard_screenshot.png "Screenshot of the dashboard that was created as part of the 2020 UBCO Capstone project")   
+(Screenshot of dashboard - see Introduction for link)
+
 
 1. [ Introduction ](#desc)
 2. [ Grafana Setup ](#setup)
@@ -214,7 +216,7 @@ The last step performs a join between the table of sensor readings and the end-u
 &nbsp;  
 
 <a name="future"></a>
-# Future Work For Flux Query)
+# Future Work For Flux Query
 
 #### -Use Updated Database Structure
 
