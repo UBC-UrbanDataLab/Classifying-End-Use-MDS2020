@@ -2,7 +2,7 @@
 
 
 ## File Directory
--All code is found in the *code* folder with the main model called <code>main.py</code>
+- All code is found in the *code* folder with the main model called <code>main.py</code>
 
 ## Project Description
 The UBC Urban Data Lab (UDL) was established to provide open access to sustainability data. UDL provides access to an InfluxDB time series database that contains data on instruments that record the power, energy, water, and gas use of each UBC building. Currently, many instruments have descriptive tags that are not understandable or are too granular for practical use by building managers. For that reason, the focus of the project is to apply machine learning techniques to classify and group instruments by energy end-use. This information will be useful for building managers to easily identify where energy efficiency improvements can be made.
