@@ -144,38 +144,38 @@ Rm 6206D EF-12 Floor 6 Energy EF_12_VFD_PWR(kWh),02_HEATING_COOLING_COMBINED
 Rm B409B EF-33 Floor 0 Energy EF_33_VFD_PWR(kWh),02_HEATING_COOLING_COMBINED
 Rm B503 EF-34 Floor 0 Energy EF_34_VFD_PWR(kWh),02_HEATING_COOLING_COMBINED
 Rm B605 EF-35 Floor 0 Energy EF_35_VFD_PWR(kWh),02_HEATING_COOLING_COMBINED
-Elec Submeters DCA Utilities Energy OPC Energy OPC,03_LIGHTING_NORMAL
-Elec Submeters DCB Utilities Energy OPC Copy Energy OPC Copy,03_LIGHTING_NORMAL
-Elec Submeters LEED-ATS-DCA Utilities ATS-DCA_EnergyPosSum ATS-DCA_EnergyPosSum,01_SPACE_COOLING
-Elec Submeters LEED-ATS-DCA Utilities ATS-DCA_EnergyPosSumNR ATS-DCA_EnergyPosSumNR,01_SPACE_COOLING
-Elec Submeters LEED-ATS-DCB Utilities ATS-DCB_EnergyPosSum ATS-DCB_EnergyPosSum,01_SPACE_COOLING
-Elec Submeters LEED-ATS-DCB Utilities ATS-DCB_EnergyPosSumNR ATS-DCB_EnergyPosSumNR,01_SPACE_COOLING
+Elec Submeters DCA Utilities Energy OPC Energy OPC,00_HEATING_SPACE_AND_WATER
+Elec Submeters DCB Utilities Energy OPC Copy Energy OPC Copy,00_HEATING_SPACE_AND_WATER
+Elec Submeters LEED-ATS-DCA Utilities ATS-DCA_EnergyPosSum ATS-DCA_EnergyPosSum,05_OTHER
+Elec Submeters LEED-ATS-DCA Utilities ATS-DCA_EnergyPosSumNR ATS-DCA_EnergyPosSumNR,05_OTHER
+Elec Submeters LEED-ATS-DCB Utilities ATS-DCB_EnergyPosSum ATS-DCB_EnergyPosSum,05_OTHER
+Elec Submeters LEED-ATS-DCB Utilities ATS-DCB_EnergyPosSumNR ATS-DCB_EnergyPosSumNR,05_OTHER
 Elec Submeters LEED-ATS-S1 Utilities ATS-S1_EnergyPosSum ATS-S1_EnergyPosSum,05_OTHER
 Elec Submeters LEED-ATS-S1 Utilities ATS-S1_EnergyPosSumNR ATS-S1_EnergyPosSumNR,05_OTHER
 Elec Submeters LEED-ATS-S3 Utilities ATS-S3_EnergyPosSum ATS-S3_EnergyPosSum,05_OTHER
 Elec Submeters LEED-ATS-S3 Utilities ATS-S3_EnergyPosSumNR ATS-S3_EnergyPosSumNR,05_OTHER
 Elec Submeters LEED-G1 Utilities G1_EnergyPosSum G1_EnergyPosSum,03_LIGHTING_NORMAL
 Elec Submeters LEED-G1 Utilities G1_EnergyPosSumNR G1_EnergyPosSumNR,03_LIGHTING_NORMAL
-Elec Submeters LEED-LV-DCA Utilities LV-DCA_EnergyPosSum LV-DCA_EnergyPosSum,01_SPACE_COOLING
-Elec Submeters LEED-LV-DCA Utilities LV-DCA_EnergyPosSumNR LV-DCA_EnergyPosSumNR,01_SPACE_COOLING
-Elec Submeters LEED-LV-DCB Utilities LV-DCB_EnergyPosSum LV-DCB_EnergyPosSum,01_SPACE_COOLING
-Elec Submeters LEED-LV-DCB Utilities LV-DCB_EnergyPosSumNR LV-DCB_EnergyPosSumNR,01_SPACE_COOLING
+Elec Submeters LEED-LV-DCA Utilities LV-DCA_EnergyPosSum LV-DCA_EnergyPosSum,05_OTHER
+Elec Submeters LEED-LV-DCA Utilities LV-DCA_EnergyPosSumNR LV-DCA_EnergyPosSumNR,05_OTHER
+Elec Submeters LEED-LV-DCB Utilities LV-DCB_EnergyPosSum LV-DCB_EnergyPosSum,05_OTHER
+Elec Submeters LEED-LV-DCB Utilities LV-DCB_EnergyPosSumNR LV-DCB_EnergyPosSumNR,05_OTHER
 Elec Submeters LEED-LV-PA Utilities LV-PA_EnergyPosSum LV-PA_EnergyPosSum,05_OTHER
 Elec Submeters LEED-LV-PA Utilities LV-PA_EnergyPosSumNR LV-PA_EnergyPosSumNR,05_OTHER
 Elec Submeters LEED-LV-PB Utilities LV-PB_EnergyPosSum LV-PB_EnergyPosSum,05_OTHER
 Elec Submeters LEED-LV-PB Utilities LV-PB_EnergyPosSumNR LV-PB_EnergyPosSumNR,05_OTHER
-Elec Submeters LEED-S2 Utilities S2_EnergyPosSum S2_EnergyPosSum,05_OTHER
-Elec Submeters LEED-S2 Utilities S2_EnergyPosSumNR S2_EnergyPosSumNR,05_OTHER
+Elec Submeters LEED-S2 Utilities S2_EnergyPosSum S2_EnergyPosSum,01_SPACE_COOLING
+Elec Submeters LEED-S2 Utilities S2_EnergyPosSumNR S2_EnergyPosSumNR,01_SPACE_COOLING
 Elec Submeters LEED-TBIRD_PARK_E1 Utilities TBIRD_PARK_E1_EnergyPosSum TBIRD_PARK_E1_EnergyPosSum,04_LIGHTING_EMERGENCY
 Elec Submeters LEED-TBIRD_PARK_E1 Utilities TBIRD_PARK_E1_EnergyPosSumNR TBIRD_PARK_E1_EnergyPosSumNR,04_LIGHTING_EMERGENCY
 Elec Submeters LEED-TBIRD_PARK_LV-PB Utilities TBIRD_PARK_LV-PB_EnergyPosSum TBIRD_PARK_LV-PB_EnergyPosSum,05_OTHER
 Elec Submeters LEED-TBIRD_PARK_LV-PB Utilities TBIRD_PARK_LV-PB_EnergyPosSumNR TBIRD_PARK_LV-PB_EnergyPosSumNR,05_OTHER
 Elec Submeters LEED-TBIRD_PARK_S2 Utilities TBIRD_PARK_S2_EnergyPosSum TBIRD_PARK_S2_EnergyPosSum,03_LIGHTING_NORMAL
 Elec Submeters LEED-TBIRD_PARK_S2 Utilities TBIRD_PARK_S2_EnergyPosSumNR TBIRD_PARK_S2_EnergyPosSumNR,03_LIGHTING_NORMAL
-Elec Submeters LEED-TX-E1C1 Utilities TX-E1C1_EnergyPosSum TX-E1C1_EnergyPosSum,03_LIGHTING_NORMAL
-Elec Submeters LEED-TX-E1C1 Utilities TX-E1C1_EnergyPosSumNR TX-E1C1_EnergyPosSumNR,03_LIGHTING_NORMAL
+Elec Submeters LEED-TX-E1C1 Utilities TX-E1C1_EnergyPosSum TX-E1C1_EnergyPosSum,05_OTHER
+Elec Submeters LEED-TX-E1C1 Utilities TX-E1C1_EnergyPosSumNR TX-E1C1_EnergyPosSumNR,05_OTHER
 Elec Submeters PA Utilities Energy OPC Energy OPC,00_HEATING_SPACE_AND_WATER
-Elec Submeters PB Utilities Energy OPC Energy OPC,03_LIGHTING_NORMAL
+Elec Submeters PB Utilities Energy OPC Energy OPC,00_HEATING_SPACE_AND_WATER
 Cooling Plant CT-1A Hydronic Systems Energy CT1A_VFD_PWR(kWh),03_LIGHTING_NORMAL
 Cooling Plant CT-1B Hydronic Systems Energy CT1B_VFD_PWR(kWh),03_LIGHTING_NORMAL
 Cooling Plant CT-1C Hydronic Systems Energy CT1C_VFD_PWR(kWh),03_LIGHTING_NORMAL
