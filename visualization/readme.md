@@ -208,7 +208,7 @@ join(
   |> yield()
 ```
 
-The last step performs a join between the table of sensor readings and the end-use category labels for those sensors. It renames a few columns so the column names in the result make more sense. Finally it sums up the readings for each end-use category and outputs the results using the yield() function.
+The last step performs a join between the table of sensor readings and the end-use category labels for those sensors. It renames a few columns so the column names in the results make more sense. Finally, it sums up the readings for each end-use category and outputs the results using the yield() function.
 
 &nbsp;  
 &nbsp;  
