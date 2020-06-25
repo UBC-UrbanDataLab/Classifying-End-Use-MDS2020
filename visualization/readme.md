@@ -44,7 +44,7 @@ Grafana pie-chart plugin: `1.5.0`
 
 The dashboard is using the Flux language to interact with influxDB. As this language is still in beta (until the official release of influxDB V2.0), the Grafana plugin for using the language is ALSO in beta.
 
-The data source has already been configured on the UDL dashboard but if transfering to a new server/account then the data source will need to be added again (i.e. the definition of the datasource isn't included in the .json export of the dashboard).
+The data source has already been configured on the UDL dashboard but if transferring to a new server/account then the data source will need to be added again (i.e. the definition of the data source isn't included in the .json export of the dashboard).
 
 It is straight-forward to setup a data source in Grafana ([link](https://grafana.com/docs/grafana/latest/features/datasources/add-a-data-source/)) but to access the Flux plugin we need to do the additional step of adding the plugin. If using the cloud-based service it is as simple as clicking the "Install Plugin" button on the plugin's page while logged into your Grafana account: https://grafana.com/grafana/plugins/grafana-influxdb-flux-datasource
 If using a non-cloud implementation (i.e. running grafana open source on a server or docker container), then follow the installation instructions on the plugin's web page.
