@@ -8,13 +8,13 @@
 4. [ Future Work For Query ](#future)
 
 <a name="intro"></a>
-# Introduction)   
+# Introduction   
 
 The Grafana dashboard created to visualize energy consumption by end-use category for the Pharmacy building uses a simple pie-chart as the visualization. The focus of this document is on the setup of the data source in Grafana and the query used to retrieve the data for the pie-chart.
 
 ### Location of Dashboard   
 
-The dashboard has been saved as **MDS2020_CAPSTONE** in UDL's grafana account: https://udl.grafana.net/d/4GlqacWGz/
+The dashboard has been saved as **MDS2020_CAPSTONE** in UDL's Grafana account: https://udl.grafana.net/d/4GlqacWGz/
 
 A copy of the dashboard in .json format has been saved on this git repo under [visualization/grafana_MDS2020-CAPSTONE.json](grafana_MDS2020-CAPSTONE.json)
 
@@ -26,7 +26,7 @@ Due to the calculations required to process the data, the influxDB server is onl
 &nbsp;  
 
 <a name="setup"></a>
-# Grafana Setup & Importing Dashboard)
+# Grafana Setup & Importing Dashboard
 
 Grafana can either be set up as a standalone service on a server/docker container by installing the open-source Grafana software (https://grafana.com/oss/grafana/) or can be used through the commercial cloud-based implementation (https://grafana.com/products/cloud/). Note that a free-use tier exists for the cloud-based service and simply requires the user to make an account, login, and start a Grafana instance. This free-tier limits the user to only 5 dashboards, 1 user account, and only the non-enterprise plugins. For the purpose of the MDS2020_CAPSTONE dashboard, the free-tier has all the necessary features.
 
@@ -46,10 +46,10 @@ The dashboard is using the Flux language to interact with influxDB. As this lang
 
 The data source has already been configured on the UDL dashboard but if transferring to a new server/account then the data source will need to be added again (i.e. the definition of the data source isn't included in the .json export of the dashboard).
 
-It is straight-forward to setup a data source in Grafana ([link](https://grafana.com/docs/grafana/latest/features/datasources/add-a-data-source/)) but to access the Flux plugin we need to do the additional step of adding the plugin. If using the cloud-based service it is as simple as clicking the "Install Plugin" button on the plugin's page while logged into your Grafana account: https://grafana.com/grafana/plugins/grafana-influxdb-flux-datasource
+It is straight-forward to set up a data source in Grafana ([link](https://grafana.com/docs/grafana/latest/features/datasources/add-a-data-source/)) but to access the Flux plugin we need to do the additional step of adding the plugin. If using the cloud-based service it is as simple as clicking the "Install Plugin" button on the plugin's page while logged into your Grafana account: https://grafana.com/grafana/plugins/grafana-influxdb-flux-datasource
 If using a non-cloud implementation (i.e. running grafana open source on a server or docker container), then follow the installation instructions on the plugin's web page.
 
-#### **NOTE** It is highly recommended that you DO NOT use version 7.0.0 of the plugin. There are known issues with trying to connect to influxDB version 1.X. Instead use version 5.4.1. (if there is a newer version of the plugin than 7.0.0, you can try it. They may have fixed this bug
+#### **NOTE**: It is highly recommended that you DO NOT use version 7.0.0 of the plugin. There are known issues with trying to connect to influxDB version 1.X. Instead, use version 5.4.1. (if there is a newer version of the plugin than 7.0.0, you can try it. They may have fixed this bug.
 
 ![plugin selection](images/plugin_version.png "Make sure you are installing the correct version of the plugin!")
 
@@ -76,9 +76,9 @@ Hit Save & Test (it may only give you a blue "TESTING" bar and not return to the
 
 Grafana doesn't include the pie-chart as a default plugin, but it is available for free from Grafana Labs.
 
-The plugin can be found [here](https://grafana.com/grafana/plugins/grafana-piechart-panel)
+The plugin can be found [here](https://grafana.com/grafana/plugins/grafana-piechart-panel).
 
-Instructures are the same as installing the data source plugin (if using Grafana Cloud). One way of navigating to the plugin page and installing is shown below.
+Instructions are the same as installing the data source plugin (if using Grafana Cloud). One way of navigating to the plugin page and installing is shown below.
 
 Log into [Grafana Cloud](https://grafana.com/login) and navigate to the details of your Grafana instance ("details" button):
 
@@ -88,7 +88,7 @@ Click the Find More Plugins button to get a list of available plugins, click on 
 
 ![](images/listed_plugins.png "Click Find More Plugins to navigate to a page of all available plugins.")
 
-You may need to log out of grafana and log back in for the plugin to become active.
+You may need to log out of Grafana and log back in for the plugin to become active.
 
 ### Import a Dashboard   
 
@@ -106,7 +106,7 @@ MDS2020-CAPSTONE should now be listed in the dashboards.
 &nbsp;  
 
 <a name="query"></a>
-# About the Flux Query)  
+# About the Flux Query  
 ### Notes on Flux
 Details on how to enable and use Flux can be found on the [official influxDB documentation page](https://docs.influxdata.com/flux/v0.65/introduction/) on the topic.
 
@@ -145,11 +145,11 @@ rawreadings=from(bucket: "SKYSPARK")
 
 For readers familar with SQL, the `from()` , `range()` and `filter` are usually used together in this format to do the same thing as a `SELECT <fields> FROM <database.table> WHERE <some criteria>` 
 
-The 'bucket' refers to the database (in Influx 1.x you have databases and retention policies, in InfluxDB 2.x you have Buckets that representation a combination of those two things). In our case there is only a default retention policy for our database so we don't need to specify a specific rentenion policy.
+The 'bucket' refers to the database (in Influx 1.x you have databases and retention policies, in InfluxDB 2.x you have Buckets that represent a combination of those two things). In our case, there is only a default retention policy for our database so we don't need to specify a specific retention policy.
 
-The specific Flux functions are best read about in the official documentation but it is worth pointing out two Grafana dashboard variables that are being used in the query: `$range` and `$userSite`. The first is a "global" variable in Grafana that simply points at the selected date range on the dashboard. The `$userSite` is a variable that has been defined for the dashboard and points to a dropdown list for selecting a building. More on Grafana Dashboard variables can be read [here](https://grafana.com/docs/grafana/latest/variables/templates-and-variables/)
+The specific Flux functions are best read about in the official documentation but it is worth pointing out two Grafana dashboard variables that are being used in the query: `$range` and `$userSite`. The first is a "global" variable in Grafana that simply points at the selected date range on the dashboard. The `$userSite` is a variable that has been defined for the dashboard and points to a dropdown list for selecting a building. More on Grafana Dashboard variables can be read [here](https://grafana.com/docs/grafana/latest/variables/templates-and-variables/).
 
-The `=~` expression tells the filter to only select things that match the Regular Expression (RegEx) on the right. In this case it is only matching values that may or may not start with a negative symbol and then have one or more digits and possibly a decimal point. Basically, every possible numeric value.
+The `=~` expression tells the filter to only select things that match the Regular Expression (RegEx) on the right. In this case, it is only matching values that may or may not start with a negative symbol and then have one or more digits and possibly a decimal point. Basically, every possible numeric value.
 
 #### -step 2.
 ```
@@ -160,9 +160,9 @@ The `=~` expression tells the filter to only select things that match the Regula
     }))
 ```	
 
-The map function allows us to perform custom functions on columns of data. In this case we create a uniqueID by concatenating multiple identifying tags (leaving spaces between the values) and also to match the strategy used in the main python code, we remove all instances of the building name by doing a replaceAll on all instances of the `siteRef` value found in the uniqueID.
+The map function allows us to perform custom functions on columns of data. In this case, we create a uniqueID by concatenating multiple identifying tags (leaving spaces between the values). In addition, to match the strategy used in the main python code, we remove all instances of the building name by doing a replaceAll on all instances of the `siteRef` value found in the uniqueID.
 
-Next we have to "cast" the readings values from strings into floats so that the values can be aggregated, summarized, and visualized (which can not be done with strings).	
+Next, we have to "cast" the values of the readings from strings into floats so that the values can be aggregated, summarized, and visualized (which can not be done with strings).	
 
 #### -step 3.   
 ```	
@@ -181,7 +181,7 @@ readings=join(tables: {mintbl: mintable, maxtbl: maxtable}, on: ["uniqueID"], me
 
 ```
 
-Next we get rid of unecessary columns of data and calculate tables of the minimum values for each of the sensors and a table of all the maximum values for each of the sensors. To find the difference between the maximum and minimum value for each sensor (i.e. the change in the reading of these sensors that measure cumulative energy use) we have to join the two tables together and use another map function to calculate the difference and store it in a new column.
+Next, we get rid of unnecessary columns of data and calculate tables of the minimum values for each of the sensors and a table of all the maximum values for each of the sensors. To find the difference between the maximum and minimum value for each sensor (i.e. the change in the reading of these sensors that measure cumulative energy use), we have to join the two tables together and use another map function to calculate the difference and store it in a new column.
 
 #### -step 4.   
 ```
@@ -192,7 +192,7 @@ enduses=from(bucket: "SKYSPARK")
   r._measurement == "END_USE")
 ```
 
-This is similar to step 1 except it first defines a set start date-range for the selection. The reason for this because the end use category labels are stored with a constant timestamp of 2020-01-01T:00:00:00. By making the sure the query looks before this, it always captures the data. 
+This is similar to step 1 except it first defines a set start date-range for the selection. The reason for this is the end-use category labels are stored with a constant timestamp of 2020-01-01T:00:00:00. By making sure the query looks before this, it always captures the data. 
 
 
 #### -step 5.   
