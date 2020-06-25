@@ -267,7 +267,7 @@ The query is basically the same as before but points at `READINGS` instead of `E
 
 #### -Use uniqueID from END_USE To Filter Sensors in Readings
 
-Currently **_all_** Sensors in the READINGS measurement are queried in the user specified date range and user specified building. It should be possible to first query the sensors in the END_USE measurement and then use that as part of the query criteria for the READINGS query. This should greatly reduce the number of records queried and speed up processing. The way to do this seems to require the tableFind() and getColumn() functions as shown in the reply on this post:
+Currently **_all_** Sensors in the READINGS measurement are queried in the user-specified date range and user-specified building. It should be possible to first query the sensors in the END_USE measurement and then use that as part of the query criteria for the READINGS query. This should greatly reduce the number of records queried and speed up processing. The way to do this seems to require the tableFind() and getColumn() functions as shown in the reply on this post:
 
 https://community.influxdata.com/t/filter-tags-in-flux-query-based-on-results-in-another-table/13697
 
