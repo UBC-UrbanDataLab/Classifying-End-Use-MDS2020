@@ -2,7 +2,7 @@
 
 
 ## File Directory
-- [code](code/) - all code is found in this folder with the main model called <code>main.py</code> and example of its usage in `example_notebook.ipynb`
+- [code](code/) - all code is found in this folder:
   - aggregation.py (various aggregation-related functions called by main.py)
   - cluster.py (various clustering functions called by main.py)
   - data_preparation.py (various functions for querying and cleaning data, called by main.py)
