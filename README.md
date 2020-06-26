@@ -4,6 +4,8 @@
 ## File Directory
 - All code is found in the <ins>code</ins> folder with the main model called <code>main.py</code>
 - Information on the visualization including Grafana Setup & Importing Dashboard is located in the <ins>visualization</ins> folder
+- The outputs from <code>main.py</code> can be written to the END_USE measurement in the SKYSPARK InfluxDB using <code>write_enduse_to_influx.py</code>, this is refered to as step 5 in the report and <code>example_notebook.ipynb</code>
+- The functionality from <code>main.py</code> and <code>write_enduse_to_influx.py</code> are also available in the format of a Jupyter notebook in <code>example_notebook.ipynb</code>, this notebook includes explanations of how each of the five steps discussed in the report function
 
 ## Project Description
 The UBC Urban Data Lab (UDL) was established to provide open access to sustainability data. UDL provides access to an InfluxDB time series database that contains data on instruments that record the power, energy, water, and gas use of each UBC building. Currently, many instruments have descriptive tags that are not understandable or are too granular for practical use by building managers. For that reason, the focus of the project is to apply machine learning techniques to classify and group instruments by energy end-use. This information will be useful for building managers to easily identify where energy efficiency improvements can be made.
