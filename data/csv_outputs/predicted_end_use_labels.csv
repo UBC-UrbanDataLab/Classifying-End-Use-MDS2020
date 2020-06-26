@@ -148,8 +148,8 @@ Elec Submeters DCA Utilities Energy OPC Energy OPC,00_HEATING_SPACE_AND_WATER
 Elec Submeters DCB Utilities Energy OPC Copy Energy OPC Copy,00_HEATING_SPACE_AND_WATER
 Elec Submeters LEED-ATS-DCA Utilities ATS-DCA_EnergyPosSum ATS-DCA_EnergyPosSum,01_SPACE_COOLING
 Elec Submeters LEED-ATS-DCA Utilities ATS-DCA_EnergyPosSumNR ATS-DCA_EnergyPosSumNR,01_SPACE_COOLING
-Elec Submeters LEED-ATS-DCB Utilities ATS-DCB_EnergyPosSum ATS-DCB_EnergyPosSum,05_OTHER
-Elec Submeters LEED-ATS-DCB Utilities ATS-DCB_EnergyPosSumNR ATS-DCB_EnergyPosSumNR,05_OTHER
+Elec Submeters LEED-ATS-DCB Utilities ATS-DCB_EnergyPosSum ATS-DCB_EnergyPosSum,01_SPACE_COOLING
+Elec Submeters LEED-ATS-DCB Utilities ATS-DCB_EnergyPosSumNR ATS-DCB_EnergyPosSumNR,01_SPACE_COOLING
 Elec Submeters LEED-ATS-S1 Utilities ATS-S1_EnergyPosSum ATS-S1_EnergyPosSum,05_OTHER
 Elec Submeters LEED-ATS-S1 Utilities ATS-S1_EnergyPosSumNR ATS-S1_EnergyPosSumNR,05_OTHER
 Elec Submeters LEED-ATS-S3 Utilities ATS-S3_EnergyPosSum ATS-S3_EnergyPosSum,05_OTHER
@@ -158,8 +158,8 @@ Elec Submeters LEED-G1 Utilities G1_EnergyPosSum G1_EnergyPosSum,03_LIGHTING_NOR
 Elec Submeters LEED-G1 Utilities G1_EnergyPosSumNR G1_EnergyPosSumNR,03_LIGHTING_NORMAL
 Elec Submeters LEED-LV-DCA Utilities LV-DCA_EnergyPosSum LV-DCA_EnergyPosSum,01_SPACE_COOLING
 Elec Submeters LEED-LV-DCA Utilities LV-DCA_EnergyPosSumNR LV-DCA_EnergyPosSumNR,01_SPACE_COOLING
-Elec Submeters LEED-LV-DCB Utilities LV-DCB_EnergyPosSum LV-DCB_EnergyPosSum,05_OTHER
-Elec Submeters LEED-LV-DCB Utilities LV-DCB_EnergyPosSumNR LV-DCB_EnergyPosSumNR,05_OTHER
+Elec Submeters LEED-LV-DCB Utilities LV-DCB_EnergyPosSum LV-DCB_EnergyPosSum,01_SPACE_COOLING
+Elec Submeters LEED-LV-DCB Utilities LV-DCB_EnergyPosSumNR LV-DCB_EnergyPosSumNR,01_SPACE_COOLING
 Elec Submeters LEED-LV-PA Utilities LV-PA_EnergyPosSum LV-PA_EnergyPosSum,05_OTHER
 Elec Submeters LEED-LV-PA Utilities LV-PA_EnergyPosSumNR LV-PA_EnergyPosSumNR,05_OTHER
 Elec Submeters LEED-LV-PB Utilities LV-PB_EnergyPosSum LV-PB_EnergyPosSum,05_OTHER

@@ -53,10 +53,10 @@ def main():
     STEP3_SAVE_PATH = '../data/csv_outputs/step3_data_prep_for_classification_output.csv'
     PREDICTED_SAVE_PATH = '../data/csv_outputs/predicted_end_use_labels.csv'
     # Boolean defining if the model should query from the database or pull from csv's (from database if True, else False)
-    QUERY_FROM_DB = False
+    QUERY_FROM_DB = True
     # Strings defining the start and end date fo the date range to query (if QUERY_FROM_DB==True)
-    START_DATE = '2020-03-16'
-    END_DATE = '2020-03-17'
+    START_DATE = '2020-06-01'
+    END_DATE = '2020-06-05'
     # Strings containing the paths to the folders that contains the csv's to pull data from if QUERY_FROM_DB==False
     # All file names within the folders must be formatted as "YYYY-MM-DD.csv"
     QUERY_CSV_PATH = '../data/sensor_data/'
