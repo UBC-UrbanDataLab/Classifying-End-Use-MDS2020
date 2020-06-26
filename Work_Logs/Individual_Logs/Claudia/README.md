@@ -186,4 +186,11 @@ Summary of our activities on a weekly basis:
 |8|2020-06-22|daily standup meeting|Daily Meetings|0.25|
 |8|2020-06-22|sort out & practice presentation |Presentation|4|
 |8|2020-06-22|format final report|Report|1.5|
-|9|2020-06-23|daily standup meeting|Daily Meetings|0|
+|9|2020-06-23|daily standup meeting|Daily Meetings|0.25|
+|9|2020-06-23|practice final presentaion |Presentation|0.5|
+|9|2020-06-23|final presentations|Presentation|4|
+|9|2020-06-23|update github & transfer stuff from google drive to github|Logistics|1.5|
+|9|2020-06-24|daily standup meeting|Daily Meetings|0.5|
+|9|2020-06-24|report writing|Report|5|
+|9|2020-06-25|daily standup meeting|Daily Meetings|0.5|
+|9|2020-06-25|edit and write final report|Report|5.5|
