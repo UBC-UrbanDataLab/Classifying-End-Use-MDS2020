@@ -266,8 +266,7 @@ Summary of our activities on a weekly basis:
 |7|2020-06-15|Daily Standup|Daily Meetings|0.25|
 |7|2020-06-15|Discussion of how to divy up remaining work/what is most efficient to work on today|Other Meeting|0.42|
 |7|2020-06-15|Review/update presentation to include updated Clustering output and sample final output|Meeting Prep|0.58|
-"|7|2020-06-15|Test the EC and NC query functions and the DATELIST generating function
-Monitor and restart running of step 1 final output code as needed|Coding|1|"
+|7|2020-06-15|Test the EC and NC query functions and the DATELIST generating function, Monitor and restart running of step 1 final output code as needed|Coding|1|
 |7|2020-06-15|Reviewing, cleaning, and commenting updated code since last pull request|Code Review|0.5|
 |7|2020-06-15|Break out presentation slides as a team|Meeting Prep|0.17|
 |7|2020-06-15|Finished reviewing, cleaning, and commenting updated code since last pull request and pushed updated branch to GitHub (no pull request yet)|Code Review|0.67|
