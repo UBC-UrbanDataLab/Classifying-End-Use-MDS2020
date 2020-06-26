@@ -2,10 +2,25 @@
 
 
 ## File Directory
-- All code is found in the <ins>code</ins> folder with the main model called <code>main.py</code>
-    - The outputs from <code>main.py</code> can be written to the END_USE measurement in the SKYSPARK InfluxDB using <code>write_enduse_to_influx.py</code>, this is refered to as step 5 in the report and <code>example_notebook.ipynb</code>
-    - The functionality from <code>main.py</code> and <code>write_enduse_to_influx.py</code> are also available in the format of a Jupyter notebook in <code>example_notebook.ipynb</code>, this notebook includes explanations of how each of the five steps discussed in the report function
-- Information on the visualization including Grafana Setup & Importing Dashboard is located in the <ins>visualization</ins> folder
+- [code](code/) - all code is found in this folder:
+  - aggregation.py (various aggregation-related functions called by main.py)
+  - cluster.py (various clustering functions called by main.py)
+  - data_preparation.py (various functions for querying and cleaning data, called by main.py)
+  - feature_selection.py (stand alone code used to perform feature selection - resulting feature selection choices were hard-coded into main.py)
+  - **main.py (the primary file that drives the program)**
+  - write_enduse_to_influx.py (stand alone code meant to be run after main.py to write the results into the InfluxDB)
+  - classification_model_comparison_and_selection_tool.ipynb (Jupyter Notebook designed to compare classification models)
+  - example_notebook.ipynb (Jupyter Notebook demonstrating the use of main.py and write_enduse_to_influx.py, full of annotations and explanations in markdown cells)
+- [data](data/) -  contains files used demonstrating functionality in the example_notebook and also the files that are used in main.py (see the constants section of the code for a full listing)
+- [Final_Report](Final_Report/) - Final report for capstone project
+- [Logistics](Logistics/) - Contains a variety of documents used during the capstone project to communicate information within the team and track progress
+- [Meetings](Meetings/) - Meeting agendas and minutes for capstone project
+- [misc_work](misc_work/) - Contains an (slightly tangential) investigation into which fields/columns can be found in every building in the EWS SkySpark database
+- [onepage_summary](onepage_summary/) - Contains document summarizing capstone project, was provided in advance of final presentation
+- [proposal](proposal/) - Contains original capstone project proposal
+- [visualization](visualization/) - Contains markdown document with details on the Grafana visualization dashboard that was created and .json file export of the dashboard.   
+- [Weekly_Presentations](Weekly_Presentations/) - Contains PDF copies of each week's capstone project presentation **(Including Final Presentation)**
+- [Work_Logs](Work_Logs/) - Contains individual and team work logs for the capstone project
 
 
 ## Project Description
