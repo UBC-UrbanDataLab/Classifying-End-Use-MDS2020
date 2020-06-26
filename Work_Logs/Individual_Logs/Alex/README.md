@@ -249,7 +249,7 @@ Summary of our activities on a weekly basis:
 |8|2020-06-18|Update Jira cards|Logistics|0.5|
 |8|2020-06-18|Misc report updates|Logistics|0.25|
 |8|2020-06-18|Daily Standup|Daily Meetings|0.25|
-|8|2020-06-18|Retrospective Meeting||0.5|
+|8|2020-06-18|Retrospective Meeting|Weekly Meetings|0.5|
 |8|2020-06-18|Update write_to_py code|Coding|2|
 |8|2020-06-18|Work on report|Logistics|3.5|
 |8|2020-06-18|Got flux query working with UBC_EWS (including casting numeric values and making uniqueID) |Coding|2.25|
@@ -274,4 +274,25 @@ Summary of our activities on a weekly basis:
 |8|2020-06-22|Update+practice presentation on own|Logistics|1.5|
 |9|2020-06-23|Tested query speed improvement with "READINGS" influx measurement|Debugging|2|
 |9|2020-06-23|Updated Personal Log|Logistics|0.25|
-|9|2020-06-23|Daily Standup|Daily Meetings|0|
+|9|2020-06-23|Daily Standup|Daily Meetings|0.25|
+|9|2020-06-23|Last run-through of presentation with team|Other Meeting|0.5|
+|9|2020-06-23|Update notes for presentation and practice again|Logistics|0.5|
+|9|2020-06-23|Visualization Markdown file|Logistics|0.5|
+|9|2020-06-23|Updated visualization section of report|Logistics|2|
+|9|2020-06-23|Move final version of Grafana dashboard to UDL's account (adding markdown cell)|Logistics|0.75|
+|9|2020-06-23|Reviewed latest pull request from Connor|Logistics|0.75|
+|9|2020-06-23|Worked on visualization markdown file|Git management|1|
+|9|2020-06-24|Daily Standup|Logistics|1.75|
+|9|2020-06-24|Discuss work priorities|Daily Meetings|0.25|
+|9|2020-06-24|Clean up files, folders, and git branches|Other Meeting|0.25|
+|9|2020-06-24|Finish visualization markdown file and make pull request|Git management|1.25|
+|9|2020-06-24|Edit report|Logistics|1.25|
+|9|2020-06-24|Review and implement Eva's suggestions to visualization markdown file|Logistics|3.5|
+|9|2020-06-24|Edit report|Logistics|0.75|
+|9|2020-06-25|Daily Standup|Logistics|2|
+|9|2020-06-25|Edit report|Daily Meetings|0.5|
+|9|2020-06-25|Discuss agenda for UDL meeting|Logistics|3.5|
+|9|2020-06-25|Edit report|Weekly Meetings|0.25|
+|9|2020-06-25|Update Personal logs|Logistics|2.25|
+|9|2020-06-25|Edit report and review example_notebook|Logistics|0.25|
+|9|2020-06-25||Logistics|1|
