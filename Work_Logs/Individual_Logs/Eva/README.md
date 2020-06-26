@@ -328,3 +328,16 @@ Summary of our activities on a weekly basis:
 |8|2020-06-22|Practiced presentation|Development|0.25|
 |8|2020-06-22|Practiced presentation|Development|1.25|
 |8|2020-06-22|Final Report|Development|1|
+|9|2020-06-23|Practiced presentation + final presentations|Development|6.58|
+|9|2020-06-24|Daily stand up + worked on google colab|Development|3.42|
+|9|2020-06-24|Google colab + feature selection notebook + code review for Alex's branch|Development|1.75|
+|9|2020-06-24|Code review for Alex's branch + merged my branch changes with master|Development|1.17|
+|9|2020-06-25|Daily stand up|Daily Stand Up|0.75|
+|9|2020-06-25|Google colab|Code Review|1.92|
+|9|2020-06-25|Google colab|Code Review|0.5|
+|9|2020-06-25|Meeting for UDL agenda|Other Meeting|0.5|
+|9|2020-06-25|Google colab|Code Review|1.5|
+|9|2020-06-25|Final Report|Development|0.5|
+|9|2020-06-25|Final Report|Development|2.42|
+|9|2020-06-25|Final Report|Development|0.5|
+|9|2020-06-25|Final Report|Development|0.5|
