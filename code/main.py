@@ -37,7 +37,7 @@ def main():
     # String defining the path to the metadata csv for the given building
     METADATA_CSV_PATH = '../data/PharmacyQuery.csv'
     # String defining the path to the training dataset
-    TRAINING_SET_PATH = '../data/FinalPharmacyECSensorList-WithLabels - PharmacyECSensorsWithLabels.csv'
+    TRAINING_SET_PATH = '../data/pharmacy_train_test_data.csv'
     # List of indices that can be combined to uniquely identify a sensor (used to group on each sensors)
     SENSOR_ID_TAGS = [1,2,3,4,5,6] # order is ["groupRef","equipRef","navName","siteRef","typeRef","unit"]
                                    # The planned update to the InfluxDB may change SENSOR_ID_TAGS to only [1] as in ["uniqueID"]

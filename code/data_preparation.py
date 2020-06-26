@@ -11,7 +11,7 @@ import pandas as pd
 # Influx Imports
 import influxdb
 import pytz
-# Feature Engieering Imports
+# Feature Engineering Imports
 from sklearn.preprocessing import OneHotEncoder, MinMaxScaler
 
 ### ~ Data Scaling and Encoding Functions ~ ###
