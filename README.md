@@ -2,8 +2,17 @@
 
 
 ## File Directory
-- All code is found in the <ins>code</ins> folder with the main model called <code>main.py</code>
-- Information on the visualization including Grafana Setup & Importing Dashboard is located in the <ins>visualization</ins> folder
+- [code](code/) - all code is found in this folder with the main model called <code>main.py</code> and example of its usage in `example_notebook.ipynb`
+- [data](data/) -  contains files used demonstrating functionality in the example_notebook and also the files that are used in main.py (see the constants section of the code for a full listing)
+- [Final_Report](Final_Report/) - Final report for capstone project **as well as final presentation ???**
+- [Logistics](Logistics/) - Contains a variety of documents used during the capstone project to communicate information within the team and track progress
+- [Meetings](Meetings/) - Meeting agendas and minutes for capstone project
+- [misc_work](misc_work/) - Contains an (slightly tangential) investigation into which fields/columns can be found in every building in the EWS SkySpark database
+- [onepage_summary](onepage_summary/) - Contains document summarizing capstone project, was provided in advance of final presentation
+- [proposal](proposal/) - Contains original capstone project proposal
+- [visualization](visualization/) - Contains markdown document with details on the Grafana visualization dashboard that was created and .json file export of the dashboard.   
+- [Weekly_Presentations](Weekly_Presentations/) - Contains PDF copies of each week's capstone project presentation **(Including Final Presentation???)**
+- [Work_Logs](Work_Logs/) - Contains individual and team work logs for the capstone project
 
 ## Project Description
 The UBC Urban Data Lab (UDL) was established to provide open access to sustainability data. UDL provides access to an InfluxDB time series database that contains data on instruments that record the power, energy, water, and gas use of each UBC building. Currently, many instruments have descriptive tags that are not understandable or are too granular for practical use by building managers. For that reason, the focus of the project is to apply machine learning techniques to classify and group instruments by energy end-use. This information will be useful for building managers to easily identify where energy efficiency improvements can be made.
